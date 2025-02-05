@@ -5,15 +5,22 @@ import PackageDescription
 
 let package = Package(
     name: "ios-features",
+    platforms: [.iOS(.v15)],
     products: [
         .library(
-            name: "ios-features",
-            targets: ["ios-features"]
+            name: "MyKSuite",
+            targets: ["MyKSuite"]
         ),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/Infomaniak/ios-core-ui", .upToNextMajor(from: "17.2.0"))
     ],
     targets: [
         .target(
-            name: "ios-features"
+            name: "MyKSuite",
+            dependencies: [
+                .product(name: "InfomaniakCoreUI", package: "ios-core-ui")
+            ]
         )
     ]
 )
