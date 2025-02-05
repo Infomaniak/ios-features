@@ -34,7 +34,7 @@ struct SubscriptionCardView: View {
             if myKSuite.isFree {
                 SubscriptionFreeDetailsView(dailyLimit: myKSuite.freeMail.dailyLimitSent)
             } else {
-                SubscriptionPlusDetailsView()
+                SubscriptionPlusDetailsView(myKSuite: myKSuite)
             }
         }
         .padding(value: .medium)

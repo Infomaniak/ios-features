@@ -19,20 +19,24 @@
 import SwiftUI
 
 struct SubscriptionPlusDetailsView: View {
+    let myKSuite: MyKSuite
+
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            HStack {
-                Text("myKSuiteDashboardTrialPeriod", bundle: .module)
-                    .foregroundStyle(ColorHelper.primary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            if let trialDate = myKSuite.formattedTrialExpiryDate {
+                HStack {
+                    Text("myKSuiteDashboardTrialPeriod", bundle: .module)
+                        .foregroundStyle(ColorHelper.primary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
-                Text(
-                    String(
-                        format: NSLocalizedString("myKSuiteDashboardUntil", bundle: .module, comment: ""),
-                        arguments: ["xx/xx/xxxx"]
+                    Text(
+                        String(
+                            format: NSLocalizedString("myKSuiteDashboardUntil", bundle: .module, comment: ""),
+                            arguments: [trialDate]
+                        )
                     )
-                )
-                .foregroundStyle(ColorHelper.secondary)
+                    .foregroundStyle(ColorHelper.secondary)
+                }
             }
 
             // Waiting for InAppPurchase
@@ -68,5 +72,5 @@ struct SubscriptionPlusDetailsView: View {
 }
 
 #Preview {
-    SubscriptionPlusDetailsView()
+    SubscriptionPlusDetailsView(myKSuite: PreviewHelper.sampleMyKSuite)
 }
