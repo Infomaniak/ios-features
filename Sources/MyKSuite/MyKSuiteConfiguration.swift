@@ -18,7 +18,6 @@
 
 import SwiftUI
 
-@available(iOS 15, *)
 public enum MyKSuiteConfiguration {
     case mail
     case kDrive

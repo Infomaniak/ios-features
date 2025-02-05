@@ -18,7 +18,6 @@
 
 import SwiftUI
 
-@available(iOS 15, *)
 struct MyKSuitePanelModifier: ViewModifier {
     @Binding var isPresented: Bool
     let configuration: MyKSuiteConfiguration
@@ -31,14 +30,12 @@ struct MyKSuitePanelModifier: ViewModifier {
     }
 }
 
-@available(iOS 15, *)
 public extension View {
     func myKSuitePanel(isPresented: Binding<Bool>, configuration: MyKSuiteConfiguration) -> some View {
         modifier(MyKSuitePanelModifier(isPresented: isPresented, configuration: configuration))
     }
 }
 
-@available(iOS 15, *)
 #Preview {
     Text("Hello world!")
         .myKSuitePanel(isPresented: .constant(true), configuration: .kDrive)

@@ -5,7 +5,10 @@ import PackageDescription
 
 let package = Package(
     name: "ios-features",
-    platforms: [.iOS(.v15)],
+    defaultLocalization: "en",
+    platforms: [
+        .iOS(.v15)
+    ],
     products: [
         .library(
             name: "MyKSuite",
@@ -19,7 +22,8 @@ let package = Package(
         .target(
             name: "MyKSuite",
             dependencies: [
-                .product(name: "InfomaniakCoreUI", package: "ios-core-ui")
+                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
+                .product(name: "DesignSystem", package: "ios-core-ui")
             ]
         )
     ]

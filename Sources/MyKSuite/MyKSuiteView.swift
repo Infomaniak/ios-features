@@ -20,7 +20,6 @@ import DesignSystem
 import InfomaniakCoreSwiftUI
 import SwiftUI
 
-@available(iOS 15.0, *)
 public struct MyKSuiteView: View {
     @Environment(\.dismiss) private var dismiss
 
@@ -74,12 +73,10 @@ public struct MyKSuiteView: View {
     }
 }
 
-@available(iOS 15.0, *)
 #Preview("kDrive") {
     MyKSuiteView(configuration: .kDrive)
 }
 
-@available(iOS 15.0, *)
 #Preview("Mail") {
     MyKSuiteView(configuration: .mail)
 }
