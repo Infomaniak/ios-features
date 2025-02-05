@@ -32,7 +32,7 @@ enum ColorHelper {
 
     static let backgroundPrimary = Color(light: .white, dark: bat)
     static let backgroundSecondary = Color(light: polarBear, dark: orca)
-    
+
     static let primary = Color(light: orca, dark: rabbit)
     static let secondary = Color(light: elephant, dark: shark)
 
@@ -59,7 +59,7 @@ extension Color {
     }
 
     private init(light: UIColor, dark: UIColor) {
-        self.init(uiColor: UIColor(dynamicProvider: { traits in
+        self.init(uiColor: UIColor { traits in
             switch traits.userInterfaceStyle {
             case .light, .unspecified:
                 return light
@@ -70,6 +70,6 @@ extension Color {
             @unknown default:
                 return light
             }
-        }))
+        })
     }
 }
