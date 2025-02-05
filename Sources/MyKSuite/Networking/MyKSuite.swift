@@ -21,13 +21,9 @@ import SwiftUI
 @MainActor
 public struct MyKSuite: Codable, Sendable {
     let id: Int
-    let status: String
-    let packId: Int
-    let pack: Pack
     let isFree: Bool
     let drive: Drive
     let freeMail: FreeMail
-    let hasAutoRenew: Bool
 
     var icon: Image {
         if isFree {
@@ -35,15 +31,6 @@ public struct MyKSuite: Codable, Sendable {
         }
         return ImageHelper.myKSuitePlusLogo
     }
-}
-
-struct Pack: Codable {
-    let id: Int
-    let name: String
-    let driveStorage: Int
-    let mailStorage: Int
-    let mailDailyLimitSend: Int
-    let isMaxStorageOffer: Bool
 }
 
 struct Drive: Codable {
