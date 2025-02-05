@@ -36,7 +36,7 @@ struct SubscriptionPlusDetailsView: View {
             }
 
             // Waiting for InAppPurchase
-            
+
 //            HStack {
 //                Text("myKSuiteDashboardPaymentMethod", bundle: .module)
 //                    .frame(maxWidth: .infinity, alignment: .leading)
@@ -44,7 +44,6 @@ struct SubscriptionPlusDetailsView: View {
 //                Text("!Apple Pay")
 //                    .foregroundStyle(ColorHelper.secondary)
 //            }
-
 
             HStack(alignment: .top, spacing: 12) {
                 ImageHelper.information
