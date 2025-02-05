@@ -27,4 +27,8 @@ enum ImageHelper {
     static let myKSuitePlusLogo = Image("myKSuitePlus.logo", bundle: .module)
     static let person = Image("person", bundle: .module)
     static let background = Image("background", bundle: .module)
+    static let plane = Image("plane", bundle: .module)
+    static let gift = Image("gift", bundle: .module)
+    static let drive = Image("drive", bundle: .module)
+    static let folderArrowUp = Image("folder.arrow.up", bundle: .module)
 }
