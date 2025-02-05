@@ -19,7 +19,7 @@
 import SwiftUI
 
 @MainActor
-public struct MyKSuite: Codable {
+public struct MyKSuite: Codable, Sendable {
     let id: Int
     let status: String
     let packId: Int
