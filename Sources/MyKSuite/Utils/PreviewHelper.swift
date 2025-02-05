@@ -38,6 +38,7 @@ enum PreviewHelper {
         id: 81,
         isFree: true,
         drive: sampleDrive,
-        freeMail: sampleFreeMail
+        freeMail: sampleFreeMail,
+        trialExpiryAt: 1_769_814_000
     )
 }

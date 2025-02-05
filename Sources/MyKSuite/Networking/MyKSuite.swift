@@ -24,12 +24,22 @@ public struct MyKSuite: Codable, Sendable {
     let isFree: Bool
     let drive: Drive
     let freeMail: FreeMail
+    let trialExpiryAt: Int?
 
     var icon: Image {
         if isFree {
             return ImageHelper.myKSuiteLogo
         }
         return ImageHelper.myKSuitePlusLogo
+    }
+
+    var formattedTrialExpiryDate: String? {
+        guard let trialExpiryAt else { return nil }
+        let date = Date(timeIntervalSince1970: TimeInterval(trialExpiryAt))
+
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter.string(from: date)
     }
 }
 
