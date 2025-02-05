@@ -19,7 +19,7 @@
 import SwiftUI
 
 struct CardModifier: ViewModifier {
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
 
     let withStroke: Bool
 
