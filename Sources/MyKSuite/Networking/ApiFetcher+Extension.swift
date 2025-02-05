@@ -29,19 +29,7 @@ extension Endpoint {
 }
 
 extension ApiFetcher {
-    private var myKSuiteDecoder: JSONDecoder {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return decoder
-    }
-
     func myKSuite() async throws -> MyKSuite {
-        let endpoint = Endpoint.myKSuite()
-
-        let header = HTTPHeader(name: "Authorization", value: "Bearer \(currentToken?.accessToken ?? "")")
-        return try await perform(request: AF.request(
-            endpoint.url,
-            headers: HTTPHeaders([header])
-        ))
+        return try await perform(request: authenticatedRequest(.myKSuite()))
     }
 }

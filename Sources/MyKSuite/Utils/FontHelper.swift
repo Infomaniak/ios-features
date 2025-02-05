@@ -19,16 +19,22 @@
 import SwiftUI
 
 enum FontHelper {
-    static let title: Font = .system(size: 18, weight: .semibold)
+    private static func dynamicTypeSizeFont(size: CGFloat, weight: Font.Weight, relativeTo textStyle: Font.TextStyle) -> Font {
+        let fontFamily = UIFont.preferredFont(forTextStyle: .body).familyName
+        return Font.custom(fontFamily, size: size, relativeTo: textStyle).weight(weight)
+    }
+
+    static let title: Font = dynamicTypeSizeFont(size: 18, weight: .semibold, relativeTo: .title2)
 
     // MARK: - Regular
 
-    static let body: Font = .system(size: 16, weight: .regular)
-    static let bodySmall: Font = .system(size: 14, weight: .regular)
+    static let body: Font = dynamicTypeSizeFont(size: 16, weight: .regular, relativeTo: .body)
+    static let bodySmall: Font = dynamicTypeSizeFont(size: 14, weight: .regular, relativeTo: .callout)
 
     // MARK: - Medium
 
-    static let bodyMedium: Font = .system(size: 16, weight: .medium)
-    static let bodySmallMedium: Font = .system(size: 14, weight: .medium)
-    static let labelMedium: Font = .system(size: 12, weight: .medium)
+    static let bodyMedium: Font = dynamicTypeSizeFont(size: 16, weight: .medium, relativeTo: .headline)
+
+    static let bodySmallMedium: Font = dynamicTypeSizeFont(size: 14, weight: .medium, relativeTo: .callout)
+    static let labelMedium: Font = dynamicTypeSizeFont(size: 12, weight: .medium, relativeTo: .caption)
 }
