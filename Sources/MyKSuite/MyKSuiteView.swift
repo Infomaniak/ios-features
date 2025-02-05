@@ -31,15 +31,15 @@ public struct MyKSuiteView: View {
 
     public var body: some View {
         VStack(spacing: 32) {
-            Image("gradient", bundle: .module)
+            ImageHelper.gradient
                 .resizable()
                 .scaledToFit()
 
             VStack(alignment: .leading, spacing: 32) {
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
                     Text("myKSuiteUpgradeTitle", bundle: .module)
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundStyle(Color("orca", bundle: .module))
+                        .font(FontHelper.title)
+                        .foregroundStyle(ColorHelper.primary)
                         .frame(maxWidth: .infinity, alignment: .center)
 
                     Text("myKSuiteUpgradeDescription", bundle: .module)
@@ -67,8 +67,8 @@ public struct MyKSuiteView: View {
                 .buttonStyle(.ikBorderedProminent)
             }
             .padding(.horizontal, value: .large)
-            .font(.system(size: 16, weight: .regular))
-            .foregroundStyle(Color("elephant", bundle: .module))
+            .font(FontHelper.body)
+            .foregroundStyle(ColorHelper.secondary)
         }
     }
 }
