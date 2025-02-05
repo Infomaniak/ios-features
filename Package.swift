@@ -13,7 +13,7 @@ let package = Package(
         .library(
             name: "MyKSuite",
             targets: ["MyKSuite"]
-        ),
+        )
     ],
     dependencies: [
         .package(url: "https://github.com/Infomaniak/ios-core-ui", .upToNextMajor(from: "17.2.0"))

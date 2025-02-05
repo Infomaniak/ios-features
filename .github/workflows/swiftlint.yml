@@ -1,12 +1,12 @@
-name: CI workflow
+name: SwiftLint
 
 on:
   pull_request:
     branches: [ main ]
 
 jobs:
-  build_and_test_iOS:
-    name: Build and Test project on iOS
+  build:
+    name: SwiftLint
     runs-on: [ self-hosted, iOS ]
 
     steps:
@@ -14,7 +14,12 @@ jobs:
         uses: styfle/cancel-workflow-action@0.12.1
         with:
           access_token: ${{ github.token }}
+      - uses: jdx/mise-action@v2
+        with:
+          cache: false
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build
-        run: xcodebuild -scheme ios-features build -sdk iphonesimulator -destination "generic/platform=iOS"
+        with:
+          fetch-depth: 0
+      - name: SwiftLint
+        run: swiftlint --config .swiftlint.yml --config .swiftlint-ci.yml --reporter github-actions-logging .
