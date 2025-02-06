@@ -27,8 +27,8 @@ struct SubscriptionProductsView: View {
             if myKSuite.isFree {
                 ProductProgressView(
                     product: .mail,
-                    usedValue: myKSuite.freeMail.usedSize,
-                    totalValue: myKSuite.freeMail.storageSizeLimit
+                    usedValue: myKSuite.mail.usedSize,
+                    totalValue: myKSuite.mail.storageSizeLimit
                 )
             } else {
                 HStack {

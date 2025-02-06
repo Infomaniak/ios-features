@@ -23,7 +23,7 @@ public struct MyKSuite: Codable, Sendable {
     let id: Int
     let isFree: Bool
     let drive: Drive
-    let freeMail: FreeMail
+    let mail: Mail
     let trialExpiryAt: Int?
 
     var icon: Image {
@@ -50,7 +50,7 @@ struct Drive: Codable {
     let usedSize: Int64
 }
 
-struct FreeMail: Codable {
+struct Mail: Codable {
     let id: Int
     let dailyLimitSent: Int
     let storageSizeLimit: Int64

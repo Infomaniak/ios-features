@@ -19,7 +19,7 @@
 import Foundation
 
 enum PreviewHelper {
-    static let sampleFreeMail = FreeMail(
+    static let sampleMail = Mail(
         id: 343_334,
         dailyLimitSent: 500,
         storageSizeLimit: 21_474_836_480,
@@ -38,7 +38,7 @@ enum PreviewHelper {
         id: 81,
         isFree: true,
         drive: sampleDrive,
-        freeMail: sampleFreeMail,
+        mail: sampleMail,
         trialExpiryAt: 1_769_814_000
     )
 }
