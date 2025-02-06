@@ -29,10 +29,12 @@ public struct MyKSuiteDashboardView: View {
 
     @State private var myKSuite: MyKSuite?
     private let apiFetcher: ApiFetcher
+    private let userId: Int
     private let avatar: Image?
 
-    public init(apiFetcher: ApiFetcher, userAvatar: Image?) {
+    public init(apiFetcher: ApiFetcher, userId: Int, userAvatar: Image?) {
         self.apiFetcher = apiFetcher
+        self.userId = userId
         avatar = userAvatar
     }
 
@@ -70,7 +72,7 @@ public struct MyKSuiteDashboardView: View {
         }
         .task {
             do {
-                myKSuite = try await myKSuiteStore.updateMyKSuite(with: self.apiFetcher)
+                myKSuite = try await myKSuiteStore.updateMyKSuite(with: self.apiFetcher, id: userId)
             } catch {
                 Logger.general.error("Error fetching my ksuite: \(error)")
             }
