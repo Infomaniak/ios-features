@@ -21,23 +21,34 @@ import InfomaniakCoreSwiftUI
 import SwiftUI
 
 struct HeaderView: View {
-    let myKSuite: MyKSuite
+    private let myKSuite: MyKSuite
+    private let avatar: Image?
+
+    init(myKSuite: MyKSuite, avatar: Image?) {
+        self.myKSuite = myKSuite
+
+        self.avatar = avatar
+    }
 
     var body: some View {
         HStack {
-            ImageHelper.person
-                .resizable()
-                .scaledToFit()
-                .frame(width: 14)
-                .foregroundStyle(ColorHelper.secondary)
-                .background {
-                    Circle()
-                        .strokeBorder(ColorHelper.gradient, lineWidth: 1)
-                        .frame(width: 24, height: 24)
+            Group {
+                if let avatar {
+                    avatar
+                        .iconSize(.large)
+                } else {
+                    ImageHelper.person
+                        .iconSize(.medium)
+                        .foregroundStyle(ColorHelper.secondary)
                 }
-                .frame(width: 24, height: 24)
-                .background(ColorHelper.polarBear)
-                .clipShape(.circle)
+            }
+            .frame(width: 24, height: 24)
+            .background {
+                Circle()
+                    .strokeBorder(ColorHelper.gradient, lineWidth: 1)
+            }
+            .background(ColorHelper.polarBear)
+            .clipShape(.circle)
 
             Text(myKSuite.freeMail.email)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -54,5 +65,5 @@ struct HeaderView: View {
 }
 
 #Preview {
-    HeaderView(myKSuite: PreviewHelper.sampleMyKSuite)
+    HeaderView(myKSuite: PreviewHelper.sampleMyKSuite, avatar: nil)
 }
