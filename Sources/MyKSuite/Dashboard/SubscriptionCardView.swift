@@ -35,7 +35,7 @@ struct SubscriptionCardView: View {
             Divider()
 
             if myKSuite.isFree {
-                SubscriptionFreeDetailsView(dailyLimit: myKSuite.freeMail.dailyLimitSent)
+                SubscriptionFreeDetailsView(dailyLimit: myKSuite.mail.dailyLimitSent)
             } else {
                 SubscriptionPlusDetailsView(myKSuite: myKSuite)
             }

@@ -50,7 +50,7 @@ struct HeaderView: View {
             .background(ColorHelper.polarBear)
             .clipShape(.circle)
 
-            Text(myKSuite.freeMail.email)
+            Text(myKSuite.mail.email)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(ColorHelper.primary)
                 .font(FontHelper.body)
