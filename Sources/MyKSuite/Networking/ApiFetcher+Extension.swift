@@ -16,28 +16,20 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import InfomaniakCoreSwiftUI
-import SwiftUI
+import Alamofire
+import Foundation
+@preconcurrency import InfomaniakCore
 
-struct MyKSuitePanelModifier: ViewModifier {
-    @Binding var isPresented: Bool
-    let configuration: MyKSuiteConfiguration
-
-    func body(content: Content) -> some View {
-        content
-            .floatingPanel(isPresented: $isPresented) {
-                MyKSuiteView(configuration: configuration)
-            }
+extension Endpoint {
+    static func myKSuite() -> Endpoint {
+        return Endpoint(host: "api.staging-myksuite.dev.infomaniak.ch", path: "/1/my_ksuite/current", queryItems: [
+            URLQueryItem(name: "with", value: "*")
+        ])
     }
 }
 
-public extension View {
-    func myKSuitePanel(isPresented: Binding<Bool>, configuration: MyKSuiteConfiguration) -> some View {
-        modifier(MyKSuitePanelModifier(isPresented: isPresented, configuration: configuration))
+extension ApiFetcher {
+    func myKSuite() async throws -> MyKSuite {
+        return try await perform(request: authenticatedRequest(.myKSuite()))
     }
-}
-
-#Preview {
-    Text("Hello world!")
-        .myKSuitePanel(isPresented: .constant(true), configuration: .kDrive)
 }

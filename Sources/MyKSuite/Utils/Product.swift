@@ -16,28 +16,27 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import InfomaniakCoreSwiftUI
 import SwiftUI
 
-struct MyKSuitePanelModifier: ViewModifier {
-    @Binding var isPresented: Bool
-    let configuration: MyKSuiteConfiguration
+enum Product {
+    case mail
+    case drive
 
-    func body(content: Content) -> some View {
-        content
-            .floatingPanel(isPresented: $isPresented) {
-                MyKSuiteView(configuration: configuration)
-            }
+    var title: String {
+        switch self {
+        case .mail:
+            return "Mail"
+        case .drive:
+            return "kDrive"
+        }
     }
-}
 
-public extension View {
-    func myKSuitePanel(isPresented: Binding<Bool>, configuration: MyKSuiteConfiguration) -> some View {
-        modifier(MyKSuitePanelModifier(isPresented: isPresented, configuration: configuration))
+    var color: Color {
+        switch self {
+        case .mail:
+            return ColorHelper.productMail
+        case .drive:
+            return ColorHelper.productDrive
+        }
     }
-}
-
-#Preview {
-    Text("Hello world!")
-        .myKSuitePanel(isPresented: .constant(true), configuration: .kDrive)
 }

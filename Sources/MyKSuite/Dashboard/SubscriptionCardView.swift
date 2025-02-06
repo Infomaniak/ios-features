@@ -1,0 +1,61 @@
+/*
+ iOS Features
+ Copyright (C) 2025 Infomaniak Network SA
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+import DesignSystem
+import InfomaniakCoreSwiftUI
+import SwiftUI
+
+struct SubscriptionCardView: View {
+    let myKSuite: MyKSuite
+    let avatar: Image?
+
+    var body: some View {
+        VStack(spacing: IKPadding.large) {
+            HeaderView(myKSuite: myKSuite, avatar: avatar)
+
+            Divider()
+
+            SubscriptionProductsView(myKSuite: myKSuite)
+
+            Divider()
+
+            if myKSuite.isFree {
+                SubscriptionFreeDetailsView(dailyLimit: myKSuite.mail.dailyLimitSent)
+            } else {
+                SubscriptionPlusDetailsView(myKSuite: myKSuite)
+            }
+        }
+        .padding(value: .medium)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(ColorHelper.backgroundPrimary)
+        .cardStyle()
+    }
+}
+
+#Preview {
+    SubscriptionCardView(myKSuite: PreviewHelper.sampleMyKSuite, avatar: nil)
+        .padding()
+        .frame(maxHeight: .infinity, alignment: .top)
+        .background {
+            ImageHelper.background
+                .resizable()
+                .scaledToFit()
+                .frame(maxHeight: .infinity, alignment: .top)
+                .ignoresSafeArea()
+        }
+}

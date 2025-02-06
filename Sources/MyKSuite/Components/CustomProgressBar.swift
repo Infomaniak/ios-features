@@ -16,28 +16,26 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import InfomaniakCoreSwiftUI
 import SwiftUI
 
-struct MyKSuitePanelModifier: ViewModifier {
-    @Binding var isPresented: Bool
-    let configuration: MyKSuiteConfiguration
-
-    func body(content: Content) -> some View {
-        content
-            .floatingPanel(isPresented: $isPresented) {
-                MyKSuiteView(configuration: configuration)
-            }
-    }
-}
-
-public extension View {
-    func myKSuitePanel(isPresented: Binding<Bool>, configuration: MyKSuiteConfiguration) -> some View {
-        modifier(MyKSuitePanelModifier(isPresented: isPresented, configuration: configuration))
+struct CustomProgressBar: ProgressViewStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        ZStack(alignment: .leading) {
+            RoundedRectangle(cornerRadius: 10)
+                .frame(height: 14)
+                .foregroundStyle(ColorHelper.reversedPrimary)
+                .overlay {
+                    GeometryReader { geometry in
+                        RoundedRectangle(cornerRadius: 10)
+                            .frame(width: geometry.size.width * CGFloat(configuration.fractionCompleted ?? 0.0), height: 14)
+                    }
+                }
+        }
     }
 }
 
 #Preview {
-    Text("Hello world!")
-        .myKSuitePanel(isPresented: .constant(true), configuration: .kDrive)
+    ProgressView(value: 2.3, total: 15)
+        .progressViewStyle(CustomProgressBar())
+        .foregroundStyle(.blue)
 }

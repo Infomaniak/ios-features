@@ -23,23 +23,23 @@ import SwiftUI
 public struct MyKSuiteView: View {
     @Environment(\.dismiss) private var dismiss
 
-    let configuration: MyKSuiteConfiguration
+    private let configuration: MyKSuiteConfiguration
 
     public init(configuration: MyKSuiteConfiguration) {
         self.configuration = configuration
     }
 
     public var body: some View {
-        VStack(spacing: 32) {
-            Image("gradient", bundle: .module)
+        VStack(spacing: IKPadding.huge) {
+            ImageHelper.gradient
                 .resizable()
                 .scaledToFit()
 
-            VStack(alignment: .leading, spacing: 32) {
+            VStack(alignment: .leading, spacing: IKPadding.huge) {
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
                     Text("myKSuiteUpgradeTitle", bundle: .module)
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundStyle(Color("orca", bundle: .module))
+                        .font(FontHelper.title)
+                        .foregroundStyle(ColorHelper.primary)
                         .frame(maxWidth: .infinity, alignment: .center)
 
                     Text("myKSuiteUpgradeDescription", bundle: .module)
@@ -51,6 +51,7 @@ public struct MyKSuiteView: View {
                             Text(label.text)
                         } icon: {
                             label.icon
+                                .iconSize(.large)
                         }
                     }
                 }
@@ -67,8 +68,8 @@ public struct MyKSuiteView: View {
                 .buttonStyle(.ikBorderedProminent)
             }
             .padding(.horizontal, value: .large)
-            .font(.system(size: 16, weight: .regular))
-            .foregroundStyle(Color("elephant", bundle: .module))
+            .font(FontHelper.body)
+            .foregroundStyle(ColorHelper.secondary)
         }
     }
 }
