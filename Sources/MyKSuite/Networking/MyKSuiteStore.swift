@@ -17,7 +17,7 @@
  */
 
 import Foundation
-import InfomaniakCore
+@preconcurrency import InfomaniakCore
 import InfomaniakDI
 import OSLog
 

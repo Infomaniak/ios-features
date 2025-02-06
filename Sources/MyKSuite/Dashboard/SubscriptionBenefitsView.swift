@@ -31,24 +31,21 @@ struct SubscriptionBenefitsView: View {
                 Text("myKSuiteUpgradeDriveLabel", bundle: .module)
             } icon: {
                 Image("drive", bundle: .module)
-                    .resizable()
-                    .frame(width: 16, height: 16)
+                    .iconSize(.medium)
             }
 
             Label {
                 Text("myKSuiteUpgradeUnlimitedMailLabel", bundle: .module)
             } icon: {
                 Image("plane", bundle: .module)
-                    .resizable()
-                    .frame(width: 16, height: 16)
+                    .iconSize(.medium)
             }
 
             Label {
                 Text("myKSuiteUpgradeLabel", bundle: .module)
             } icon: {
                 Image("gift", bundle: .module)
-                    .resizable()
-                    .frame(width: 16, height: 16)
+                    .iconSize(.medium)
             }
         }
         .foregroundStyle(ColorHelper.primary)

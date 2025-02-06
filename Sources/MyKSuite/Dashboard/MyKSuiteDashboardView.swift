@@ -16,7 +16,8 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import InfomaniakCore
+import DesignSystem
+@preconcurrency import InfomaniakCore
 import InfomaniakCoreSwiftUI
 import InfomaniakDI
 import OSLog
@@ -36,14 +37,12 @@ public struct MyKSuiteDashboardView: View {
     public var body: some View {
         NavigationView {
             if let myKSuite {
-                VStack(spacing: 24) {
+                VStack(spacing: IKPadding.large) {
                     SubscriptionCardView(myKSuite: myKSuite)
 
                     if !myKSuite.isFree {
                         SubscriptionBenefitsView()
-                    } // else {
-//                        FreeTrialView()
-//                    }
+                    }
                 }
                 .padding(value: .medium)
                 .navigationTitle(Text("myKSuiteDashboardTitle", bundle: .module))

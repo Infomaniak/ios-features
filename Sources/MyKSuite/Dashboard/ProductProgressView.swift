@@ -16,6 +16,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import DesignSystem
 import SwiftUI
 
 struct ProductProgressView: View {
@@ -25,7 +26,7 @@ struct ProductProgressView: View {
     let totalValue: Int64
 
     var body: some View {
-        VStack {
+        VStack(spacing: IKPadding.mini) {
             HStack {
                 Text(product.title)
                     .frame(maxWidth: .infinity, alignment: .leading)

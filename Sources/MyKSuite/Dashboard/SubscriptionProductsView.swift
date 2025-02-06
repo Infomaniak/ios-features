@@ -16,13 +16,14 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import DesignSystem
 import SwiftUI
 
 struct SubscriptionProductsView: View {
     let myKSuite: MyKSuite
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: IKPadding.medium) {
             if myKSuite.isFree {
                 ProductProgressView(
                     product: .mail,

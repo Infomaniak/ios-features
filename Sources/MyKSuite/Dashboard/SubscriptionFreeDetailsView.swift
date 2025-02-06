@@ -16,20 +16,20 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import DesignSystem
+import InfomaniakCoreSwiftUI
 import SwiftUI
 
 struct SubscriptionFreeDetailsView: View {
     let dailyLimit: Int
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: IKPadding.large) {
             Label {
                 Text("myKSuiteDashboardFreeMailLabel", bundle: .module)
             } icon: {
                 Image(systemName: "envelope")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 16)
+                    .iconSize(.medium)
                     .foregroundStyle(ColorHelper.secondary)
             }
 
@@ -54,9 +54,7 @@ struct SubscriptionFreeDetailsView: View {
                     Text("myKSuiteDashboardLimitedFunctionalityLabel", bundle: .module)
                 } icon: {
                     ImageHelper.lock
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 16)
+                        .iconSize(.medium)
                         .foregroundStyle(ColorHelper.secondary)
                 }
             }
