@@ -16,6 +16,8 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import DesignSystem
+import InfomaniakCoreSwiftUI
 import SwiftUI
 
 struct FreeTrialView: View {
@@ -23,7 +25,7 @@ struct FreeTrialView: View {
     private let chipColor = Color(light: .white, dark: ColorHelper.orca)
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: IKPadding.medium) {
             HStack {
                 ImageHelper.myKSuitePlusLogo
                     .resizable()
@@ -36,7 +38,7 @@ struct FreeTrialView: View {
                     .font(FontHelper.labelMedium)
                     .foregroundStyle(ColorHelper.primary)
                     .padding(.vertical, 2)
-                    .padding(.horizontal, 8)
+                    .padding(.horizontal, value: .mini)
                     .background(chipColor, in: .capsule)
             }
             Text("myKSuiteDashboardFreeTrialDescription", bundle: .module)
@@ -52,12 +54,12 @@ struct FreeTrialView: View {
             .ikButtonFullWidth(true)
             .buttonStyle(.ikBorderedProminent)
         }
-        .padding(16)
+        .padding(value: .medium)
         .background {
-            RoundedRectangle(cornerRadius: 16)
+            RoundedRectangle(cornerRadius: IKRadius.large)
                 .strokeBorder(ColorHelper.gradient, lineWidth: 1)
         }
-        .background(skyBackground, in: .rect(cornerRadius: 16))
+        .background(skyBackground, in: .rect(cornerRadius: IKRadius.large))
         .cardStyle(withStroke: false)
     }
 }

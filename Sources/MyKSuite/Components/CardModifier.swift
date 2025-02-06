@@ -16,6 +16,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import DesignSystem
 import SwiftUI
 
 struct CardModifier: ViewModifier {
@@ -36,9 +37,9 @@ struct CardModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .clipShape(.rect(cornerRadius: 16))
+            .clipShape(.rect(cornerRadius: IKRadius.large))
             .overlay {
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: IKRadius.large)
                     .strokeBorder(ColorHelper.elephant.opacity(strokeOpacity), lineWidth: 1)
             }
             .shadow(color: ColorHelper.shark.opacity(shadowOpacity), radius: 10)

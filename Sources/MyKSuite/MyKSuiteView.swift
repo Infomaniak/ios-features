@@ -23,19 +23,19 @@ import SwiftUI
 public struct MyKSuiteView: View {
     @Environment(\.dismiss) private var dismiss
 
-    let configuration: MyKSuiteConfiguration
+    private let configuration: MyKSuiteConfiguration
 
     public init(configuration: MyKSuiteConfiguration) {
         self.configuration = configuration
     }
 
     public var body: some View {
-        VStack(spacing: 32) {
+        VStack(spacing: IKPadding.huge) {
             ImageHelper.gradient
                 .resizable()
                 .scaledToFit()
 
-            VStack(alignment: .leading, spacing: 32) {
+            VStack(alignment: .leading, spacing: IKPadding.huge) {
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
                     Text("myKSuiteUpgradeTitle", bundle: .module)
                         .font(FontHelper.title)
@@ -51,6 +51,7 @@ public struct MyKSuiteView: View {
                             Text(label.text)
                         } icon: {
                             label.icon
+                                .iconSize(.large)
                         }
                     }
                 }

@@ -18,7 +18,7 @@
 
 import Alamofire
 import Foundation
-import InfomaniakCore
+@preconcurrency import InfomaniakCore
 
 extension Endpoint {
     static func myKSuite() -> Endpoint {

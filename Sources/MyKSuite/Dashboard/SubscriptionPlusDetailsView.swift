@@ -16,13 +16,15 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import DesignSystem
+import InfomaniakCoreSwiftUI
 import SwiftUI
 
 struct SubscriptionPlusDetailsView: View {
     let myKSuite: MyKSuite
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: IKPadding.large) {
             if let trialDate = myKSuite.formattedTrialExpiryDate {
                 HStack {
                     Text("myKSuiteDashboardTrialPeriod", bundle: .module)
@@ -39,21 +41,12 @@ struct SubscriptionPlusDetailsView: View {
                 }
             }
 
-            // Waiting for InAppPurchase
-
-//            HStack {
-//                Text("myKSuiteDashboardPaymentMethod", bundle: .module)
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//                    .foregroundStyle(ColorHelper.primary)
-//                Text("!Apple Pay")
-//                    .foregroundStyle(ColorHelper.secondary)
-//            }
-
-            HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .top, spacing: IKPadding.small) {
                 ImageHelper.information
+                    .iconSize(.medium)
                     .foregroundStyle(ColorHelper.secondary)
 
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: IKPadding.medium) {
                     Text("myKSuiteManageSubscriptionDescription", bundle: .module)
                         .foregroundStyle(ColorHelper.primary)
 
@@ -66,7 +59,7 @@ struct SubscriptionPlusDetailsView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(value: .medium)
-            .background(ColorHelper.backgroundSecondary, in: .rect(cornerRadius: 8))
+            .background(ColorHelper.backgroundSecondary, in: .rect(cornerRadius: IKRadius.medium))
         }
     }
 }
