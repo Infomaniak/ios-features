@@ -22,10 +22,11 @@ import SwiftUI
 
 struct SubscriptionCardView: View {
     let myKSuite: MyKSuite
+    let avatar: Image?
 
     var body: some View {
         VStack(spacing: IKPadding.large) {
-            HeaderView(myKSuite: myKSuite)
+            HeaderView(myKSuite: myKSuite, avatar: avatar)
 
             Divider()
 
@@ -47,7 +48,7 @@ struct SubscriptionCardView: View {
 }
 
 #Preview {
-    SubscriptionCardView(myKSuite: PreviewHelper.sampleMyKSuite)
+    SubscriptionCardView(myKSuite: PreviewHelper.sampleMyKSuite, avatar: nil)
         .padding()
         .frame(maxHeight: .infinity, alignment: .top)
         .background {

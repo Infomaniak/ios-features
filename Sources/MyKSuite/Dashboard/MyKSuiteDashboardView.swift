@@ -28,17 +28,19 @@ public struct MyKSuiteDashboardView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var myKSuite: MyKSuite?
-    let apiFetcher: ApiFetcher
+    private let apiFetcher: ApiFetcher
+    private let avatar: Image?
 
-    public init(apiFetcher: ApiFetcher) {
+    public init(apiFetcher: ApiFetcher, userAvatar: Image?) {
         self.apiFetcher = apiFetcher
+        avatar = userAvatar
     }
 
     public var body: some View {
         NavigationView {
             if let myKSuite {
                 VStack(spacing: IKPadding.large) {
-                    SubscriptionCardView(myKSuite: myKSuite)
+                    SubscriptionCardView(myKSuite: myKSuite, avatar: avatar)
 
                     if !myKSuite.isFree {
                         SubscriptionBenefitsView()
