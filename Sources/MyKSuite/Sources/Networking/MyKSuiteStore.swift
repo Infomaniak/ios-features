@@ -17,7 +17,7 @@
  */
 
 import Foundation
-@preconcurrency import InfomaniakCore
+import InfomaniakCore
 import InfomaniakDI
 import OSLog
 
@@ -39,7 +39,7 @@ public actor MyKSuiteStore {
     }
 
     @discardableResult
-    public func updateMyKSuite(with apiFetcher: ApiFetcher, id: UserId) async throws -> MyKSuite {
+    public func updateMyKSuite(with apiFetcher: KSuiteApiFetchable, id: UserId) async throws -> MyKSuite {
         await loadIfNeeded()
         let myKSuite = try await apiFetcher.myKSuite()
         kSuites?[id] = myKSuite

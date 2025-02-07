@@ -18,7 +18,11 @@
 
 import Alamofire
 import Foundation
-@preconcurrency import InfomaniakCore
+import InfomaniakCore
+
+public protocol KSuiteApiFetchable {
+    func myKSuite() async throws -> MyKSuite
+}
 
 extension Endpoint {
     static func myKSuite() -> Endpoint {
@@ -28,8 +32,8 @@ extension Endpoint {
     }
 }
 
-extension ApiFetcher {
-    func myKSuite() async throws -> MyKSuite {
+extension ApiFetcher: KSuiteApiFetchable {
+    public func myKSuite() async throws -> MyKSuite {
         return try await perform(request: authenticatedRequest(.myKSuite()))
     }
 }

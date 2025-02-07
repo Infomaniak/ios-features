@@ -17,22 +17,23 @@
  */
 
 import DesignSystem
-@preconcurrency import InfomaniakCore
+import InfomaniakCore
 import InfomaniakCoreSwiftUI
 import InfomaniakDI
 import OSLog
 import SwiftUI
 
 public struct MyKSuiteDashboardView: View {
-    @InjectService var myKSuiteStore: MyKSuiteStore
+    @InjectService private var myKSuiteStore: MyKSuiteStore
+
     @Environment(\.dismiss) private var dismiss
 
     @State private var myKSuite: MyKSuite?
-    private let apiFetcher: ApiFetcher
+    private let apiFetcher: KSuiteApiFetchable
     private let userId: Int
     private let avatar: Image?
 
-    public init(apiFetcher: ApiFetcher, userId: Int, userAvatar: Image?) {
+    public init(apiFetcher: KSuiteApiFetchable, userId: Int, userAvatar: Image?) {
         self.apiFetcher = apiFetcher
         self.userId = userId
         avatar = userAvatar
@@ -72,7 +73,7 @@ public struct MyKSuiteDashboardView: View {
         }
         .task {
             do {
-                myKSuite = try await myKSuiteStore.updateMyKSuite(with: self.apiFetcher, id: userId)
+                myKSuite = try await myKSuiteStore.updateMyKSuite(with: apiFetcher, id: userId)
             } catch {
                 Logger.general.error("Error fetching my ksuite: \(error)")
             }
@@ -80,6 +81,8 @@ public struct MyKSuiteDashboardView: View {
     }
 }
 
-// #Preview {
-//    MyKSuiteDashboardView(apiFetcher: ApiFetcher())
-// }
+@available(iOS 17.0, *)
+#Preview {
+    @Previewable @State var di = PreviewTargetAssembly()
+    MyKSuiteDashboardView(apiFetcher: PreviewKSuiteFetcher(), userId: 0, userAvatar: nil)
+}

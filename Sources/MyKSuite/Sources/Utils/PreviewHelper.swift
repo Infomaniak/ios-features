@@ -17,6 +17,8 @@
  */
 
 import Foundation
+import InfomaniakCore
+import InfomaniakDI
 
 enum PreviewHelper {
     static let sampleMail = Mail(
@@ -41,4 +43,44 @@ enum PreviewHelper {
         mail: sampleMail,
         trialExpiryAt: 1_769_814_000
     )
+}
+
+class PreviewKSuiteFetcher: KSuiteApiFetchable {
+    func myKSuite() async throws -> MyKSuite {
+        PreviewHelper.sampleMyKSuite
+    }
+}
+
+class PreviewAppGroupPathProvider: AppGroupPathProvidable {
+    var groupDirectoryURL: URL
+
+    var realmRootURL: URL
+
+    var importDirectoryURL: URL
+
+    var cacheDirectoryURL: URL
+
+    var tmpDirectoryURL: URL
+
+    var openInPlaceDirectoryURL: URL?
+
+    required init(realmRootPath: String, appGroupIdentifier: String) {
+        groupDirectoryURL = FileManager.default.temporaryDirectory
+        realmRootURL = FileManager.default.temporaryDirectory
+        importDirectoryURL = FileManager.default.temporaryDirectory
+        cacheDirectoryURL = FileManager.default.temporaryDirectory
+        tmpDirectoryURL = FileManager.default.temporaryDirectory
+        openInPlaceDirectoryURL = FileManager.default.temporaryDirectory
+    }
+}
+
+struct PreviewTargetAssembly {
+    init() {
+        SimpleResolver.sharedResolver.store(factory: Factory(type: AppGroupPathProvidable.self) { _, _ in
+            return PreviewAppGroupPathProvider(realmRootPath: "", appGroupIdentifier: "")
+        })
+        SimpleResolver.sharedResolver.store(factory: Factory(type: MyKSuiteStore.self) { _, _ in
+            MyKSuiteStore()
+        })
+    }
 }
