@@ -1,5 +1,5 @@
 {
-  "originHash" : "ce159d66b7137acdbd6f6358f5a8b8032e7e97f4da3c13384c001d0dd45a3979",
+  "originHash" : "dd47893907886c9f81f7bc3c364403f24307b057d2119120d2c533d62a65a638",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Infomaniak/ios-dependency-injection",
       "state" : {
-        "revision" : "7d127ead20bbb4a6a39ca60e6dc32e580197b59e",
-        "version" : "2.0.2"
+        "revision" : "f7724f3237f6e2b36fbfabacb88f2658e1e7281e",
+        "version" : "2.0.3"
       }
     },
     {
