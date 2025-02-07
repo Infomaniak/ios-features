@@ -37,7 +37,7 @@ struct SubscriptionProductsView: View {
                         .foregroundStyle(ColorHelper.primary)
                         .font(FontHelper.body)
 
-                    Text("myKSuiteDashboardDataUnlimited", bundle: .module)
+                    Text(MyKSuiteLocalizable.myKSuiteDashboardDataUnlimited)
                         .foregroundStyle(ColorHelper.secondary)
                         .font(FontHelper.bodySmall)
                 }

@@ -49,7 +49,7 @@ public struct MyKSuiteDashboardView: View {
                     }
                 }
                 .padding(value: .medium)
-                .navigationTitle(Text("myKSuiteDashboardTitle", bundle: .module))
+                .navigationTitle(MyKSuiteLocalizable.myKSuiteDashboardTitle)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {

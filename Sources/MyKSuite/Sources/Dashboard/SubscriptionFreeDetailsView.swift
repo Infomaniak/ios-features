@@ -26,7 +26,7 @@ struct SubscriptionFreeDetailsView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: IKPadding.large) {
             Label {
-                Text("myKSuiteDashboardFreeMailLabel", bundle: .module)
+                Text(MyKSuiteLocalizable.myKSuiteDashboardFreeMailLabel)
             } icon: {
                 Image(systemName: "envelope")
                     .iconSize(.medium)
@@ -35,23 +35,23 @@ struct SubscriptionFreeDetailsView: View {
 
             DisclosureGroup {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("myKSuiteDashboardFunctionalityMailAndDrive", bundle: .module)
+                    Text(MyKSuiteLocalizable.myKSuiteDashboardFunctionalityMailAndDrive)
                     HStack {
-                        Text("myKSuiteDashboardFunctionalityLimit", bundle: .module)
+                        Text(MyKSuiteLocalizable.myKSuiteDashboardFunctionalityLimit)
                             .frame(maxWidth: .infinity, alignment: .leading)
 
                         Text("\(dailyLimit)")
                             .foregroundStyle(ColorHelper.primary)
                             .font(FontHelper.bodySmallMedium)
                     }
-                    Text("myKSuiteDashboardFunctionalityCustomReminders", bundle: .module)
+                    Text(MyKSuiteLocalizable.myKSuiteDashboardFunctionalityCustomReminders)
                 }
                 .padding(.top, 18)
                 .foregroundStyle(ColorHelper.secondary)
                 .font(FontHelper.bodySmall)
             } label: {
                 Label {
-                    Text("myKSuiteDashboardLimitedFunctionalityLabel", bundle: .module)
+                    Text(MyKSuiteLocalizable.myKSuiteDashboardLimitedFunctionalityLabel)
                 } icon: {
                     ImageHelper.lock
                         .iconSize(.medium)

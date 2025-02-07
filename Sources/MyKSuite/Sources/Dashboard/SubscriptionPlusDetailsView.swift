@@ -27,17 +27,12 @@ struct SubscriptionPlusDetailsView: View {
         VStack(alignment: .leading, spacing: IKPadding.large) {
             if let trialDate = myKSuite.formattedTrialExpiryDate {
                 HStack {
-                    Text("myKSuiteDashboardTrialPeriod", bundle: .module)
+                    Text(MyKSuiteLocalizable.myKSuiteDashboardTrialPeriod)
                         .foregroundStyle(ColorHelper.primary)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
-                    Text(
-                        String(
-                            format: NSLocalizedString("myKSuiteDashboardUntil", bundle: .module, comment: ""),
-                            arguments: [trialDate]
-                        )
-                    )
-                    .foregroundStyle(ColorHelper.secondary)
+                    Text(MyKSuiteLocalizable.myKSuiteDashboardUntil(trialDate))
+                        .foregroundStyle(ColorHelper.secondary)
                 }
             }
 
@@ -47,13 +42,13 @@ struct SubscriptionPlusDetailsView: View {
                     .foregroundStyle(ColorHelper.secondary)
 
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
-                    Text("myKSuiteManageSubscriptionDescription", bundle: .module)
+                    Text(MyKSuiteLocalizable.myKSuiteManageSubscriptionDescription)
                         .foregroundStyle(ColorHelper.primary)
 
                     Button {
                         // Gerer mon abonnement
                     } label: {
-                        Text("myKSuiteManageSubscriptionButton", bundle: .module)
+                        Text(MyKSuiteLocalizable.myKSuiteManageSubscriptionButton)
                     }
                 }
             }

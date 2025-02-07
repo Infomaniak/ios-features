@@ -23,26 +23,26 @@ import SwiftUI
 struct SubscriptionBenefitsView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: IKPadding.large) {
-            Text("myKSuiteUpgradeBenefitsTitle", bundle: .module)
+            Text(MyKSuiteLocalizable.myKSuiteUpgradeBenefitsTitle)
                 .foregroundStyle(ColorHelper.secondary)
                 .font(FontHelper.bodySmall)
 
             Label {
-                Text("myKSuiteUpgradeDriveLabel", bundle: .module)
+                Text(MyKSuiteLocalizable.myKSuiteUpgradeDriveLabel)
             } icon: {
                 Image("drive", bundle: .module)
                     .iconSize(.medium)
             }
 
             Label {
-                Text("myKSuiteUpgradeUnlimitedMailLabel", bundle: .module)
+                Text(MyKSuiteLocalizable.myKSuiteUpgradeUnlimitedMailLabel)
             } icon: {
                 Image("plane", bundle: .module)
                     .iconSize(.medium)
             }
 
             Label {
-                Text("myKSuiteUpgradeLabel", bundle: .module)
+                Text(MyKSuiteLocalizable.myKSuiteUpgradeLabel)
             } icon: {
                 Image("gift", bundle: .module)
                     .iconSize(.medium)

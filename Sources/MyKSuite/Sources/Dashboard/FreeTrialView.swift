@@ -34,21 +34,21 @@ struct FreeTrialView: View {
 
                 Spacer()
 
-                Text("myKSuiteDashboardFreeTrialTitle", bundle: .module)
+                Text(MyKSuiteLocalizable.myKSuiteDashboardFreeTrialTitle)
                     .font(FontHelper.labelMedium)
                     .foregroundStyle(ColorHelper.primary)
                     .padding(.vertical, 2)
                     .padding(.horizontal, value: .mini)
                     .background(chipColor, in: .capsule)
             }
-            Text("myKSuiteDashboardFreeTrialDescription", bundle: .module)
+            Text(MyKSuiteLocalizable.myKSuiteDashboardFreeTrialDescription)
                 .font(FontHelper.bodySmall)
                 .foregroundStyle(ColorHelper.primary)
 
             Button {
                 // Start trial
             } label: {
-                Text("myKSuiteDashboardFreeTrialButton", bundle: .module)
+                Text(MyKSuiteLocalizable.myKSuiteDashboardFreeTrialButton)
             }
             .controlSize(.large)
             .ikButtonFullWidth(true)

@@ -37,12 +37,12 @@ public struct MyKSuiteView: View {
 
             VStack(alignment: .leading, spacing: IKPadding.huge) {
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
-                    Text("myKSuiteUpgradeTitle", bundle: .module)
+                    Text(MyKSuiteLocalizable.myKSuiteUpgradeTitle)
                         .font(FontHelper.title)
                         .foregroundStyle(ColorHelper.primary)
                         .frame(maxWidth: .infinity, alignment: .center)
 
-                    Text("myKSuiteUpgradeDescription", bundle: .module)
+                    Text(MyKSuiteLocalizable.myKSuiteUpgradeDescription)
                 }
 
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
@@ -56,12 +56,12 @@ public struct MyKSuiteView: View {
                     }
                 }
 
-                Text("myKSuiteUpgradeDetails", bundle: .module)
+                Text(MyKSuiteLocalizable.myKSuiteUpgradeDetails)
 
                 Button {
                     dismiss()
                 } label: {
-                    Text("buttonClose", bundle: .module)
+                    Text(MyKSuiteLocalizable.buttonClose)
                 }
                 .ikButtonFullWidth(true)
                 .controlSize(.large)
