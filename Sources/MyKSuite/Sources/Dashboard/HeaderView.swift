@@ -20,11 +20,11 @@ import DesignSystem
 import InfomaniakCoreSwiftUI
 import SwiftUI
 
-struct HeaderView: View {
+struct HeaderView<Content: View>: View {
     private let myKSuite: MyKSuite
-    private let avatar: Image?
+    private let avatar: Content
 
-    init(myKSuite: MyKSuite, avatar: Image?) {
+    init(myKSuite: MyKSuite, avatar: Content) {
         self.myKSuite = myKSuite
 
         self.avatar = avatar
@@ -32,18 +32,16 @@ struct HeaderView: View {
 
     var body: some View {
         HStack {
-            Group {
-                if let avatar {
-                    avatar
-                        .iconSize(.large)
-                } else {
-                    Resources.Assets.person.swiftUIImage
-                        .iconSize(.medium)
-                        .foregroundStyle(ColorHelper.secondary)
-                }
+            ZStack {
+                Resources.Assets.person.swiftUIImage
+                    .iconSize(.medium)
+                    .foregroundStyle(ColorHelper.secondary)
+
+                avatar
+                    .frame(width: 24, height: 24)
             }
             .frame(width: 24, height: 24)
-            .background {
+            .overlay {
                 Circle()
                     .strokeBorder(ColorHelper.gradient, lineWidth: 1)
             }
@@ -65,5 +63,5 @@ struct HeaderView: View {
 }
 
 #Preview {
-    HeaderView(myKSuite: PreviewHelper.sampleMyKSuite, avatar: nil)
+    HeaderView(myKSuite: PreviewHelper.sampleMyKSuite, avatar: EmptyView())
 }

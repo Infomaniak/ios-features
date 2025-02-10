@@ -20,9 +20,9 @@ import DesignSystem
 import InfomaniakCoreSwiftUI
 import SwiftUI
 
-struct SubscriptionCardView: View {
+struct SubscriptionCardView<Content: View>: View {
     let myKSuite: MyKSuite
-    let avatar: Image?
+    let avatar: Content
 
     var body: some View {
         VStack(spacing: IKPadding.large) {
@@ -50,7 +50,7 @@ struct SubscriptionCardView: View {
 }
 
 #Preview {
-    SubscriptionCardView(myKSuite: PreviewHelper.sampleMyKSuite, avatar: nil)
+    SubscriptionCardView(myKSuite: PreviewHelper.sampleMyKSuite, avatar: EmptyView())
         .padding()
         .frame(maxHeight: .infinity, alignment: .top)
         .background {

@@ -23,7 +23,7 @@ import InfomaniakDI
 import OSLog
 import SwiftUI
 
-public struct MyKSuiteDashboardView: View {
+public struct MyKSuiteDashboardView<Content: View>: View {
     @InjectService private var myKSuiteStore: MyKSuiteStore
 
     @Environment(\.dismiss) private var dismiss
@@ -31,12 +31,12 @@ public struct MyKSuiteDashboardView: View {
     @State private var myKSuite: MyKSuite?
     private let apiFetcher: KSuiteApiFetchable
     private let userId: Int
-    private let avatar: Image?
+    private let avatar: Content
 
-    public init(apiFetcher: KSuiteApiFetchable, userId: Int, userAvatar: Image?) {
+    public init(apiFetcher: KSuiteApiFetchable, userId: Int, @ViewBuilder avatar: () -> Content) {
         self.apiFetcher = apiFetcher
         self.userId = userId
-        avatar = userAvatar
+        self.avatar = avatar()
     }
 
     public var body: some View {
@@ -84,5 +84,5 @@ public struct MyKSuiteDashboardView: View {
 @available(iOS 17.0, *)
 #Preview {
     @Previewable @State var di = PreviewTargetAssembly()
-    MyKSuiteDashboardView(apiFetcher: PreviewKSuiteFetcher(), userId: 0, userAvatar: nil)
+    MyKSuiteDashboardView(apiFetcher: PreviewKSuiteFetcher(), userId: 0) { EmptyView() }
 }
