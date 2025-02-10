@@ -26,9 +26,10 @@ public protocol KSuiteApiFetchable {
 
 extension Endpoint {
     static func myKSuite() -> Endpoint {
-        return Endpoint(host: "api.staging-myksuite.dev.infomaniak.ch", path: "/1/my_ksuite/current", queryItems: [
-            URLQueryItem(name: "with", value: "*")
-        ])
+        return Endpoint(path: "/my_ksuite/current",
+                        queryItems: [
+                            URLQueryItem(name: "with", value: "*")
+                        ])
     }
 }
 
