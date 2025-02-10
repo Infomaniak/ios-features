@@ -27,30 +27,30 @@ public enum MyKSuiteConfiguration {
         case .mail:
             [
                 MyKSuiteLabel(
-                    icon: ImageHelper.plane,
+                    icon: Resources.Assets.plane.swiftUIImage,
                     text: MyKSuiteLocalizable.myKSuiteUpgradeUnlimitedMailLabel
                 ),
                 MyKSuiteLabel(
-                    icon: ImageHelper.envelope,
+                    icon: Resources.Assets.envelope.swiftUIImage,
                     text: MyKSuiteLocalizable.myKSuiteUpgradeRedirectLabel
                 ),
                 MyKSuiteLabel(
-                    icon: ImageHelper.gift,
+                    icon: Resources.Assets.gift.swiftUIImage,
                     text: MyKSuiteLocalizable.myKSuiteUpgradeLabel
                 )
             ]
         case .kDrive:
             [
                 MyKSuiteLabel(
-                    icon: ImageHelper.drive,
+                    icon: Resources.Assets.drive.swiftUIImage,
                     text: MyKSuiteLocalizable.myKSuiteUpgradeDriveLabel
                 ),
                 MyKSuiteLabel(
-                    icon: ImageHelper.folderArrowUp,
+                    icon: Resources.Assets.folderArrowUp.swiftUIImage,
                     text: MyKSuiteLocalizable.myKSuiteUpgradePdfEditionLabel
                 ),
                 MyKSuiteLabel(
-                    icon: ImageHelper.gift,
+                    icon: Resources.Assets.gift.swiftUIImage,
                     text: MyKSuiteLocalizable.myKSuiteUpgradeLabel
                 )
             ]

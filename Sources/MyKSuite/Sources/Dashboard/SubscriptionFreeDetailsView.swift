@@ -53,7 +53,7 @@ struct SubscriptionFreeDetailsView: View {
                 Label {
                     Text(MyKSuiteLocalizable.myKSuiteDashboardLimitedFunctionalityLabel)
                 } icon: {
-                    ImageHelper.lock
+                    Resources.Assets.lock.swiftUIImage
                         .iconSize(.medium)
                         .foregroundStyle(ColorHelper.secondary)
                 }

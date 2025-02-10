@@ -37,7 +37,7 @@ struct HeaderView: View {
                     avatar
                         .iconSize(.large)
                 } else {
-                    ImageHelper.person
+                    Resources.Assets.person.swiftUIImage
                         .iconSize(.medium)
                         .foregroundStyle(ColorHelper.secondary)
                 }
@@ -47,7 +47,7 @@ struct HeaderView: View {
                 Circle()
                     .strokeBorder(ColorHelper.gradient, lineWidth: 1)
             }
-            .background(ColorHelper.polarBear)
+            .background(Resources.Colors.polarBear.swiftUIColor)
             .clipShape(.circle)
 
             Text(myKSuite.mail.email)

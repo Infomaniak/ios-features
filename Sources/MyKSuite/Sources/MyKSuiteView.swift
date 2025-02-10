@@ -31,7 +31,7 @@ public struct MyKSuiteView: View {
 
     public var body: some View {
         VStack(spacing: IKPadding.huge) {
-            ImageHelper.gradient
+            Resources.Assets.gradient.swiftUIImage
                 .resizable()
                 .scaledToFit()
 

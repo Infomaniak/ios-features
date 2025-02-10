@@ -19,24 +19,16 @@
 import SwiftUI
 
 enum ColorHelper {
-    static let orca = Color("orca", bundle: .module)
-    static let elephant = Color("elephant", bundle: .module)
-    static let polarBear = Color("polar.bear", bundle: .module)
-    static let rabbit = Color("rabbit", bundle: .module)
-    static let shark = Color("shark", bundle: .module)
-    static let sky = Color("sky", bundle: .module)
-    static let bat = Color("bat", bundle: .module)
+    static let backgroundPrimary = Color(light: .white, dark: Resources.Colors.bat.swiftUIColor)
+    static let backgroundSecondary = Color(
+        light: Resources.Colors.polarBear.swiftUIColor,
+        dark: Resources.Colors.orca.swiftUIColor
+    )
 
-    static let productMail = Color("product.mail", bundle: .module)
-    static let productDrive = Color("product.drive", bundle: .module)
+    static let primary = Color(light: Resources.Colors.orca.swiftUIColor, dark: Resources.Colors.rabbit.swiftUIColor)
+    static let secondary = Color(light: Resources.Colors.elephant.swiftUIColor, dark: Resources.Colors.shark.swiftUIColor)
 
-    static let backgroundPrimary = Color(light: .white, dark: bat)
-    static let backgroundSecondary = Color(light: polarBear, dark: orca)
-
-    static let primary = Color(light: orca, dark: rabbit)
-    static let secondary = Color(light: elephant, dark: shark)
-
-    static let reversedPrimary = Color(light: rabbit, dark: orca)
+    static let reversedPrimary = Color(light: Resources.Colors.rabbit.swiftUIColor, dark: Resources.Colors.orca.swiftUIColor)
 
     // MARK: - Gradient
 

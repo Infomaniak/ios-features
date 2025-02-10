@@ -37,7 +37,7 @@ struct SubscriptionPlusDetailsView: View {
             }
 
             HStack(alignment: .top, spacing: IKPadding.small) {
-                ImageHelper.information
+                Resources.Assets.information.swiftUIImage
                     .iconSize(.medium)
                     .foregroundStyle(ColorHelper.secondary)
 

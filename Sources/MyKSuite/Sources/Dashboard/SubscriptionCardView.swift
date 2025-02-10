@@ -52,7 +52,7 @@ struct SubscriptionCardView: View {
         .padding()
         .frame(maxHeight: .infinity, alignment: .top)
         .background {
-            ImageHelper.background
+            Resources.Assets.background.swiftUIImage
                 .resizable()
                 .scaledToFit()
                 .frame(maxHeight: .infinity, alignment: .top)

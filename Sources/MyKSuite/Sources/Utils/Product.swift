@@ -34,9 +34,9 @@ enum Product {
     var color: Color {
         switch self {
         case .mail:
-            return ColorHelper.productMail
+            return Resources.Colors.productMail.swiftUIColor
         case .drive:
-            return ColorHelper.productDrive
+            return Resources.Colors.productDrive.swiftUIColor
         }
     }
 }
