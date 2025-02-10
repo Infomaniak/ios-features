@@ -29,10 +29,12 @@ struct SubscriptionCardView: View {
             HeaderView(myKSuite: myKSuite, avatar: avatar)
 
             Divider()
+                .overlay(ColorHelper.divider)
 
             SubscriptionProductsView(myKSuite: myKSuite)
 
             Divider()
+                .overlay(ColorHelper.divider)
 
             if myKSuite.isFree {
                 SubscriptionFreeDetailsView(dailyLimit: myKSuite.mail.dailyLimitSent)

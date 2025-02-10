@@ -36,14 +36,20 @@ struct SubscriptionPlusDetailsView: View {
                 }
             }
 
-            HStack(alignment: .top, spacing: IKPadding.small) {
+            HStack(alignment: .iconAndMultilineTextAlignment, spacing: IKPadding.small) {
                 Resources.Assets.information.swiftUIImage
                     .iconSize(.medium)
                     .foregroundStyle(ColorHelper.secondary)
+                    .alignmentGuide(.iconAndMultilineTextAlignment) { d in
+                        d[VerticalAlignment.center]
+                    }
 
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
                     Text(MyKSuiteLocalizable.myKSuiteManageSubscriptionDescription)
                         .foregroundStyle(ColorHelper.primary)
+                        .alignmentGuide(.iconAndMultilineTextAlignment) { d in
+                            (d.height - (d[.lastTextBaseline] - d[.firstTextBaseline])) / 2
+                        }
 
                     Button {
                         // Gerer mon abonnement

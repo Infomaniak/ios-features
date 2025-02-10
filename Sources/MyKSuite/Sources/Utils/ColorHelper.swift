@@ -30,6 +30,8 @@ enum ColorHelper {
 
     static let reversedPrimary = Color(light: Resources.Colors.rabbit.swiftUIColor, dark: Resources.Colors.orca.swiftUIColor)
 
+    static let divider = Color(light: Resources.Colors.mouse.swiftUIColor, dark: Resources.Colors.elephant.swiftUIColor)
+
     // MARK: - Gradient
 
     static let gradientColor1 = Color("gradient.color.1", bundle: .module)

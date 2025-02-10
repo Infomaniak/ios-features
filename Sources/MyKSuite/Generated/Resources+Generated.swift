@@ -46,6 +46,7 @@ public enum Resources {
     public static let gradientColor5 = ColorAsset(name: "gradient.color.5")
     public static let bat = ColorAsset(name: "bat")
     public static let elephant = ColorAsset(name: "elephant")
+    public static let mouse = ColorAsset(name: "mouse")
     public static let orca = ColorAsset(name: "orca")
     public static let polarBear = ColorAsset(name: "polar.bear")
     public static let productDrive = ColorAsset(name: "product.drive")

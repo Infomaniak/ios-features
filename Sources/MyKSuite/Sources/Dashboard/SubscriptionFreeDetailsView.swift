@@ -24,7 +24,7 @@ struct SubscriptionFreeDetailsView: View {
     let dailyLimit: Int
 
     var body: some View {
-        VStack(alignment: .leading, spacing: IKPadding.large) {
+        VStack(alignment: .leading, spacing: IKPadding.mini) {
             Label {
                 Text(MyKSuiteLocalizable.myKSuiteDashboardFreeMailLabel)
             } icon: {
@@ -32,9 +32,10 @@ struct SubscriptionFreeDetailsView: View {
                     .iconSize(.medium)
                     .foregroundStyle(ColorHelper.secondary)
             }
+            .padding(.vertical, value: .mini)
 
             DisclosureGroup {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: IKPadding.mini) {
                     Text(MyKSuiteLocalizable.myKSuiteDashboardFunctionalityMailAndDrive)
                     HStack {
                         Text(MyKSuiteLocalizable.myKSuiteDashboardFunctionalityLimit)
@@ -46,7 +47,7 @@ struct SubscriptionFreeDetailsView: View {
                     }
                     Text(MyKSuiteLocalizable.myKSuiteDashboardFunctionalityCustomReminders)
                 }
-                .padding(.top, 18)
+                .padding(.top, value: .mini)
                 .foregroundStyle(ColorHelper.secondary)
                 .font(FontHelper.bodySmall)
             } label: {
@@ -57,6 +58,7 @@ struct SubscriptionFreeDetailsView: View {
                         .iconSize(.medium)
                         .foregroundStyle(ColorHelper.secondary)
                 }
+                .padding(.vertical, value: .mini)
             }
         }
         .font(FontHelper.body)

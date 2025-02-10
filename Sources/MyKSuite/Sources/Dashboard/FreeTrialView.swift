@@ -30,7 +30,7 @@ struct FreeTrialView: View {
                 Resources.Assets.myKSuitePlusLogo.swiftUIImage
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 90)
+                    .frame(maxWidth: 90)
 
                 Spacer()
 

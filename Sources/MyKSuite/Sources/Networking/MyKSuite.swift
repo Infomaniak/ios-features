@@ -18,7 +18,6 @@
 
 import SwiftUI
 
-@MainActor
 public struct MyKSuite: Codable, Sendable {
     let id: Int
     let isFree: Bool
