@@ -16,7 +16,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/Infomaniak/ios-core-ui", .upToNextMajor(from: "17.2.0"))
+        .package(url: "https://github.com/Infomaniak/ios-core-ui", .upToNextMajor(from: "18.0.0"))
     ],
     targets: [
         .target(
