@@ -22,11 +22,11 @@ import SwiftUI
 
 struct SubscriptionCardView<Content: View>: View {
     let myKSuite: MyKSuite
-    let avatar: Content
+    let avatarView: () -> Content
 
     var body: some View {
         VStack(spacing: IKPadding.large) {
-            HeaderView(myKSuite: myKSuite, avatar: avatar)
+            HeaderView(myKSuite: myKSuite, avatarView: avatarView)
 
             Divider()
                 .overlay(ColorHelper.divider)
@@ -50,14 +50,16 @@ struct SubscriptionCardView<Content: View>: View {
 }
 
 #Preview {
-    SubscriptionCardView(myKSuite: PreviewHelper.sampleMyKSuite, avatar: EmptyView())
-        .padding()
-        .frame(maxHeight: .infinity, alignment: .top)
-        .background {
-            Resources.Assets.background.swiftUIImage
-                .resizable()
-                .scaledToFit()
-                .frame(maxHeight: .infinity, alignment: .top)
-                .ignoresSafeArea()
-        }
+    SubscriptionCardView(myKSuite: PreviewHelper.sampleMyKSuite) {
+        EmptyView()
+    }
+    .padding()
+    .frame(maxHeight: .infinity, alignment: .top)
+    .background {
+        Resources.Assets.background.swiftUIImage
+            .resizable()
+            .scaledToFit()
+            .frame(maxHeight: .infinity, alignment: .top)
+            .ignoresSafeArea()
+    }
 }

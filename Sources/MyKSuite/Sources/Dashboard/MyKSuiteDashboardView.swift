@@ -31,19 +31,19 @@ public struct MyKSuiteDashboardView<Content: View>: View {
     @State private var myKSuite: MyKSuite?
     private let apiFetcher: KSuiteApiFetchable
     private let userId: Int
-    private let avatar: Content
+    private let avatarView: () -> Content
 
-    public init(apiFetcher: KSuiteApiFetchable, userId: Int, @ViewBuilder avatar: () -> Content) {
+    public init(apiFetcher: KSuiteApiFetchable, userId: Int, @ViewBuilder avatarView: @escaping () -> Content) {
         self.apiFetcher = apiFetcher
         self.userId = userId
-        self.avatar = avatar()
+        self.avatarView = avatarView
     }
 
     public var body: some View {
         NavigationView {
             if let myKSuite {
                 VStack(spacing: IKPadding.large) {
-                    SubscriptionCardView(myKSuite: myKSuite, avatar: avatar)
+                    SubscriptionCardView(myKSuite: myKSuite, avatarView: avatarView)
 
                     if !myKSuite.isFree {
                         SubscriptionBenefitsView()
