@@ -21,14 +21,8 @@ import InfomaniakCoreSwiftUI
 import SwiftUI
 
 struct HeaderView<Content: View>: View {
-    private let myKSuite: MyKSuite
-    private let avatar: Content
-
-    init(myKSuite: MyKSuite, avatar: Content) {
-        self.myKSuite = myKSuite
-
-        self.avatar = avatar
-    }
+    let myKSuite: MyKSuite
+    let avatarView: () -> Content
 
     var body: some View {
         HStack {
@@ -37,7 +31,7 @@ struct HeaderView<Content: View>: View {
                     .iconSize(.medium)
                     .foregroundStyle(ColorHelper.secondary)
 
-                avatar
+                avatarView()
                     .frame(width: 24, height: 24)
             }
             .frame(width: 24, height: 24)
@@ -63,5 +57,5 @@ struct HeaderView<Content: View>: View {
 }
 
 #Preview {
-    HeaderView(myKSuite: PreviewHelper.sampleMyKSuite, avatar: EmptyView())
+    HeaderView(myKSuite: PreviewHelper.sampleMyKSuite) { EmptyView() }
 }
