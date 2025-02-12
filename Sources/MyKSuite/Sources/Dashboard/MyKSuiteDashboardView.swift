@@ -41,37 +41,41 @@ public struct MyKSuiteDashboardView<Content: View>: View {
 
     public var body: some View {
         NavigationView {
-            if let myKSuite {
-                VStack(spacing: IKPadding.large) {
+            VStack(spacing: IKPadding.large) {
+                if let myKSuite {
                     SubscriptionCardView(myKSuite: myKSuite, avatarView: avatarView)
 
                     if !myKSuite.isFree {
                         SubscriptionBenefitsView()
                     }
+                } else {
+                    ProgressView()
+                        .frame(maxWidth: .infinity)
                 }
-                .padding(value: .medium)
-                .navigationTitle(MyKSuiteLocalizable.myKSuiteDashboardTitle)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button(role: .destructive) {
-                            dismiss()
-                        } label: {
-                            Image(systemName: "xmark")
-                        }
+            }
+            .padding(value: .medium)
+            .navigationTitle(MyKSuiteLocalizable.myKSuiteDashboardTitle)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(role: .destructive) {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
                     }
                 }
-                .frame(maxHeight: .infinity, alignment: .top)
-                .background {
-                    MyKSuiteResources.Assets.background.swiftUIImage
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxHeight: .infinity, alignment: .top)
-                        .ignoresSafeArea()
-                }
+            }
+            .frame(maxHeight: .infinity, alignment: .top)
+            .background {
+                MyKSuiteResources.Assets.background.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .ignoresSafeArea()
             }
         }
         .task {
+            myKSuite = await myKSuiteStore.getMyKSuite(id: userId)
             do {
                 myKSuite = try await myKSuiteStore.updateMyKSuite(with: apiFetcher, id: userId)
             } catch {
