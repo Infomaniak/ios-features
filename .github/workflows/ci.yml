@@ -18,3 +18,5 @@ jobs:
         uses: actions/checkout@v4
       - name: Build
         run: xcodebuild -scheme ios-features build -sdk iphonesimulator -destination "generic/platform=iOS"
+      - name: Test
+        run: xcodebuild -scheme ios-features test -destination "platform=iOS Simulator,name=iPhone 16,OS=latest"
