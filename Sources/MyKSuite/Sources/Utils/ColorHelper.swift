@@ -19,18 +19,30 @@
 import SwiftUI
 
 enum ColorHelper {
-    static let backgroundPrimary = Color(light: .white, dark: Resources.Colors.bat.swiftUIColor)
+    static let backgroundPrimary = Color(light: .white, dark: MyKSuiteResources.Colors.bat.swiftUIColor)
     static let backgroundSecondary = Color(
-        light: Resources.Colors.polarBear.swiftUIColor,
-        dark: Resources.Colors.orca.swiftUIColor
+        light: MyKSuiteResources.Colors.polarBear.swiftUIColor,
+        dark: MyKSuiteResources.Colors.orca.swiftUIColor
     )
 
-    static let primary = Color(light: Resources.Colors.orca.swiftUIColor, dark: Resources.Colors.rabbit.swiftUIColor)
-    static let secondary = Color(light: Resources.Colors.elephant.swiftUIColor, dark: Resources.Colors.shark.swiftUIColor)
+    static let primary = Color(
+        light: MyKSuiteResources.Colors.orca.swiftUIColor,
+        dark: MyKSuiteResources.Colors.rabbit.swiftUIColor
+    )
+    static let secondary = Color(
+        light: MyKSuiteResources.Colors.elephant.swiftUIColor,
+        dark: MyKSuiteResources.Colors.shark.swiftUIColor
+    )
 
-    static let reversedPrimary = Color(light: Resources.Colors.rabbit.swiftUIColor, dark: Resources.Colors.orca.swiftUIColor)
+    static let reversedPrimary = Color(
+        light: MyKSuiteResources.Colors.rabbit.swiftUIColor,
+        dark: MyKSuiteResources.Colors.orca.swiftUIColor
+    )
 
-    static let divider = Color(light: Resources.Colors.mouse.swiftUIColor, dark: Resources.Colors.elephant.swiftUIColor)
+    static let divider = Color(
+        light: MyKSuiteResources.Colors.mouse.swiftUIColor,
+        dark: MyKSuiteResources.Colors.elephant.swiftUIColor
+    )
 
     // MARK: - Gradient
 

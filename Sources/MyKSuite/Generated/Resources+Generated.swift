@@ -23,7 +23,7 @@ public typealias AssetImageTypeAlias = ImageAsset.Image
 // MARK: - Asset Catalogs
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-public enum Resources {
+public enum MyKSuiteResources {
   public enum Assets {
     public static let drive = ImageAsset(name: "drive")
     public static let envelope = ImageAsset(name: "envelope")

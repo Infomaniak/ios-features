@@ -56,7 +56,7 @@ struct SubscriptionCardView<Content: View>: View {
     .padding()
     .frame(maxHeight: .infinity, alignment: .top)
     .background {
-        Resources.Assets.background.swiftUIImage
+        MyKSuiteResources.Assets.background.swiftUIImage
             .resizable()
             .scaledToFit()
             .frame(maxHeight: .infinity, alignment: .top)
