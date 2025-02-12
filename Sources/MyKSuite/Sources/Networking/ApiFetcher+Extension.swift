@@ -26,9 +26,9 @@ public protocol KSuiteApiFetchable {
 
 extension Endpoint {
     static func myKSuite() -> Endpoint {
-        return Endpoint(path: "/my_ksuite/current",
+        return Endpoint(path: "/1/my_ksuite/current",
                         queryItems: [
-                            URLQueryItem(name: "with", value: "*")
+                            URLQueryItem(name: "with", value: "drive,mail")
                         ])
     }
 }

@@ -29,6 +29,7 @@ let package = Package(
                 .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
                 .product(name: "DesignSystem", package: "ios-core-ui")
             ]
-        )
+        ),
+        .testTarget(name: "MyKSuiteTests", dependencies: ["MyKSuite"])
     ]
 )
