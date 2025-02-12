@@ -27,7 +27,7 @@ struct HeaderView<Content: View>: View {
     var body: some View {
         HStack {
             ZStack {
-                Resources.Assets.person.swiftUIImage
+                MyKSuiteResources.Assets.person.swiftUIImage
                     .iconSize(.medium)
                     .foregroundStyle(ColorHelper.secondary)
 
@@ -39,7 +39,7 @@ struct HeaderView<Content: View>: View {
                 Circle()
                     .strokeBorder(ColorHelper.gradient, lineWidth: 1)
             }
-            .background(Resources.Colors.polarBear.swiftUIColor)
+            .background(MyKSuiteResources.Colors.polarBear.swiftUIColor)
             .clipShape(.circle)
 
             Text(myKSuite.mail.email)

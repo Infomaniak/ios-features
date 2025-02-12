@@ -37,7 +37,7 @@ struct SubscriptionPlusDetailsView: View {
             }
 
             HStack(alignment: .iconAndMultilineTextAlignment, spacing: IKPadding.small) {
-                Resources.Assets.information.swiftUIImage
+                MyKSuiteResources.Assets.information.swiftUIImage
                     .iconSize(.medium)
                     .foregroundStyle(ColorHelper.secondary)
                     .alignmentGuide(.iconAndMultilineTextAlignment) { d in

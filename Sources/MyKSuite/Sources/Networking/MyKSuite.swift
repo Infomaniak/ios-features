@@ -27,9 +27,9 @@ public struct MyKSuite: Codable, Sendable {
 
     var icon: Image {
         if isFree {
-            return Resources.Assets.myKSuiteLogo.swiftUIImage
+            return MyKSuiteResources.Assets.myKSuiteLogo.swiftUIImage
         }
-        return Resources.Assets.myKSuitePlusLogo.swiftUIImage
+        return MyKSuiteResources.Assets.myKSuitePlusLogo.swiftUIImage
     }
 
     var formattedTrialExpiryDate: String? {

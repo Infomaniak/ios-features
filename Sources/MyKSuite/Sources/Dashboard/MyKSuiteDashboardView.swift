@@ -63,7 +63,7 @@ public struct MyKSuiteDashboardView<Content: View>: View {
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
                 .background {
-                    Resources.Assets.background.swiftUIImage
+                    MyKSuiteResources.Assets.background.swiftUIImage
                         .resizable()
                         .scaledToFit()
                         .frame(maxHeight: .infinity, alignment: .top)

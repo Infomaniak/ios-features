@@ -32,5 +32,5 @@ xcassets:
     - templateName: swift5
       output: Resources+Generated.swift
       params:
-        enumName: Resources
+        enumName: MyKSuiteResources
         publicAccess: true
