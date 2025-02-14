@@ -19,23 +19,41 @@
 import SwiftUI
 
 struct CustomProgressBar: ProgressViewStyle {
+    let barHeight: CGFloat = 14
+
     func makeBody(configuration: Configuration) -> some View {
         ZStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 10)
-                .frame(height: 14)
+            RoundedRectangle(cornerRadius: barHeight / 2)
+                .frame(height: barHeight)
                 .foregroundStyle(ColorHelper.reversedPrimary)
                 .overlay {
                     GeometryReader { geometry in
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: geometry.size.width * CGFloat(configuration.fractionCompleted ?? 0.0), height: 14)
+                        RoundedRectangle(cornerRadius: barHeight / 2)
+                            .frame(
+                                width: filledProgressBarWidth(
+                                    progressBarWidth: geometry.size.width,
+                                    fractionCompleted: configuration.fractionCompleted ?? 0
+                                ),
+                                height: barHeight
+                            )
                     }
                 }
         }
     }
+
+    func filledProgressBarWidth(progressBarWidth: CGFloat, fractionCompleted: CGFloat) -> CGFloat {
+        max(barHeight, progressBarWidth * CGFloat(fractionCompleted))
+    }
 }
 
 #Preview {
-    ProgressView(value: 2.3, total: 15)
-        .progressViewStyle(CustomProgressBar())
-        .foregroundStyle(.blue)
+    VStack {
+        ProgressView(value: 2.3, total: 15)
+            .progressViewStyle(CustomProgressBar())
+            .foregroundStyle(.blue)
+        ProgressView(value: 1, total: 1000)
+            .progressViewStyle(CustomProgressBar())
+            .foregroundStyle(.blue)
+    }
+    .padding()
 }
