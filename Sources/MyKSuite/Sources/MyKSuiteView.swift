@@ -34,6 +34,7 @@ public struct MyKSuiteView: View {
             MyKSuiteResources.Assets.gradient.swiftUIImage
                 .resizable()
                 .scaledToFit()
+                .ignoresSafeArea()
 
             VStack(alignment: .leading, spacing: IKPadding.huge) {
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
@@ -66,6 +67,7 @@ public struct MyKSuiteView: View {
                 .ikButtonFullWidth(true)
                 .controlSize(.large)
                 .buttonStyle(.ikBorderedProminent)
+                .frame(maxWidth: .infinity, alignment: .center)
             }
             .padding(.horizontal, value: .large)
             .font(FontHelper.body)
