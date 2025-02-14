@@ -41,19 +41,27 @@ public struct MyKSuiteDashboardView<Content: View>: View {
 
     public var body: some View {
         NavigationView {
-            VStack(spacing: IKPadding.large) {
-                if let myKSuite {
-                    SubscriptionCardView(myKSuite: myKSuite, avatarView: avatarView)
+            ScrollView {
+                VStack(spacing: IKPadding.large) {
+                    if let myKSuite {
+                        SubscriptionCardView(myKSuite: myKSuite, avatarView: avatarView)
 
-                    if !myKSuite.isFree {
-                        SubscriptionBenefitsView()
+                        if !myKSuite.isFree {
+                            SubscriptionBenefitsView()
+                        }
+                    } else {
+                        ProgressView()
+                            .frame(maxWidth: .infinity)
                     }
-                } else {
-                    ProgressView()
-                        .frame(maxWidth: .infinity)
                 }
+                .padding(value: .medium)
             }
-            .padding(value: .medium)
+            .background(alignment: .top) {
+                MyKSuiteResources.Assets.background.swiftUIImage
+                    .resizable()
+                    .fixedSize(horizontal: false, vertical: true)
+                    .ignoresSafeArea()
+            }
             .navigationTitle(MyKSuiteLocalizable.myKSuiteDashboardTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -64,14 +72,6 @@ public struct MyKSuiteDashboardView<Content: View>: View {
                         Image(systemName: "xmark")
                     }
                 }
-            }
-            .frame(maxHeight: .infinity, alignment: .top)
-            .background {
-                MyKSuiteResources.Assets.background.swiftUIImage
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxHeight: .infinity, alignment: .top)
-                    .ignoresSafeArea()
             }
         }
         .task {
