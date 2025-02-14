@@ -60,6 +60,7 @@ struct SubscriptionFreeDetailsView: View {
                 }
                 .padding(.vertical, value: .mini)
             }
+            .tint(ColorHelper.secondary)
         }
         .font(FontHelper.body)
         .foregroundStyle(ColorHelper.primary)
