@@ -23,6 +23,8 @@ import SwiftUI
 struct SubscriptionPlusDetailsView: View {
     let myKSuite: MyKSuite
 
+    private let managerURL = URL(string: "https://manager.infomaniak.com/v3/ng/home")
+
     var body: some View {
         VStack(alignment: .leading, spacing: IKPadding.large) {
             if let trialDate = myKSuite.formattedTrialExpiryDate {
@@ -51,10 +53,10 @@ struct SubscriptionPlusDetailsView: View {
                             (d.height - (d[.lastTextBaseline] - d[.firstTextBaseline])) / 2
                         }
 
-                    Button {
-                        // Gerer mon abonnement
-                    } label: {
-                        Text(MyKSuiteLocalizable.myKSuiteManageSubscriptionButton)
+                    if let managerURL {
+                        Link(destination: managerURL) {
+                            Text(MyKSuiteLocalizable.myKSuiteManageSubscriptionButton)
+                        }
                     }
                 }
             }
