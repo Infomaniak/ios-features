@@ -23,7 +23,7 @@ import SwiftUI
 struct SubscriptionPlusDetailsView: View {
     let myKSuite: MyKSuite
 
-    private let managerUrl = URL(string: "https://manager.infomaniak.com/v3/ng/home")
+    private let managerURL = URL(string: "https://manager.infomaniak.com/v3/ng/home")
 
     var body: some View {
         VStack(alignment: .leading, spacing: IKPadding.large) {
@@ -53,8 +53,8 @@ struct SubscriptionPlusDetailsView: View {
                             (d.height - (d[.lastTextBaseline] - d[.firstTextBaseline])) / 2
                         }
 
-                    if let managerUrl {
-                        Link(destination: managerUrl) {
+                    if let managerURL {
+                        Link(destination: managerURL) {
                             Text(MyKSuiteLocalizable.myKSuiteManageSubscriptionButton)
                         }
                     }
