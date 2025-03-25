@@ -18,7 +18,7 @@
 
 import OSLog
 
-public extension Logger {
+extension Logger {
     private static let subsystem = Bundle.main.bundleIdentifier ?? "com.infomaniak.myKSuite"
 
     static let general = Logger(subsystem: subsystem, category: "general")
