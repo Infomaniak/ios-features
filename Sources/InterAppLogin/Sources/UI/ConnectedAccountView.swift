@@ -23,22 +23,30 @@ import NukeUI
 import SwiftUI
 
 struct ConnectedAccountAvatarView: View {
-    private let size: CGFloat = 40
     let connectedAccount: ConnectedAccount
+    var size: CGFloat = 40
 
     var body: some View {
-        if let rawAvatarURL = connectedAccount.userProfile.avatar,
-           let avatarURL = URL(string: rawAvatarURL) {
-            LazyImage(request: ImageRequest(url: avatarURL)) { state in
-                if let image = state.image {
-                    AvatarImage(image: image, size: size)
-                } else {
-                    initialsView
+        Group {
+            if let rawAvatarURL = connectedAccount.userProfile.avatar,
+               let avatarURL = URL(string: rawAvatarURL) {
+                LazyImage(request: ImageRequest(url: avatarURL)) { state in
+                    if let image = state.image {
+                        AvatarImage(image: image, size: size)
+                    } else {
+                        initialsView
+                    }
                 }
+            } else {
+                initialsView
             }
-        } else {
-            initialsView
         }
+        .clipShape(Circle())
+        .background(
+            Circle()
+                .stroke()
+                .foregroundStyle(Color.greyMouse)
+        )
     }
 
     var initialsView: some View {
