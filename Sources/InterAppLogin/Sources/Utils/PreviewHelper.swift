@@ -22,9 +22,9 @@ import InfomaniakDI
 import InfomaniakLogin
 
 struct PreviewTargetAssembly {
-    init() {
+    init(emptyAccounts: Bool) {
         SimpleResolver.sharedResolver.store(factory: Factory(type: ConnectedAccountManagerable.self) { _, _ in
-            PreviewConnectedAccountManager()
+            PreviewConnectedAccountManager(emptyAccounts: emptyAccounts)
         })
     }
 }
@@ -104,7 +104,12 @@ enum PreviewHelper {
 }
 
 struct PreviewConnectedAccountManager: ConnectedAccountManagerable {
+    let emptyAccounts: Bool
+
     func listAllLocalAccounts() async -> [ConnectedAccount] {
+        guard !emptyAccounts else {
+            return []
+        }
         return PreviewHelper.allAccounts
     }
 }

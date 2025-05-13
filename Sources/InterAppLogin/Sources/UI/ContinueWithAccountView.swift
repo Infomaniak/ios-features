@@ -27,10 +27,27 @@ struct ContinueWithAccountView: View {
     @State private var accounts: [ConnectedAccount]?
     @State private var selectedAccountIds = Set<Int>()
 
+    private let onLoginPressed: () -> Void
+    private let onLoginWithAccountsPressed: ([ConnectedAccount]) -> Void
+    private let onCreateAccountPressed: () -> Void
+
+    init(onLoginPressed: @escaping () -> Void,
+         onLoginWithAccountsPressed: @escaping ([ConnectedAccount]) -> Void,
+         onCreateAccountPressed: @escaping () -> Void) {
+        self.onLoginPressed = onLoginPressed
+        self.onLoginWithAccountsPressed = onLoginWithAccountsPressed
+        self.onCreateAccountPressed = onCreateAccountPressed
+    }
+
     var body: some View {
         VStack {
             if let accounts {
                 if accounts.isEmpty {
+                    Button("!Login", action: onLoginPressed)
+                        .buttonStyle(.ikBorderedProminent)
+
+                    Button("!Create account", action: onCreateAccountPressed)
+                        .buttonStyle(.ikBorderless)
                 } else {
                     Button {
                         isAccountShowingAccountSelections.toggle()
@@ -42,18 +59,22 @@ struct ContinueWithAccountView: View {
                         }
                     }
                     .buttonStyle(.ikBordered)
-                    .ikButtonFullWidth(true)
-                    .controlSize(.large)
 
-                    Button("!Continue with this accounts") {}
-                        .buttonStyle(.ikBorderedProminent)
-                        .ikButtonFullWidth(true)
-                        .controlSize(.large)
+                    Button("!Continue with this accounts") {
+                        onLoginWithAccountsPressed(selectedAccountIds.compactMap { selectedAccountId in
+                            accounts.first { account in
+                                account.userId == selectedAccountId
+                            }
+                        })
+                    }
+                    .buttonStyle(.ikBorderedProminent)
                 }
             } else {
                 ProgressView()
             }
         }
+        .ikButtonFullWidth(true)
+        .controlSize(.large)
         .task {
             @InjectService var connectedAccountManager: ConnectedAccountManagerable
             let accounts = await connectedAccountManager.listAllLocalAccounts()
@@ -62,19 +83,25 @@ struct ContinueWithAccountView: View {
         }
         .floatingPanel(
             isPresented: $isAccountShowingAccountSelections,
-            title: "Select one or multiple accounts"
+            title: "!Select one or multiple accounts"
         ) {
             SelectConnectedAccountListView(
                 connectedAccounts: accounts ?? [],
                 selectedAccountIds: $selectedAccountIds,
-                onAddAccount: {}
+                onAddAccount: onLoginPressed
             )
         }
     }
 }
 
 @available(iOS 17, *)
-#Preview {
-    @Previewable @State var di = PreviewTargetAssembly()
-    ContinueWithAccountView()
+#Preview("Accounts") {
+    @Previewable @State var di = PreviewTargetAssembly(emptyAccounts: false)
+    ContinueWithAccountView(onLoginPressed: {}, onLoginWithAccountsPressed: { _ in }, onCreateAccountPressed: {})
+}
+
+@available(iOS 17, *)
+#Preview("No accounts") {
+    @Previewable @State var di = PreviewTargetAssembly(emptyAccounts: true)
+    ContinueWithAccountView(onLoginPressed: {}, onLoginWithAccountsPressed: { _ in }, onCreateAccountPressed: {})
 }

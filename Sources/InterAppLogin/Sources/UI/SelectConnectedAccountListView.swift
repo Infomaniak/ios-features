@@ -21,6 +21,8 @@ import InfomaniakCoreSwiftUI
 import SwiftUI
 
 struct SelectConnectedAccountListView: View {
+    @Environment(\.dismiss) private var dismiss
+
     @Binding private var selectedAccountIds: Set<Int>
 
     private let connectedAccounts: [ConnectedAccount]
@@ -52,6 +54,7 @@ struct SelectConnectedAccountListView: View {
             IKDivider()
 
             Button {
+                dismiss()
                 onAddAccount()
             } label: {
                 HStack(spacing: IKPadding.medium) {
