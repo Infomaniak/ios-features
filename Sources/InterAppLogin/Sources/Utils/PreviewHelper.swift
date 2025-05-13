@@ -97,10 +97,14 @@ enum PreviewHelper {
 
         return ConnectedAccount(userId: 3, token: fakeToken, userProfile: fakeUserProfile)
     }
+
+    static var allAccounts: [ConnectedAccount] {
+        return [connectedAccount, connectedAccount2, connectedAccount3]
+    }
 }
 
 struct PreviewConnectedAccountManager: ConnectedAccountManagerable {
     func listAllLocalAccounts() async -> [ConnectedAccount] {
-        return [PreviewHelper.connectedAccount]
+        return PreviewHelper.allAccounts
     }
 }

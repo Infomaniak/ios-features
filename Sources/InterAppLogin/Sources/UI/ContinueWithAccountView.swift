@@ -36,9 +36,7 @@ struct ContinueWithAccountView: View {
                         isAccountShowingAccountSelections.toggle()
                     } label: {
                         HStack {
-                            ForEach(accounts) { account in
-                                ConnectedAccountAvatarView(connectedAccount: account, size: 24)
-                            }
+                            ConnectedAccountAvatarStackView(accounts: accounts)
                             Text("!\(selectedAccountIds.count) accounts selected")
                                 .frame(maxWidth: .infinity)
                         }
