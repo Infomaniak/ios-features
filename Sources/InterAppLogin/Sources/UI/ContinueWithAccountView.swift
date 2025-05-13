@@ -16,22 +16,41 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import SwiftUI
-import InfomaniakDI
+import DesignSystem
 import InfomaniakCore
+import InfomaniakCoreSwiftUI
+import InfomaniakDI
+import SwiftUI
 
 struct ContinueWithAccountView: View {
+    @State private var isAccountShowingAccountSelections = false
     @State private var accounts: [ConnectedAccount]?
+    @State private var selectedAccountIds = Set<Int>()
 
     var body: some View {
         VStack {
             if let accounts {
                 if accounts.isEmpty {
-
                 } else {
-                    ForEach(accounts) { account in
-                        ConnectedAccountAvatarView(connectedAccount: account)
+                    Button {
+                        isAccountShowingAccountSelections.toggle()
+                    } label: {
+                        HStack {
+                            ForEach(accounts) { account in
+                                ConnectedAccountAvatarView(connectedAccount: account, size: 24)
+                            }
+                            Text("!\(selectedAccountIds.count) accounts selected")
+                                .frame(maxWidth: .infinity)
+                        }
                     }
+                    .buttonStyle(.ikBordered)
+                    .ikButtonFullWidth(true)
+                    .controlSize(.large)
+
+                    Button("!Continue with this accounts") {}
+                        .buttonStyle(.ikBorderedProminent)
+                        .ikButtonFullWidth(true)
+                        .controlSize(.large)
                 }
             } else {
                 ProgressView()
@@ -39,7 +58,19 @@ struct ContinueWithAccountView: View {
         }
         .task {
             @InjectService var connectedAccountManager: ConnectedAccountManagerable
-            accounts = await connectedAccountManager.listAllLocalAccounts()
+            let accounts = await connectedAccountManager.listAllLocalAccounts()
+            selectedAccountIds = Set(accounts.compactMap(\.userId))
+            self.accounts = accounts
+        }
+        .floatingPanel(
+            isPresented: $isAccountShowingAccountSelections,
+            title: "Select one or multiple accounts"
+        ) {
+            SelectConnectedAccountListView(
+                connectedAccounts: accounts ?? [],
+                selectedAccountIds: $selectedAccountIds,
+                onAddAccount: {}
+            )
         }
     }
 }

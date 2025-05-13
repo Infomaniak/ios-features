@@ -60,19 +60,42 @@ enum PreviewHelper {
             refreshToken: "",
             scope: "",
             tokenType: "",
-            userId: 1,
+            userId: 2,
             expirationDate: Date()
         )
 
         let fakeUserProfile = UserProfile(
-            id: 1,
+            id: 2,
             displayName: "Tim Cook",
             firstName: "Tim",
             lastName: "Cook",
             email: "timcook@ik.me"
         )
 
-        return ConnectedAccount(userId: 1, token: fakeToken, userProfile: fakeUserProfile)
+        return ConnectedAccount(userId: 2, token: fakeToken, userProfile: fakeUserProfile)
+    }
+
+    static var connectedAccount3: ConnectedAccount {
+        let fakeToken = ApiToken(
+            accessToken: "",
+            expiresIn: -1,
+            refreshToken: "",
+            scope: "",
+            tokenType: "",
+            userId: 3,
+            expirationDate: Date()
+        )
+
+        let fakeUserProfile = UserProfile(
+            id: 3,
+            displayName: "Craig Federighi",
+            firstName: "Craig",
+            lastName: "Federighi",
+            email: "CraigFederighi@ik.me",
+            avatar: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fphotos5.appleinsider.com%2Farchive%2F12.08.27-Federighi.png&f=1&nofb=1&ipt=2283edd37fadae2e14e2f083e6f98b91a42d828845c5babd601bd8082fd9a9f4"
+        )
+
+        return ConnectedAccount(userId: 3, token: fakeToken, userProfile: fakeUserProfile)
     }
 }
 

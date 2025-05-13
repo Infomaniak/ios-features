@@ -18,12 +18,12 @@
 
 import SwiftUI
 
-struct ConnectedAccountListView: View {
-    var body: some View {
-        List {}
-    }
-}
+extension Font {
+    enum Custom {
+        /// Figma name: *Body Medium*
+        static let headline = Font.dynamicTypeSizeFont(size: 16, weight: .medium, relativeTo: .headline)
 
-#Preview {
-    ConnectedAccountListView()
+        /// Figma name: *Body Regular*
+        public static let body = Font.dynamicTypeSizeFont(size: 16, weight: .regular, relativeTo: .body)
+    }
 }
