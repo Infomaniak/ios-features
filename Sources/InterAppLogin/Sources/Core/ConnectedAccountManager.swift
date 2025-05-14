@@ -20,10 +20,10 @@ import Foundation
 import InfomaniakCore
 import InfomaniakLogin
 
-extension KeychainHelper {
-    static let appIdentifierBuilder = AppIdentifierBuilder(teamId: "864VDCS2QY")
-    public static let driveKeychainIdentifier = appIdentifierBuilder.keychainAccessGroupFor(identifier: "com.infomaniak.drive")
-    public static let mailKeychainIdentifier = appIdentifierBuilder.keychainAccessGroupFor(identifier: "com.infomaniak.mail")
+public extension AppIdentifierBuilder {
+    static let ikAppIdentifierBuilder = AppIdentifierBuilder(teamId: "864VDCS2QY")
+    static let driveKeychainIdentifier = ikAppIdentifierBuilder.keychainAccessGroupFor(identifier: "com.infomaniak.drive")
+    static let mailKeychainIdentifier = ikAppIdentifierBuilder.keychainAccessGroupFor(identifier: "com.infomaniak.mail")
 
     static let knownAppKeychainIdentifiers = [driveKeychainIdentifier, mailKeychainIdentifier]
 }
@@ -61,28 +61,33 @@ public struct ConnectedAccount: Identifiable {
     public let userProfile: UserProfile
 }
 
-protocol ConnectedAccountManagerable {
-    func listAllLocalAccounts() async -> [ConnectedAccount]
-}
-
 public protocol ProfileApiFetchable {
     func userProfile(ignoreDefaultAvatar: Bool, dateFormat: DateFormat) async throws -> UserProfile
 }
 
 extension ApiFetcher: ProfileApiFetchable {}
 
+public protocol ConnectedAccountManagerable {
+    func listAllLocalAccounts() async -> [ConnectedAccount]
+}
+
 public struct ConnectedAccountManager: ConnectedAccountManagerable {
     let currentAppKeychainIdentifier: String
+    let knownAppKeychainIdentifiers: [String]
     let refreshTokenDelegate = NoRefreshTokenDelegate()
 
-    init(currentAppKeychainIdentifier: String) {
+    public init(
+        currentAppKeychainIdentifier: String,
+        knownAppKeychainIdentifiers: [String] = AppIdentifierBuilder.knownAppKeychainIdentifiers
+    ) {
         self.currentAppKeychainIdentifier = currentAppKeychainIdentifier
+        self.knownAppKeychainIdentifiers = knownAppKeychainIdentifiers
     }
 
     public func listAllLocalAccounts() async -> [ConnectedAccount] {
         var accounts: [ConnectedAccount] = []
 
-        for keychainIdentifier in KeychainHelper.knownAppKeychainIdentifiers {
+        for keychainIdentifier in knownAppKeychainIdentifiers {
             if keychainIdentifier == currentAppKeychainIdentifier {
                 continue
             }
@@ -97,8 +102,7 @@ public struct ConnectedAccountManager: ConnectedAccountManagerable {
                         authenticator: OAuthAuthenticator(refreshTokenDelegate: refreshTokenDelegate)
                     )
 
-                    guard let userProfile = try? await apiFetcher.userProfile(ignoreDefaultAvatar: true, dateFormat: .iso8601)
-                    else {
+                    guard let userProfile = try? await apiFetcher.userProfile(ignoreDefaultAvatar: true) else {
                         continue
                     }
                     accounts.append(ConnectedAccount(userId: apiToken.userId, token: apiToken, userProfile: userProfile))
