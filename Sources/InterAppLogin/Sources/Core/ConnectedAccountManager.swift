@@ -22,8 +22,8 @@ import InfomaniakLogin
 
 extension KeychainHelper {
     static let appIdentifierBuilder = AppIdentifierBuilder(teamId: "864VDCS2QY")
-    static let driveKeychainIdentifier = appIdentifierBuilder.keychainAccessGroupFor(identifier: "com.infomaniak.drive")
-    static let mailKeychainIdentifier = appIdentifierBuilder.keychainAccessGroupFor(identifier: "com.infomaniak.mail")
+    public static let driveKeychainIdentifier = appIdentifierBuilder.keychainAccessGroupFor(identifier: "com.infomaniak.drive")
+    public static let mailKeychainIdentifier = appIdentifierBuilder.keychainAccessGroupFor(identifier: "com.infomaniak.mail")
 
     static let knownAppKeychainIdentifiers = [driveKeychainIdentifier, mailKeychainIdentifier]
 }
