@@ -22,7 +22,7 @@ import InfomaniakCoreSwiftUI
 import InfomaniakDI
 import SwiftUI
 
-struct ContinueWithAccountView: View {
+public struct ContinueWithAccountView: View {
     @State private var isAccountShowingAccountSelections = false
     @State private var accounts: [ConnectedAccount]?
     @State private var selectedAccountIds = Set<Int>()
@@ -31,15 +31,15 @@ struct ContinueWithAccountView: View {
     private let onLoginWithAccountsPressed: ([ConnectedAccount]) -> Void
     private let onCreateAccountPressed: () -> Void
 
-    init(onLoginPressed: @escaping () -> Void,
-         onLoginWithAccountsPressed: @escaping ([ConnectedAccount]) -> Void,
-         onCreateAccountPressed: @escaping () -> Void) {
+    public init(onLoginPressed: @escaping () -> Void,
+                onLoginWithAccountsPressed: @escaping ([ConnectedAccount]) -> Void,
+                onCreateAccountPressed: @escaping () -> Void) {
         self.onLoginPressed = onLoginPressed
         self.onLoginWithAccountsPressed = onLoginWithAccountsPressed
         self.onCreateAccountPressed = onCreateAccountPressed
     }
 
-    var body: some View {
+    public var body: some View {
         VStack {
             if let accounts {
                 if accounts.isEmpty {
