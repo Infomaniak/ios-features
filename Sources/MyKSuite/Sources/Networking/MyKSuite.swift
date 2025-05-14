@@ -20,10 +20,11 @@ import SwiftUI
 
 public struct MyKSuite: Codable, Sendable {
     let id: Int
-    let isFree: Bool
     let drive: Drive
     let mail: Mail
     let trialExpiryAt: Int?
+
+    public let isFree: Bool
 
     var icon: Image {
         if isFree {
@@ -39,6 +40,10 @@ public struct MyKSuite: Codable, Sendable {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         return formatter.string(from: date)
+    }
+
+    public var email: String {
+        mail.email
     }
 }
 
