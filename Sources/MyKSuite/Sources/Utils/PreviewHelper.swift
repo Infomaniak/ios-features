@@ -38,10 +38,10 @@ enum PreviewHelper {
 
     static let sampleMyKSuite = MyKSuite(
         id: 81,
-        isFree: true,
         drive: sampleDrive,
         mail: sampleMail,
-        trialExpiryAt: 1_769_814_000
+        trialExpiryAt: 1_769_814_000,
+        isFree: true
     )
 }
 
