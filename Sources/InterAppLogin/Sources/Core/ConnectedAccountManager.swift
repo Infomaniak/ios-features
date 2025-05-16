@@ -20,38 +20,7 @@ import Foundation
 import InfomaniakCore
 import InfomaniakLogin
 
-public extension AppIdentifierBuilder {
-    static let ikAppIdentifierBuilder = AppIdentifierBuilder(teamId: "864VDCS2QY")
-    static let driveKeychainIdentifier = ikAppIdentifierBuilder.keychainAccessGroupFor(identifier: "com.infomaniak.drive")
-    static let mailKeychainIdentifier = ikAppIdentifierBuilder.keychainAccessGroupFor(identifier: "com.infomaniak.mail")
-
-    static let knownAppKeychainIdentifiers = [driveKeychainIdentifier, mailKeychainIdentifier]
-}
-
-public struct AppIdentifierBuilder: Sendable {
-    let teamId: String
-
-    /// - Parameter teamId: Team ID of the Apple Developer account eg. For IK 864VDCS2QY. (this is ID is public)
-    public init(teamId: String) {
-        self.teamId = teamId
-    }
-
-    /// Construct a valid keychain access group.
-    /// - Parameter identifier: The identifier declared in the entitlement file (Keychain Sharing section).
-    /// - Returns: An access group ready for use in by the Keychain as kSecAttrAccessGroup.
-    public func keychainAccessGroupFor(identifier: String) -> String {
-        "\(teamId)\(identifier)"
-    }
-
-    /// Construct a valid app group identifier.
-    /// - Parameter identifier: The identifier declared in the entitlement file (App Groups section).
-    /// - Returns: An app group ready for use with FileManager.containerURL(forSecurityApplicationGroupIdentifier: )
-    public func appGroupFor(identifier: String) -> String {
-        "group.\(identifier)"
-    }
-}
-
-public struct ConnectedAccount: Identifiable {
+public struct ConnectedAccount: Identifiable, Sendable {
     public var id: Int {
         return userId
     }

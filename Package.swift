@@ -20,8 +20,8 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/Infomaniak/ios-core-ui", branch: "refactor/initials-view"),
-        .package(url: "https://github.com/Infomaniak/ios-core", branch: "feat/name-formatter"),
+        .package(url: "https://github.com/Infomaniak/ios-core-ui", branch: "refactor/move-to-core"),
+        .package(url: "https://github.com/Infomaniak/ios-core", .upToNextMajor(from: "15.2.0")),
         .package(url: "https://github.com/Infomaniak/ios-dependency-injection", .upToNextMajor(from: "2.0.3")),
         .package(url: "https://github.com/kean/Nuke", .upToNextMajor(from: "12.1.3"))
     ],
