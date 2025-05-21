@@ -86,7 +86,10 @@ public struct ContinueWithAccountView: View {
             @InjectService var connectedAccountManager: ConnectedAccountManagerable
             let accounts = await connectedAccountManager.listAllLocalAccounts()
             selectedAccountIds = Set(accounts.compactMap(\.userId))
-            self.accounts = accounts
+
+            withAnimation {
+                self.accounts = accounts
+            }
         }
         .floatingPanel(
             isPresented: $isAccountShowingAccountSelections,
