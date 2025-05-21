@@ -27,13 +27,16 @@ public struct ContinueWithAccountView: View {
     @State private var accounts: [ConnectedAccount]?
     @State private var selectedAccountIds = Set<Int>()
 
+    private let isLoading: Bool
     private let onLoginPressed: () -> Void
     private let onLoginWithAccountsPressed: ([ConnectedAccount]) -> Void
     private let onCreateAccountPressed: () -> Void
 
-    public init(onLoginPressed: @escaping () -> Void,
+    public init(isLoading: Bool,
+                onLoginPressed: @escaping () -> Void,
                 onLoginWithAccountsPressed: @escaping ([ConnectedAccount]) -> Void,
                 onCreateAccountPressed: @escaping () -> Void) {
+        self.isLoading = isLoading
         self.onLoginPressed = onLoginPressed
         self.onLoginWithAccountsPressed = onLoginWithAccountsPressed
         self.onCreateAccountPressed = onCreateAccountPressed
@@ -45,9 +48,11 @@ public struct ContinueWithAccountView: View {
                 if accounts.isEmpty {
                     Button("!Login", action: onLoginPressed)
                         .buttonStyle(.ikBorderedProminent)
+                        .ikButtonLoading(isLoading)
 
                     Button("!Create account", action: onCreateAccountPressed)
                         .buttonStyle(.ikBorderless)
+                        .disabled(isLoading)
                 } else {
                     Button {
                         isAccountShowingAccountSelections.toggle()
@@ -59,6 +64,7 @@ public struct ContinueWithAccountView: View {
                         }
                     }
                     .buttonStyle(.ikBordered)
+                    .disabled(isLoading)
 
                     Button("!Continue with this accounts") {
                         onLoginWithAccountsPressed(selectedAccountIds.compactMap { selectedAccountId in
@@ -68,6 +74,7 @@ public struct ContinueWithAccountView: View {
                         })
                     }
                     .buttonStyle(.ikBorderedProminent)
+                    .ikButtonLoading(isLoading)
                 }
             } else {
                 ProgressView()
@@ -97,11 +104,37 @@ public struct ContinueWithAccountView: View {
 @available(iOS 17, *)
 #Preview("Accounts") {
     @Previewable @State var di = PreviewTargetAssembly(emptyAccounts: false)
-    ContinueWithAccountView(onLoginPressed: {}, onLoginWithAccountsPressed: { _ in }, onCreateAccountPressed: {})
+    VStack {
+        ContinueWithAccountView(
+            isLoading: false,
+            onLoginPressed: {},
+            onLoginWithAccountsPressed: { _ in },
+            onCreateAccountPressed: {}
+        )
+        ContinueWithAccountView(
+            isLoading: true,
+            onLoginPressed: {},
+            onLoginWithAccountsPressed: { _ in },
+            onCreateAccountPressed: {}
+        )
+    }
 }
 
 @available(iOS 17, *)
 #Preview("No accounts") {
     @Previewable @State var di = PreviewTargetAssembly(emptyAccounts: true)
-    ContinueWithAccountView(onLoginPressed: {}, onLoginWithAccountsPressed: { _ in }, onCreateAccountPressed: {})
+    VStack {
+        ContinueWithAccountView(
+            isLoading: false,
+            onLoginPressed: {},
+            onLoginWithAccountsPressed: { _ in },
+            onCreateAccountPressed: {}
+        )
+        ContinueWithAccountView(
+            isLoading: true,
+            onLoginPressed: {},
+            onLoginWithAccountsPressed: { _ in },
+            onCreateAccountPressed: {}
+        )
+    }
 }
