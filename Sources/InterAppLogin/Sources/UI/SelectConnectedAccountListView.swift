@@ -51,7 +51,10 @@ struct SelectConnectedAccountListView: View {
                 }
             }
 
-            IKDivider()
+            Divider()
+                .frame(height: 1)
+                .overlay(Color.Custom.divider)
+                .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
 
             Button {
                 dismiss()

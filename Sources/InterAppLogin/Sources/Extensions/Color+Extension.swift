@@ -30,5 +30,11 @@ extension Color {
             light: UIColor.greyElephant,
             dark: UIColor.greyShark
         )
+
+        /// light: greyMouse / dark: greyOrca
+        public static let divider = Color(
+            light: UIColor.greyMouse,
+            dark: UIColor.greyOrca
+        )
     }
 }
