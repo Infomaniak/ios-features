@@ -46,11 +46,11 @@ public struct ContinueWithAccountView: View {
         VStack {
             if let accounts {
                 if accounts.isEmpty {
-                    Button("!Login", action: onLoginPressed)
+                    Button(InterAppLoginLocalizable.buttonLogin, action: onLoginPressed)
                         .buttonStyle(.ikBorderedProminent)
                         .ikButtonLoading(isLoading)
 
-                    Button("!Create account", action: onCreateAccountPressed)
+                    Button(InterAppLoginLocalizable.buttonCreateAccount, action: onCreateAccountPressed)
                         .buttonStyle(.ikBorderless)
                         .disabled(isLoading)
                 } else {
@@ -60,7 +60,7 @@ public struct ContinueWithAccountView: View {
                         HStack {
                             ConnectedAccountAvatarStackView(accounts: accounts)
 
-                            Text("!\(selectedAccountIds.count) accounts selected")
+                            Text(InterAppLoginLocalizable.selectedAccountCountLabel(selectedAccountIds.count))
                                 .frame(maxWidth: .infinity)
 
                             CenteringPlaceholderAvatarStackView(accounts: accounts)
@@ -69,7 +69,7 @@ public struct ContinueWithAccountView: View {
                     .buttonStyle(.outlined)
                     .disabled(isLoading)
 
-                    Button("!Continue with this accounts") {
+                    Button(InterAppLoginLocalizable.buttonContinueWithAccounts(selectedAccountIds.count)) {
                         onLoginWithAccountsPressed(selectedAccountIds.compactMap { selectedAccountId in
                             accounts.first { account in
                                 account.userId == selectedAccountId
@@ -96,7 +96,7 @@ public struct ContinueWithAccountView: View {
         }
         .floatingPanel(
             isPresented: $isAccountShowingAccountSelections,
-            title: "!Select one or multiple accounts"
+            title: InterAppLoginLocalizable.selectAccountPanelTitle
         ) {
             SelectConnectedAccountListView(
                 connectedAccounts: accounts ?? [],

@@ -1,0 +1,20 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: de, German
+ * Tagged: ios, !common, !privacy, !my kSuite
+ * Exported by: Philippe Weidmann
+ * Exported at: Wed, 04 Jun 2025 16:31:57 +0200
+ */
+
+/* loco:68404629d6574c876e05b382 */
+"buttonAddAccount" = "Account hinzufügen";
+
+/* loco:684003a81687be54da004145 */
+"buttonCreateAccount" = "Ein Konto erstellen";
+
+/* loco:6840035e1687be54da004142 */
+"buttonLogin" = "Anmeldung";
+
+/* loco:684044c80031d880680d8e12 */
+"selectAccountPanelTitle" = "Wählen Sie ein oder mehrere Konten";

@@ -18,6 +18,7 @@
 
 import DesignSystem
 import InfomaniakCoreSwiftUI
+import InfomaniakCoreUIResources
 import SwiftUI
 
 struct SelectConnectedAccountListView: View {
@@ -65,7 +66,7 @@ struct SelectConnectedAccountListView: View {
                         .iconSize(.large)
                         .foregroundStyle(.tint)
 
-                    Text("!Add account")
+                    Text(InterAppLoginLocalizable.buttonAddAccount)
                         .foregroundStyle(Color.Custom.textPrimary)
                         .font(.Custom.body)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -74,7 +75,7 @@ struct SelectConnectedAccountListView: View {
             }
             .padding(.horizontal, value: .mini)
 
-            Button("!Save") {}
+            Button(CoreUILocalizable.buttonSave) {}
                 .buttonStyle(.ikBorderedProminent)
                 .ikButtonFullWidth(true)
                 .controlSize(.large)
