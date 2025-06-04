@@ -19,13 +19,20 @@
 import SwiftUI
 
 struct ConnectedAccountAvatarStackView: View {
+    static let defaultSize: CGFloat = 24
+    static let defaultMaxStackSize = 3
+
     @State private var currentIndex = 0
 
     let accounts: [ConnectedAccount]
     let size: CGFloat
     let maxStackSize: Int
 
-    init(accounts: [ConnectedAccount], size: CGFloat = 24, maxStackSize: Int = 3) {
+    init(
+        accounts: [ConnectedAccount],
+        size: CGFloat = ConnectedAccountAvatarStackView.defaultSize,
+        maxStackSize: Int = ConnectedAccountAvatarStackView.defaultMaxStackSize
+    ) {
         self.accounts = accounts
         self.size = size
         self.maxStackSize = maxStackSize

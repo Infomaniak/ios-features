@@ -59,8 +59,11 @@ public struct ContinueWithAccountView: View {
                     } label: {
                         HStack {
                             ConnectedAccountAvatarStackView(accounts: accounts)
+
                             Text("!\(selectedAccountIds.count) accounts selected")
                                 .frame(maxWidth: .infinity)
+
+                            CenteringPlaceholderAvatarStackView(accounts: accounts)
                         }
                     }
                     .buttonStyle(.outlined)
