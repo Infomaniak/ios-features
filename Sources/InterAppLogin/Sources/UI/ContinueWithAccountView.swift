@@ -63,7 +63,7 @@ public struct ContinueWithAccountView: View {
                                 .frame(maxWidth: .infinity)
                         }
                     }
-                    .buttonStyle(.ikBordered)
+                    .buttonStyle(.outlined)
                     .disabled(isLoading)
 
                     Button("!Continue with this accounts") {
