@@ -32,6 +32,10 @@ public struct ContinueWithAccountView: View {
     private let onLoginWithAccountsPressed: ([ConnectedAccount]) -> Void
     private let onCreateAccountPressed: () -> Void
 
+    private var selectedAccounts: [ConnectedAccount] {
+        accounts?.filter { selectedAccountIds.contains($0.userId) } ?? []
+    }
+
     public init(isLoading: Bool,
                 onLoginPressed: @escaping () -> Void,
                 onLoginWithAccountsPressed: @escaping ([ConnectedAccount]) -> Void,
@@ -58,23 +62,19 @@ public struct ContinueWithAccountView: View {
                         isAccountShowingAccountSelections.toggle()
                     } label: {
                         HStack {
-                            ConnectedAccountAvatarStackView(accounts: accounts)
+                            ConnectedAccountAvatarStackView(accounts: selectedAccounts)
 
                             Text(InterAppLoginLocalizable.selectedAccountCountLabel(selectedAccountIds.count))
                                 .frame(maxWidth: .infinity)
 
-                            CenteringPlaceholderAvatarStackView(accounts: accounts)
+                            CenteringPlaceholderAvatarStackView(accounts: selectedAccounts)
                         }
                     }
                     .buttonStyle(.outlined)
                     .disabled(isLoading)
 
                     Button(InterAppLoginLocalizable.buttonContinueWithAccounts(selectedAccountIds.count)) {
-                        onLoginWithAccountsPressed(selectedAccountIds.compactMap { selectedAccountId in
-                            accounts.first { account in
-                                account.userId == selectedAccountId
-                            }
-                        })
+                        onLoginWithAccountsPressed(selectedAccounts)
                     }
                     .buttonStyle(.ikBorderedProminent)
                     .ikButtonLoading(isLoading)
@@ -100,9 +100,16 @@ public struct ContinueWithAccountView: View {
         ) {
             SelectConnectedAccountListView(
                 connectedAccounts: accounts ?? [],
-                selectedAccountIds: $selectedAccountIds,
-                onAddAccount: onLoginPressed
+                currentlySelectedAccountIds: selectedAccountIds,
+                onAddAccount: onLoginPressed,
+                onSelectedAccountSaved: onSelectedAccountSaved
             )
+        }
+    }
+
+    private func onSelectedAccountSaved(_ selectedAccountIds: Set<Int>) {
+        withAnimation {
+            self.selectedAccountIds = selectedAccountIds
         }
     }
 }

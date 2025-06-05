@@ -24,15 +24,20 @@ import SwiftUI
 struct SelectConnectedAccountListView: View {
     @Environment(\.dismiss) private var dismiss
 
-    @Binding private var selectedAccountIds: Set<Int>
+    @State private var selectedAccountIds: Set<Int>
 
     private let connectedAccounts: [ConnectedAccount]
     private let onAddAccount: () -> Void
+    private let onSelectedAccountSaved: (Set<Int>) -> Void
 
-    init(connectedAccounts: [ConnectedAccount], selectedAccountIds: Binding<Set<Int>>, onAddAccount: @escaping () -> Void) {
+    init(connectedAccounts: [ConnectedAccount],
+         currentlySelectedAccountIds: Set<Int>,
+         onAddAccount: @escaping () -> Void,
+         onSelectedAccountSaved: @escaping (Set<Int>) -> Void) {
         self.connectedAccounts = connectedAccounts
-        _selectedAccountIds = selectedAccountIds
+        _selectedAccountIds = State(wrappedValue: currentlySelectedAccountIds)
         self.onAddAccount = onAddAccount
+        self.onSelectedAccountSaved = onSelectedAccountSaved
     }
 
     var body: some View {
@@ -75,11 +80,14 @@ struct SelectConnectedAccountListView: View {
             }
             .padding(.horizontal, value: .mini)
 
-            Button(CoreUILocalizable.buttonSave) {}
-                .buttonStyle(.ikBorderedProminent)
-                .ikButtonFullWidth(true)
-                .controlSize(.large)
-                .padding(value: .medium)
+            Button(CoreUILocalizable.buttonSave) {
+                dismiss()
+                onSelectedAccountSaved(selectedAccountIds)
+            }
+            .buttonStyle(.ikBorderedProminent)
+            .ikButtonFullWidth(true)
+            .controlSize(.large)
+            .padding(value: .medium)
         }
     }
 }
@@ -92,8 +100,9 @@ struct SelectConnectedAccountListView: View {
         ) {
             SelectConnectedAccountListView(
                 connectedAccounts: [PreviewHelper.connectedAccount, PreviewHelper.connectedAccount2],
-                selectedAccountIds: .constant([PreviewHelper.connectedAccount.userId]),
-                onAddAccount: {}
+                currentlySelectedAccountIds: [PreviewHelper.connectedAccount.userId],
+                onAddAccount: {},
+                onSelectedAccountSaved: { _ in }
             )
         }
 }
