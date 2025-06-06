@@ -1,5 +1,5 @@
 {
-  "originHash" : "d19aa5b5b3f1772f9c20a559b858c66d93920baae5fd7d7a4317bceba4d7c0b7",
+  "originHash" : "37053bc0addc65e642d48ea9b8b07bd089fa7acbeaec00f1cb4b718010476aa3",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Infomaniak/ios-core",
       "state" : {
-        "revision" : "f9664e0b91a79d86373cafa87f89e0a45deb3128",
-        "version" : "15.0.0"
+        "revision" : "37a2e5ae289d6e68a2661efef1a0364383a66cfe",
+        "version" : "15.4.1"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Infomaniak/ios-core-ui",
       "state" : {
-        "revision" : "89873aff2c300f9f2966340b7b3e8832e88a95a6",
-        "version" : "18.0.1"
+        "branch" : "feat/add-background-color-on-alert-presenter",
+        "revision" : "ef337d3e8fa8c89dda7dcef3c53bde9a23680482"
       }
     },
     {
