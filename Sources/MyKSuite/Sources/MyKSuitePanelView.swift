@@ -21,23 +21,24 @@ import SwiftUI
 
 struct MyKSuitePanelModifier: ViewModifier {
     @Binding var isPresented: Bool
+    let backgroundColor: Color
     let configuration: MyKSuiteConfiguration
 
     func body(content: Content) -> some View {
         content
-            .floatingPanel(isPresented: $isPresented) {
+            .floatingPanel(isPresented: $isPresented, backgroundColor: backgroundColor) {
                 MyKSuiteView(configuration: configuration)
             }
     }
 }
 
 public extension View {
-    func myKSuitePanel(isPresented: Binding<Bool>, configuration: MyKSuiteConfiguration) -> some View {
-        modifier(MyKSuitePanelModifier(isPresented: isPresented, configuration: configuration))
+    func myKSuitePanel(isPresented: Binding<Bool>, backgroundColor: Color, configuration: MyKSuiteConfiguration) -> some View {
+        modifier(MyKSuitePanelModifier(isPresented: isPresented, backgroundColor: backgroundColor, configuration: configuration))
     }
 }
 
 #Preview {
     Text("Hello world!")
-        .myKSuitePanel(isPresented: .constant(true), configuration: .kDrive)
+        .myKSuitePanel(isPresented: .constant(true), backgroundColor: .white, configuration: .kDrive)
 }
