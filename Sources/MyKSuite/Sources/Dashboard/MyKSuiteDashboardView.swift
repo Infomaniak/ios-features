@@ -74,6 +74,7 @@ public struct MyKSuiteDashboardView<Content: View>: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
         .task {
             myKSuite = await myKSuiteStore.getMyKSuite(id: userId)
             do {
