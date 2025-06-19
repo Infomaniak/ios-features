@@ -96,7 +96,8 @@ public struct ContinueWithAccountView: View {
         }
         .floatingPanel(
             isPresented: $isAccountShowingAccountSelections,
-            title: InterAppLoginLocalizable.selectAccountPanelTitle
+            title: InterAppLoginLocalizable.selectAccountPanelTitle,
+            backgroundColor: .backgroundSecondary
         ) {
             SelectConnectedAccountListView(
                 connectedAccounts: accounts ?? [],

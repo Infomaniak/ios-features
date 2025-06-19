@@ -96,7 +96,8 @@ struct SelectConnectedAccountListView: View {
     Text("Hello World")
         .floatingPanel(
             isPresented: .constant(true),
-            title: "Select one or multiple accounts"
+            title: "Select one or multiple accounts",
+            backgroundColor: .backgroundSecondary
         ) {
             SelectConnectedAccountListView(
                 connectedAccounts: [PreviewHelper.connectedAccount, PreviewHelper.connectedAccount2],
