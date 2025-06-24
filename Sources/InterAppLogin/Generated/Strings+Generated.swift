@@ -10,21 +10,25 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum InterAppLoginLocalizable {
-  /// loco:68404629d6574c876e05b382
-  internal static let buttonAddAccount = InterAppLoginLocalizable.tr("Localizable", "buttonAddAccount", fallback: "Add account")
-  /// Plural format key: "%#@value@"
-  internal static func buttonContinueWithAccounts(_ p1: Int) -> String {
-    return InterAppLoginLocalizable.tr("Localizable", "buttonContinueWithAccounts", p1, fallback: "Plural format key: \"%#@value@\"")
+  internal enum Localizable {
+    /// loco:68404629d6574c876e05b382
+    internal static let buttonAddAccount = InterAppLoginLocalizable.tr("Localizable", "buttonAddAccount", fallback: "Add account")
+    /// loco:684003a81687be54da004145
+    internal static let buttonCreateAccount = InterAppLoginLocalizable.tr("Localizable", "buttonCreateAccount", fallback: "Create an account")
+    /// loco:6840035e1687be54da004142
+    internal static let buttonLogin = InterAppLoginLocalizable.tr("Localizable", "buttonLogin", fallback: "Login")
+    /// loco:684044c80031d880680d8e12
+    internal static let selectAccountPanelTitle = InterAppLoginLocalizable.tr("Localizable", "selectAccountPanelTitle", fallback: "Select one or multiple accounts")
   }
-  /// loco:684003a81687be54da004145
-  internal static let buttonCreateAccount = InterAppLoginLocalizable.tr("Localizable", "buttonCreateAccount", fallback: "Create an account")
-  /// loco:6840035e1687be54da004142
-  internal static let buttonLogin = InterAppLoginLocalizable.tr("Localizable", "buttonLogin", fallback: "Login")
-  /// loco:684044c80031d880680d8e12
-  internal static let selectAccountPanelTitle = InterAppLoginLocalizable.tr("Localizable", "selectAccountPanelTitle", fallback: "Select one or multiple accounts")
-  /// Plural format key: "%#@value@"
-  internal static func selectedAccountCountLabel(_ p1: Int) -> String {
-    return InterAppLoginLocalizable.tr("Localizable", "selectedAccountCountLabel", p1, fallback: "Plural format key: \"%#@value@\"")
+  internal enum PluralLocalizable {
+    /// Plural format key: "%#@value@"
+    internal static func buttonContinueWithAccounts(_ p1: Int) -> String {
+      return InterAppLoginLocalizable.tr("PluralLocalizable", "buttonContinueWithAccounts", p1, fallback: "Plural format key: \"%#@value@\"")
+    }
+    /// Plural format key: "%#@value@"
+    internal static func selectedAccountCountLabel(_ p1: Int) -> String {
+      return InterAppLoginLocalizable.tr("PluralLocalizable", "selectedAccountCountLabel", p1, fallback: "Plural format key: \"%#@value@\"")
+    }
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

@@ -50,11 +50,11 @@ public struct ContinueWithAccountView: View {
         VStack {
             if let accounts {
                 if accounts.isEmpty {
-                    Button(InterAppLoginLocalizable.buttonLogin, action: onLoginPressed)
+                    Button(InterAppLoginLocalizable.Localizable.buttonLogin, action: onLoginPressed)
                         .buttonStyle(.ikBorderedProminent)
                         .ikButtonLoading(isLoading)
 
-                    Button(InterAppLoginLocalizable.buttonCreateAccount, action: onCreateAccountPressed)
+                    Button(InterAppLoginLocalizable.Localizable.buttonCreateAccount, action: onCreateAccountPressed)
                         .buttonStyle(.ikBorderless)
                         .disabled(isLoading)
                 } else {
@@ -64,7 +64,7 @@ public struct ContinueWithAccountView: View {
                         HStack {
                             ConnectedAccountAvatarStackView(accounts: selectedAccounts)
 
-                            Text(InterAppLoginLocalizable.selectedAccountCountLabel(selectedAccountIds.count))
+                            Text(InterAppLoginLocalizable.PluralLocalizable.selectedAccountCountLabel(selectedAccountIds.count))
                                 .frame(maxWidth: .infinity)
 
                             CenteringPlaceholderAvatarStackView(accounts: selectedAccounts)
@@ -73,7 +73,7 @@ public struct ContinueWithAccountView: View {
                     .buttonStyle(.outlined)
                     .disabled(isLoading)
 
-                    Button(InterAppLoginLocalizable.buttonContinueWithAccounts(selectedAccountIds.count)) {
+                    Button(InterAppLoginLocalizable.PluralLocalizable.buttonContinueWithAccounts(selectedAccountIds.count)) {
                         onLoginWithAccountsPressed(selectedAccounts)
                     }
                     .buttonStyle(.ikBorderedProminent)
@@ -96,7 +96,7 @@ public struct ContinueWithAccountView: View {
         }
         .floatingPanel(
             isPresented: $isAccountShowingAccountSelections,
-            title: InterAppLoginLocalizable.selectAccountPanelTitle,
+            title: InterAppLoginLocalizable.Localizable.selectAccountPanelTitle,
             backgroundColor: .backgroundSecondary
         ) {
             SelectConnectedAccountListView(
