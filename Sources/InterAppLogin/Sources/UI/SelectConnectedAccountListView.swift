@@ -49,7 +49,7 @@ struct SelectConnectedAccountListView: View {
                     }, set: { isSelected in
                         if isSelected {
                             selectedAccountIds.insert(account.userId)
-                        } else {
+                        } else if selectedAccountIds.count > 1 {
                             selectedAccountIds.remove(account.userId)
                         }
                     }))
