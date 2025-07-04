@@ -26,8 +26,7 @@ struct ConnectedAccountCellView: View {
     var body: some View {
         Button {
             isSelected.toggle()
-        }
-        label: {
+        } label: {
             HStack {
                 ConnectedAccountAvatarView(connectedAccount: connectedAccount)
                 VStack(alignment: .leading, spacing: 0) {

@@ -123,9 +123,7 @@ struct ConnectedAccountAvatarStackView: View {
 #Preview {
     VStack {
         ConnectedAccountAvatarStackView(
-            accounts: [
-                PreviewHelper.connectedAccount,
-            ]
+            accounts: [PreviewHelper.connectedAccount]
         )
         ConnectedAccountAvatarStackView(
             accounts: Array(PreviewHelper.allAccounts.dropFirst())

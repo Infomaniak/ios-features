@@ -49,14 +49,4 @@ struct OutlinedButtonStyle: ButtonStyle {
                     .stroke(Color.Custom.divider, lineWidth: 0.5)
             )
     }
-
-    private func foreground(role: ButtonRole?) -> any ShapeStyle {
-        if !isEnabled || isLoading {
-            return theme.disabledPrimary
-        } else if role == .destructive {
-            return theme.error
-        } else {
-            return theme.primary
-        }
-    }
 }
