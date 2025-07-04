@@ -45,7 +45,7 @@ struct OutlinedButtonStyle: ButtonStyle {
             .modifier(IKButtonOpacityAnimationModifier(isPressed: configuration.isPressed))
             .allowsHitTesting(!isLoading)
             .background(
-                RoundedRectangle(cornerRadius: IKRadius.medium)
+                RoundedRectangle(cornerRadius: IKRadius.large)
                     .stroke(Color.Custom.divider, lineWidth: 0.5)
             )
     }
