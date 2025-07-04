@@ -39,7 +39,8 @@ excluded:
  - Derived/
  - Tuist/.build/
  - Tests/*
- - Sources/MyKSuite/Generated/*
+ - Sources/MyKSuite/Generated
+ - Sources/InterAppLogin/Generated
 custom_rules:
   private_state:
     included:
