@@ -4,9 +4,9 @@
  Loco ios export: Xcode Stringsdict (legacy)
  Project: CoreUI
  Locale: es, Spanish
- Tagged: ios-stringsdict, !common, !privacy, !my kSuite
+ Tagged: ios-stringsdict, !common, !emoji-reaction, !ios, !my kSuite, !privacy
  Exported by: Philippe Weidmann
- Exported at: Wed, 04 Jun 2025 16:31:57 +0200
+ Exported at: Fri, 04 Jul 2025 13:55:36 +0200
 -->
 <plist version="1.0">
   <dict>

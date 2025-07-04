@@ -2,19 +2,19 @@
  * Loco ios export: Xcode Strings (legacy)
  * Project: CoreUI
  * Locale: es, Spanish
- * Tagged: ios, !common, !privacy, !my kSuite
+ * Tagged: ios, !common, !emoji-reaction, !ios-stringsdict, !my kSuite, !privacy
  * Exported by: Philippe Weidmann
- * Exported at: Wed, 04 Jun 2025 16:31:57 +0200
+ * Exported at: Fri, 04 Jul 2025 13:55:35 +0200
  */
-
-/* loco:68404629d6574c876e05b382 */
-"buttonAddAccount" = "Añadir una cuenta";
 
 /* loco:684003a81687be54da004145 */
 "buttonCreateAccount" = "Crear una cuenta";
 
 /* loco:6840035e1687be54da004142 */
 "buttonLogin" = "Inicio de sesión";
+
+/* loco:68404629d6574c876e05b382 */
+"buttonUseOtherAccount" = "Utilizar otra cuenta";
 
 /* loco:684044c80031d880680d8e12 */
 "selectAccountPanelTitle" = "Seleccione una o varias cuentas";
