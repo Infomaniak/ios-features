@@ -18,6 +18,7 @@
 
 import DesignSystem
 import InfomaniakCoreSwiftUI
+import KSuiteUtils
 import SwiftUI
 
 struct SubscriptionFreeDetailsView: View {
@@ -54,7 +55,7 @@ struct SubscriptionFreeDetailsView: View {
                 Label {
                     Text(MyKSuiteLocalizable.myKSuiteDashboardLimitedFunctionalityLabel)
                 } icon: {
-                    MyKSuiteResources.Assets.lock.swiftUIImage
+                    MyKSuiteResources.lock.swiftUIImage
                         .iconSize(.medium)
                         .foregroundStyle(ColorHelper.secondary)
                 }

@@ -57,7 +57,7 @@ public struct MyKSuiteDashboardView<Content: View>: View {
                 .padding(value: .medium)
             }
             .background(alignment: .top) {
-                MyKSuiteResources.Assets.background.swiftUIImage
+                MyKSuiteResources.background.swiftUIImage
                     .resizable()
                     .fixedSize(horizontal: false, vertical: true)
                     .ignoresSafeArea()

@@ -18,6 +18,7 @@
 
 import DesignSystem
 import InfomaniakCoreSwiftUI
+import KSuiteUtils
 import SwiftUI
 
 struct HeaderView<Content: View>: View {
@@ -27,7 +28,7 @@ struct HeaderView<Content: View>: View {
     var body: some View {
         HStack {
             ZStack {
-                MyKSuiteResources.Assets.person.swiftUIImage
+                MyKSuiteResources.person.swiftUIImage
                     .iconSize(.medium)
                     .foregroundStyle(ColorHelper.secondary)
 
@@ -39,7 +40,7 @@ struct HeaderView<Content: View>: View {
                 Circle()
                     .strokeBorder(ColorHelper.gradient, lineWidth: 1)
             }
-            .background(MyKSuiteResources.Colors.polarBear.swiftUIColor)
+            .background(KSuiteUtilsResources.polarBear.swiftUIColor)
             .clipShape(.circle)
 
             Text(myKSuite.mail.email)

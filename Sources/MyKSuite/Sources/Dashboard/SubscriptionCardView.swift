@@ -18,6 +18,7 @@
 
 import DesignSystem
 import InfomaniakCoreSwiftUI
+import KSuiteUtils
 import SwiftUI
 
 struct SubscriptionCardView<Content: View>: View {
@@ -56,7 +57,7 @@ struct SubscriptionCardView<Content: View>: View {
     .padding()
     .frame(maxHeight: .infinity, alignment: .top)
     .background {
-        MyKSuiteResources.Assets.background.swiftUIImage
+        MyKSuiteResources.background.swiftUIImage
             .resizable()
             .scaledToFit()
             .frame(maxHeight: .infinity, alignment: .top)

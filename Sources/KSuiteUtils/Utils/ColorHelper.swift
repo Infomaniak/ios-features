@@ -18,30 +18,30 @@
 
 import SwiftUI
 
-enum ColorHelper {
-    static let backgroundPrimary = Color(light: .white, dark: MyKSuiteResources.Colors.bat.swiftUIColor)
-    static let backgroundSecondary = Color(
-        light: MyKSuiteResources.Colors.polarBear.swiftUIColor,
-        dark: MyKSuiteResources.Colors.orca.swiftUIColor
+public enum ColorHelper {
+    public static let backgroundPrimary = Color(light: .white, dark: KSuiteUtilsResources.bat.swiftUIColor)
+    public static let backgroundSecondary = Color(
+        light: KSuiteUtilsResources.polarBear.swiftUIColor,
+        dark: KSuiteUtilsResources.orca.swiftUIColor
     )
 
-    static let primary = Color(
-        light: MyKSuiteResources.Colors.orca.swiftUIColor,
-        dark: MyKSuiteResources.Colors.rabbit.swiftUIColor
+    public static let primary = Color(
+        light: KSuiteUtilsResources.orca.swiftUIColor,
+        dark: KSuiteUtilsResources.rabbit.swiftUIColor
     )
-    static let secondary = Color(
-        light: MyKSuiteResources.Colors.elephant.swiftUIColor,
-        dark: MyKSuiteResources.Colors.shark.swiftUIColor
-    )
-
-    static let reversedPrimary = Color(
-        light: MyKSuiteResources.Colors.rabbit.swiftUIColor,
-        dark: MyKSuiteResources.Colors.orca.swiftUIColor
+    public static let secondary = Color(
+        light: KSuiteUtilsResources.elephant.swiftUIColor,
+        dark: KSuiteUtilsResources.shark.swiftUIColor
     )
 
-    static let divider = Color(
-        light: MyKSuiteResources.Colors.mouse.swiftUIColor,
-        dark: MyKSuiteResources.Colors.elephant.swiftUIColor
+    public static let reversedPrimary = Color(
+        light: KSuiteUtilsResources.rabbit.swiftUIColor,
+        dark: KSuiteUtilsResources.orca.swiftUIColor
+    )
+
+    public static let divider = Color(
+        light: KSuiteUtilsResources.mouse.swiftUIColor,
+        dark: KSuiteUtilsResources.elephant.swiftUIColor
     )
 
     // MARK: - Gradient
@@ -52,7 +52,7 @@ enum ColorHelper {
     static let gradientColor4 = Color("gradient.color.4", bundle: .module)
     static let gradientColor5 = Color("gradient.color.5", bundle: .module)
 
-    static let gradient = LinearGradient(
+    public static let gradient = LinearGradient(
         colors: [gradientColor1, gradientColor2, gradientColor3, gradientColor4, gradientColor5],
         startPoint: .leading,
         endPoint: .trailing
