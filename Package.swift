@@ -17,6 +17,10 @@ let package = Package(
         .library(
             name: "InterAppLogin",
             targets: ["InterAppLogin"]
+		),
+		.library(
+            name: "KSuiteUtils",
+            targets: ["KSuiteUtils"]
         )
     ],
     dependencies: [
@@ -35,6 +39,7 @@ let package = Package(
                 .product(name: "DesignSystem", package: "ios-core-ui")
             ]
         ),
+        .target(name: "KSuiteUtils"),
         .target(
             name: "InterAppLogin",
             dependencies: [

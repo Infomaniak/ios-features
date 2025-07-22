@@ -18,19 +18,20 @@
 
 import DesignSystem
 import InfomaniakCoreSwiftUI
+import KSuiteUtils
 import SwiftUI
 
 struct FreeTrialView: View {
     private let skyBackground = Color(
-        light: MyKSuiteResources.Colors.sky.swiftUIColor,
-        dark: MyKSuiteResources.Colors.bat.swiftUIColor
+        light: KSuiteUtilsResources.sky.color,
+        dark: KSuiteUtilsResources.bat.color
     )
-    private let chipColor = Color(light: .white, dark: MyKSuiteResources.Colors.orca.swiftUIColor)
+    private let chipColor = Color(light: .white, dark: KSuiteUtilsResources.orca.color)
 
     var body: some View {
         VStack(alignment: .leading, spacing: IKPadding.medium) {
             HStack {
-                MyKSuiteResources.Assets.myKSuitePlusLogo.swiftUIImage
+                MyKSuiteResources.myKSuitePlusLogo.swiftUIImage
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: 90)

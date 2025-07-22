@@ -16,6 +16,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import KSuiteUtils
 import SwiftUI
 
 enum Product {
@@ -34,9 +35,9 @@ enum Product {
     var color: Color {
         switch self {
         case .mail:
-            return MyKSuiteResources.Colors.productMail.swiftUIColor
+            return KSuiteUtilsResources.productMail.swiftUIColor
         case .drive:
-            return MyKSuiteResources.Colors.productDrive.swiftUIColor
+            return KSuiteUtilsResources.productDrive.swiftUIColor
         }
     }
 }
