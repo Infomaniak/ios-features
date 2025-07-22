@@ -18,23 +18,23 @@
 
 import SwiftUI
 
-enum FontHelper {
+public enum FontHelper {
     private static func dynamicTypeSizeFont(size: CGFloat, weight: Font.Weight, relativeTo textStyle: Font.TextStyle) -> Font {
         let fontFamily = UIFont.preferredFont(forTextStyle: .body).familyName
         return Font.custom(fontFamily, size: size, relativeTo: textStyle).weight(weight)
     }
 
-    static let title: Font = dynamicTypeSizeFont(size: 18, weight: .semibold, relativeTo: .title2)
+    public static let title: Font = dynamicTypeSizeFont(size: 18, weight: .semibold, relativeTo: .title2)
 
     // MARK: - Regular
 
-    static let body: Font = dynamicTypeSizeFont(size: 16, weight: .regular, relativeTo: .body)
-    static let bodySmall: Font = dynamicTypeSizeFont(size: 14, weight: .regular, relativeTo: .callout)
+    public static let body: Font = dynamicTypeSizeFont(size: 16, weight: .regular, relativeTo: .body)
+    public static let bodySmall: Font = dynamicTypeSizeFont(size: 14, weight: .regular, relativeTo: .callout)
 
     // MARK: - Medium
 
-    static let bodyMedium: Font = dynamicTypeSizeFont(size: 16, weight: .medium, relativeTo: .headline)
+    public static let bodyMedium: Font = dynamicTypeSizeFont(size: 16, weight: .medium, relativeTo: .headline)
 
-    static let bodySmallMedium: Font = dynamicTypeSizeFont(size: 14, weight: .medium, relativeTo: .callout)
-    static let labelMedium: Font = dynamicTypeSizeFont(size: 12, weight: .medium, relativeTo: .caption)
+    public static let bodySmallMedium: Font = dynamicTypeSizeFont(size: 14, weight: .medium, relativeTo: .callout)
+    public static let labelMedium: Font = dynamicTypeSizeFont(size: 12, weight: .medium, relativeTo: .caption)
 }

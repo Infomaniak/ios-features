@@ -18,6 +18,7 @@
 
 import DesignSystem
 import InfomaniakCoreSwiftUI
+import KSuiteUtils
 import SwiftUI
 
 struct SubscriptionBenefitsView: View {

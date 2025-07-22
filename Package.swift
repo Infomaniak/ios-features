@@ -13,6 +13,10 @@ let package = Package(
         .library(
             name: "MyKSuite",
             targets: ["MyKSuite"]
+        ),
+        .library(
+            name: "KSuiteUtils",
+            targets: ["KSuiteUtils"]
         )
     ],
     dependencies: [
@@ -30,6 +34,7 @@ let package = Package(
                 .product(name: "DesignSystem", package: "ios-core-ui")
             ]
         ),
+        .target(name: "KSuiteUtils"),
         .testTarget(name: "MyKSuiteTests", dependencies: ["MyKSuite"])
     ]
 )

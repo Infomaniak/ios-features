@@ -17,6 +17,7 @@
  */
 
 import DesignSystem
+import KSuiteUtils
 import SwiftUI
 
 struct ProductProgressView: View {
