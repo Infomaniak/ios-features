@@ -59,7 +59,6 @@ private struct ManyAvatarsAnimationView: View {
                     .opacity(normalizedIndex(index) >= maxStackSize ? 0 : 1)
             }
         }
-        .frame(width: 0.6 * size * CGFloat(min(maxStackSize, accounts.count)))
         .task {
             while !Task.isCancelled && accounts.count > 1 {
                 try? await Task.sleep(nanoseconds: 2_000_000_000)
@@ -117,6 +116,7 @@ struct ConnectedAccountAvatarStackView: View {
                 ManyAvatarsAnimationView(accounts: accounts, size: size)
             }
         }
+        .frame(width: 0.6 * size * CGFloat(min(maxStackSize, accounts.count)))
     }
 }
 

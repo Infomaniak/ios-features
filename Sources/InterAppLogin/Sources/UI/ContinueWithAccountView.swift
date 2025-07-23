@@ -47,7 +47,7 @@ public struct ContinueWithAccountView: View {
     }
 
     public var body: some View {
-        VStack {
+        VStack(spacing: IKPadding.mini) {
             if let accounts {
                 if accounts.isEmpty {
                     Button(InterAppLoginLocalizable.Localizable.buttonLogin, action: onLoginPressed)
@@ -61,13 +61,19 @@ public struct ContinueWithAccountView: View {
                     Button {
                         isAccountShowingAccountSelections.toggle()
                     } label: {
-                        HStack {
+                        HStack(spacing: IKPadding.mini) {
                             ConnectedAccountAvatarStackView(accounts: selectedAccounts)
 
                             Text(InterAppLoginLocalizable.PluralLocalizable.selectedAccountCountLabel(selectedAccountIds.count))
                                 .frame(maxWidth: .infinity)
+                                .lineLimit(1)
 
                             CenteringPlaceholderAvatarStackView(accounts: selectedAccounts)
+                                .overlay(alignment: .trailing) {
+                                    Image(.chevronDown)
+                                        .iconSize(.medium)
+                                        .foregroundStyle(.tint)
+                                }
                         }
                     }
                     .buttonStyle(.outlined)
@@ -118,7 +124,7 @@ public struct ContinueWithAccountView: View {
 @available(iOS 17, *)
 #Preview("Accounts") {
     @Previewable @State var di = PreviewTargetAssembly(emptyAccounts: false)
-    VStack {
+    VStack(spacing: IKPadding.huge) {
         ContinueWithAccountView(
             isLoading: false,
             onLoginPressed: {},
@@ -132,6 +138,7 @@ public struct ContinueWithAccountView: View {
             onCreateAccountPressed: {}
         )
     }
+    .padding()
 }
 
 @available(iOS 17, *)
@@ -151,4 +158,5 @@ public struct ContinueWithAccountView: View {
             onCreateAccountPressed: {}
         )
     }
+    .padding()
 }

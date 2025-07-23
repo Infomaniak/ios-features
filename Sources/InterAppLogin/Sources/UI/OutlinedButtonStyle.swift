@@ -30,17 +30,25 @@ extension ButtonStyle where Self == OutlinedButtonStyle {
 struct OutlinedButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
 
-    @Environment(\.ikButtonTheme) private var theme
     @Environment(\.ikButtonLoading) private var isLoading
+
+    private var foreground: Color {
+        if isEnabled {
+            return .Custom.textPrimary
+        } else {
+            return .Custom.textSecondary
+        }
+    }
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .labelStyle(.ikLabel)
-            .foregroundStyle(Color.Custom.textPrimary)
+            .foregroundStyle(foreground)
             .modifier(IKButtonLoadingModifier(isFilled: false))
             .modifier(IKButtonControlSizeModifier())
-            .modifier(IKButtonLayout(isInlined: false))
-            .modifier(IKButtonExpandableModifier())
+            .padding(.horizontal, value: .medium)
+            .padding(.horizontal, value: .small)
+            .frame(minHeight: IKButtonHeight.large)
             .contentShape(Rectangle())
             .modifier(IKButtonOpacityAnimationModifier(isPressed: configuration.isPressed))
             .allowsHitTesting(!isLoading)
