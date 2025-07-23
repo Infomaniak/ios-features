@@ -32,7 +32,7 @@ private struct FewAvatarsAnimationView: View {
 }
 
 private struct ManyAvatarsAnimationView: View {
-   @State private var currentIndex = 0
+    @State private var currentIndex = 0
 
     let accounts: [ConnectedAccount]
     let size: CGFloat
