@@ -18,11 +18,21 @@
 
 import SwiftUI
 
-struct ConnectedAccountAvatarStackView: View {
-    static let defaultSize: CGFloat = 24
-    static let defaultMaxStackSize = 3
+private struct FewAvatarsAnimationView: View {
+    let accounts: [ConnectedAccount]
+    let size: CGFloat
 
-    @State private var currentIndex = 0
+    var body: some View {
+        HStack(spacing: -size * 0.4) {
+            ForEach(accounts.indices, id: \.self) { index in
+                ConnectedAccountAvatarView(connectedAccount: accounts[index], size: size)
+            }
+        }
+    }
+}
+
+private struct ManyAvatarsAnimationView: View {
+   @State private var currentIndex = 0
 
     let accounts: [ConnectedAccount]
     let size: CGFloat
@@ -65,10 +75,10 @@ struct ConnectedAccountAvatarStackView: View {
 
     func scaleForIndex(_ index: Int) -> CGFloat {
         guard accounts.count > 1 else {
-            return 1.2
+            return 1.0
         }
 
-        return normalizedIndex(index) == 1 ? 1.2 : 0.8
+        return normalizedIndex(index) == 1 ? 1.0 : 0.75
     }
 
     func offsetForIndex(_ index: Int) -> CGFloat {
@@ -78,6 +88,35 @@ struct ConnectedAccountAvatarStackView: View {
 
         let normalizedIndex = normalizedIndex(index)
         return (CGFloat(normalizedIndex) * size * 0.6) - size * 0.6
+    }
+}
+
+struct ConnectedAccountAvatarStackView: View {
+    static let defaultSize: CGFloat = 32
+    static let defaultMaxStackSize = 3
+
+    let accounts: [ConnectedAccount]
+    let size: CGFloat
+    let maxStackSize: Int
+
+    init(
+        accounts: [ConnectedAccount],
+        size: CGFloat = ConnectedAccountAvatarStackView.defaultSize,
+        maxStackSize: Int = ConnectedAccountAvatarStackView.defaultMaxStackSize
+    ) {
+        self.accounts = accounts
+        self.size = size
+        self.maxStackSize = maxStackSize
+    }
+
+    var body: some View {
+        Group {
+            if accounts.count <= 2 {
+                FewAvatarsAnimationView(accounts: accounts, size: size)
+            } else {
+                ManyAvatarsAnimationView(accounts: accounts, size: size)
+            }
+        }
     }
 }
 
