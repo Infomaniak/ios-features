@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+ Loco ios export: Xcode Stringsdict (legacy)
+ Project: CoreUI
+ Locale: en, English
+ Tagged: ios-stringsdict, !common, !emoji-reaction, !ios, !my kSuite, !privacy
+ Exported by: Philippe Weidmann
+ Exported at: Fri, 04 Jul 2025 13:55:36 +0200
+-->
+<plist version="1.0">
+  <dict>
+    <key>buttonContinueWithAccounts</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@value@</string>
+      <key>value</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Continue with this account</string>
+        <key>other</key>
+        <string>Continue with these accounts</string>
+      </dict>
+    </dict>
+    <key>selectedAccountCountLabel</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@value@</string>
+      <key>value</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>%d account selected</string>
+        <key>other</key>
+        <string>%d accounts selected</string>
+      </dict>
+    </dict>
+  </dict>
+</plist>
