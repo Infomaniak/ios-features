@@ -44,15 +44,19 @@ struct ConnectedAccountCellView: View {
                     .iconSize(.medium)
                     .foregroundStyle(.tint)
                     .opacity(isSelected ? 1 : 0)
+                    .animation(nil, value: isSelected)
             }
             .padding(.vertical, value: .mini)
         }
     }
 }
 
+@available(iOS 17.0, *)
 #Preview {
+    @Previewable @State var isFirstSelected = true
+    @Previewable @State var isSecondSelected = false
     VStack {
-        ConnectedAccountCellView(connectedAccount: PreviewHelper.connectedAccount, isSelected: .constant(true))
-        ConnectedAccountCellView(connectedAccount: PreviewHelper.connectedAccount, isSelected: .constant(false))
+        ConnectedAccountCellView(connectedAccount: PreviewHelper.connectedAccount, isSelected: $isFirstSelected)
+        ConnectedAccountCellView(connectedAccount: PreviewHelper.connectedAccount, isSelected: $isSecondSelected)
     }
 }
