@@ -67,11 +67,11 @@ struct SelectConnectedAccountListView: View {
                 onAddAccount()
             } label: {
                 HStack(spacing: IKPadding.medium) {
-                    Image(systemName: "plus")
+                    Image(.personCirclePlusFilled)
                         .iconSize(.large)
                         .foregroundStyle(.tint)
 
-                    Text(InterAppLoginLocalizable.Localizable.buttonAddAccount)
+                    Text(InterAppLoginLocalizable.Localizable.buttonUseOtherAccount)
                         .foregroundStyle(Color.Custom.textPrimary)
                         .font(.Custom.body)
                         .frame(maxWidth: .infinity, alignment: .leading)
