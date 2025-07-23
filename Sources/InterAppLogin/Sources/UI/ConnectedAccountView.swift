@@ -44,12 +44,11 @@ struct ConnectedAccountAvatarView: View {
         .clipShape(Circle())
         .background(
             Circle()
-                .stroke()
-                .foregroundStyle(Color.greyMouse)
+                .stroke(Color.greyMouse)
         )
     }
 
-    var initialsView: some View {
+    private var initialsView: some View {
         InitialsView(
             initials: NameFormatter(fullName: connectedAccount.userProfile.displayName).initials,
             backgroundColor: Color.backgroundColor(from: connectedAccount.userProfile.email.hash),
