@@ -34,3 +34,11 @@ struct CenteringPlaceholderAvatarStackView: View {
             .frame(width: width, height: 1)
     }
 }
+
+#Preview {
+    CenteringPlaceholderAvatarStackView(
+        accounts: PreviewHelper.allAccounts,
+        size: 40,
+        maxStackSize: 3
+    )
+}
