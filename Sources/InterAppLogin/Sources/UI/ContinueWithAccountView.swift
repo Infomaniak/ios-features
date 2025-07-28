@@ -98,7 +98,7 @@ public struct ContinueWithAccountView: View {
             @InjectService var connectedAccountManager: ConnectedAccountManagerable
             var accounts = await connectedAccountManager.listAllLocalAccounts()
             accounts = accounts.filter { connectedAccount in
-                !self.excludingUserIds.contains(connectedAccount.userId)
+                !excludingUserIds.contains(connectedAccount.userId)
             }
 
             selectedAccountIds = Set(accounts.compactMap(\.userId))
