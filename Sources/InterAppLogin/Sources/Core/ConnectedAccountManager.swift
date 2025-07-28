@@ -79,11 +79,6 @@ public struct ConnectedAccountManager: ConnectedAccountManagerable {
             }
         }
 
-        let hasStaff = accounts.contains { $0.userProfile.isStaff ?? false }
-        guard hasStaff else {
-            return []
-        }
-
         return accounts
     }
 }
