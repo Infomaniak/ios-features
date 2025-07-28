@@ -28,6 +28,7 @@ public struct ContinueWithAccountView: View {
     @State private var selectedAccountIds = Set<Int>()
 
     private let isLoading: Bool
+    private let excludingUserIds: [Int]
     private let onLoginPressed: () -> Void
     private let onLoginWithAccountsPressed: ([ConnectedAccount]) -> Void
     private let onCreateAccountPressed: () -> Void
@@ -37,9 +38,11 @@ public struct ContinueWithAccountView: View {
     }
 
     public init(isLoading: Bool,
+                excludingUserIds: [Int] = [],
                 onLoginPressed: @escaping () -> Void,
                 onLoginWithAccountsPressed: @escaping ([ConnectedAccount]) -> Void,
                 onCreateAccountPressed: @escaping () -> Void) {
+        self.excludingUserIds = excludingUserIds
         self.isLoading = isLoading
         self.onLoginPressed = onLoginPressed
         self.onLoginWithAccountsPressed = onLoginWithAccountsPressed
@@ -93,7 +96,11 @@ public struct ContinueWithAccountView: View {
         .controlSize(.large)
         .task {
             @InjectService var connectedAccountManager: ConnectedAccountManagerable
-            let accounts = await connectedAccountManager.listAllLocalAccounts()
+            var accounts = await connectedAccountManager.listAllLocalAccounts()
+            accounts = accounts.filter { connectedAccount in
+                !self.excludingUserIds.contains(connectedAccount.userId)
+            }
+
             selectedAccountIds = Set(accounts.compactMap(\.userId))
 
             withAnimation {
