@@ -22,6 +22,62 @@ import InfomaniakCoreSwiftUI
 import InfomaniakDI
 import SwiftUI
 
+private struct OneAccountView: View {
+    let account: ConnectedAccount
+
+    var body: some View {
+        HStack {
+            ConnectedAccountAvatarView(connectedAccount: account)
+
+            VStack(alignment: .leading, spacing: 0) {
+                Text(account.userProfile.displayName)
+                    .font(.Custom.headline)
+                    .foregroundStyle(Color.Custom.textPrimary)
+                Text(account.userProfile.email)
+                    .font(.Custom.body)
+                    .foregroundStyle(Color.Custom.textSecondary)
+            }
+            .lineLimit(1)
+            .frame(maxWidth: .infinity, alignment: .center)
+
+            CenteringPlaceholderAvatarStackView(accounts: [account])
+                .overlay(alignment: .trailing) {
+                    Image(.chevronDown)
+                        .iconSize(.medium)
+                        .foregroundStyle(.tint)
+                }
+        }
+        .padding(.vertical, value: .mini)
+    }
+}
+
+struct ManyAccountView: View {
+    let selectedAccounts: [ConnectedAccount]
+    let selectedAccountIds: Set<Int>
+
+    public init(selectedAccounts: [ConnectedAccount], selectedAccountIds: Set<Int>) {
+        self.selectedAccounts = selectedAccounts
+        self.selectedAccountIds = selectedAccountIds
+    }
+
+    var body: some View {
+        HStack(spacing: IKPadding.mini) {
+            ConnectedAccountAvatarStackView(accounts: selectedAccounts)
+
+            Text(InterAppLoginLocalizable.PluralLocalizable.selectedAccountCountLabel(selectedAccountIds.count))
+                .frame(maxWidth: .infinity)
+                .lineLimit(1)
+
+            CenteringPlaceholderAvatarStackView(accounts: selectedAccounts)
+                .overlay(alignment: .trailing) {
+                    Image(.chevronDown)
+                        .iconSize(.medium)
+                        .foregroundStyle(.tint)
+                }
+        }
+    }
+}
+
 public struct ContinueWithAccountView: View {
     @State private var isAccountShowingAccountSelections = false
     @State private var accounts: [ConnectedAccount]?
@@ -64,19 +120,10 @@ public struct ContinueWithAccountView: View {
                     Button {
                         isAccountShowingAccountSelections.toggle()
                     } label: {
-                        HStack(spacing: IKPadding.mini) {
-                            ConnectedAccountAvatarStackView(accounts: selectedAccounts)
-
-                            Text(InterAppLoginLocalizable.PluralLocalizable.selectedAccountCountLabel(selectedAccountIds.count))
-                                .frame(maxWidth: .infinity)
-                                .lineLimit(1)
-
-                            CenteringPlaceholderAvatarStackView(accounts: selectedAccounts)
-                                .overlay(alignment: .trailing) {
-                                    Image(.chevronDown)
-                                        .iconSize(.medium)
-                                        .foregroundStyle(.tint)
-                                }
+                        if accounts.count == 1 || selectedAccountIds.count == 1, let account = accounts.first {
+                            OneAccountView(account: account)
+                        } else {
+                            ManyAccountView(selectedAccounts: accounts, selectedAccountIds: selectedAccountIds)
                         }
                     }
                     .buttonStyle(.outlined)
