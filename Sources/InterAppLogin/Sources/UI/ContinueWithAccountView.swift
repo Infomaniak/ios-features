@@ -22,6 +22,33 @@ import InfomaniakCoreSwiftUI
 import InfomaniakDI
 import SwiftUI
 
+struct ManyAccountView: View {
+    let selectedAccounts: [ConnectedAccount]
+    let selectedAccountIds: Set<Int>
+
+    public init(selectedAccounts: [ConnectedAccount], selectedAccountIds: Set<Int>) {
+        self.selectedAccounts = selectedAccounts
+        self.selectedAccountIds = selectedAccountIds
+    }
+    
+    var body: some View {
+        HStack(spacing: IKPadding.mini) {
+            ConnectedAccountAvatarStackView(accounts: selectedAccounts)
+
+            Text(InterAppLoginLocalizable.PluralLocalizable.selectedAccountCountLabel(selectedAccountIds.count))
+                .frame(maxWidth: .infinity)
+                .lineLimit(1)
+
+            CenteringPlaceholderAvatarStackView(accounts: selectedAccounts)
+                .overlay(alignment: .trailing) {
+                    Image(.chevronDown)
+                        .iconSize(.medium)
+                        .foregroundStyle(.tint)
+                }
+        }
+    }
+}
+
 public struct ContinueWithAccountView: View {
     @State private var isAccountShowingAccountSelections = false
     @State private var accounts: [ConnectedAccount]?
@@ -64,20 +91,7 @@ public struct ContinueWithAccountView: View {
                     Button {
                         isAccountShowingAccountSelections.toggle()
                     } label: {
-                        HStack(spacing: IKPadding.mini) {
-                            ConnectedAccountAvatarStackView(accounts: selectedAccounts)
-
-                            Text(InterAppLoginLocalizable.PluralLocalizable.selectedAccountCountLabel(selectedAccountIds.count))
-                                .frame(maxWidth: .infinity)
-                                .lineLimit(1)
-
-                            CenteringPlaceholderAvatarStackView(accounts: selectedAccounts)
-                                .overlay(alignment: .trailing) {
-                                    Image(.chevronDown)
-                                        .iconSize(.medium)
-                                        .foregroundStyle(.tint)
-                                }
-                        }
+                        ManyAccountView(selectedAccounts: accounts, selectedAccountIds: selectedAccountIds)
                     }
                     .buttonStyle(.outlined)
                     .disabled(isLoading)
