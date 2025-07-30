@@ -22,6 +22,35 @@ import InfomaniakCoreSwiftUI
 import InfomaniakDI
 import SwiftUI
 
+private struct OneAccountView: View {
+    let account: ConnectedAccount
+
+    var body: some View {
+        HStack {
+            ConnectedAccountAvatarView(connectedAccount: account)
+
+            VStack(alignment: .leading, spacing: 0) {
+                Text(account.userProfile.displayName)
+                    .font(.Custom.headline)
+                    .foregroundStyle(Color.Custom.textPrimary)
+                Text(account.userProfile.email)
+                    .font(.Custom.body)
+                    .foregroundStyle(Color.Custom.textSecondary)
+            }
+            .lineLimit(1)
+            .frame(maxWidth: .infinity, alignment: .center)
+
+            CenteringPlaceholderAvatarStackView(accounts: [account])
+                .overlay(alignment: .trailing) {
+                    Image(.chevronDown)
+                        .iconSize(.medium)
+                        .foregroundStyle(.tint)
+                }
+        }
+        .padding(.vertical, value: .mini)
+    }
+}
+
 struct ManyAccountView: View {
     let selectedAccounts: [ConnectedAccount]
     let selectedAccountIds: Set<Int>
@@ -30,7 +59,7 @@ struct ManyAccountView: View {
         self.selectedAccounts = selectedAccounts
         self.selectedAccountIds = selectedAccountIds
     }
-    
+
     var body: some View {
         HStack(spacing: IKPadding.mini) {
             ConnectedAccountAvatarStackView(accounts: selectedAccounts)
@@ -91,7 +120,11 @@ public struct ContinueWithAccountView: View {
                     Button {
                         isAccountShowingAccountSelections.toggle()
                     } label: {
-                        ManyAccountView(selectedAccounts: accounts, selectedAccountIds: selectedAccountIds)
+                        if accounts.count == 1 || selectedAccountIds.count == 1, let selectedAccount = selectedAccounts.first {
+                            OneAccountView(account: selectedAccount)
+                        } else {
+                            ManyAccountView(selectedAccounts: selectedAccounts, selectedAccountIds: selectedAccountIds)
+                        }
                     }
                     .buttonStyle(.outlined)
                     .disabled(isLoading)
