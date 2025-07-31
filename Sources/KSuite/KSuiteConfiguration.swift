@@ -16,11 +16,13 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import KSuiteUtils
+
 public enum KSuiteConfiguration {
     case standard
     case business
     case enterprise
-    
+
     var title: String {
         switch self {
         case .standard:
@@ -28,11 +30,10 @@ public enum KSuiteConfiguration {
         case .business:
             "Gagnez en impact et en maîtrise avec l'offre business"
         case .enterprise:
-            // TODO: - Faire cette trad
-            "RIEN"
+            "Sécurisez, centralisez, maîtrisez avec l'offre Enterprise"
         }
     }
-    
+
     var description: String {
         switch self {
         case .standard:
@@ -49,69 +50,69 @@ public enum KSuiteConfiguration {
         case .standard:
             [
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.drive.swiftUIImage,
                     text: "50 Go par utilisateur de stockage cloud kDrive et kChat"
                 ),
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.kchat.swiftUIImage,
                     text: "kChat : historique des messages illimités, plus de canaux, etc."
                 ),
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.envelope.swiftUIImage,
                     text: "Mail : stockage messagerie illimité, envoi programmé, etc."
                 ),
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.euria.swiftUIImage,
                     text: "Euria : transcriptiondes vidéos, création d'image, etc."
                 ),
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.plusCircle.swiftUIImage,
                     text: "Et bien plus encore !"
                 )
             ]
         case .business:
             [
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.drive.swiftUIImage,
                     text: "3 To par utilisateur de stockage cloud kDrive et kChat"
                 ),
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.kchat.swiftUIImage,
                     text: "kChat : canaux partagés, intégration d'autres applications illimité"
                 ),
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.folder.swiftUIImage,
                     text: "kDrive: recherche dans le contenu, historique de versions étendu"
                 ),
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.shieldLock.swiftUIImage,
                     text: "Sécurité : Login SSO, sauvegarde PC, etc."
                 ),
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.plusCircle.swiftUIImage,
                     text: "Et bien plus encore !"
                 )
             ]
         case .enterprise:
             [
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.drive.swiftUIImage,
                     text: "6 To par utilisateur de stockage cloud kDrive et kChat"
                 ),
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.kchat.swiftUIImage,
                     text: "kChat : 200 utilisateurs externes, jusqu'à 1000 canaux publics/privés"
                 ),
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.stair.swiftUIImage,
                     text: "Fonctionnalités avancées : Support Premium, Custom Brand, etc."
                 ),
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.microsoft.swiftUIImage,
                     text: "Intégration Microsoft Office Online"
                 ),
                 KSuiteLabel(
-                    icon: MyKSuiteResources.drive.swiftUIImage,
+                    icon: KSuiteResources.plusCircle.swiftUIImage,
                     text: "Et bien plus encore !"
                 )
             ]

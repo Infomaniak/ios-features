@@ -24,8 +24,17 @@ public typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 public enum KSuiteResources {
-  public static let background = ImageAsset(name: "background")
   public static let blueDarkColor = ColorAsset(name: "blueDarkColor")
+  public static let background = ImageAsset(name: "background")
+  public static let drive = ImageAsset(name: "drive")
+  public static let envelope = ImageAsset(name: "envelope")
+  public static let euria = ImageAsset(name: "euria")
+  public static let folder = ImageAsset(name: "folder")
+  public static let kchat = ImageAsset(name: "kchat")
+  public static let microsoft = ImageAsset(name: "microsoft")
+  public static let plusCircle = ImageAsset(name: "plus.circle")
+  public static let shieldLock = ImageAsset(name: "shield.lock")
+  public static let stair = ImageAsset(name: "stair")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
