@@ -15,6 +15,10 @@ let package = Package(
             targets: ["MyKSuite"]
         ),
         .library(
+            name: "KSuite",
+            targets: ["KSuite"]
+        ),
+        .library(
             name: "KSuiteUtils",
             targets: ["KSuiteUtils"]
         )
@@ -32,6 +36,13 @@ let package = Package(
                 .product(name: "InfomaniakCore", package: "ios-core"),
                 .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
                 .product(name: "DesignSystem", package: "ios-core-ui")
+            ]
+        ),
+        .target(
+            name: "KSuite",
+            dependencies: [
+                .product(name: "DesignSystem", package: "ios-core-ui"),
+                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
             ]
         ),
         .target(name: "KSuiteUtils"),
