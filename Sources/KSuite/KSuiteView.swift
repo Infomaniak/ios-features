@@ -24,10 +24,10 @@ import SwiftUI
 public struct KSuiteView: View {
     @Environment(\.dismiss) private var dismiss
 
-    private let labels: [KSuiteLabel]
+    private let configuration: KSuiteConfiguration
 
-    public init(labels: [KSuiteLabel]) {
-        self.labels = labels
+    public init(configuration: KSuiteConfiguration) {
+        self.configuration = configuration
     }
 
     public var body: some View {
@@ -39,17 +39,17 @@ public struct KSuiteView: View {
 
             VStack(alignment: .leading, spacing: IKPadding.huge) {
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
-                    Text("Passer à la vitesse supérieur avec l'offre standard")
+                    Text(configuration.title)
                         .multilineTextAlignment(.center)
                         .font(FontHelper.title)
                         .foregroundStyle(ColorHelper.primary)
                         .frame(maxWidth: .infinity, alignment: .center)
 
-                    Text("Donnez à votre équipe les outils essentiels pour collaborer efficacement au quotidien.")
+                    Text(configuration.description)
                 }
 
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
-                    ForEach(labels) { label in
+                    ForEach(configuration.labels) { label in
                         Label {
                             Text(label.text)
                         } icon: {
@@ -79,10 +79,9 @@ public struct KSuiteView: View {
         }
         .padding(.bottom, 24)
         .background(ColorHelper.backgroundPrimary)
-        
     }
 }
 
 #Preview {
-    KSuiteView(labels: [])
+    KSuiteView(configuration: .business)
 }
