@@ -1,0 +1,62 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: it, Italian
+ * Tagged: ios, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !my kSuite, !privacy
+ * Exported by: Ambroise Decouttere
+ * Exported at: Mon, 04 Aug 2025 13:50:41 +0200
+ */
+
+/* loco:688b74f0e9091ea68006a122 */
+"kSuiteBusinessKChatLabel" = "kChat: canali condivisi, integrazione illimitata con altre applicazioni";
+
+/* loco:688b751e7a16f4c4af056e83 */
+"kSuiteBusinessKDriveLabel" = "kDrive: ricerca dei contenuti, cronologia estesa delle versioni";
+
+/* loco:688b6cbb8ac935ed130e3705 */
+"kSuiteBusinessOfferDescription" = "Ottimizzate gli scambi e strutturate la collaborazione in tutta l’organizzazione.";
+
+/* loco:688b6c6b70085c4be6071a92 */
+"kSuiteBusinessOfferTitle" = "Ottenere impatto e controllo con l’offerta commerciale";
+
+/* loco:688b754fc9d22f4a32076322 */
+"kSuiteBusinessSecurityLabel" = "Sicurezza: login SSO, backup del PC, ecc.";
+
+/* loco:688b75ae838dac7b2a000af2 */
+"kSuiteEnterpriseFunctionalityLabel" = "Caratteristiche avanzate: supporto premium, marchio personalizzato, ecc.";
+
+/* loco:688b756a5ca0bb203300e474 */
+"kSuiteEnterpriseKChatLabel" = "kChat: 200 utenti esterni, fino a 1000 canali pubblici/privati";
+
+/* loco:688b75c7b687ddc15d066a62 */
+"kSuiteEnterpriseMicrosoftLabel" = "Integrazione di Microsoft Office Online";
+
+/* loco:688b6cde60be19d6ba01e729 */
+"kSuiteEnterpriseOfferDescription" = "Un ambiente di collaborazione sicuro per i vostri team, anche i più esigenti.";
+
+/* loco:688b6c8768c1a651fc07c764 */
+"kSuiteEnterpriseOfferTitle" = "Sicurezza, centralizzazione e controllo con l’offerta Enterprise";
+
+/* loco:688b74ceafa0be317a0bef62 */
+"kSuiteMoreLabel" = "E molto altro ancora!";
+
+/* loco:688b74b977353df30e0cd682 */
+"kSuiteStandardEuriaLabel" = "Euria: trascrizione di video, creazione di immagini, ecc.";
+
+/* loco:688b7484149384c94b09fc12 */
+"kSuiteStandardKChatLabel" = "kChat: cronologia dei messaggi illimitata, più canali, ecc.";
+
+/* loco:688b74a0121272a5e3036d02 */
+"kSuiteStandardMailLabel" = "Posta: archiviazione illimitata della posta, consegna programmata, ecc.";
+
+/* loco:688b6ca1bfc9faabc80f7aa4 */
+"kSuiteStandardOfferDescription" = "Fornite al vostro team gli strumenti essenziali per collaborare efficacemente ogni giorno.";
+
+/* loco:688b6c5368c1a651fc07c763 */
+"kSuiteStandardOfferTitle" = "Un passo avanti con l’offerta standard";
+
+/* loco:688b7452e7d2ef7c92095802 */
+"kSuiteStorageLabel" = "%@ per utente di cloud storage kDrive e kChat";
+
+/* loco:688b6c0168c1a651fc07c762 */
+"kSuiteUpgradeDetails" = "Per aggiornare l’offerta, utilizzare l’interfaccia web.";
