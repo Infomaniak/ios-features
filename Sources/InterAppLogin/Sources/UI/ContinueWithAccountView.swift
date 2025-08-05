@@ -115,9 +115,17 @@ public struct ContinueWithAccountView: View {
             SelectConnectedAccountListView(
                 connectedAccounts: accounts ?? [],
                 currentlySelectedAccountIds: selectedAccountIds,
-                onAddAccount: onLoginPressed,
+                onAddAccount: onAddAccountPressed,
                 onSelectedAccountSaved: onSelectedAccountSaved
             )
+        }
+    }
+
+    private func onAddAccountPressed() {
+        Task { @MainActor in
+            // We have to wait for closing animation before opening the login WebView modally
+            try await Task.sleep(nanoseconds: 500_000_000)
+            onLoginPressed()
         }
     }
 
