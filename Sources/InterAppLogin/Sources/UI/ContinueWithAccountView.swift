@@ -53,18 +53,16 @@ private struct OneAccountView: View {
 
 struct ManyAccountView: View {
     let selectedAccounts: [ConnectedAccount]
-    let selectedAccountIds: Set<Int>
 
-    public init(selectedAccounts: [ConnectedAccount], selectedAccountIds: Set<Int>) {
+    public init(selectedAccounts: [ConnectedAccount]) {
         self.selectedAccounts = selectedAccounts
-        self.selectedAccountIds = selectedAccountIds
     }
 
     var body: some View {
         HStack(spacing: IKPadding.mini) {
             ConnectedAccountAvatarStackView(accounts: selectedAccounts)
 
-            Text(InterAppLoginLocalizable.PluralLocalizable.selectedAccountCountLabel(selectedAccountIds.count))
+            Text(InterAppLoginLocalizable.PluralLocalizable.selectedAccountCountLabel(selectedAccounts.count))
                 .frame(maxWidth: .infinity)
                 .lineLimit(1)
 
@@ -123,7 +121,7 @@ public struct ContinueWithAccountView: View {
                         if accounts.count == 1 || selectedAccountIds.count == 1, let selectedAccount = selectedAccounts.first {
                             OneAccountView(account: selectedAccount)
                         } else {
-                            ManyAccountView(selectedAccounts: selectedAccounts, selectedAccountIds: selectedAccountIds)
+                            ManyAccountView(selectedAccounts: selectedAccounts)
                         }
                     }
                     .buttonStyle(.outlined)
