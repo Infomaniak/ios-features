@@ -10,6 +10,8 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum KSuiteLocalizable {
+  /// loco:689321dbe19fe82cd7087412
+  public static let kSuiteUpgradeDetailsContactAdmin = KSuiteLocalizable.tr("Localizable", " kSuiteUpgradeDetailsContactAdmin", fallback: "Contact your administrator to upgrade your offer.")
   /// loco:688b74f0e9091ea68006a122
   public static let kSuiteBusinessKChatLabel = KSuiteLocalizable.tr("Localizable", "kSuiteBusinessKChatLabel", fallback: "kChat: shared channels, unlimited integration with other applications")
   /// loco:688b751e7a16f4c4af056e83

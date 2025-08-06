@@ -25,9 +25,11 @@ public struct KSuiteView: View {
     @Environment(\.dismiss) private var dismiss
 
     private let configuration: KSuiteConfiguration
+    private let isAdmin: Bool
 
-    public init(configuration: KSuiteConfiguration) {
+    public init(configuration: KSuiteConfiguration, isAdmin: Bool) {
         self.configuration = configuration
+        self.isAdmin = isAdmin
     }
 
     public var body: some View {
@@ -59,7 +61,7 @@ public struct KSuiteView: View {
                     }
                 }
 
-                Text("Pour faire évoluer votre offre, utilisez l'interface web.")
+                Text(isAdmin ? KSuiteLocalizable.kSuiteUpgradeDetails : KSuiteLocalizable.kSuiteUpgradeDetailsContactAdmin)
 
                 Button {
                     dismiss()
@@ -83,5 +85,5 @@ public struct KSuiteView: View {
 }
 
 #Preview {
-    KSuiteView(configuration: .business)
+    KSuiteView(configuration: .business, isAdmin: false)
 }

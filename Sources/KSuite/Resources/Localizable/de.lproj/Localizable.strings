@@ -4,8 +4,11 @@
  * Locale: de, German
  * Tagged: ios, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !my kSuite, !privacy
  * Exported by: Ambroise Decouttere
- * Exported at: Mon, 04 Aug 2025 13:50:41 +0200
+ * Exported at: Wed, 06 Aug 2025 12:19:40 +0200
  */
+
+/* loco:689321dbe19fe82cd7087412 */
+" kSuiteUpgradeDetailsContactAdmin" = "Wenden Sie sich an Ihren Administrator, um Ihr Angebot weiterzuentwickeln.";
 
 /* loco:688b74f0e9091ea68006a122 */
 "kSuiteBusinessKChatLabel" = "kChat: Gemeinsame Kanäle, Integration anderer Anwendungen unbegrenzt";

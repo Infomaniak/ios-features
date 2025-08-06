@@ -26,22 +26,22 @@ public enum KSuiteConfiguration {
     var title: String {
         switch self {
         case .standard:
-            "Passez à la vitesse supérieure avec l'offre standard"
+            KSuiteLocalizable.kSuiteStandardOfferTitle
         case .business:
-            "Gagnez en impact et en maîtrise avec l'offre business"
+            KSuiteLocalizable.kSuiteBusinessOfferTitle
         case .enterprise:
-            "Sécurisez, centralisez, maîtrisez avec l'offre Enterprise"
+            KSuiteLocalizable.kSuiteEnterpriseOfferTitle
         }
     }
 
     var description: String {
         switch self {
         case .standard:
-            "Donnez à votre équipe les outils essentiels pour collaborer efficacement au quotidien."
+            KSuiteLocalizable.kSuiteStandardOfferDescription
         case .business:
-            "Optimisez vos échanges et structurez la collaboration à l'échelle de votre organisation."
+            KSuiteLocalizable.kSuiteBusinessOfferDescription
         case .enterprise:
-            "Un environnement de collaboration sécurisé pour vos équipes, même les plus exigeantes."
+            KSuiteLocalizable.kSuiteEnterpriseOfferDescription
         }
     }
 
@@ -51,69 +51,69 @@ public enum KSuiteConfiguration {
             [
                 KSuiteLabel(
                     icon: KSuiteResources.drive.swiftUIImage,
-                    text: "50 Go par utilisateur de stockage cloud kDrive et kChat"
+                    text: KSuiteLocalizable.kSuiteStorageLabel("50 Go")
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.kchat.swiftUIImage,
-                    text: "kChat : historique des messages illimités, plus de canaux, etc."
+                    text: KSuiteLocalizable.kSuiteStandardKChatLabel
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.envelope.swiftUIImage,
-                    text: "Mail : stockage messagerie illimité, envoi programmé, etc."
+                    text: KSuiteLocalizable.kSuiteStandardMailLabel
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.euria.swiftUIImage,
-                    text: "Euria : transcriptiondes vidéos, création d'image, etc."
+                    text: KSuiteLocalizable.kSuiteStandardEuriaLabel
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.plusCircle.swiftUIImage,
-                    text: "Et bien plus encore !"
+                    text: KSuiteLocalizable.kSuiteMoreLabel
                 )
             ]
         case .business:
             [
                 KSuiteLabel(
                     icon: KSuiteResources.drive.swiftUIImage,
-                    text: "3 To par utilisateur de stockage cloud kDrive et kChat"
+                    text: KSuiteLocalizable.kSuiteStorageLabel("3 To")
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.kchat.swiftUIImage,
-                    text: "kChat : canaux partagés, intégration d'autres applications illimité"
+                    text: KSuiteLocalizable.kSuiteBusinessKChatLabel
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.folder.swiftUIImage,
-                    text: "kDrive: recherche dans le contenu, historique de versions étendu"
+                    text: KSuiteLocalizable.kSuiteBusinessKDriveLabel
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.shieldLock.swiftUIImage,
-                    text: "Sécurité : Login SSO, sauvegarde PC, etc."
+                    text: KSuiteLocalizable.kSuiteBusinessSecurityLabel
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.plusCircle.swiftUIImage,
-                    text: "Et bien plus encore !"
+                    text: KSuiteLocalizable.kSuiteMoreLabel
                 )
             ]
         case .enterprise:
             [
                 KSuiteLabel(
                     icon: KSuiteResources.drive.swiftUIImage,
-                    text: "6 To par utilisateur de stockage cloud kDrive et kChat"
+                    text: KSuiteLocalizable.kSuiteStorageLabel("6 To")
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.kchat.swiftUIImage,
-                    text: "kChat : 200 utilisateurs externes, jusqu'à 1000 canaux publics/privés"
+                    text: KSuiteLocalizable.kSuiteEnterpriseKChatLabel
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.stair.swiftUIImage,
-                    text: "Fonctionnalités avancées : Support Premium, Custom Brand, etc."
+                    text: KSuiteLocalizable.kSuiteEnterpriseFunctionalityLabel
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.microsoft.swiftUIImage,
-                    text: "Intégration Microsoft Office Online"
+                    text: KSuiteLocalizable.kSuiteEnterpriseMicrosoftLabel
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.plusCircle.swiftUIImage,
-                    text: "Et bien plus encore !"
+                    text: KSuiteLocalizable.kSuiteMoreLabel
                 )
             ]
         }
