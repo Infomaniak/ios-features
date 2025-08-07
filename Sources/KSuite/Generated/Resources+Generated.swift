@@ -26,6 +26,8 @@ public typealias AssetImageTypeAlias = ImageAsset.Image
 public enum KSuiteResources {
   public static let blueDarkColor = ColorAsset(name: "blueDarkColor")
   public static let background = ImageAsset(name: "background")
+  public static let badgePro = ImageAsset(name: "badge.pro")
+  public static let chevronRight = ImageAsset(name: "chevron.right")
   public static let drive = ImageAsset(name: "drive")
   public static let envelope = ImageAsset(name: "envelope")
   public static let euria = ImageAsset(name: "euria")
