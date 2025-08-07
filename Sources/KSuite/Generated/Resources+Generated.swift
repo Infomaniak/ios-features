@@ -33,6 +33,7 @@ public enum KSuiteResources {
   public static let kchat = ImageAsset(name: "kchat")
   public static let microsoft = ImageAsset(name: "microsoft")
   public static let plusCircle = ImageAsset(name: "plus.circle")
+  public static let rocket = ImageAsset(name: "rocket")
   public static let shieldLock = ImageAsset(name: "shield.lock")
   public static let stair = ImageAsset(name: "stair")
 }
