@@ -4,7 +4,7 @@
  * Locale: de, German
  * Tagged: ios, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !my kSuite, !privacy
  * Exported by: Ambroise Decouttere
- * Exported at: Wed, 06 Aug 2025 12:19:40 +0200
+ * Exported at: Thu, 07 Aug 2025 14:51:05 +0200
  */
 
 /* loco:689321dbe19fe82cd7087412 */
@@ -40,6 +40,12 @@
 /* loco:688b6c8768c1a651fc07c764 */
 "kSuiteEnterpriseOfferTitle" = "Sichern, zentralisieren, beherrschen mit dem Enterprise-Angebot";
 
+/* loco:68949e85cf319fb7c803f312 */
+"kSuiteGetProDescription" = "Grenzenloses Erstellen und Zusammenarbeiten";
+
+/* loco:68949e54810c56a6160a31b4 */
+"kSuiteGetProTitle" = "KSuite erhalten";
+
 /* loco:688b74ceafa0be317a0bef62 */
 "kSuiteMoreLabel" = "Und noch viel mehr!";
 
@@ -60,6 +66,9 @@
 
 /* loco:688b7452e7d2ef7c92095802 */
 "kSuiteStorageLabel" = "%@ pro Nutzer des Cloud-Speichers kDrive und kChat";
+
+/* loco:68949e21e9102e1eb00a6d04 */
+"kSuiteUpgradeButton" = "ENTWICKELN";
 
 /* loco:688b6c0168c1a651fc07c762 */
 "kSuiteUpgradeDetails" = "Um Ihr Angebot weiterzuentwickeln, nutzen Sie das Webinterface.";

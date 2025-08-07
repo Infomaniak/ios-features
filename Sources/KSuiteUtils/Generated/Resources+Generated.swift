@@ -37,6 +37,7 @@ public enum KSuiteUtilsResources {
   public static let rabbit = ColorAsset(name: "rabbit")
   public static let shark = ColorAsset(name: "shark")
   public static let sky = ColorAsset(name: "sky")
+  public static let swan = ColorAsset(name: "swan")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

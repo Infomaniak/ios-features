@@ -32,6 +32,10 @@ public enum KSuiteLocalizable {
   public static let kSuiteEnterpriseOfferDescription = KSuiteLocalizable.tr("Localizable", "kSuiteEnterpriseOfferDescription", fallback: "A secure collaboration environment for even the most demanding teams.")
   /// loco:688b6c8768c1a651fc07c764
   public static let kSuiteEnterpriseOfferTitle = KSuiteLocalizable.tr("Localizable", "kSuiteEnterpriseOfferTitle", fallback: "Secure, centralize, control with the Enterprise offer")
+  /// loco:68949e85cf319fb7c803f312
+  public static let kSuiteGetProDescription = KSuiteLocalizable.tr("Localizable", "kSuiteGetProDescription", fallback: "Create and collaborate without limits")
+  /// loco:68949e54810c56a6160a31b4
+  public static let kSuiteGetProTitle = KSuiteLocalizable.tr("Localizable", "kSuiteGetProTitle", fallback: "Get kSuite")
   /// loco:688b74ceafa0be317a0bef62
   public static let kSuiteMoreLabel = KSuiteLocalizable.tr("Localizable", "kSuiteMoreLabel", fallback: "And much, much more!")
   /// loco:688b74b977353df30e0cd682
@@ -48,6 +52,8 @@ public enum KSuiteLocalizable {
   public static func kSuiteStorageLabel(_ p1: Any) -> String {
     return KSuiteLocalizable.tr("Localizable", "kSuiteStorageLabel", String(describing: p1), fallback: "%@ per kDrive and kChat cloud storage user")
   }
+  /// loco:68949e21e9102e1eb00a6d04
+  public static let kSuiteUpgradeButton = KSuiteLocalizable.tr("Localizable", "kSuiteUpgradeButton", fallback: "EVOLVE")
   /// loco:688b6c0168c1a651fc07c762
   public static let kSuiteUpgradeDetails = KSuiteLocalizable.tr("Localizable", "kSuiteUpgradeDetails", fallback: "To upgrade your offer, use the web interface.")
 }
