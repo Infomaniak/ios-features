@@ -23,20 +23,16 @@ public struct KSuiteUpgradeButtonView: View {
     public init() {}
 
     public var body: some View {
-        Button {
-            // Upgrade
-        } label: {
-            HStack {
-                Text("ÉVOLUER")
-                    .font(.system(size: 10))
-                    .foregroundStyle(ColorHelper.primary)
+        HStack {
+            Text(KSuiteLocalizable.kSuiteUpgradeButton)
+                .font(.system(size: 10))
+                .foregroundStyle(ColorHelper.primary)
 
-                KSuiteResources.rocket.swiftUIImage
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 12)
-                    .foregroundStyle(ColorHelper.gradient)
-            }
+            KSuiteResources.rocket.swiftUIImage
+                .resizable()
+                .scaledToFit()
+                .frame(width: 12)
+                .foregroundStyle(ColorHelper.gradient)
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 6)
