@@ -27,7 +27,13 @@ struct KSuitePanelModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .floatingPanel(isPresented: $isPresented, backgroundColor: .clear, topPadding: 0) {
-                KSuiteView(configuration: configuration, isAdmin: isAdmin)
+                VStack(spacing: 0) {
+                    KSuiteResources.blueDarkColor.swiftUIColor
+                        .frame(height: 16)
+                        .frame(maxWidth: .infinity)
+                    
+                    KSuiteView(configuration: configuration, isAdmin: isAdmin)
+                }
             }
     }
 }

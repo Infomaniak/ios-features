@@ -57,7 +57,7 @@ public struct KSuiteGetProView: View {
         .background(
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
-                    .foregroundStyle(KSuiteResources.blueDarkColor.swiftUIColor)
+                    .foregroundStyle(KSuiteResources.menuBackgroundColor.swiftUIColor)
 
                 RoundedRectangle(cornerRadius: 16)
                     .strokeBorder(
