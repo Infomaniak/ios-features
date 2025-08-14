@@ -38,8 +38,8 @@ public struct KSuiteProUpgradeChip: View {
         .padding(.vertical, 6)
         .background(
             ZStack {
-                Capsule()
-                    .foregroundStyle(ColorHelper.backgroundPrimary)
+                ColorHelper.chipBackground
+                    .clipShape(Capsule())
 
                 Capsule()
                     .strokeBorder(
