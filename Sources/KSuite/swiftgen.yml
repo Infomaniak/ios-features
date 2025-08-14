@@ -23,7 +23,7 @@ strings:
       output: Strings+Generated.swift
       params:
         enumName: KSuiteLocalizable
-        publicAccess: true
+        publicAccess: false
 xcassets:
   inputs:
     - Resources/Assets.xcassets
