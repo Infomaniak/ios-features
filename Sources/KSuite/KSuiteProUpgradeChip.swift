@@ -19,7 +19,7 @@
 import KSuiteUtils
 import SwiftUI
 
-public struct KSuiteUpgradeButtonView: View {
+public struct KSuiteProUpgradeChip: View {
     public init() {}
 
     public var body: some View {
@@ -52,5 +52,5 @@ public struct KSuiteUpgradeButtonView: View {
 }
 
 #Preview {
-    KSuiteUpgradeButtonView()
+    KSuiteProUpgradeChip()
 }
