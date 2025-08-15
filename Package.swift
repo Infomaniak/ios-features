@@ -33,6 +33,7 @@ let package = Package(
         .target(
             name: "MyKSuite",
             dependencies: [
+                "KSuiteUtils",
                 .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
                 .product(name: "InfomaniakCore", package: "ios-core"),
                 .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
