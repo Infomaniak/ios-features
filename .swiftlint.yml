@@ -41,6 +41,7 @@ excluded:
  - Tests/*
  - Sources/MyKSuite/Generated
  - Sources/InterAppLogin/Generated
+ - Sources/KSuiteUtils/Generated
 custom_rules:
   private_state:
     included:
