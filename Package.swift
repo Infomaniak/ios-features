@@ -17,8 +17,8 @@ let package = Package(
         .library(
             name: "InterAppLogin",
             targets: ["InterAppLogin"]
-		),
-		.library(
+        ),
+        .library(
             name: "KSuiteUtils",
             targets: ["KSuiteUtils"]
         )
