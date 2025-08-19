@@ -18,6 +18,7 @@
 
 import DesignSystem
 import InfomaniakCoreSwiftUI
+import KSuiteUtils
 import SwiftUI
 
 struct SubscriptionPlusDetailsView: View {
@@ -39,7 +40,7 @@ struct SubscriptionPlusDetailsView: View {
             }
 
             HStack(alignment: .iconAndMultilineTextAlignment, spacing: IKPadding.small) {
-                MyKSuiteResources.Assets.information.swiftUIImage
+                MyKSuiteResources.information.swiftUIImage
                     .iconSize(.medium)
                     .foregroundStyle(ColorHelper.secondary)
                     .alignmentGuide(.iconAndMultilineTextAlignment) { d in

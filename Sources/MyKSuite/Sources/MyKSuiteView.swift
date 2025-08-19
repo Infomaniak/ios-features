@@ -18,6 +18,7 @@
 
 import DesignSystem
 import InfomaniakCoreSwiftUI
+import KSuiteUtils
 import SwiftUI
 
 public struct MyKSuiteView: View {
@@ -31,7 +32,7 @@ public struct MyKSuiteView: View {
 
     public var body: some View {
         VStack(spacing: IKPadding.huge) {
-            MyKSuiteResources.Assets.gradient.swiftUIImage
+            MyKSuiteResources.gradient.swiftUIImage
                 .resizable()
                 .scaledToFit()
                 .ignoresSafeArea()

@@ -17,6 +17,7 @@
  */
 
 import DesignSystem
+import KSuiteUtils
 import SwiftUI
 
 struct CardModifier: ViewModifier {
@@ -40,9 +41,9 @@ struct CardModifier: ViewModifier {
             .clipShape(.rect(cornerRadius: IKRadius.large))
             .overlay {
                 RoundedRectangle(cornerRadius: IKRadius.large)
-                    .strokeBorder(MyKSuiteResources.Colors.elephant.swiftUIColor.opacity(strokeOpacity), lineWidth: 1)
+                    .strokeBorder(KSuiteUtilsResources.elephant.swiftUIColor.opacity(strokeOpacity), lineWidth: 1)
             }
-            .shadow(color: MyKSuiteResources.Colors.shark.swiftUIColor.opacity(shadowOpacity), radius: 10)
+            .shadow(color: KSuiteUtilsResources.shark.swiftUIColor.opacity(shadowOpacity), radius: 10)
     }
 }
 
