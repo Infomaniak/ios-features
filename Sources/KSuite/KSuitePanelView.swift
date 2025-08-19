@@ -21,17 +21,18 @@ import SwiftUI
 
 struct KSuitePanelModifier: ViewModifier {
     @Binding var isPresented: Bool
+    let backgroundColor: Color
     let configuration: KSuiteConfiguration
     let isAdmin: Bool
 
     func body(content: Content) -> some View {
         content
-            .floatingPanel(isPresented: $isPresented, backgroundColor: .clear, topPadding: 0) {
+            .floatingPanel(isPresented: $isPresented, backgroundColor: backgroundColor, topPadding: 0) {
                 VStack(spacing: 0) {
                     KSuiteResources.blueDarkColor.swiftUIColor
                         .frame(height: 16)
                         .frame(maxWidth: .infinity)
-                    
+
                     KSuiteView(configuration: configuration, isAdmin: isAdmin)
                 }
             }
@@ -39,8 +40,18 @@ struct KSuitePanelModifier: ViewModifier {
 }
 
 public extension View {
-    func kSuitePanel(isPresented: Binding<Bool>, configuration: KSuiteConfiguration, isAdmin: Bool) -> some View {
-        modifier(KSuitePanelModifier(isPresented: isPresented, configuration: configuration, isAdmin: isAdmin))
+    func kSuitePanel(
+        isPresented: Binding<Bool>,
+        backgroundColor: Color = .clear,
+        configuration: KSuiteConfiguration,
+        isAdmin: Bool
+    ) -> some View {
+        modifier(KSuitePanelModifier(
+            isPresented: isPresented,
+            backgroundColor: backgroundColor,
+            configuration: configuration,
+            isAdmin: isAdmin
+        ))
     }
 }
 
