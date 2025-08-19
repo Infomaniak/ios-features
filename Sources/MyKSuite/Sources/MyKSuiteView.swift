@@ -63,7 +63,7 @@ public struct MyKSuiteView: View {
                 Button {
                     dismiss()
                 } label: {
-                    Text(MyKSuiteLocalizable.buttonClose)
+                    Text(KSuiteUtilsLocalizable.buttonClose)
                 }
                 .ikButtonFullWidth(true)
                 .controlSize(.large)

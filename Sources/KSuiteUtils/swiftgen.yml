@@ -16,6 +16,14 @@
 
 output_dir: Generated/
 
+strings:
+  inputs: Resources/Localizable/en.lproj
+  outputs:
+    - templateName: structured-swift5
+      output: Strings+Generated.swift
+      params:
+        enumName: KSuiteUtilsLocalizable
+        publicAccess: true
 xcassets:
   inputs:
     - Resources/Colors.xcassets

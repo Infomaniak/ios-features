@@ -66,7 +66,7 @@ public struct KSuiteView: View {
                 Button {
                     dismiss()
                 } label: {
-                    Text("Fermer")
+                    Text(KSuiteUtilsLocalizable.buttonClose)
                         .foregroundStyle(ColorHelper.primary)
                 }
                 .ikButtonFullWidth(true)
