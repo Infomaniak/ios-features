@@ -31,12 +31,12 @@ public struct KSuiteGetProView: View {
                     Text(KSuiteLocalizable.kSuiteGetProTitle)
                         .font(FontHelper.bodyMedium)
 
-                    KSuiteResources.badgePro.swiftUIImage
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20)
-                        .padding(.vertical, value: .micro)
-                        .padding(.horizontal, 5)
+                    Text(verbatim: "PRO")
+                        .kerning(1)
+                        .font(.system(size: 8, weight: .bold))
+                        .padding(.vertical, 2)
+                        .padding(.leading, 5)
+                        .padding(.trailing, 4)
                         .background(
                             RoundedRectangle(cornerRadius: 2)
                                 .strokeBorder(ColorHelper.gradient, lineWidth: 1)
