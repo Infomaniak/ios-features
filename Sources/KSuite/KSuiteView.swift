@@ -79,7 +79,7 @@ public struct KSuiteView: View {
             .font(FontHelper.body)
             .foregroundStyle(ColorHelper.secondary)
         }
-        .padding(.bottom, 24)
+        .padding(.bottom, value: .large)
         .background(ColorHelper.backgroundPrimary)
     }
 }

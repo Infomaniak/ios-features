@@ -16,6 +16,8 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import DesignSystem
+import InfomaniakCoreSwiftUI
 import KSuiteUtils
 import SwiftUI
 
@@ -33,7 +35,7 @@ public struct KSuiteGetProView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 20)
-                        .padding(.vertical, 4)
+                        .padding(.vertical, value: .micro)
                         .padding(.horizontal, 5)
                         .background(
                             RoundedRectangle(cornerRadius: 2)
@@ -53,13 +55,13 @@ public struct KSuiteGetProView: View {
                 .frame(width: 16, height: 16)
                 .foregroundStyle(KSuiteUtilsResources.swan.swiftUIColor)
         }
-        .padding(16)
+        .padding(value: .medium)
         .background(
             ZStack {
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: IKRadius.large)
                     .foregroundStyle(KSuiteResources.menuBackgroundColor.swiftUIColor)
 
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: IKRadius.large)
                     .strokeBorder(
                         ColorHelper.gradient,
                         lineWidth: 1

@@ -16,6 +16,8 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import DesignSystem
+import InfomaniakCoreSwiftUI
 import KSuiteUtils
 import SwiftUI
 
@@ -34,7 +36,7 @@ public struct KSuiteProUpgradeChip: View {
                 .frame(width: 12)
                 .foregroundStyle(ColorHelper.gradient)
         }
-        .padding(.horizontal, 8)
+        .padding(.horizontal, value: .mini)
         .padding(.vertical, 6)
         .background(
             ZStack {
