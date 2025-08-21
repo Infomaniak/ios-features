@@ -24,7 +24,6 @@ public typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 public enum KSuiteResources {
-  public static let blueDarkColor = ColorAsset(name: "blueDarkColor")
   public static let menuBackgroundColor = ColorAsset(name: "menuBackgroundColor")
   public static let background = ImageAsset(name: "background")
   public static let chevronRight = ImageAsset(name: "chevron.right")

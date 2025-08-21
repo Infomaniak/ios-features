@@ -1,17 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "background.svg",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "background 1.svg",
+      "filename" : "ksuite-header.svg",
       "idiom" : "universal"
     }
   ],
