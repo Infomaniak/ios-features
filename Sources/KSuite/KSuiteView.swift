@@ -84,6 +84,14 @@ public struct KSuiteView: View {
     }
 }
 
-#Preview {
+#Preview("Standard") {
+    KSuiteView(configuration: .standard, isAdmin: false)
+}
+
+#Preview("Business") {
     KSuiteView(configuration: .business, isAdmin: false)
+}
+
+#Preview("Entreprise") {
+    KSuiteView(configuration: .enterprise, isAdmin: false)
 }
