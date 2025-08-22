@@ -19,11 +19,11 @@
 import Foundation
 import InfomaniakCore
 
-extension ConnectionConfirmationRequest {
-    static let preview = ConnectionConfirmationRequest(
+extension ConnectionAttempt {
+    static let preview = ConnectionAttempt(
         id: "aa",
         requestDate: Date(timeIntervalSinceNow: -2 * 60),
-        device: RequestDevice(model: "iPhone 17", platform: "iOS", type: .phone),
+        device: Device(model: "iPhone 17", platform: "iOS", type: .phone),
         locationName: "Switzerland"
     )
 }
