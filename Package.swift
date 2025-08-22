@@ -74,7 +74,16 @@ let package = Package(
                 .product(name: "NukeUI", package: "Nuke")
             ]
         ),
-        .target(name: "InAppTwoFactorAuthentication"),
+        .target(
+            name: "InAppTwoFactorAuthentication",
+            dependencies: [
+                .product(name: "InfomaniakCore", package: "ios-core"),
+                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
+                .product(name: "DesignSystem", package: "ios-core-ui"),
+                .product(name: "Nuke", package: "Nuke"),
+                .product(name: "NukeUI", package: "Nuke")
+            ]
+        ),
         .testTarget(name: "MyKSuiteTests", dependencies: ["MyKSuite"])
     ]
 )
