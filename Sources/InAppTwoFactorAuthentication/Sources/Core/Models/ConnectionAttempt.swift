@@ -24,15 +24,15 @@ enum DeviceType: String, Decodable {
     case tablet
 }
 
-struct RequestDevice: Decodable {
+struct Device: Decodable {
     let model: String?
     let platform: String
     let type: DeviceType
 }
 
-struct ConnectionConfirmationRequest: Decodable {
+struct ConnectionAttempt: Decodable {
     let id: String
     let requestDate: Date
-    let device: RequestDevice
+    let device: Device
     let locationName: String
 }

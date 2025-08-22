@@ -33,7 +33,7 @@ extension DeviceType {
     }
 }
 
-extension RequestDevice {
+extension Device {
     var description: String {
         guard let model else { return "\(platform)" }
 
@@ -45,7 +45,7 @@ struct ConnectionConfirmationView: View {
     @Environment(\.dismiss) private var dismiss
 
     let user: InfomaniakUser
-    let connectionConfirmationRequest: ConnectionConfirmationRequest
+    let connectionConfirmationRequest: ConnectionAttempt
 
     var body: some View {
         NavigationView {
