@@ -21,19 +21,32 @@ import InfomaniakCoreSwiftUI
 import KSuiteUtils
 import SwiftUI
 
+extension VerticalAlignment {
+    private struct ProBadge: AlignmentID {
+        static func defaultValue(in context: ViewDimensions) -> CGFloat {
+            return context[VerticalAlignment.center] + 1
+        }
+    }
+
+    static let proBadge = VerticalAlignment(ProBadge.self)
+}
+
 public struct KSuiteGetProView: View {
     public init() {}
 
     public var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                HStack {
+                HStack(alignment: .proBadge) {
                     Text(KSuiteLocalizable.kSuiteGetProTitle)
                         .font(FontHelper.bodyMedium)
 
                     Text(verbatim: "PRO")
                         .kerning(1)
                         .font(.system(size: 8, weight: .bold))
+                        .alignmentGuide(.proBadge) { d in
+                            d[VerticalAlignment.center]
+                        }
                         .padding(.vertical, 2)
                         .padding(.leading, 5)
                         .padding(.trailing, 4)
