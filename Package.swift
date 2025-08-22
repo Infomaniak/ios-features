@@ -25,6 +25,10 @@ let package = Package(
         .library(
             name: "KSuiteUtils",
             targets: ["KSuiteUtils"]
+        ),
+        .library(
+            name: "InAppTwoFactorAuthentication",
+            targets: ["InAppTwoFactorAuthentication"]
         )
     ],
     dependencies: [
@@ -70,6 +74,7 @@ let package = Package(
                 .product(name: "NukeUI", package: "Nuke")
             ]
         ),
+        .target(name: "InAppTwoFactorAuthentication"),
         .testTarget(name: "MyKSuiteTests", dependencies: ["MyKSuite"])
     ]
 )
