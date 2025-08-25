@@ -60,7 +60,7 @@ public enum KSuiteConfiguration {
     var labels: [KSuiteUtils.KSuiteLabel] {
         let byteFormatter = ByteCountFormatter()
         byteFormatter.allowedUnits = [.useGB, .useTB]
-        let byteCount = byteFormatter.string(fromByteCount: storage)
+        let byteCount = "**\(byteFormatter.string(fromByteCount: storage))**"
 
         switch self {
         case .standard:
@@ -71,15 +71,15 @@ public enum KSuiteConfiguration {
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.kchat.swiftUIImage,
-                    text: KSuiteLocalizable.kSuiteStandardKChatLabel
+                    text: bold(string: KSuiteLocalizable.kSuiteStandardKChatLabel)
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.envelope.swiftUIImage,
-                    text: KSuiteLocalizable.kSuiteStandardMailLabel
+                    text: bold(string: KSuiteLocalizable.kSuiteStandardMailLabel)
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.euria.swiftUIImage,
-                    text: KSuiteLocalizable.kSuiteStandardEuriaLabel
+                    text: bold(string: KSuiteLocalizable.kSuiteStandardEuriaLabel)
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.plusCircle.swiftUIImage,
@@ -94,15 +94,15 @@ public enum KSuiteConfiguration {
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.kchat.swiftUIImage,
-                    text: KSuiteLocalizable.kSuiteBusinessKChatLabel
+                    text: bold(string: KSuiteLocalizable.kSuiteBusinessKChatLabel)
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.folder.swiftUIImage,
-                    text: KSuiteLocalizable.kSuiteBusinessKDriveLabel
+                    text: bold(string: KSuiteLocalizable.kSuiteBusinessKDriveLabel)
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.shieldLock.swiftUIImage,
-                    text: KSuiteLocalizable.kSuiteBusinessSecurityLabel
+                    text: bold(string: KSuiteLocalizable.kSuiteBusinessSecurityLabel)
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.plusCircle.swiftUIImage,
@@ -117,15 +117,15 @@ public enum KSuiteConfiguration {
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.kchat.swiftUIImage,
-                    text: KSuiteLocalizable.kSuiteEnterpriseKChatLabel
+                    text: bold(string: KSuiteLocalizable.kSuiteEnterpriseKChatLabel)
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.stair.swiftUIImage,
-                    text: KSuiteLocalizable.kSuiteEnterpriseFunctionalityLabel
+                    text: bold(string: KSuiteLocalizable.kSuiteEnterpriseFunctionalityLabel)
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.microsoft.swiftUIImage,
-                    text: KSuiteLocalizable.kSuiteEnterpriseMicrosoftLabel
+                    text: bold(string: KSuiteLocalizable.kSuiteEnterpriseMicrosoftLabel)
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.plusCircle.swiftUIImage,
@@ -133,5 +133,18 @@ public enum KSuiteConfiguration {
                 )
             ]
         }
+    }
+
+    private func bold(string: String) -> String {
+        if let index = string.firstIndex(of: ":") {
+            let newIndex = string.index(index, offsetBy: 1)
+            let prefix = String(string.prefix(upTo: newIndex))
+            let suffix = String(string.suffix(from: newIndex))
+            return "**\(prefix)**\(suffix)"
+        }
+        if string.contains("Microsoft Office Online") {
+            return string.replacingOccurrences(of: "Microsoft Office Online", with: "**Microsoft Office Online**")
+        }
+        return string
     }
 }
