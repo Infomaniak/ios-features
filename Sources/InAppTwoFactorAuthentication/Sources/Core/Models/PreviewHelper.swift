@@ -18,6 +18,18 @@
 
 import Foundation
 import InfomaniakCore
+import InfomaniakDI
+
+struct PreviewTargetAssembly {
+    init() {
+        SimpleResolver.sharedResolver.store(factory: Factory(type: PlatformDetectable.self) { _, _ in
+            PlatformDetector()
+        })
+        SimpleResolver.sharedResolver.store(factory: Factory(type: InAppTwoFactorAuthenticationManagerable.self) { _, _ in
+            InAppTwoFactorAuthenticationManager()
+        })
+    }
+}
 
 extension ConnectionAttempt {
     static let preview = ConnectionAttempt(
@@ -41,4 +53,11 @@ struct PreviewUser: InfomaniakUser {
         avatar: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fphotos5.appleinsider.com%2Farchive%2F12.08.27-Federighi.png&f=1&nofb=1&ipt=2283edd37fadae2e14e2f083e6f98b91a42d828845c5babd601bd8082fd9a9f4"
     )
     static let previewNoAvatar = PreviewUser(id: 2, email: "tcook@apple.com", displayName: "Tim Cook", avatar: nil)
+}
+
+extension InAppTwoFactorAuthenticationSession {
+    static let preview = InAppTwoFactorAuthenticationSession(
+        user: PreviewUser.preview,
+        apiFetcher: MockInAppTwoFactorAuthenticationFetcher()
+    )
 }
