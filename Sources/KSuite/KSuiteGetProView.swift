@@ -36,8 +36,8 @@ public struct KSuiteGetProView: View {
 
     public var body: some View {
         HStack {
-            VStack(alignment: .leading) {
-                HStack(alignment: .proBadge) {
+            VStack(alignment: .leading, spacing: IKPadding.micro) {
+                HStack(alignment: .proBadge, spacing: IKPadding.micro) {
                     Text(KSuiteLocalizable.kSuiteGetProTitle)
                         .font(FontHelper.bodyMedium)
 
