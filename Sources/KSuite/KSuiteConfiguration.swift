@@ -16,6 +16,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import Foundation
 import KSuiteUtils
 
 public enum KSuiteConfiguration {
@@ -45,13 +46,28 @@ public enum KSuiteConfiguration {
         }
     }
 
-    var labels: [KSuiteUtils.KSuiteLabel] {
+    private var storage: Int64 {
         switch self {
         case .standard:
-            [
+            50_000_000_000
+        case .business:
+            3_000_000_000_000
+        case .enterprise:
+            6_000_000_000_000
+        }
+    }
+
+    var labels: [KSuiteUtils.KSuiteLabel] {
+        let byteFormatter = ByteCountFormatter()
+        byteFormatter.allowedUnits = [.useGB, .useTB]
+        let byteCount = byteFormatter.string(fromByteCount: storage)
+
+        switch self {
+        case .standard:
+            return [
                 KSuiteLabel(
                     icon: KSuiteResources.drive.swiftUIImage,
-                    text: KSuiteLocalizable.kSuiteStorageLabel("50 Go")
+                    text: KSuiteLocalizable.kSuiteStorageLabel(byteCount)
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.kchat.swiftUIImage,
@@ -71,10 +87,10 @@ public enum KSuiteConfiguration {
                 )
             ]
         case .business:
-            [
+            return [
                 KSuiteLabel(
                     icon: KSuiteResources.drive.swiftUIImage,
-                    text: KSuiteLocalizable.kSuiteStorageLabel("3 To")
+                    text: KSuiteLocalizable.kSuiteStorageLabel(byteCount)
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.kchat.swiftUIImage,
@@ -94,10 +110,10 @@ public enum KSuiteConfiguration {
                 )
             ]
         case .enterprise:
-            [
+            return [
                 KSuiteLabel(
                     icon: KSuiteResources.drive.swiftUIImage,
-                    text: KSuiteLocalizable.kSuiteStorageLabel("6 To")
+                    text: KSuiteLocalizable.kSuiteStorageLabel(byteCount)
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.kchat.swiftUIImage,
