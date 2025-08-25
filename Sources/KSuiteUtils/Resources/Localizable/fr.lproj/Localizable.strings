@@ -1,0 +1,11 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: fr, French
+ * Tagged: ios, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !kSuite, !my kSuite, !privacy
+ * Exported by: Ambroise Decouttere
+ * Exported at: Tue, 19 Aug 2025 09:11:18 +0200
+ */
+
+/* loco:679237f6daa3807fa008b175 */
+"buttonClose" = "Fermer";

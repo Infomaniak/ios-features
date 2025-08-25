@@ -25,6 +25,8 @@ public enum ColorHelper {
         dark: KSuiteUtilsResources.orca.swiftUIColor
     )
 
+    public static let chipBackground = Color(light: .white, dark: KSuiteUtilsResources.orca.swiftUIColor)
+
     public static let primary = Color(
         light: KSuiteUtilsResources.orca.swiftUIColor,
         dark: KSuiteUtilsResources.rabbit.swiftUIColor

@@ -22,14 +22,14 @@ strings:
     - templateName: structured-swift5
       output: Strings+Generated.swift
       params:
-        enumName: KSuiteUtilsLocalizable
+        enumName: KSuiteLocalizable
         publicAccess: true
 xcassets:
   inputs:
-    - Resources/Colors.xcassets
+    - Resources/Assets.xcassets
   outputs:
     - templateName: swift5
       output: Resources+Generated.swift
       params:
-        enumName: KSuiteUtilsResources
+        enumName: KSuiteResources
         publicAccess: true

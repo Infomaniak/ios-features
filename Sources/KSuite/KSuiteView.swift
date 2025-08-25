@@ -21,30 +21,33 @@ import InfomaniakCoreSwiftUI
 import KSuiteUtils
 import SwiftUI
 
-public struct MyKSuiteView: View {
+public struct KSuiteView: View {
     @Environment(\.dismiss) private var dismiss
 
-    private let configuration: MyKSuiteConfiguration
+    private let configuration: KSuiteConfiguration
+    private let isAdmin: Bool
 
-    public init(configuration: MyKSuiteConfiguration) {
+    public init(configuration: KSuiteConfiguration, isAdmin: Bool) {
         self.configuration = configuration
+        self.isAdmin = isAdmin
     }
 
     public var body: some View {
         VStack(spacing: IKPadding.huge) {
-            MyKSuiteResources.gradient.swiftUIImage
+            KSuiteResources.background.swiftUIImage
                 .resizable()
                 .scaledToFit()
                 .ignoresSafeArea()
 
             VStack(alignment: .leading, spacing: IKPadding.huge) {
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
-                    Text(MyKSuiteLocalizable.myKSuiteUpgradeTitle)
+                    Text(configuration.title)
+                        .multilineTextAlignment(.center)
                         .font(FontHelper.title)
                         .foregroundStyle(ColorHelper.primary)
                         .frame(maxWidth: .infinity, alignment: .center)
 
-                    Text(MyKSuiteLocalizable.myKSuiteUpgradeDescription)
+                    Text(configuration.description)
                 }
 
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
@@ -58,15 +61,17 @@ public struct MyKSuiteView: View {
                     }
                 }
 
-                Text(MyKSuiteLocalizable.myKSuiteUpgradeDetails)
+                Text(isAdmin ? KSuiteLocalizable.kSuiteUpgradeDetails : KSuiteLocalizable.kSuiteUpgradeDetailsContactAdmin)
 
                 Button {
                     dismiss()
                 } label: {
                     Text(KSuiteUtilsLocalizable.buttonClose)
+                        .foregroundStyle(ColorHelper.primary)
                 }
                 .ikButtonFullWidth(true)
                 .controlSize(.large)
+                .tint(ColorHelper.reversedPrimary)
                 .buttonStyle(.ikBorderedProminent)
                 .frame(maxWidth: .infinity, alignment: .center)
             }
@@ -74,13 +79,19 @@ public struct MyKSuiteView: View {
             .font(FontHelper.body)
             .foregroundStyle(ColorHelper.secondary)
         }
+        .padding(.bottom, value: .large)
+        .background(ColorHelper.backgroundPrimary)
     }
 }
 
-#Preview("kDrive") {
-    MyKSuiteView(configuration: .kDrive)
+#Preview("Standard") {
+    KSuiteView(configuration: .standard, isAdmin: false)
 }
 
-#Preview("Mail") {
-    MyKSuiteView(configuration: .mail)
+#Preview("Business") {
+    KSuiteView(configuration: .business, isAdmin: false)
+}
+
+#Preview("Entreprise") {
+    KSuiteView(configuration: .enterprise, isAdmin: false)
 }

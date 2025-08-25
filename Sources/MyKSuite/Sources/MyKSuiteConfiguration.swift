@@ -16,57 +16,45 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import KSuiteUtils
 import SwiftUI
 
 public enum MyKSuiteConfiguration {
     case mail
     case kDrive
 
-    var labels: [MyKSuiteLabel] {
+    var labels: [KSuiteUtils.KSuiteLabel] {
         switch self {
         case .mail:
             [
-                MyKSuiteLabel(
+                KSuiteLabel(
                     icon: MyKSuiteResources.plane.swiftUIImage,
                     text: MyKSuiteLocalizable.myKSuiteUpgradeUnlimitedMailLabel
                 ),
-                MyKSuiteLabel(
+                KSuiteLabel(
                     icon: MyKSuiteResources.envelope.swiftUIImage,
                     text: MyKSuiteLocalizable.myKSuiteUpgradeRedirectLabel
                 ),
-                MyKSuiteLabel(
+                KSuiteLabel(
                     icon: MyKSuiteResources.gift.swiftUIImage,
                     text: MyKSuiteLocalizable.myKSuiteUpgradeLabel
                 )
             ]
         case .kDrive:
             [
-                MyKSuiteLabel(
+                KSuiteLabel(
                     icon: MyKSuiteResources.drive.swiftUIImage,
                     text: MyKSuiteLocalizable.myKSuiteUpgradeDriveLabel
                 ),
-                MyKSuiteLabel(
+                KSuiteLabel(
                     icon: MyKSuiteResources.folderArrowUp.swiftUIImage,
                     text: MyKSuiteLocalizable.myKSuiteUpgradePdfEditionLabel
                 ),
-                MyKSuiteLabel(
+                KSuiteLabel(
                     icon: MyKSuiteResources.gift.swiftUIImage,
                     text: MyKSuiteLocalizable.myKSuiteUpgradeLabel
                 )
             ]
         }
-    }
-}
-
-struct MyKSuiteLabel: Identifiable {
-    let id: String
-
-    let icon: Image
-    let text: String
-
-    init(icon: Image, text: String) {
-        self.icon = icon
-        self.text = text
-        id = text
     }
 }
