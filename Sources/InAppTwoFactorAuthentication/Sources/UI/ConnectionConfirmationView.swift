@@ -44,7 +44,9 @@ extension Device {
 struct ConnectionConfirmationView: View {
     @Environment(\.dismiss) private var dismiss
 
-    let user: InfomaniakUser
+    @State private var isLoading = false
+
+    let session: InAppTwoFactorAuthenticationSession
     let connectionConfirmationRequest: ConnectionAttempt
 
     var body: some View {
@@ -63,7 +65,7 @@ struct ConnectionConfirmationView: View {
                 }
 
                 VStack(alignment: .leading) {
-                    UserRowView(user: user)
+                    UserRowView(user: session.user)
                     Divider()
 
                     VStack {
@@ -86,15 +88,21 @@ struct ConnectionConfirmationView: View {
                                     .foregroundColor(.secondary)
 
                                 HStack {
-                                    Button("!Deny") {}
-                                        .buttonStyle(.ikBorderedProminent)
-                                        .ikButtonFullWidth(true)
-                                        .controlSize(.large)
+                                    Button("!Deny") {
+                                        validateConnectionAttempt(approved: false)
+                                    }
+                                    .buttonStyle(.ikBorderedProminent)
+                                    .ikButtonFullWidth(true)
+                                    .ikButtonLoading(isLoading)
+                                    .controlSize(.large)
 
-                                    Button("!Approve") {}
-                                        .buttonStyle(.ikBorderedProminent)
-                                        .ikButtonFullWidth(true)
-                                        .controlSize(.large)
+                                    Button("!Approve") {
+                                        validateConnectionAttempt(approved: true)
+                                    }
+                                    .buttonStyle(.ikBorderedProminent)
+                                    .ikButtonFullWidth(true)
+                                    .ikButtonLoading(isLoading)
+                                    .controlSize(.large)
                                 }
                             }
                             .frame(maxHeight: .infinity, alignment: .bottom)
@@ -117,8 +125,28 @@ struct ConnectionConfirmationView: View {
         }
         .navigationViewStyle(.stack)
     }
+
+    func validateConnectionAttempt(approved: Bool) {
+        isLoading = true
+        Task {
+            do {
+                _ = try await session.apiFetcher.validateConnectionAttempt(
+                    id: connectionConfirmationRequest.id,
+                    approved: approved
+                )
+                dismiss()
+            } catch {
+                // TODO: Error screens do not exist
+            }
+            isLoading = false
+        }
+    }
 }
 
 #Preview {
-    ConnectionConfirmationView(user: PreviewUser.preview, connectionConfirmationRequest: .preview)
+    ConnectionConfirmationView(
+        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
+                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
+        connectionConfirmationRequest: .preview
+    )
 }
