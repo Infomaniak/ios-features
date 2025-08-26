@@ -53,7 +53,11 @@ public struct KSuiteView: View {
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
                     ForEach(configuration.labels) { label in
                         Label {
-                            Text(label.text)
+                            if let attributedString = try? AttributedString(markdown: label.text) {
+                                Text(attributedString)
+                            } else {
+                                Text(label.text)
+                            }
                         } icon: {
                             label.icon
                                 .iconSize(.large)
