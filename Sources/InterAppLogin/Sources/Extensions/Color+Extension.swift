@@ -21,18 +21,18 @@ import SwiftUI
 extension Color {
     enum Custom {
         /// light: greyOrca / dark: greyRabbit
-        public static let textPrimary = Color(
+        static let textPrimary = Color(
             light: UIColor.greyOrca,
             dark: UIColor.greyRabbit
         )
         /// light: greyElephant / dark: greyShark
-        public static let textSecondary = Color(
+        static let textSecondary = Color(
             light: UIColor.greyElephant,
             dark: UIColor.greyShark
         )
 
         /// light: greyMouse / dark: greyOrca
-        public static let divider = Color(
+        static let divider = Color(
             light: UIColor.greyMouse,
             dark: UIColor.greyOrca
         )
