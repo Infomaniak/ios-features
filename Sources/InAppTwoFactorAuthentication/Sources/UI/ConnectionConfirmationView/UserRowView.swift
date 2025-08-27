@@ -50,8 +50,11 @@ struct UserRowView: View {
 
             VStack(alignment: .leading) {
                 Text(user.displayName)
+                    .font(.Custom.headline)
+                    .foregroundStyle(Color.Custom.textPrimary)
                 Text(user.email)
-                    .foregroundColor(.secondary)
+                    .font(.Custom.body)
+                    .foregroundStyle(Color.Custom.textSecondary)
             }
         }
     }
