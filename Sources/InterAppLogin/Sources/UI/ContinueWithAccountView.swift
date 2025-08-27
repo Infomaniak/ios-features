@@ -54,7 +54,7 @@ private struct OneAccountView: View {
 struct ManyAccountView: View {
     let selectedAccounts: [ConnectedAccount]
 
-    public init(selectedAccounts: [ConnectedAccount]) {
+    init(selectedAccounts: [ConnectedAccount]) {
         self.selectedAccounts = selectedAccounts
     }
 
