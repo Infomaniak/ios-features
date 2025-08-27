@@ -106,11 +106,14 @@ Some common UI errors with correction:
 
 Do: `VStack(alignment: .leading, spacing: IKPadding.micro)`
 Don't do: `VStack(alignment: .leading)`
+Comment: Multiple IKPadding exist, the dev has to choose the closest one to the design spec (micro, ..., giant - refer to IKPadding for full list).
 
 Do: `.padding(value: .medium)`
 Don't do: `.padding(16)`
+Comment: Multiple IKPadding exist, the dev has to choose the closest one to the design spec (micro, ..., giant - refer to IKPadding for full list).
 
 Do: `RoundedRectangle(cornerRadius: IKRadius.large)`
 Don't do: `RoundedRectangle(cornerRadius: 12)`
+Comment: Multiple IKRadius exist, the dev has to choose the closest one to the design spec (small, medium, large).
 
 This onboarding document is your definitive guide for this repository. Only deviate if you discover a build or validation error not covered above.
