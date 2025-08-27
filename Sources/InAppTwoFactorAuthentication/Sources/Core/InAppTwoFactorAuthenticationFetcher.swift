@@ -47,10 +47,6 @@ struct MockInAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetc
 struct InAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchable {
     let apiFetcher: ApiFetcher
 
-    init(apiFetcher: ApiFetcher) {
-        self.apiFetcher = apiFetcher
-    }
-
     func latestConnectionAttempt() async throws -> ConnectionAttempt {
         let request = apiFetcher.authenticatedRequest(.latestConnectionAttempt)
         return try await apiFetcher.perform(request: request)
