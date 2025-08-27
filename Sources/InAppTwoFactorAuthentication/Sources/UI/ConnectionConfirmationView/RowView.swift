@@ -16,6 +16,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import DesignSystem
 import SwiftUI
 
 struct RowView<Content: View>: View {
@@ -23,12 +24,15 @@ struct RowView<Content: View>: View {
     @ViewBuilder let description: Content
 
     var body: some View {
-        HStack {
+        VStack(alignment: .leading, spacing: IKPadding.micro) {
             Text(title)
-                .foregroundStyle(.secondary)
+                .font(.Custom.callout)
+                .foregroundStyle(Color.Custom.textSecondary)
             description
-                .frame(maxWidth: .infinity, alignment: .trailing)
+                .font(.Custom.headline)
+                .foregroundStyle(Color.Custom.textPrimary)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
