@@ -74,6 +74,7 @@ public struct MyKSuiteView: View {
             .font(FontHelper.body)
             .foregroundStyle(ColorHelper.secondary)
         }
+        .padding(.bottom, value: .large)
     }
 }
 
