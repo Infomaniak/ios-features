@@ -84,6 +84,7 @@ public struct KSuiteView: View {
         }
         .padding(.bottom, value: .large)
         .background(ColorHelper.backgroundPrimary)
+        .fixedSize(horizontal: false, vertical: true)
     }
 }
 
