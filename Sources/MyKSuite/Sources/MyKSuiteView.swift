@@ -68,13 +68,13 @@ public struct MyKSuiteView: View {
                 .ikButtonFullWidth(true)
                 .controlSize(.large)
                 .buttonStyle(.ikBorderedProminent)
-                .frame(maxWidth: .infinity, alignment: .center)
             }
             .padding(.horizontal, value: .large)
             .font(FontHelper.body)
             .foregroundStyle(ColorHelper.secondary)
+            .padding(.bottom, value: .large)
         }
-        .padding(.bottom, value: .large)
+        .background(ColorHelper.backgroundPrimary)
     }
 }
 
