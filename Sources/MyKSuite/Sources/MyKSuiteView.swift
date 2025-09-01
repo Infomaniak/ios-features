@@ -40,6 +40,7 @@ public struct MyKSuiteView: View {
             VStack(alignment: .leading, spacing: IKPadding.huge) {
                 VStack(alignment: .leading, spacing: IKPadding.medium) {
                     Text(MyKSuiteLocalizable.myKSuiteUpgradeTitle)
+                        .multilineTextAlignment(.center)
                         .font(FontHelper.title)
                         .foregroundStyle(ColorHelper.primary)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -68,13 +69,14 @@ public struct MyKSuiteView: View {
                 .ikButtonFullWidth(true)
                 .controlSize(.large)
                 .buttonStyle(.ikBorderedProminent)
-                .frame(maxWidth: .infinity, alignment: .center)
             }
             .padding(.horizontal, value: .large)
             .font(FontHelper.body)
             .foregroundStyle(ColorHelper.secondary)
+            .padding(.bottom, value: .large)
         }
         .padding(.bottom, value: .large)
+        .background(ColorHelper.backgroundPrimary)
     }
 }
 

@@ -77,7 +77,6 @@ public struct KSuiteView: View {
                 .controlSize(.large)
                 .tint(ColorHelper.reversedPrimary)
                 .buttonStyle(.ikBorderedProminent)
-                .frame(maxWidth: .infinity, alignment: .center)
             }
             .padding(.horizontal, value: .large)
             .font(FontHelper.body)
