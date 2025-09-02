@@ -17,7 +17,6 @@
  */
 
 import DesignSystem
-import InfomaniakCore
 import InfomaniakCoreSwiftUI
 import SwiftUI
 
@@ -58,8 +57,6 @@ extension IKButtonTheme {
 struct ConnectionConfirmationView: View {
     @Environment(\.dismiss) private var dismiss
 
-    @State private var isLoading = false
-
     let session: InAppTwoFactorAuthenticationSession
     let connectionConfirmationRequest: ConnectionAttempt
 
@@ -84,74 +81,8 @@ struct ConnectionConfirmationView: View {
                             .multilineTextAlignment(.center)
                     }
 
-                    ZStack {
-                        Image(.backgroundLightSource)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxHeight: .infinity, alignment: .top)
-                            .offset(y: -332 / 2 + 32)
-
-                        VStack(alignment: .leading, spacing: IKPadding.medium) {
-                            UserRowView(user: session.user)
-                            Divider()
-
-                            VStack {
-                                VStack(spacing: IKPadding.medium) {
-                                    RowView(title: "!When") {
-                                        Text(connectionConfirmationRequest.requestDate, style: .relative)
-                                    }
-
-                                    RowView(title: "!Device") {
-                                        HStack {
-                                            Text(connectionConfirmationRequest.device.description)
-                                            connectionConfirmationRequest.device.type.icon
-                                        }
-                                    }
-
-                                    RowView(title: "!Location", description: connectionConfirmationRequest.locationName)
-
-                                    VStack(spacing: IKPadding.medium) {
-                                        Text(
-                                            "!Confirming this connection will allow this device to access your Infomaniak account."
-                                        )
-                                        .multilineTextAlignment(.center)
-                                        .font(.Custom.callout)
-                                        .foregroundStyle(Color.Custom.textSecondary)
-
-                                        HStack(spacing: IKPadding.medium) {
-                                            Button("!Deny") {
-                                                validateConnectionAttempt(approved: false)
-                                            }
-                                            .buttonStyle(.ikBordered)
-                                            .ikButtonFullWidth(true)
-                                            .ikButtonLoading(isLoading)
-                                            .controlSize(.large)
-
-                                            Button("!Approve") {
-                                                validateConnectionAttempt(approved: true)
-                                            }
-                                            .buttonStyle(.ikBorderedProminent)
-                                            .ikButtonFullWidth(true)
-                                            .ikButtonLoading(isLoading)
-                                            .controlSize(.large)
-                                        }
-                                    }
-                                    .frame(maxHeight: .infinity, alignment: .bottom)
-                                }
-                            }
-                        }
-                        .padding(IKPadding.large)
-                        .background {
-                            RoundedRectangle(cornerRadius: IKRadius.large)
-                                .strokeBorder(Color.Custom.cardOutline, lineWidth: 1)
-                                .background(
-                                    RoundedRectangle(cornerRadius: IKRadius.large)
-                                        .fill(Color.backgroundSecondary)
-                                )
-                        }
-                        .padding(IKPadding.medium)
-                    }
-                    .frame(maxWidth: 600)
+                    MainContentView(session: session, connectionConfirmationRequest: connectionConfirmationRequest)
+                        .frame(maxWidth: 600)
                 }
             }
             .frame(maxWidth: .infinity)
@@ -164,22 +95,6 @@ struct ConnectionConfirmationView: View {
         }
         .navigationViewStyle(.stack)
         .ikButtonTheme(.feature)
-    }
-
-    func validateConnectionAttempt(approved: Bool) {
-        isLoading = true
-        Task {
-            do {
-                _ = try await session.apiFetcher.validateConnectionAttempt(
-                    id: connectionConfirmationRequest.id,
-                    approved: approved
-                )
-                dismiss()
-            } catch {
-                // TODO: Error screens do not exist
-            }
-            isLoading = false
-        }
     }
 }
 
