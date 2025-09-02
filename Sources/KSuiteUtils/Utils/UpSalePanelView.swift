@@ -87,8 +87,10 @@ public struct UpSalePanelView: View {
                 .controlSize(.large)
                 .tint(ColorHelper.reversedPrimary)
                 .buttonStyle(.ikBorderedProminent)
+                .frame(maxWidth: .infinity, alignment: .center)
             }
             .padding(.horizontal, value: .large)
+            .frame(maxWidth: 600)
             .font(FontHelper.body)
             .foregroundStyle(ColorHelper.secondary)
             .layoutPriority(1)
