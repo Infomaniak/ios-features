@@ -91,6 +91,7 @@ public struct UpSalePanelView: View {
             .padding(.horizontal, value: .large)
             .font(FontHelper.body)
             .foregroundStyle(ColorHelper.secondary)
+            .layoutPriority(1)
         }
         .padding(.bottom, value: .large)
         .background(ColorHelper.backgroundPrimary)
