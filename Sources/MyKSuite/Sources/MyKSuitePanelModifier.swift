@@ -26,7 +26,9 @@ struct MyKSuitePanelModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .floatingPanel(isPresented: $isPresented, backgroundColor: backgroundColor) {
+            .floatingPanel(isPresented: $isPresented,
+                           closeButtonHidden: true,
+                           backgroundColor: backgroundColor) {
                 MyKSuiteView(configuration: configuration)
             }
     }
