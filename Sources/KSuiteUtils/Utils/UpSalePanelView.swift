@@ -57,7 +57,7 @@ public struct UpSalePanelView: View {
                         .multilineTextAlignment(.center)
                         .font(FontHelper.title)
                         .foregroundStyle(ColorHelper.primary)
-                        .frame(maxWidth: .infinity, alignment: .center)
+                        .frame(maxWidth: .infinity)
 
                     Text(description)
                 }
@@ -87,7 +87,7 @@ public struct UpSalePanelView: View {
                 .controlSize(.large)
                 .tint(ColorHelper.reversedPrimary)
                 .buttonStyle(.ikBorderedProminent)
-                .frame(maxWidth: .infinity, alignment: .center)
+                .frame(maxWidth: .infinity)
             }
             .padding(.horizontal, value: .large)
             .frame(maxWidth: 600)
