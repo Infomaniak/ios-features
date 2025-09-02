@@ -54,11 +54,45 @@ extension IKButtonTheme {
     )
 }
 
+enum ConnectionConfirmationContent {
+    case main
+    case error
+    case connectionRefused
+
+    var title: String {
+        switch self {
+        case .main:
+            "!Are you sure you trying to sign in?"
+        case .error:
+            "!An error occurred"
+        case .connectionRefused:
+            "!Connection refused"
+        }
+    }
+}
+
 struct ConnectionConfirmationView: View {
     @Environment(\.dismiss) private var dismiss
 
+    @State private var currentContent: ConnectionConfirmationContent = .main
+
     let session: InAppTwoFactorAuthenticationSession
     let connectionConfirmationRequest: ConnectionAttempt
+
+    init(session: InAppTwoFactorAuthenticationSession, connectionConfirmationRequest: ConnectionAttempt) {
+        self.connectionConfirmationRequest = connectionConfirmationRequest
+        self.session = session
+    }
+
+    init(
+        session: InAppTwoFactorAuthenticationSession,
+        connectionConfirmationRequest: ConnectionAttempt,
+        currentContent: ConnectionConfirmationContent
+    ) {
+        self.currentContent = currentContent
+        self.session = session
+        self.connectionConfirmationRequest = connectionConfirmationRequest
+    }
 
     var body: some View {
         NavigationView {
@@ -75,14 +109,26 @@ struct ConnectionConfirmationView: View {
                                 .frame(height: IKIconSize.large.rawValue)
                         }
 
-                        Text("!Are you trying to sign in?")
+                        Text(currentContent.title)
                             .font(.Custom.title2)
                             .foregroundStyle(Color.Custom.textPrimary)
                             .multilineTextAlignment(.center)
                     }
 
-                    MainContentView(session: session, connectionConfirmationRequest: connectionConfirmationRequest)
-                        .frame(maxWidth: 600)
+                    Group {
+                        switch currentContent {
+                        case .main:
+                            MainContentView(session: session, connectionConfirmationRequest: connectionConfirmationRequest)
+                        case .error:
+                            InformationContentView(text: "!We couldn't process your request. Please try again later.")
+                        case .connectionRefused:
+                            InformationContentView(
+                                text: "!Connection refused.",
+                                additionalAction: .init(title: "!Modify password") {}
+                            )
+                        }
+                    }
+                    .frame(maxWidth: 600)
                 }
             }
             .frame(maxWidth: .infinity)
@@ -98,10 +144,28 @@ struct ConnectionConfirmationView: View {
     }
 }
 
-#Preview {
+#Preview("Main") {
     ConnectionConfirmationView(
         session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
                                                      apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
         connectionConfirmationRequest: .preview
+    )
+}
+
+#Preview("Error") {
+    ConnectionConfirmationView(
+        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
+                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
+        connectionConfirmationRequest: .preview,
+        currentContent: .error
+    )
+}
+
+#Preview("Connection refused") {
+    ConnectionConfirmationView(
+        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
+                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
+        connectionConfirmationRequest: .preview,
+        currentContent: .connectionRefused
     )
 }
