@@ -65,90 +65,96 @@ struct ConnectionConfirmationView: View {
 
     var body: some View {
         NavigationView {
-            VStack(spacing: IKPadding.giant) {
-                VStack(spacing: IKPadding.medium) {
-                    ZStack {
-                        Circle()
-                            .fill(Color.featurePrimary)
-                            .frame(width: 48, height: 48)
-                        Image(.shield)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: IKIconSize.large.rawValue)
+            FittingView { spaceConstrained in
+                VStack(spacing: spaceConstrained ? IKPadding.small : IKPadding.giant) {
+                    VStack(spacing: IKPadding.medium) {
+                        ZStack {
+                            Circle()
+                                .fill(Color.featurePrimary)
+                                .frame(width: 48, height: 48)
+                            Image(.shield)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: IKIconSize.large.rawValue)
+                        }
+
+                        Text("!Are you trying to sign in?")
+                            .font(.Custom.title2)
+                            .foregroundStyle(Color.Custom.textPrimary)
+                            .multilineTextAlignment(.center)
                     }
 
-                    Text("!Are you trying to sign in?")
-                        .font(.Custom.title2)
-                        .foregroundStyle(Color.Custom.textPrimary)
-                        .multilineTextAlignment(.center)
-                }
+                    ZStack {
+                        Image(.backgroundLightSource)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxHeight: .infinity, alignment: .top)
+                            .offset(y: -332 / 2 + 32)
 
-                ZStack {
-                    Image(.backgroundLightSource)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxHeight: .infinity, alignment: .top)
-                        .offset(y: -332 / 2 + 32)
+                        VStack(alignment: .leading, spacing: IKPadding.medium) {
+                            UserRowView(user: session.user)
+                            Divider()
 
-                    VStack(alignment: .leading, spacing: IKPadding.medium) {
-                        UserRowView(user: session.user)
-                        Divider()
-
-                        VStack {
-                            VStack(spacing: IKPadding.medium) {
-                                RowView(title: "!When") {
-                                    Text(connectionConfirmationRequest.requestDate, style: .relative)
-                                }
-
-                                RowView(title: "!Device") {
-                                    HStack {
-                                        Text(connectionConfirmationRequest.device.description)
-                                        connectionConfirmationRequest.device.type.icon
-                                    }
-                                }
-
-                                RowView(title: "!Location", description: connectionConfirmationRequest.locationName)
-
+                            VStack {
                                 VStack(spacing: IKPadding.medium) {
-                                    Text("!Confirming this connection will allow this device to access your Infomaniak account.")
+                                    RowView(title: "!When") {
+                                        Text(connectionConfirmationRequest.requestDate, style: .relative)
+                                    }
+
+                                    RowView(title: "!Device") {
+                                        HStack {
+                                            Text(connectionConfirmationRequest.device.description)
+                                            connectionConfirmationRequest.device.type.icon
+                                        }
+                                    }
+
+                                    RowView(title: "!Location", description: connectionConfirmationRequest.locationName)
+
+                                    VStack(spacing: IKPadding.medium) {
+                                        Text(
+                                            "!Confirming this connection will allow this device to access your Infomaniak account."
+                                        )
                                         .multilineTextAlignment(.center)
                                         .font(.Custom.callout)
                                         .foregroundStyle(Color.Custom.textSecondary)
 
-                                    HStack(spacing: IKPadding.medium) {
-                                        Button("!Deny") {
-                                            validateConnectionAttempt(approved: false)
-                                        }
-                                        .buttonStyle(.ikBordered)
-                                        .ikButtonFullWidth(true)
-                                        .ikButtonLoading(isLoading)
-                                        .controlSize(.large)
+                                        HStack(spacing: IKPadding.medium) {
+                                            Button("!Deny") {
+                                                validateConnectionAttempt(approved: false)
+                                            }
+                                            .buttonStyle(.ikBordered)
+                                            .ikButtonFullWidth(true)
+                                            .ikButtonLoading(isLoading)
+                                            .controlSize(.large)
 
-                                        Button("!Approve") {
-                                            validateConnectionAttempt(approved: true)
+                                            Button("!Approve") {
+                                                validateConnectionAttempt(approved: true)
+                                            }
+                                            .buttonStyle(.ikBorderedProminent)
+                                            .ikButtonFullWidth(true)
+                                            .ikButtonLoading(isLoading)
+                                            .controlSize(.large)
                                         }
-                                        .buttonStyle(.ikBorderedProminent)
-                                        .ikButtonFullWidth(true)
-                                        .ikButtonLoading(isLoading)
-                                        .controlSize(.large)
                                     }
+                                    .frame(maxHeight: .infinity, alignment: .bottom)
                                 }
-                                .frame(maxHeight: .infinity, alignment: .bottom)
                             }
                         }
+                        .padding(IKPadding.large)
+                        .background {
+                            RoundedRectangle(cornerRadius: IKRadius.large)
+                                .strokeBorder(Color.Custom.cardOutline, lineWidth: 1)
+                                .background(
+                                    RoundedRectangle(cornerRadius: IKRadius.large)
+                                        .fill(Color.backgroundSecondary)
+                                )
+                        }
+                        .padding(IKPadding.medium)
                     }
-                    .padding(IKPadding.large)
-                    .background {
-                        RoundedRectangle(cornerRadius: IKRadius.large)
-                            .strokeBorder(Color.Custom.cardOutline, lineWidth: 1)
-                            .background(
-                                RoundedRectangle(cornerRadius: IKRadius.large)
-                                    .fill(Color.backgroundSecondary)
-                            )
-                    }
-                    .padding(IKPadding.medium)
+                    .frame(maxWidth: 600)
                 }
             }
+            .frame(maxWidth: .infinity)
             .background(Color.backgroundPrimary)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
