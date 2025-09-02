@@ -52,7 +52,13 @@ let package = Package(
                 .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui")
             ]
         ),
-        .target(name: "KSuiteUtils"),
+        .target(
+            name: "KSuiteUtils",
+            dependencies: [
+                .product(name: "DesignSystem", package: "ios-core-ui"),
+                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui")
+            ]
+        ),
         .target(
             name: "InterAppLogin",
             dependencies: [

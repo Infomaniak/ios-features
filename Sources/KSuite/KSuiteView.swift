@@ -33,57 +33,14 @@ public struct KSuiteView: View {
     }
 
     public var body: some View {
-        VStack(spacing: IKPadding.huge) {
-            KSuiteResources.background.swiftUIImage
-                .resizable()
-                .scaledToFit()
-                .ignoresSafeArea()
-
-            VStack(alignment: .leading, spacing: IKPadding.huge) {
-                VStack(alignment: .leading, spacing: IKPadding.medium) {
-                    Text(configuration.title)
-                        .multilineTextAlignment(.center)
-                        .font(FontHelper.title)
-                        .foregroundStyle(ColorHelper.primary)
-                        .frame(maxWidth: .infinity, alignment: .center)
-
-                    Text(configuration.description)
-                }
-
-                VStack(alignment: .leading, spacing: IKPadding.medium) {
-                    ForEach(configuration.labels) { label in
-                        Label {
-                            if let attributedString = try? AttributedString(markdown: label.text) {
-                                Text(attributedString)
-                            } else {
-                                Text(label.text)
-                            }
-                        } icon: {
-                            label.icon
-                                .iconSize(.large)
-                        }
-                    }
-                }
-
-                Text(isAdmin ? KSuiteLocalizable.kSuiteUpgradeDetails : KSuiteLocalizable.kSuiteUpgradeDetailsContactAdmin)
-
-                Button {
-                    dismiss()
-                } label: {
-                    Text(KSuiteUtilsLocalizable.buttonClose)
-                        .foregroundStyle(ColorHelper.primary)
-                }
-                .ikButtonFullWidth(true)
-                .controlSize(.large)
-                .tint(ColorHelper.reversedPrimary)
-                .buttonStyle(.ikBorderedProminent)
-            }
-            .padding(.horizontal, value: .large)
-            .font(FontHelper.body)
-            .foregroundStyle(ColorHelper.secondary)
-        }
-        .padding(.bottom, value: .large)
-        .background(ColorHelper.backgroundPrimary)
+        UpSalePanelView(
+            headerImage: KSuiteResources.background.swiftUIImage,
+            title: configuration.title,
+            description: configuration.description,
+            labels: configuration.labels,
+            additionalText: isAdmin ?
+                KSuiteLocalizable.kSuiteUpgradeDetails : KSuiteLocalizable.kSuiteUpgradeDetailsContactAdmin
+        )
     }
 }
 
