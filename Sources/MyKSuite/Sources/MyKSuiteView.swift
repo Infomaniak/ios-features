@@ -31,52 +31,13 @@ public struct MyKSuiteView: View {
     }
 
     public var body: some View {
-        VStack(spacing: IKPadding.huge) {
-            MyKSuiteResources.gradient.swiftUIImage
-                .resizable()
-                .scaledToFit()
-                .ignoresSafeArea()
-
-            VStack(alignment: .leading, spacing: IKPadding.huge) {
-                VStack(alignment: .leading, spacing: IKPadding.medium) {
-                    Text(MyKSuiteLocalizable.myKSuiteUpgradeTitle)
-                        .multilineTextAlignment(.center)
-                        .font(FontHelper.title)
-                        .foregroundStyle(ColorHelper.primary)
-                        .frame(maxWidth: .infinity, alignment: .center)
-
-                    Text(MyKSuiteLocalizable.myKSuiteUpgradeDescription)
-                }
-
-                VStack(alignment: .leading, spacing: IKPadding.medium) {
-                    ForEach(configuration.labels) { label in
-                        Label {
-                            Text(label.text)
-                        } icon: {
-                            label.icon
-                                .iconSize(.large)
-                        }
-                    }
-                }
-
-                Text(MyKSuiteLocalizable.myKSuiteUpgradeDetails)
-
-                Button {
-                    dismiss()
-                } label: {
-                    Text(KSuiteUtilsLocalizable.buttonClose)
-                }
-                .ikButtonFullWidth(true)
-                .controlSize(.large)
-                .buttonStyle(.ikBorderedProminent)
-            }
-            .padding(.horizontal, value: .large)
-            .font(FontHelper.body)
-            .foregroundStyle(ColorHelper.secondary)
-            .padding(.bottom, value: .large)
-        }
-        .padding(.bottom, value: .large)
-        .background(ColorHelper.backgroundPrimary)
+        UpSalePanelView(
+            headerImage: MyKSuiteResources.gradient.swiftUIImage,
+            title: MyKSuiteLocalizable.myKSuiteUpgradeTitle,
+            description: MyKSuiteLocalizable.myKSuiteUpgradeDescription,
+            labels: configuration.labels,
+            additionalText: MyKSuiteLocalizable.myKSuiteUpgradeDetails
+        )
     }
 }
 
