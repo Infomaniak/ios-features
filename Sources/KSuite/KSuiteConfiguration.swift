@@ -105,6 +105,10 @@ public enum KSuiteConfiguration {
                     text: bold(string: KSuiteLocalizable.kSuiteBusinessSecurityLabel)
                 ),
                 KSuiteLabel(
+                    icon: KSuiteResources.microsoft.swiftUIImage,
+                    text: bold(string: KSuiteLocalizable.kSuiteBusinessMicrosoftLabel)
+                ),
+                KSuiteLabel(
                     icon: KSuiteResources.plusCircle.swiftUIImage,
                     text: KSuiteLocalizable.kSuiteMoreLabel
                 )
@@ -120,12 +124,12 @@ public enum KSuiteConfiguration {
                     text: bold(string: KSuiteLocalizable.kSuiteEnterpriseKChatLabel)
                 ),
                 KSuiteLabel(
-                    icon: KSuiteResources.stair.swiftUIImage,
-                    text: bold(string: KSuiteLocalizable.kSuiteEnterpriseFunctionalityLabel)
+                    icon: KSuiteResources.folder.swiftUIImage,
+                    text: bold(string: KSuiteLocalizable.kSuiteEnterpriseKDriveLabel)
                 ),
                 KSuiteLabel(
-                    icon: KSuiteResources.microsoft.swiftUIImage,
-                    text: bold(string: KSuiteLocalizable.kSuiteEnterpriseMicrosoftLabel)
+                    icon: KSuiteResources.stair.swiftUIImage,
+                    text: bold(string: KSuiteLocalizable.kSuiteEnterpriseFunctionalityLabel)
                 ),
                 KSuiteLabel(
                     icon: KSuiteResources.plusCircle.swiftUIImage,
