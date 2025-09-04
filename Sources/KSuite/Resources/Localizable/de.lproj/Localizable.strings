@@ -2,9 +2,9 @@
  * Loco ios export: Xcode Strings (legacy)
  * Project: CoreUI
  * Locale: de, German
- * Tagged: ios, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !my kSuite, !privacy
+ * Tagged: ios, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !kSuiteUtils, !my kSuite, !privacy
  * Exported by: Ambroise Decouttere
- * Exported at: Thu, 07 Aug 2025 14:51:05 +0200
+ * Exported at: Wed, 03 Sep 2025 15:59:13 +0200
  */
 
 /* loco:689321dbe19fe82cd7087412 */
@@ -15,6 +15,9 @@
 
 /* loco:688b751e7a16f4c4af056e83 */
 "kSuiteBusinessKDriveLabel" = "kDrive: Suche im Inhalt, erweiterte Versionsgeschichte";
+
+/* loco:688b75c7b687ddc15d066a62 */
+"kSuiteBusinessMicrosoftLabel" = "Microsoft Office Online-Integration";
 
 /* loco:688b6cbb8ac935ed130e3705 */
 "kSuiteBusinessOfferDescription" = "Optimieren Sie Ihren Austausch und strukturieren Sie die Zusammenarbeit in Ihrer gesamten Organisation.";
@@ -31,8 +34,8 @@
 /* loco:688b756a5ca0bb203300e474 */
 "kSuiteEnterpriseKChatLabel" = "kChat: 200 externe Nutzer, bis zu 1000 öffentliche/private Kanäle";
 
-/* loco:688b75c7b687ddc15d066a62 */
-"kSuiteEnterpriseMicrosoftLabel" = "Microsoft Office Online-Integration";
+/* loco:68b84862605b115d670aa203 */
+"kSuiteEnterpriseKDriveLabel" = "kDrive: 5000 öffentliche Sharing-Links, bis zu 1000 Dropboxen";
 
 /* loco:688b6cde60be19d6ba01e729 */
 "kSuiteEnterpriseOfferDescription" = "Eine sichere Umgebung zur Zusammenarbeit für Ihre Teams, selbst für die anspruchsvollsten.";

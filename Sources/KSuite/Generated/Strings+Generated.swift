@@ -16,6 +16,8 @@ public enum KSuiteLocalizable {
   public static let kSuiteBusinessKChatLabel = KSuiteLocalizable.tr("Localizable", "kSuiteBusinessKChatLabel", fallback: "kChat: shared channels, unlimited integration with other applications")
   /// loco:688b751e7a16f4c4af056e83
   public static let kSuiteBusinessKDriveLabel = KSuiteLocalizable.tr("Localizable", "kSuiteBusinessKDriveLabel", fallback: "kDrive: content search, extended version history")
+  /// loco:688b75c7b687ddc15d066a62
+  public static let kSuiteBusinessMicrosoftLabel = KSuiteLocalizable.tr("Localizable", "kSuiteBusinessMicrosoftLabel", fallback: "Microsoft Office Online integration")
   /// loco:688b6cbb8ac935ed130e3705
   public static let kSuiteBusinessOfferDescription = KSuiteLocalizable.tr("Localizable", "kSuiteBusinessOfferDescription", fallback: "Optimize your exchanges and structure collaboration throughout your organization.")
   /// loco:688b6c6b70085c4be6071a92
@@ -26,8 +28,8 @@ public enum KSuiteLocalizable {
   public static let kSuiteEnterpriseFunctionalityLabel = KSuiteLocalizable.tr("Localizable", "kSuiteEnterpriseFunctionalityLabel", fallback: "Advanced features: Premium Support, Custom Brand, etc.")
   /// loco:688b756a5ca0bb203300e474
   public static let kSuiteEnterpriseKChatLabel = KSuiteLocalizable.tr("Localizable", "kSuiteEnterpriseKChatLabel", fallback: "kChat: 200 external users, up to 1000 public/private channels")
-  /// loco:688b75c7b687ddc15d066a62
-  public static let kSuiteEnterpriseMicrosoftLabel = KSuiteLocalizable.tr("Localizable", "kSuiteEnterpriseMicrosoftLabel", fallback: "Microsoft Office Online integration")
+  /// loco:68b84862605b115d670aa203
+  public static let kSuiteEnterpriseKDriveLabel = KSuiteLocalizable.tr("Localizable", "kSuiteEnterpriseKDriveLabel", fallback: "kDrive: 5,000 public sharing links, up to 1,000 dropboxes")
   /// loco:688b6cde60be19d6ba01e729
   public static let kSuiteEnterpriseOfferDescription = KSuiteLocalizable.tr("Localizable", "kSuiteEnterpriseOfferDescription", fallback: "A secure collaboration environment for even the most demanding teams.")
   /// loco:688b6c8768c1a651fc07c764
