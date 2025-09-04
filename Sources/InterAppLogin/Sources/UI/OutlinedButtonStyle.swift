@@ -64,7 +64,6 @@ struct OutlinedButtonStyle: ButtonStyle {
     VStack {
         Button("Hello, World!") {}
 
-
         Button("Hello, World!") {}
             .ikButtonFullWidth(true)
     }
