@@ -49,6 +49,7 @@ struct OutlinedButtonStyle: ButtonStyle {
             .padding(.horizontal, value: .medium)
             .padding(.horizontal, value: .small)
             .frame(minHeight: IKButtonHeight.large)
+            .modifier(IKButtonExpandableModifier())
             .contentShape(Rectangle())
             .modifier(IKButtonOpacityAnimationModifier(isPressed: configuration.isPressed))
             .allowsHitTesting(!isLoading)
@@ -57,4 +58,14 @@ struct OutlinedButtonStyle: ButtonStyle {
                     .stroke(Color.Custom.divider, lineWidth: 0.5)
             )
     }
+}
+
+#Preview {
+    VStack {
+        Button("Hello, World!") {}
+
+        Button("Hello, World!") {}
+            .ikButtonFullWidth(true)
+    }
+    .buttonStyle(.outlined)
 }
