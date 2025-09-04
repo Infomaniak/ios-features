@@ -25,6 +25,10 @@ let package = Package(
         .library(
             name: "KSuiteUtils",
             targets: ["KSuiteUtils"]
+        ),
+        .library(
+            name: "InAppTwoFactorAuthentication",
+            targets: ["InAppTwoFactorAuthentication"]
         )
     ],
     dependencies: [
@@ -61,6 +65,17 @@ let package = Package(
         ),
         .target(
             name: "InterAppLogin",
+            dependencies: [
+                .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
+                .product(name: "InfomaniakCore", package: "ios-core"),
+                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
+                .product(name: "DesignSystem", package: "ios-core-ui"),
+                .product(name: "Nuke", package: "Nuke"),
+                .product(name: "NukeUI", package: "Nuke")
+            ]
+        ),
+        .target(
+            name: "InAppTwoFactorAuthentication",
             dependencies: [
                 .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
                 .product(name: "InfomaniakCore", package: "ios-core"),

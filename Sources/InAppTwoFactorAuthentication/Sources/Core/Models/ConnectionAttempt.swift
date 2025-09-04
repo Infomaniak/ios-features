@@ -16,25 +16,23 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import SwiftUI
+import Foundation
 
-extension Color {
-    enum Custom {
-        /// light: greyOrca / dark: greyRabbit
-        static let textPrimary = Color(
-            light: UIColor.greyOrca,
-            dark: UIColor.greyRabbit
-        )
-        /// light: greyElephant / dark: greyShark
-        static let textSecondary = Color(
-            light: UIColor.greyElephant,
-            dark: UIColor.greyShark
-        )
+enum DeviceType: String, Decodable {
+    case computer
+    case phone
+    case tablet
+}
 
-        /// light: greyMouse / dark: greyOrca
-        static let divider = Color(
-            light: UIColor.greyMouse,
-            dark: UIColor.greyOrca
-        )
-    }
+struct Device: Decodable {
+    let model: String?
+    let platform: String
+    let type: DeviceType
+}
+
+struct ConnectionAttempt: Decodable {
+    let id: String
+    let requestDate: Date
+    let device: Device
+    let locationName: String
 }

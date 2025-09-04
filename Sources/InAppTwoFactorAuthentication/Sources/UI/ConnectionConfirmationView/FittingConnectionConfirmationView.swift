@@ -18,23 +18,22 @@
 
 import SwiftUI
 
-extension Color {
-    enum Custom {
-        /// light: greyOrca / dark: greyRabbit
-        static let textPrimary = Color(
-            light: UIColor.greyOrca,
-            dark: UIColor.greyRabbit
-        )
-        /// light: greyElephant / dark: greyShark
-        static let textSecondary = Color(
-            light: UIColor.greyElephant,
-            dark: UIColor.greyShark
-        )
+struct FittingView<Content: View>: View {
+    @ViewBuilder let content: (Bool) -> Content
 
-        /// light: greyMouse / dark: greyOrca
-        static let divider = Color(
-            light: UIColor.greyMouse,
-            dark: UIColor.greyOrca
-        )
+    var body: some View {
+        if #available(iOS 16.0, *) {
+            ViewThatFits(in: .vertical) {
+                content(false)
+
+                ScrollView {
+                    content(true)
+                }
+            }
+        } else {
+            ScrollView {
+                content(true)
+            }
+        }
     }
 }

@@ -16,25 +16,19 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import SwiftUI
+import InfomaniakCore
 
-extension Color {
-    enum Custom {
-        /// light: greyOrca / dark: greyRabbit
-        static let textPrimary = Color(
-            light: UIColor.greyOrca,
-            dark: UIColor.greyRabbit
-        )
-        /// light: greyElephant / dark: greyShark
-        static let textSecondary = Color(
-            light: UIColor.greyElephant,
-            dark: UIColor.greyShark
-        )
+public struct InAppTwoFactorAuthenticationSession {
+    let user: InfomaniakUser
+    let apiFetcher: any InAppTwoFactorAuthenticationFetchable
 
-        /// light: greyMouse / dark: greyOrca
-        static let divider = Color(
-            light: UIColor.greyMouse,
-            dark: UIColor.greyOrca
-        )
+    public init(user: InfomaniakUser, apiFetcher: ApiFetcher) {
+        self.user = user
+        self.apiFetcher = InAppTwoFactorAuthenticationFetcher(apiFetcher: apiFetcher)
+    }
+
+    init(user: InfomaniakUser, apiFetcher: MockInAppTwoFactorAuthenticationFetcher) {
+        self.user = user
+        self.apiFetcher = apiFetcher
     }
 }

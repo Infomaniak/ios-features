@@ -24,6 +24,6 @@ extension Font {
         static let headline = Font.dynamicTypeSizeFont(size: 16, weight: .medium, relativeTo: .headline)
 
         /// Figma name: *Body Regular*
-        public static let body = Font.dynamicTypeSizeFont(size: 16, weight: .regular, relativeTo: .body)
+        static let body = Font.dynamicTypeSizeFont(size: 16, weight: .regular, relativeTo: .body)
     }
 }
