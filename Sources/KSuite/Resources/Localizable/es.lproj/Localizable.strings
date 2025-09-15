@@ -4,7 +4,7 @@
  * Locale: es, Spanish
  * Tagged: ios, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !kSuiteUtils, !my kSuite, !privacy
  * Exported by: Ambroise Decouttere
- * Exported at: Wed, 03 Sep 2025 15:59:13 +0200
+ * Exported at: Mon, 15 Sep 2025 12:57:02 +0200
  */
 
 /* loco:689321dbe19fe82cd7087412 */
@@ -35,7 +35,7 @@
 "kSuiteEnterpriseKChatLabel" = "kChat: 200 usuarios externos, hasta 1000 canales públicos/privados";
 
 /* loco:68b84862605b115d670aa203 */
-"kSuiteEnterpriseKDriveLabel" = "kDrive: 5.000 enlaces públicos compartidos, hasta 1.000 dropboxes";
+"kSuiteEnterpriseKDriveLabel" = "kDrive: 365 días de conservación de versiones de archivos";
 
 /* loco:688b6cde60be19d6ba01e729 */
 "kSuiteEnterpriseOfferDescription" = "Un entorno de colaboración seguro para sus equipos, incluso los más exigentes.";
