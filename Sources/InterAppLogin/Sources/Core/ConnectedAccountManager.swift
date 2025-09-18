@@ -61,7 +61,7 @@ public struct ConnectedAccountManager: ConnectedAccountManagerable {
                 continue
             }
 
-            let apiTokens = KeychainHelper(accessGroup: keychainIdentifier).loadTokens()
+            let apiTokens = KeychainHelper(accessGroup: keychainIdentifier).loadTokens().map { $0.apiToken }
 
             for apiToken in apiTokens {
                 if !accounts.contains(where: { $0.userId == apiToken.userId }) {
