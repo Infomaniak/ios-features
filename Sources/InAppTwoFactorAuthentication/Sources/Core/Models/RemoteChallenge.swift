@@ -18,7 +18,34 @@
 
 import Foundation
 
-struct ConnectionAttemptValidation: Encodable {
-    let id: String
-    let approved: Bool
+enum DeviceType: String, Decodable {
+    case computer
+    case phone
+    case tablet
+}
+
+struct Device: Decodable {
+    let name: String
+    let type: DeviceType
+}
+
+enum ChallengeType: String, Decodable {
+    case approval
+    case unknown
+
+    init(from decoder: any Decoder) throws {
+        let singleKeyContainer = try decoder.singleValueContainer()
+        let value = try singleKeyContainer.decode(String.self)
+
+        self = ChallengeType(rawValue: value) ?? .unknown
+    }
+}
+
+struct RemoteChallenge: Decodable {
+    let uuid: String
+    let type: ChallengeType
+    let device: Device
+    let location: String
+    let createdAt: Date
+    let expiresAt: Date
 }

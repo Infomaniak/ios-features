@@ -19,27 +19,33 @@
 import Foundation
 import InfomaniakCore
 
+extension ApiEnvironment {
+    var loginHost: String {
+        return "login.\(host)"
+    }
+}
+
 extension Endpoint {
-    static var validateConnectionAttempt: Endpoint {
-        return Endpoint(hostKeypath: \.apiHost, path: "<some path>")
+    static func validateChallenge(uuid: String) -> Endpoint {
+        return Endpoint(hostKeypath: \.loginHost, path: "/api/2fa/push/challenges/\(uuid)")
     }
 
-    static var latestConnectionAttempt: Endpoint {
-        return Endpoint(hostKeypath: \.apiHost, path: "<some path>")
+    static var latestChallenge: Endpoint {
+        return Endpoint(hostKeypath: \.loginHost, path: "/api/2fa/push/challenges")
     }
 }
 
 protocol InAppTwoFactorAuthenticationFetchable {
-    func latestConnectionAttempt() async throws -> ConnectionAttempt
-    func validateConnectionAttempt(id: String, approved: Bool) async throws -> Bool
+    func latestChallenge() async throws -> RemoteChallenge
+    func validateChallenge(uuid: String, approved: Bool) async throws -> Bool
 }
 
 struct MockInAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchable {
-    func latestConnectionAttempt() async throws -> ConnectionAttempt {
-        ConnectionAttempt.preview
+    func latestChallenge() async throws -> RemoteChallenge {
+        RemoteChallenge.preview
     }
 
-    func validateConnectionAttempt(id: String, approved: Bool) async throws -> Bool {
+    func validateChallenge(uuid: String, approved: Bool) async throws -> Bool {
         return true
     }
 }
@@ -47,14 +53,14 @@ struct MockInAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetc
 struct InAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchable {
     let apiFetcher: ApiFetcher
 
-    func latestConnectionAttempt() async throws -> ConnectionAttempt {
-        let request = apiFetcher.authenticatedRequest(.latestConnectionAttempt)
+    func latestChallenge() async throws -> RemoteChallenge {
+        let request = apiFetcher.authenticatedRequest(.latestChallenge)
         return try await apiFetcher.perform(request: request)
     }
 
-    func validateConnectionAttempt(id: String, approved: Bool) async throws -> Bool {
-        let parameters = ConnectionAttemptValidation(id: id, approved: approved)
-        let request = apiFetcher.authenticatedRequest(.validateConnectionAttempt, method: .post, parameters: parameters)
+    func validateChallenge(uuid: String, approved: Bool) async throws -> Bool {
+        let parameters = RemoteChallengeValidation(uuid: uuid, approved: approved)
+        let request = apiFetcher.authenticatedRequest(.validateChallenge(uuid: uuid), method: .patch, parameters: parameters)
         return try await apiFetcher.perform(request: request)
     }
 }

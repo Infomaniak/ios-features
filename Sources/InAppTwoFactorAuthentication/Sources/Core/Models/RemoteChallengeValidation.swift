@@ -18,21 +18,7 @@
 
 import Foundation
 
-enum DeviceType: String, Decodable {
-    case computer
-    case phone
-    case tablet
-}
-
-struct Device: Decodable {
-    let model: String?
-    let platform: String
-    let type: DeviceType
-}
-
-struct ConnectionAttempt: Decodable {
-    let id: String
-    let requestDate: Date
-    let device: Device
-    let locationName: String
+struct RemoteChallengeValidation: Encodable {
+    let uuid: String
+    let approved: Bool
 }

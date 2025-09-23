@@ -27,7 +27,7 @@ public protocol InAppTwoFactorAuthenticationManagerable {
 public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthenticationManagerable {
     private weak var lastActiveScene: UIWindowScene?
     private var currentWindow: UIWindow?
-    private typealias CheckConnectionAttemptResult = (session: InAppTwoFactorAuthenticationSession, attempt: ConnectionAttempt)
+    private typealias CheckConnectionAttemptResult = (session: InAppTwoFactorAuthenticationSession, challenge: RemoteChallenge)
 
     public init() {
         NotificationCenter.default.addObserver(
@@ -67,8 +67,8 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
 
     private func checkConnectionAttemptWith(session: InAppTwoFactorAuthenticationSession) async -> CheckConnectionAttemptResult? {
         do {
-            let attempt = try await session.apiFetcher.latestConnectionAttempt()
-            return (session: session, attempt: attempt)
+            let attempt = try await session.apiFetcher.latestChallenge()
+            return (session: session, challenge: attempt)
         } catch {
             return nil
         }
@@ -78,7 +78,7 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
     private func displayConnectionAttemptWindowFor(completeSession: CheckConnectionAttemptResult) {
         currentWindow = ConnectionAttemptWindow(
             session: completeSession.session,
-            connectionAttempt: completeSession.attempt,
+            connectionAttempt: completeSession.challenge,
             windowScene: lastActiveScene
         )
     }

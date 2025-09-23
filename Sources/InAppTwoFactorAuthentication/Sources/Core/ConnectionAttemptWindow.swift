@@ -24,7 +24,7 @@ import UIKit
 class ConnectionAttemptWindow: UIWindow {
     let hostingViewController: UIHostingController<ConnectionConfirmationView>
 
-    init(session: InAppTwoFactorAuthenticationSession, connectionAttempt: ConnectionAttempt, windowScene: UIWindowScene?) {
+    init(session: InAppTwoFactorAuthenticationSession, connectionAttempt: RemoteChallenge, windowScene: UIWindowScene?) {
         hostingViewController = UIHostingController(rootView: ConnectionConfirmationView(
             session: session,
             connectionConfirmationRequest: connectionAttempt

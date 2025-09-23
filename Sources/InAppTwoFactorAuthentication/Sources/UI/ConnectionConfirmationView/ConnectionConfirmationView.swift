@@ -33,14 +33,6 @@ extension DeviceType {
     }
 }
 
-extension Device {
-    var description: String {
-        guard let model else { return "\(platform)" }
-
-        return "\(platform), \(model)"
-    }
-}
-
 extension IKButtonTheme {
     static let feature = IKButtonTheme(
         primary: Color.featurePrimary,
@@ -77,16 +69,16 @@ struct ConnectionConfirmationView: View {
     @State private var currentContent: ConnectionConfirmationContent = .main
 
     let session: InAppTwoFactorAuthenticationSession
-    let connectionConfirmationRequest: ConnectionAttempt
+    let connectionConfirmationRequest: RemoteChallenge
 
-    init(session: InAppTwoFactorAuthenticationSession, connectionConfirmationRequest: ConnectionAttempt) {
+    init(session: InAppTwoFactorAuthenticationSession, connectionConfirmationRequest: RemoteChallenge) {
         self.connectionConfirmationRequest = connectionConfirmationRequest
         self.session = session
     }
 
     init(
         session: InAppTwoFactorAuthenticationSession,
-        connectionConfirmationRequest: ConnectionAttempt,
+        connectionConfirmationRequest: RemoteChallenge,
         currentContent: ConnectionConfirmationContent
     ) {
         self.currentContent = currentContent
