@@ -83,6 +83,9 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
             session: completeSession.session,
             connectionAttempt: completeSession.challenge,
             windowScene: lastActiveScene
-        )
+        ) { [weak self] in
+            self?.currentWindow?.resignKey()
+            self?.currentWindow = nil
+        }
     }
 }
