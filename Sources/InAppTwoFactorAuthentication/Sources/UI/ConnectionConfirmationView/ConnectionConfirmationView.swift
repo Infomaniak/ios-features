@@ -110,8 +110,19 @@ struct ConnectionConfirmationView: View {
                     Group {
                         switch currentContent {
                         case .main:
-                            MainContentView(session: session, connectionConfirmationRequest: connectionConfirmationRequest)
-                                .padding(.top, value: spaceConstrained ? .small : .giant)
+                            MainContentView(
+                                session: session,
+                                connectionConfirmationRequest: connectionConfirmationRequest
+                            ) { approved in
+                                if approved {
+                                    dismiss()
+                                } else {
+                                    currentContent = .connectionRefused
+                                }
+                            } onError: { error in
+                                currentContent = .error
+                            }
+                            .padding(.top, value: spaceConstrained ? .small : .giant)
                         case .error:
                             InformationContentView(text: "!We couldn't process your request. Please try again later.")
                                 .padding(.top, value: spaceConstrained ? .small : .large)

@@ -21,12 +21,12 @@ import InfomaniakCoreSwiftUI
 import SwiftUI
 
 struct MainContentView: View {
-    @Environment(\.dismiss) private var dismiss
-
     @State private var isLoading = false
 
     let session: InAppTwoFactorAuthenticationSession
     let connectionConfirmationRequest: RemoteChallenge
+    let onSuccess: ((Bool) -> Void)?
+    let onError: ((Error) -> Void)?
 
     var body: some View {
         ZStack {
@@ -106,9 +106,9 @@ struct MainContentView: View {
                     uuid: connectionConfirmationRequest.uuid,
                     approved: approved
                 )
-                dismiss()
+                onSuccess?(approved)
             } catch {
-                // TODO: Error screens do not exist
+                onError?(error)
             }
             isLoading = false
         }
@@ -118,5 +118,5 @@ struct MainContentView: View {
 #Preview {
     MainContentView(session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
                                                                  apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
-                    connectionConfirmationRequest: .preview)
+                    connectionConfirmationRequest: .preview, onSuccess: nil, onError: nil)
 }
