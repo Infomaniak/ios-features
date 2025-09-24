@@ -36,12 +36,12 @@ extension Endpoint {
 }
 
 protocol InAppTwoFactorAuthenticationFetchable {
-    func latestChallenge() async throws -> RemoteChallenge
+    func latestChallenge() async throws -> RemoteChallenge?
     func validateChallenge(uuid: String, approved: Bool) async throws -> Bool
 }
 
 struct MockInAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchable {
-    func latestChallenge() async throws -> RemoteChallenge {
+    func latestChallenge() async throws -> RemoteChallenge? {
         RemoteChallenge.preview
     }
 
@@ -52,15 +52,22 @@ struct MockInAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetc
 
 struct InAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchable {
     let apiFetcher: ApiFetcher
+    let decoder = JSONDecoder()
 
-    func latestChallenge() async throws -> RemoteChallenge {
+    init(apiFetcher: ApiFetcher) {
+        self.apiFetcher = apiFetcher
+        decoder.dateDecodingStrategy = .secondsSince1970
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+    }
+
+    func latestChallenge() async throws -> RemoteChallenge? {
         let request = apiFetcher.authenticatedRequest(.latestChallenge)
-        return try await apiFetcher.perform(request: request)
+        return try await apiFetcher.perform(request: request, overrideDecoder: decoder)
     }
 
     func validateChallenge(uuid: String, approved: Bool) async throws -> Bool {
         let parameters = RemoteChallengeValidation(uuid: uuid, approved: approved)
         let request = apiFetcher.authenticatedRequest(.validateChallenge(uuid: uuid), method: .patch, parameters: parameters)
-        return try await apiFetcher.perform(request: request)
+        return try await apiFetcher.perform(request: request, overrideDecoder: decoder)
     }
 }

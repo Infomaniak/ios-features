@@ -67,7 +67,10 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
 
     private func checkConnectionAttemptWith(session: InAppTwoFactorAuthenticationSession) async -> CheckConnectionAttemptResult? {
         do {
-            let attempt = try await session.apiFetcher.latestChallenge()
+            guard let attempt = try await session.apiFetcher.latestChallenge() else {
+                return nil
+            }
+
             return (session: session, challenge: attempt)
         } catch {
             return nil
