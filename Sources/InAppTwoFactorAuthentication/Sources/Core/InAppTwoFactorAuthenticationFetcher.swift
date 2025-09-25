@@ -16,6 +16,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import Alamofire
 import Foundation
 import InfomaniakCore
 
@@ -37,7 +38,7 @@ extension Endpoint {
 
 protocol InAppTwoFactorAuthenticationFetchable {
     func latestChallenge() async throws -> RemoteChallenge?
-    func validateChallenge(uuid: String, approved: Bool) async throws -> Bool
+    func validateChallenge(uuid: String, approved: Bool) async throws
 }
 
 struct MockInAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchable {
@@ -45,8 +46,7 @@ struct MockInAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetc
         RemoteChallenge.preview
     }
 
-    func validateChallenge(uuid: String, approved: Bool) async throws -> Bool {
-        return true
+    func validateChallenge(uuid: String, approved: Bool) async throws {
     }
 }
 
@@ -65,9 +65,13 @@ struct InAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchabl
         return try await apiFetcher.perform(request: request, overrideDecoder: decoder)
     }
 
-    func validateChallenge(uuid: String, approved: Bool) async throws -> Bool {
-        let parameters = RemoteChallengeValidation(uuid: uuid, approved: approved)
-        let request = apiFetcher.authenticatedRequest(.validateChallenge(uuid: uuid), method: .patch, parameters: parameters)
-        return try await apiFetcher.perform(request: request, overrideDecoder: decoder)
+    func validateChallenge(uuid: String, approved: Bool) async throws {
+        if approved {
+            let request = apiFetcher.authenticatedRequest(.validateChallenge(uuid: uuid), method: .patch)
+            let _: Empty = try await apiFetcher.perform(request: request, overrideDecoder: decoder)
+        } else {
+            let request = apiFetcher.authenticatedRequest(.validateChallenge(uuid: uuid), method: .delete)
+            let _: Empty = try await apiFetcher.perform(request: request, overrideDecoder: decoder)
+        }
     }
 }
