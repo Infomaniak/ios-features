@@ -17,6 +17,7 @@
  */
 
 import DesignSystem
+import InfomaniakCore
 import InfomaniakCoreSwiftUI
 import SwiftUI
 
@@ -65,6 +66,7 @@ enum ConnectionConfirmationContent {
 
 struct ConnectionConfirmationView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
 
     @State private var currentContent: ConnectionConfirmationContent = .main
 
@@ -124,12 +126,20 @@ struct ConnectionConfirmationView: View {
                             }
                             .padding(.top, value: spaceConstrained ? .small : .giant)
                         case .error:
-                            InformationContentView(text: "!We couldn't process your request. Please try again later.")
+                            InformationContentView(text: "!We couldn't process your request. Please try again later.") {}
                                 .padding(.top, value: spaceConstrained ? .small : .large)
                         case .connectionRefused:
                             InformationContentView(
                                 text: "!Connection refused.",
-                                additionalAction: .init(title: "!Modify password") {}
+                                additionalAction: .init(title: "!Modify password") {
+                                    guard let modifyPasswordURL =
+                                        URL(string: "https://manager.\(ApiEnvironment.current.host)/v3/ng/profile/edit-password")
+                                    else {
+                                        return
+                                    }
+                                    openURL(modifyPasswordURL)
+                                },
+                                onClose: dismiss.callAsFunction
                             )
                             .padding(.top, value: spaceConstrained ? .small : .large)
                         }

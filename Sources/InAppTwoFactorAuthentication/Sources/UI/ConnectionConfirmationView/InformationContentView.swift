@@ -25,10 +25,9 @@ struct InformationAction {
 }
 
 struct InformationContentView: View {
-    @Environment(\.dismiss) private var dismiss
-
     let text: String
-    var additionalAction: InformationAction?
+    var additionalAction: InformationAction? = nil
+    let onClose: (() -> Void)
 
     var body: some View {
         VStack {
@@ -45,7 +44,7 @@ struct InformationContentView: View {
                         .controlSize(.large)
                 }
 
-                Button("!Close", action: dismiss.callAsFunction)
+                Button("!Close", action: onClose)
                     .buttonStyle(.ikBordered)
                     .ikButtonFullWidth(true)
                     .controlSize(.large)
