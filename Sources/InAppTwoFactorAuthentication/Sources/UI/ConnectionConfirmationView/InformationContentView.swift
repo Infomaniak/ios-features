@@ -17,6 +17,7 @@
  */
 
 import DesignSystem
+import InfomaniakCoreUIResources
 import SwiftUI
 
 struct InformationAction {
@@ -44,7 +45,7 @@ struct InformationContentView: View {
                         .controlSize(.large)
                 }
 
-                Button("!Close", action: onClose)
+                Button(CoreUILocalizable.buttonClose, action: onClose)
                     .buttonStyle(.ikBordered)
                     .ikButtonFullWidth(true)
                     .controlSize(.large)

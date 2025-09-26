@@ -19,6 +19,7 @@
 import DesignSystem
 import InfomaniakCore
 import InfomaniakCoreSwiftUI
+import InfomaniakCoreUIResources
 import SwiftUI
 
 extension DeviceType {
@@ -55,11 +56,11 @@ enum ConnectionConfirmationContent {
     var title: String {
         switch self {
         case .main:
-            "!Are you sure you trying to sign in?"
+            Localizable.twoFactorAuthTryingToLogInTitle
         case .error:
             "!An error occurred"
         case .connectionRefused:
-            "!Connection refused"
+            Localizable.twoFactorAuthConnectionRefusedTitle
         }
     }
 }
@@ -126,12 +127,15 @@ struct ConnectionConfirmationView: View {
                             }
                             .padding(.top, value: spaceConstrained ? .small : .giant)
                         case .error:
-                            InformationContentView(text: "!We couldn't process your request. Please try again later.") {}
-                                .padding(.top, value: spaceConstrained ? .small : .large)
+                            InformationContentView(
+                                text: CoreUILocalizable.anErrorHasOccurred,
+                                onClose: dismiss.callAsFunction
+                            )
+                            .padding(.top, value: spaceConstrained ? .small : .large)
                         case .connectionRefused:
                             InformationContentView(
-                                text: "!Connection refused.",
-                                additionalAction: .init(title: "!Modify password") {
+                                text: Localizable.twoFactorAuthConnectionRefusedDescription,
+                                additionalAction: .init(title: Localizable.buttonModifyPassword) {
                                     guard let modifyPasswordURL =
                                         URL(string: "https://manager.\(ApiEnvironment.current.host)/v3/ng/profile/edit-password")
                                     else {
@@ -151,7 +155,7 @@ struct ConnectionConfirmationView: View {
             .background(Color.backgroundPrimary)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("!Close", systemImage: "xmark", role: .cancel, action: dismiss.callAsFunction)
+                    Button(CoreUILocalizable.buttonClose, systemImage: "xmark", role: .cancel, action: dismiss.callAsFunction)
                 }
             }
         }
