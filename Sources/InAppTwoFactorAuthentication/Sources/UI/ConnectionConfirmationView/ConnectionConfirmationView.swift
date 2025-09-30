@@ -97,7 +97,7 @@ struct ConnectionConfirmationView: View {
     var body: some View {
         NavigationView {
             FittingView { spaceConstrained in
-                VStack(spacing: spaceConstrained ? IKPadding.small : IKPadding.giant) {
+                VStack(spacing: 0) {
                     VStack(spacing: IKPadding.medium) {
                         ZStack {
                             Circle()
@@ -119,13 +119,16 @@ struct ConnectionConfirmationView: View {
                         switch currentContent {
                         case .main:
                             MainContentView(session: session, connectionConfirmationRequest: connectionConfirmationRequest)
+                                .padding(.top, value: spaceConstrained ? .small : .giant)
                         case .error:
                             InformationContentView(text: "!We couldn't process your request. Please try again later.")
+                                .padding(.top, value: spaceConstrained ? .small : .large)
                         case .connectionRefused:
                             InformationContentView(
                                 text: "!Connection refused.",
                                 additionalAction: .init(title: "!Modify password") {}
                             )
+                            .padding(.top, value: spaceConstrained ? .small : .large)
                         }
                     }
                     .frame(maxWidth: 600)
