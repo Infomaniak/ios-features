@@ -50,17 +50,17 @@ extension IKButtonTheme {
 
 enum ConnectionConfirmationContent {
     case main
-    case error
+    case error(DomainError)
     case connectionRefused
 
     var title: String {
         switch self {
         case .main:
-            Localizable.twoFactorAuthTryingToLogInTitle
-        case .error:
-            "!An error occurred"
+            return Localizable.twoFactorAuthTryingToLogInTitle
+        case .error(let error):
+            return error.title
         case .connectionRefused:
-            Localizable.twoFactorAuthConnectionRefusedTitle
+            return Localizable.twoFactorAuthConnectionRefusedTitle
         }
     }
 }
@@ -123,15 +123,12 @@ struct ConnectionConfirmationView: View {
                                     currentContent = .connectionRefused
                                 }
                             } onError: { error in
-                                currentContent = .error
+                                currentContent = .error(error)
                             }
                             .padding(.top, value: spaceConstrained ? .small : .giant)
-                        case .error:
-                            InformationContentView(
-                                text: CoreUILocalizable.anErrorHasOccurred,
-                                onClose: dismiss.callAsFunction
-                            )
-                            .padding(.top, value: spaceConstrained ? .small : .large)
+                        case .error(let error):
+                            InformationContentView(text: error.localizedDescription, onClose: dismiss.callAsFunction)
+                                .padding(.top, value: spaceConstrained ? .small : .large)
                         case .connectionRefused:
                             InformationContentView(
                                 text: Localizable.twoFactorAuthConnectionRefusedDescription,
@@ -172,20 +169,47 @@ struct ConnectionConfirmationView: View {
     )
 }
 
-#Preview("Error") {
-    ConnectionConfirmationView(
-        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
-                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
-        connectionConfirmationRequest: .preview,
-        currentContent: .error
-    )
-}
-
 #Preview("Connection refused") {
     ConnectionConfirmationView(
         session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
                                                      apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
         connectionConfirmationRequest: .preview,
         currentContent: .connectionRefused
+    )
+}
+
+#Preview("Error - Unknown") {
+    ConnectionConfirmationView(
+        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
+                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
+        connectionConfirmationRequest: .preview,
+        currentContent: .error(DomainError.unknown)
+    )
+}
+
+#Preview("Error - Challenge Expired") {
+    ConnectionConfirmationView(
+        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
+                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
+        connectionConfirmationRequest: .preview,
+        currentContent: .error(DomainError.challengeExpired)
+    )
+}
+
+#Preview("Error - Challenge Not found") {
+    ConnectionConfirmationView(
+        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
+                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
+        connectionConfirmationRequest: .preview,
+        currentContent: .error(DomainError.objectNotFound)
+    )
+}
+
+#Preview("Error - Network Error") {
+    ConnectionConfirmationView(
+        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
+                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
+        connectionConfirmationRequest: .preview,
+        currentContent: .error(DomainError(networkError: URLError(.networkConnectionLost)))
     )
 }

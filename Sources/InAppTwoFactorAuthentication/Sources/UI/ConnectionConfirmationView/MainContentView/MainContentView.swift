@@ -26,7 +26,7 @@ struct MainContentView: View {
     let session: InAppTwoFactorAuthenticationSession
     let connectionConfirmationRequest: RemoteChallenge
     let onSuccess: ((Bool) -> Void)?
-    let onError: ((Error) -> Void)?
+    let onError: ((DomainError) -> Void)?
 
     var body: some View {
         ZStack {
@@ -108,7 +108,7 @@ struct MainContentView: View {
                     approved: approved
                 )
                 onSuccess?(approved)
-            } catch {
+            } catch let error as DomainError {
                 onError?(error)
             }
             isLoading = false

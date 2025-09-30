@@ -19,6 +19,7 @@
 import Alamofire
 import Foundation
 import InfomaniakCore
+import InfomaniakCoreUIResources
 
 extension ApiEnvironment {
     var loginHost: String {
@@ -38,7 +39,7 @@ extension Endpoint {
 
 protocol InAppTwoFactorAuthenticationFetchable {
     func latestChallenge() async throws -> RemoteChallenge?
-    func validateChallenge(uuid: String, approved: Bool) async throws
+    func validateChallenge(uuid: String, approved: Bool) async throws(DomainError)
 }
 
 struct MockInAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchable {
@@ -46,7 +47,7 @@ struct MockInAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetc
         RemoteChallenge.preview
     }
 
-    func validateChallenge(uuid: String, approved: Bool) async throws {}
+    func validateChallenge(uuid: String, approved: Bool) async throws(DomainError) {}
 }
 
 struct InAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchable {
@@ -64,13 +65,21 @@ struct InAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchabl
         return try await apiFetcher.perform(request: request, overrideDecoder: decoder)
     }
 
-    func validateChallenge(uuid: String, approved: Bool) async throws {
-        if approved {
-            let request = apiFetcher.authenticatedRequest(.validateChallenge(uuid: uuid), method: .patch)
-            let _: Empty = try await apiFetcher.perform(request: request, overrideDecoder: decoder)
-        } else {
-            let request = apiFetcher.authenticatedRequest(.validateChallenge(uuid: uuid), method: .delete)
-            let _: Empty = try await apiFetcher.perform(request: request, overrideDecoder: decoder)
+    func validateChallenge(uuid: String, approved: Bool) async throws(DomainError) {
+        do {
+            if approved {
+                let request = apiFetcher.authenticatedRequest(.validateChallenge(uuid: uuid), method: .patch)
+                let _: Empty = try await apiFetcher.perform(request: request, overrideDecoder: decoder)
+            } else {
+                let request = apiFetcher.authenticatedRequest(.validateChallenge(uuid: uuid), method: .delete)
+                let _: Empty = try await apiFetcher.perform(request: request, overrideDecoder: decoder)
+            }
+        } catch let error as ErrorWithCode {
+            throw DomainError(apiCode: error.code) ?? .unknown
+        } catch let error as URLError {
+            throw DomainError(networkError: error)
+        } catch {
+            throw DomainError.unknown
         }
     }
 }
