@@ -18,39 +18,53 @@
 
 import Foundation
 import InfomaniakCoreUIResources
+import SwiftUI
 
 struct DomainError: Sendable, Error {
     let title: String
     let localizedDescription: String
     let apiCode: String?
 
+    let headerColor: Color
+    let headerImage: Image
+
     static let challengeExpired = DomainError(
         title: Localizable.twoFactorAuthExpiredErrorTitle,
         localizedDescription: Localizable.twoFactorAuthCheckOriginDescription,
-        apiCode: "challenge_expired"
+        apiCode: "challenge_expired",
+        headerColor: .ikOrange,
+        headerImage: Image(.xmark)
     )
 
     static let objectNotFound = DomainError(
         title: Localizable.twoFactorAuthAlreadyValidatedErrorTitle,
         localizedDescription: Localizable.twoFactorAuthCheckOriginDescription,
-        apiCode: "object_not_found"
+        apiCode: "object_not_found",
+        headerColor: .ikOrange,
+        headerImage: Image(.deviceArrowRotate)
     )
 
     static let unknown = DomainError(
         title: CoreUILocalizable.anErrorHasOccurred,
-        localizedDescription: Localizable.twoFactorAuthGenericErrorDescription
+        localizedDescription: Localizable.twoFactorAuthGenericErrorDescription,
+        headerColor: .ikRed,
+        headerImage: Image(.xmark)
     )
 
-    init(title: String, localizedDescription: String, apiCode: String? = nil) {
+    init(title: String, localizedDescription: String, apiCode: String? = nil, headerColor: Color, headerImage: Image) {
         self.title = title
         self.localizedDescription = localizedDescription
         self.apiCode = apiCode
+        self.headerColor = headerColor
+        self.headerImage = headerImage
     }
 
     init(networkError: URLError) {
-        self.title = Localizable.twoFactorAuthNoNetworkErrorTitle
-        self.localizedDescription = Localizable.twoFactorAuthNoNetworkErrorDescription
-        self.apiCode = nil
+        title = Localizable.twoFactorAuthNoNetworkErrorTitle
+        localizedDescription = Localizable.twoFactorAuthNoNetworkErrorDescription
+        apiCode = nil
+        headerColor = .ikOrange
+        headerImage = Image(.wifiSlash)
     }
 
     init?(apiCode: String) {

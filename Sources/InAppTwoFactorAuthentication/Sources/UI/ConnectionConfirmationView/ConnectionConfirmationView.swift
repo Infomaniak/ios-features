@@ -63,6 +63,28 @@ enum ConnectionConfirmationContent {
             return Localizable.twoFactorAuthConnectionRefusedTitle
         }
     }
+
+    var headerColor: Color {
+        switch self {
+        case .main:
+            return .featurePrimary
+        case .error(let error):
+            return error.headerColor
+        case .connectionRefused:
+            return .ikOrange
+        }
+    }
+
+    var headerImage: Image {
+        switch self {
+        case .main:
+            return Image(.shield)
+        case .error(let error):
+            return error.headerImage
+        case .connectionRefused:
+            return Image(.stopHandSlash)
+        }
+    }
 }
 
 struct ConnectionConfirmationView: View {
@@ -96,9 +118,9 @@ struct ConnectionConfirmationView: View {
                     VStack(spacing: IKPadding.medium) {
                         ZStack {
                             Circle()
-                                .fill(Color.featurePrimary)
+                                .fill(currentContent.headerColor)
                                 .frame(width: 48, height: 48)
-                            Image(.shield)
+                            currentContent.headerImage
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: IKIconSize.large.rawValue)
