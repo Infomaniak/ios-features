@@ -27,6 +27,7 @@ public protocol InAppTwoFactorAuthenticationManagerable {
 public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthenticationManagerable {
     private weak var lastActiveScene: UIWindowScene?
     private var currentWindow: UIWindow?
+    private typealias CheckConnectionAttemptResult = (session: InAppTwoFactorAuthenticationSession, attempt: ConnectionAttempt)
 
     public init() {
         NotificationCenter.default.addObserver(
@@ -46,33 +47,39 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
         guard !sessions.isEmpty else { return }
 
         Task {
-            await withTaskGroup(of: (session: InAppTwoFactorAuthenticationSession, attempt: ConnectionAttempt)?.self,
-                                returning: Void.self) { group in
+            await withTaskGroup(of: CheckConnectionAttemptResult?.self) { group in
                 for session in sessions {
                     group.addTask {
-                        do {
-                            let attempt = try await session.apiFetcher.latestConnectionAttempt()
-                            return (session: session, attempt: attempt)
-                        } catch {
-                            return nil
-                        }
+                        return await self.checkConnectionAttemptWith(session: session)
                     }
                 }
 
                 for await completeSession in group {
                     guard let completeSession else { continue }
 
-                    Task { @MainActor in
-                        currentWindow = ConnectionAttemptWindow(
-                            session: completeSession.session,
-                            connectionAttempt: completeSession.attempt,
-                            windowScene: lastActiveScene
-                        )
-                    }
+                    await displayConnectionAttemptWindowFor(completeSession: completeSession)
 
                     return
                 }
             }
         }
+    }
+
+    private func checkConnectionAttemptWith(session: InAppTwoFactorAuthenticationSession) async -> CheckConnectionAttemptResult? {
+        do {
+            let attempt = try await session.apiFetcher.latestConnectionAttempt()
+            return (session: session, attempt: attempt)
+        } catch {
+            return nil
+        }
+    }
+
+    @MainActor
+    private func displayConnectionAttemptWindowFor(completeSession: CheckConnectionAttemptResult) {
+        currentWindow = ConnectionAttemptWindow(
+            session: completeSession.session,
+            connectionAttempt: completeSession.attempt,
+            windowScene: lastActiveScene
+        )
     }
 }
