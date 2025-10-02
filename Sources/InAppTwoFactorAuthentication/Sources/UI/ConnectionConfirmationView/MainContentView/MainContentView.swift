@@ -34,7 +34,7 @@ struct MainContentView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(maxHeight: .infinity, alignment: .top)
-                .offset(y: -332 / 2 + 32)
+                .offset(y: -332 / 2 + 32) // We already tried using alignment guides but this is simpler
 
             VStack(alignment: .leading, spacing: IKPadding.medium) {
                 UserRowView(user: session.user)
