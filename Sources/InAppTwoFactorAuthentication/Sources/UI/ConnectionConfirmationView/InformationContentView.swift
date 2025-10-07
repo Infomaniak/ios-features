@@ -28,7 +28,7 @@ struct InformationContentView: View {
     @Environment(\.dismiss) private var dismiss
 
     let text: String
-    var additionalAction: InformationAction? = nil
+    var additionalAction: InformationAction?
 
     var body: some View {
         VStack {
@@ -50,12 +50,12 @@ struct InformationContentView: View {
                     .ikButtonFullWidth(true)
                     .controlSize(.large)
             }
-                .frame(maxHeight: .infinity, alignment: .bottom)
+            .frame(maxHeight: .infinity, alignment: .bottom)
         }
         .padding(IKPadding.large)
     }
 }
 
 #Preview {
-    InformationContentView(text: "An error occurred", additionalAction: InformationAction(title: "Retry", action: {}) )
+    InformationContentView(text: "An error occurred", additionalAction: InformationAction(title: "Retry") {})
 }
