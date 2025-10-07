@@ -16,45 +16,61 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import Alamofire
 import Foundation
 import InfomaniakCore
 
+extension ApiEnvironment {
+    var loginHost: String {
+        return "login.\(host)"
+    }
+}
+
 extension Endpoint {
-    static var validateConnectionAttempt: Endpoint {
-        return Endpoint(hostKeypath: \.apiHost, path: "<some path>")
+    static func validateChallenge(uuid: String) -> Endpoint {
+        return Endpoint(hostKeypath: \.loginHost, path: "/api/2fa/push/challenges/\(uuid)")
     }
 
-    static var latestConnectionAttempt: Endpoint {
-        return Endpoint(hostKeypath: \.apiHost, path: "<some path>")
+    static var latestChallenge: Endpoint {
+        return Endpoint(hostKeypath: \.loginHost, path: "/api/2fa/push/challenges")
     }
 }
 
 protocol InAppTwoFactorAuthenticationFetchable {
-    func latestConnectionAttempt() async throws -> ConnectionAttempt
-    func validateConnectionAttempt(id: String, approved: Bool) async throws -> Bool
+    func latestChallenge() async throws -> RemoteChallenge?
+    func validateChallenge(uuid: String, approved: Bool) async throws
 }
 
 struct MockInAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchable {
-    func latestConnectionAttempt() async throws -> ConnectionAttempt {
-        ConnectionAttempt.preview
+    func latestChallenge() async throws -> RemoteChallenge? {
+        RemoteChallenge.preview
     }
 
-    func validateConnectionAttempt(id: String, approved: Bool) async throws -> Bool {
-        return true
-    }
+    func validateChallenge(uuid: String, approved: Bool) async throws {}
 }
 
 struct InAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchable {
     let apiFetcher: ApiFetcher
+    let decoder = JSONDecoder()
 
-    func latestConnectionAttempt() async throws -> ConnectionAttempt {
-        let request = apiFetcher.authenticatedRequest(.latestConnectionAttempt)
-        return try await apiFetcher.perform(request: request)
+    init(apiFetcher: ApiFetcher) {
+        self.apiFetcher = apiFetcher
+        decoder.dateDecodingStrategy = .secondsSince1970
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
 
-    func validateConnectionAttempt(id: String, approved: Bool) async throws -> Bool {
-        let parameters = ConnectionAttemptValidation(id: id, approved: approved)
-        let request = apiFetcher.authenticatedRequest(.validateConnectionAttempt, method: .post, parameters: parameters)
-        return try await apiFetcher.perform(request: request)
+    func latestChallenge() async throws -> RemoteChallenge? {
+        let request = apiFetcher.authenticatedRequest(.latestChallenge)
+        return try await apiFetcher.perform(request: request, overrideDecoder: decoder)
+    }
+
+    func validateChallenge(uuid: String, approved: Bool) async throws {
+        if approved {
+            let request = apiFetcher.authenticatedRequest(.validateChallenge(uuid: uuid), method: .patch)
+            let _: Empty = try await apiFetcher.perform(request: request, overrideDecoder: decoder)
+        } else {
+            let request = apiFetcher.authenticatedRequest(.validateChallenge(uuid: uuid), method: .delete)
+            let _: Empty = try await apiFetcher.perform(request: request, overrideDecoder: decoder)
+        }
     }
 }

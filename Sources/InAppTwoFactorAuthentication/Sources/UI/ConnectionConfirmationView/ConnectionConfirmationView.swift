@@ -17,6 +17,7 @@
  */
 
 import DesignSystem
+import InfomaniakCore
 import InfomaniakCoreSwiftUI
 import SwiftUI
 
@@ -30,14 +31,6 @@ extension DeviceType {
         case .tablet:
             Image(systemName: "ipad.gen2")
         }
-    }
-}
-
-extension Device {
-    var description: String {
-        guard let model else { return "\(platform)" }
-
-        return "\(platform), \(model)"
     }
 }
 
@@ -73,20 +66,21 @@ enum ConnectionConfirmationContent {
 
 struct ConnectionConfirmationView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
 
     @State private var currentContent: ConnectionConfirmationContent = .main
 
     let session: InAppTwoFactorAuthenticationSession
-    let connectionConfirmationRequest: ConnectionAttempt
+    let connectionConfirmationRequest: RemoteChallenge
 
-    init(session: InAppTwoFactorAuthenticationSession, connectionConfirmationRequest: ConnectionAttempt) {
+    init(session: InAppTwoFactorAuthenticationSession, connectionConfirmationRequest: RemoteChallenge) {
         self.connectionConfirmationRequest = connectionConfirmationRequest
         self.session = session
     }
 
     init(
         session: InAppTwoFactorAuthenticationSession,
-        connectionConfirmationRequest: ConnectionAttempt,
+        connectionConfirmationRequest: RemoteChallenge,
         currentContent: ConnectionConfirmationContent
     ) {
         self.currentContent = currentContent
@@ -118,15 +112,34 @@ struct ConnectionConfirmationView: View {
                     Group {
                         switch currentContent {
                         case .main:
-                            MainContentView(session: session, connectionConfirmationRequest: connectionConfirmationRequest)
-                                .padding(.top, value: spaceConstrained ? .small : .giant)
+                            MainContentView(
+                                session: session,
+                                connectionConfirmationRequest: connectionConfirmationRequest
+                            ) { approved in
+                                if approved {
+                                    dismiss()
+                                } else {
+                                    currentContent = .connectionRefused
+                                }
+                            } onError: { error in
+                                currentContent = .error
+                            }
+                            .padding(.top, value: spaceConstrained ? .small : .giant)
                         case .error:
-                            InformationContentView(text: "!We couldn't process your request. Please try again later.")
+                            InformationContentView(text: "!We couldn't process your request. Please try again later.") {}
                                 .padding(.top, value: spaceConstrained ? .small : .large)
                         case .connectionRefused:
                             InformationContentView(
                                 text: "!Connection refused.",
-                                additionalAction: .init(title: "!Modify password") {}
+                                additionalAction: .init(title: "!Modify password") {
+                                    guard let modifyPasswordURL =
+                                        URL(string: "https://manager.\(ApiEnvironment.current.host)/v3/ng/profile/edit-password")
+                                    else {
+                                        return
+                                    }
+                                    openURL(modifyPasswordURL)
+                                },
+                                onClose: dismiss.callAsFunction
                             )
                             .padding(.top, value: spaceConstrained ? .small : .large)
                         }

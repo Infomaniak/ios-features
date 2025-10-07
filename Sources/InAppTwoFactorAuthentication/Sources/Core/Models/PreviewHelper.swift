@@ -31,12 +31,14 @@ struct PreviewTargetAssembly {
     }
 }
 
-extension ConnectionAttempt {
-    static let preview = ConnectionAttempt(
-        id: "aa",
-        requestDate: Date(timeIntervalSinceNow: -2 * 60),
-        device: Device(model: "iPhone 17", platform: "iOS", type: .phone),
-        locationName: "Switzerland"
+extension RemoteChallenge {
+    static let preview = RemoteChallenge(
+        uuid: "aa",
+        type: .approval,
+        device: Device(name: "iPhone 17", type: .phone),
+        location: "Switzerland",
+        createdAt: Date(timeIntervalSinceNow: -2 * 60),
+        expiresAt: Date(timeIntervalSinceNow: 10 * 60)
     )
 }
 

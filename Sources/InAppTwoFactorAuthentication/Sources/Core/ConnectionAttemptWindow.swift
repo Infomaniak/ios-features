@@ -21,14 +21,35 @@ import InfomaniakCore
 import SwiftUI
 import UIKit
 
-class ConnectionAttemptWindow: UIWindow {
-    let hostingViewController: UIHostingController<ConnectionConfirmationView>
+class ConnectionConfirmationViewHostingViewController: UIHostingController<ConnectionConfirmationView> {
+    var onDisappear: (() -> Void)?
 
-    init(session: InAppTwoFactorAuthenticationSession, connectionAttempt: ConnectionAttempt, windowScene: UIWindowScene?) {
-        hostingViewController = UIHostingController(rootView: ConnectionConfirmationView(
+    init(session: InAppTwoFactorAuthenticationSession, connectionAttempt: RemoteChallenge) {
+        super.init(rootView: ConnectionConfirmationView(session: session, connectionConfirmationRequest: connectionAttempt))
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        onDisappear?()
+    }
+}
+
+class ConnectionAttemptWindow: UIWindow {
+    let hostingViewController: ConnectionConfirmationViewHostingViewController
+
+    init(session: InAppTwoFactorAuthenticationSession,
+         connectionAttempt: RemoteChallenge,
+         windowScene: UIWindowScene?,
+         onDisappear: @escaping (() -> Void)) {
+        hostingViewController = ConnectionConfirmationViewHostingViewController(
             session: session,
-            connectionConfirmationRequest: connectionAttempt
-        ))
+            connectionAttempt: connectionAttempt
+        )
 
         if let windowScene {
             super.init(windowScene: windowScene)
@@ -50,6 +71,8 @@ class ConnectionAttemptWindow: UIWindow {
 
         windowLevel = .alert
         makeKeyAndVisible()
+
+        hostingViewController.onDisappear = onDisappear
     }
 
     @available(*, unavailable)

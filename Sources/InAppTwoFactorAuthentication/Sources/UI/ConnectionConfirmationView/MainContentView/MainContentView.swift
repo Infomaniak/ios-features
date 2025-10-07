@@ -21,12 +21,12 @@ import InfomaniakCoreSwiftUI
 import SwiftUI
 
 struct MainContentView: View {
-    @Environment(\.dismiss) private var dismiss
-
     @State private var isLoading = false
 
     let session: InAppTwoFactorAuthenticationSession
-    let connectionConfirmationRequest: ConnectionAttempt
+    let connectionConfirmationRequest: RemoteChallenge
+    let onSuccess: ((Bool) -> Void)?
+    let onError: ((Error) -> Void)?
 
     var body: some View {
         ZStack {
@@ -43,17 +43,17 @@ struct MainContentView: View {
                 VStack {
                     VStack(spacing: IKPadding.medium) {
                         RowView(title: "!When") {
-                            Text(connectionConfirmationRequest.requestDate, style: .relative)
+                            Text(connectionConfirmationRequest.createdAt, style: .relative)
                         }
 
                         RowView(title: "!Device") {
                             HStack {
-                                Text(connectionConfirmationRequest.device.description)
+                                Text(connectionConfirmationRequest.device.name)
                                 connectionConfirmationRequest.device.type.icon
                             }
                         }
 
-                        RowView(title: "!Location", description: connectionConfirmationRequest.locationName)
+                        RowView(title: "!Location", description: connectionConfirmationRequest.location)
 
                         VStack(spacing: IKPadding.medium) {
                             Text(
@@ -102,13 +102,13 @@ struct MainContentView: View {
         isLoading = true
         Task {
             do {
-                _ = try await session.apiFetcher.validateConnectionAttempt(
-                    id: connectionConfirmationRequest.id,
+                _ = try await session.apiFetcher.validateChallenge(
+                    uuid: connectionConfirmationRequest.uuid,
                     approved: approved
                 )
-                dismiss()
+                onSuccess?(approved)
             } catch {
-                // TODO: Error screens do not exist
+                onError?(error)
             }
             isLoading = false
         }
@@ -118,5 +118,5 @@ struct MainContentView: View {
 #Preview {
     MainContentView(session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
                                                                  apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
-                    connectionConfirmationRequest: .preview)
+                    connectionConfirmationRequest: .preview, onSuccess: nil, onError: nil)
 }

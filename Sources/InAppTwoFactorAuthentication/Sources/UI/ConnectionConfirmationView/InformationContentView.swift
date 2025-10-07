@@ -25,10 +25,9 @@ struct InformationAction {
 }
 
 struct InformationContentView: View {
-    @Environment(\.dismiss) private var dismiss
-
     let text: String
     var additionalAction: InformationAction?
+    let onClose: () -> Void
 
     var body: some View {
         VStack {
@@ -45,7 +44,7 @@ struct InformationContentView: View {
                         .controlSize(.large)
                 }
 
-                Button("!Close", action: dismiss.callAsFunction)
+                Button("!Close", action: onClose)
                     .buttonStyle(.ikBordered)
                     .ikButtonFullWidth(true)
                     .controlSize(.large)
@@ -57,5 +56,5 @@ struct InformationContentView: View {
 }
 
 #Preview {
-    InformationContentView(text: "An error occurred", additionalAction: InformationAction(title: "Retry") {})
+    InformationContentView(text: "An error occurred", additionalAction: InformationAction(title: "Retry") {}) {}
 }
