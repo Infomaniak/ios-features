@@ -42,29 +42,30 @@ struct MainContentView: View {
 
                 VStack {
                     VStack(spacing: IKPadding.medium) {
-                        RowView(title: "!When") {
-                            Text(connectionConfirmationRequest.createdAt, style: .relative)
+                        RowView(title: Localizable.twoFactorAuthWhenLabel) {
+                            TimeAgoView(challengeCreatedAt: connectionConfirmationRequest.createdAt)
                         }
 
-                        RowView(title: "!Device") {
+                        RowView(title: Localizable.twoFactorAuthDeviceLabel) {
                             HStack {
                                 Text(connectionConfirmationRequest.device.name)
                                 connectionConfirmationRequest.device.type.icon
                             }
                         }
 
-                        RowView(title: "!Location", description: connectionConfirmationRequest.location)
+                        RowView(
+                            title: Localizable.twoFactorAuthLocationLabel,
+                            description: connectionConfirmationRequest.location
+                        )
 
                         VStack(spacing: IKPadding.medium) {
-                            Text(
-                                "!Confirming this connection will allow this device to access your Infomaniak account."
-                            )
-                            .multilineTextAlignment(.center)
-                            .font(.Custom.callout)
-                            .foregroundStyle(Color.Custom.textSecondary)
+                            Text(Localizable.twoFactorAuthConfirmationDescription)
+                                .multilineTextAlignment(.center)
+                                .font(.Custom.callout)
+                                .foregroundStyle(Color.Custom.textSecondary)
 
                             HStack(spacing: IKPadding.medium) {
-                                Button("!Deny") {
+                                Button(Localizable.buttonDeny) {
                                     validateConnectionAttempt(approved: false)
                                 }
                                 .buttonStyle(.ikBordered)
@@ -72,7 +73,7 @@ struct MainContentView: View {
                                 .ikButtonLoading(isLoading)
                                 .controlSize(.large)
 
-                                Button("!Approve") {
+                                Button(Localizable.buttonApprove) {
                                     validateConnectionAttempt(approved: true)
                                 }
                                 .buttonStyle(.ikBorderedProminent)
