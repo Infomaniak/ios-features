@@ -30,7 +30,7 @@ struct TimeAgoView: View {
     func text(for date: Date) -> String {
         let secondsAgo = Int(date.timeIntervalSince(challengeCreatedAt))
 
-        if secondsAgo >= 60{
+        if secondsAgo >= 60 {
             return Localizable.twoFactorAuthMinutesAgoLabel(secondsAgo / 60)
         } else {
             return Localizable.twoFactorAuthJustNowLabel

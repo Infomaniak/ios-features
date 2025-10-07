@@ -81,5 +81,4 @@
 --yodaswap always
 --disable andOperator,opaqueGenericParameters,preferKeyPath,redundantReturn,strongOutlets,trailingCommas,unusedArguments,wrapMultilineStatementBraces,conditionalAssignment
 --enable blankLineAfterImports,blankLinesBetweenImports
---exclude DerivedData,Derived,Tuist,Project.swift,Build,.build,Sources/MyKSuite/Generated/,Sources/InterAppLogin/Generated/,Sources/KSuiteUtils/Generated/,Sources/KSuite/Generated/
-
+--exclude DerivedData,Derived,Tuist,Project.swift,Build,.build,Sources/MyKSuite/Generated/,Sources/InterAppLogin/Generated/,Sources/KSuiteUtils/Generated/,Sources/KSuite/Generated/,Sources/InAppTwoFactorAuthentication/Generated
