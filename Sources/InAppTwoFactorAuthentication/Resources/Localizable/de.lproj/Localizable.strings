@@ -4,7 +4,7 @@
  * Locale: de, German
  * Tagged: ios, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !kSuite, !kSuiteUtils, !my kSuite, !privacy
  * Exported by: Philippe Weidmann
- * Exported at: Thu, 02 Oct 2025 09:43:40 +0200
+ * Exported at: Tue, 07 Oct 2025 09:07:58 +0200
  */
 
 /* loco:68d52770d78cd0b5b102a952 */
@@ -17,31 +17,22 @@
 "buttonDeny" = "Verweigern";
 
 /* loco:68d4f8d82bc1b93265068752 */
-"buttonModifyPassword" = "Passwort ändern";
+"buttonEditPassword" = "Passwort ändern";
 
 /* loco:68da784d25d05d451b04f663 */
-"twoFactorAuthAlreadyValidatedErrorTitle" = "Diese Verbindung wurde bereits von einem anderen Gerät aus validiert";
+"twoFactorAuthAlreadyProcessedErrorTitle" = "Diese Anfrage wurde bereits bearbeitet";
 
 /* loco:68da78cbe3aba64d960ff0c2 */
-"twoFactorAuthCheckOriginDescription" = "Sie haben diese Validierung nicht veranlasst? Überprüfen Sie die Aktivität Ihrer zuletzt verwendeten Geräte.";
+"twoFactorAuthCheckOriginDescription" = "Sie haben diese Validierung nicht veranlasst? Überprüfen Sie Ihre aktiven Geräte, und trennen Sie die, die Sie nicht erkennen.";
 
 /* loco:68c04f14ec33731be0018cb8 */
 "twoFactorAuthConfirmationDescription" = "Durch die Bestätigung dieser Verbindung wird diesem Gerät der Zugriff auf Ihr Infomaniak-Konto gestattet.";
 
-/* loco:68d525efa14e70cfc4037845 */
-"twoFactorAuthConnectionAlreadyValidatedTitle" = "Diese Verbindung wurde bereits von einem anderen Gerät aus bestätigt";
-
-/* loco:68d525a2a14e70cfc4037842 */
-"twoFactorAuthConnectionExpiredTitle" = "Diese Verbindungsanfrage ist abgelaufen";
-
 /* loco:68d5248990faa534e505f204 */
-"twoFactorAuthConnectionRefusedDescription" = "Sie haben einen Anmeldeversuch abgelehnt. Um Ihr Konto zu sichern, ändern Sie Ihr Passwort.nWenn Sie diesen Versuch veranlasst haben, versuchen Sie es erneut, sich anzumelden.";
+"twoFactorAuthConnectionRejectedDescription" = "Sie haben einen Anmeldeversuch abgelehnt. Um Ihr Konto zu sichern, ändern Sie Ihr Passwort.nWenn Sie diesen Versuch veranlasst haben, versuchen Sie es erneut, sich anzumelden.";
 
 /* loco:68d5247e90faa534e505f202 */
-"twoFactorAuthConnectionRefusedTitle" = "Verbindung Abgelehnt";
-
-/* loco:68d525cbd0a3850b780837f2 */
-"twoFactorAuthConnectionValidationDescription" = "Sie haben die Validierung nicht veranlasst? Sehen Sie sich die Aktivitäten Ihrer zuletzt verwendeten Geräte an.";
+"twoFactorAuthConnectionRejectedTitle" = "Verbindung Abgelehnt";
 
 /* loco:68c04d95fa5d09365f02c055 */
 "twoFactorAuthDeviceLabel" = "Gerät";

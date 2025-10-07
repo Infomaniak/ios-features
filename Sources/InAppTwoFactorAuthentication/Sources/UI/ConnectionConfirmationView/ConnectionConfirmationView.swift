@@ -60,7 +60,7 @@ enum ConnectionConfirmationContent {
         case .error(let error):
             return error.title
         case .connectionRefused:
-            return Localizable.twoFactorAuthConnectionRefusedTitle
+            return Localizable.twoFactorAuthConnectionRejectedTitle
         }
     }
 
@@ -153,8 +153,8 @@ struct ConnectionConfirmationView: View {
                                 .padding(.top, value: spaceConstrained ? .small : .large)
                         case .connectionRefused:
                             InformationContentView(
-                                text: Localizable.twoFactorAuthConnectionRefusedDescription,
-                                additionalAction: .init(title: Localizable.buttonModifyPassword) {
+                                text: Localizable.twoFactorAuthConnectionRejectedDescription,
+                                additionalAction: .init(title: Localizable.buttonEditPassword) {
                                     guard let modifyPasswordURL =
                                         URL(string: "https://manager.\(ApiEnvironment.current.host)/v3/ng/profile/edit-password")
                                     else {

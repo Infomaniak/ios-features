@@ -37,7 +37,7 @@ struct DomainError: Sendable, Error {
     )
 
     static let objectNotFound = DomainError(
-        title: Localizable.twoFactorAuthAlreadyValidatedErrorTitle,
+        title: Localizable.twoFactorAuthAlreadyProcessedErrorTitle,
         localizedDescription: Localizable.twoFactorAuthCheckOriginDescription,
         apiCode: "object_not_found",
         headerColor: .ikOrange,

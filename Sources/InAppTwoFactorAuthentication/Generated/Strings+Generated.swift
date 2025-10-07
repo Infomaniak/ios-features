@@ -17,27 +17,21 @@ internal enum Localizable {
   /// loco:68d4f873098af73894089853
   internal static let buttonDeny = Localizable.tr("Localizable", "buttonDeny", fallback: "Deny")
   /// loco:68d4f8d82bc1b93265068752
-  internal static let buttonModifyPassword = Localizable.tr("Localizable", "buttonModifyPassword", fallback: "Modify password")
+  internal static let buttonEditPassword = Localizable.tr("Localizable", "buttonEditPassword", fallback: "Edit password")
   /// loco:68da784d25d05d451b04f663
-  internal static let twoFactorAuthAlreadyValidatedErrorTitle = Localizable.tr("Localizable", "twoFactorAuthAlreadyValidatedErrorTitle", fallback: "This connection has already been validated from another device")
+  internal static let twoFactorAuthAlreadyProcessedErrorTitle = Localizable.tr("Localizable", "twoFactorAuthAlreadyProcessedErrorTitle", fallback: "This request has already been processed")
   /// loco:68da78cbe3aba64d960ff0c2
-  internal static let twoFactorAuthCheckOriginDescription = Localizable.tr("Localizable", "twoFactorAuthCheckOriginDescription", fallback: "You didn’t initiate this validation? Check the activity of your last used devices.")
+  internal static let twoFactorAuthCheckOriginDescription = Localizable.tr("Localizable", "twoFactorAuthCheckOriginDescription", fallback: "You didn’t initiate this action? Check your active devices, and disconnect the ones you don’t recognize.")
   /// loco:68c04f14ec33731be0018cb8
   internal static let twoFactorAuthConfirmationDescription = Localizable.tr("Localizable", "twoFactorAuthConfirmationDescription", fallback: "Confirming this login attempt will allow that device to access your Infomaniak account")
-  /// loco:68d525efa14e70cfc4037845
-  internal static let twoFactorAuthConnectionAlreadyValidatedTitle = Localizable.tr("Localizable", "twoFactorAuthConnectionAlreadyValidatedTitle", fallback: "This connection has already been validated from another device")
-  /// loco:68d525a2a14e70cfc4037842
-  internal static let twoFactorAuthConnectionExpiredTitle = Localizable.tr("Localizable", "twoFactorAuthConnectionExpiredTitle", fallback: "This connection request has expired")
   /// loco:68d5248990faa534e505f204
-  internal static let twoFactorAuthConnectionRefusedDescription = Localizable.tr("Localizable", "twoFactorAuthConnectionRefusedDescription", fallback: "You have refused a login attempt. To secure your account, change your password. If you are the source of this attempt, try logging in again.")
+  internal static let twoFactorAuthConnectionRejectedDescription = Localizable.tr("Localizable", "twoFactorAuthConnectionRejectedDescription", fallback: "You have refused a login attempt. To secure your account, change your password. If you are the source of this attempt, try logging in again.")
   /// loco:68d5247e90faa534e505f202
-  internal static let twoFactorAuthConnectionRefusedTitle = Localizable.tr("Localizable", "twoFactorAuthConnectionRefusedTitle", fallback: "Connection Refused")
-  /// loco:68d525cbd0a3850b780837f2
-  internal static let twoFactorAuthConnectionValidationDescription = Localizable.tr("Localizable", "twoFactorAuthConnectionValidationDescription", fallback: "You didn’t initiate this validation? Check the activity of your last used devices.")
+  internal static let twoFactorAuthConnectionRejectedTitle = Localizable.tr("Localizable", "twoFactorAuthConnectionRejectedTitle", fallback: "Connection Rejected")
   /// loco:68c04d95fa5d09365f02c055
   internal static let twoFactorAuthDeviceLabel = Localizable.tr("Localizable", "twoFactorAuthDeviceLabel", fallback: "Device")
   /// loco:68da77e9a0c5c4a1d809d4c4
-  internal static let twoFactorAuthExpiredErrorTitle = Localizable.tr("Localizable", "twoFactorAuthExpiredErrorTitle", fallback: "This connection request has expired")
+  internal static let twoFactorAuthExpiredErrorTitle = Localizable.tr("Localizable", "twoFactorAuthExpiredErrorTitle", fallback: "This login request has expired")
   /// loco:68de2abbe02b752bd80f2782
   internal static let twoFactorAuthGenericErrorDescription = Localizable.tr("Localizable", "twoFactorAuthGenericErrorDescription", fallback: "Unable to complete the operation.\nPlease try again.")
   /// loco:68c04e0aec33731be0018cb4
