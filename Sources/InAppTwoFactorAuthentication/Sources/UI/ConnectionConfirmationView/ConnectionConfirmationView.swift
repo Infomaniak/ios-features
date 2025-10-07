@@ -17,7 +17,6 @@
  */
 
 import DesignSystem
-import InfomaniakCore
 import InfomaniakCoreSwiftUI
 import SwiftUI
 
@@ -55,18 +54,50 @@ extension IKButtonTheme {
     )
 }
 
+enum ConnectionConfirmationContent {
+    case main
+    case error
+    case connectionRefused
+
+    var title: String {
+        switch self {
+        case .main:
+            "!Are you sure you trying to sign in?"
+        case .error:
+            "!An error occurred"
+        case .connectionRefused:
+            "!Connection refused"
+        }
+    }
+}
+
 struct ConnectionConfirmationView: View {
     @Environment(\.dismiss) private var dismiss
 
-    @State private var isLoading = false
+    @State private var currentContent: ConnectionConfirmationContent = .main
 
     let session: InAppTwoFactorAuthenticationSession
     let connectionConfirmationRequest: ConnectionAttempt
 
+    init(session: InAppTwoFactorAuthenticationSession, connectionConfirmationRequest: ConnectionAttempt) {
+        self.connectionConfirmationRequest = connectionConfirmationRequest
+        self.session = session
+    }
+
+    init(
+        session: InAppTwoFactorAuthenticationSession,
+        connectionConfirmationRequest: ConnectionAttempt,
+        currentContent: ConnectionConfirmationContent
+    ) {
+        self.currentContent = currentContent
+        self.session = session
+        self.connectionConfirmationRequest = connectionConfirmationRequest
+    }
+
     var body: some View {
         NavigationView {
             FittingView { spaceConstrained in
-                VStack(spacing: spaceConstrained ? IKPadding.small : IKPadding.giant) {
+                VStack(spacing: 0) {
                     VStack(spacing: IKPadding.medium) {
                         ZStack {
                             Circle()
@@ -78,78 +109,27 @@ struct ConnectionConfirmationView: View {
                                 .frame(height: IKIconSize.large.rawValue)
                         }
 
-                        Text("!Are you trying to sign in?")
+                        Text(currentContent.title)
                             .font(.Custom.title2)
                             .foregroundStyle(Color.Custom.textPrimary)
                             .multilineTextAlignment(.center)
                     }
 
-                    ZStack {
-                        Image(.backgroundLightSource)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxHeight: .infinity, alignment: .top)
-                            .offset(y: -332 / 2 + 32)
-
-                        VStack(alignment: .leading, spacing: IKPadding.medium) {
-                            UserRowView(user: session.user)
-                            Divider()
-
-                            VStack {
-                                VStack(spacing: IKPadding.medium) {
-                                    RowView(title: "!When") {
-                                        Text(connectionConfirmationRequest.requestDate, style: .relative)
-                                    }
-
-                                    RowView(title: "!Device") {
-                                        HStack {
-                                            Text(connectionConfirmationRequest.device.description)
-                                            connectionConfirmationRequest.device.type.icon
-                                        }
-                                    }
-
-                                    RowView(title: "!Location", description: connectionConfirmationRequest.locationName)
-
-                                    VStack(spacing: IKPadding.medium) {
-                                        Text(
-                                            "!Confirming this connection will allow this device to access your Infomaniak account."
-                                        )
-                                        .multilineTextAlignment(.center)
-                                        .font(.Custom.callout)
-                                        .foregroundStyle(Color.Custom.textSecondary)
-
-                                        HStack(spacing: IKPadding.medium) {
-                                            Button("!Deny") {
-                                                validateConnectionAttempt(approved: false)
-                                            }
-                                            .buttonStyle(.ikBordered)
-                                            .ikButtonFullWidth(true)
-                                            .ikButtonLoading(isLoading)
-                                            .controlSize(.large)
-
-                                            Button("!Approve") {
-                                                validateConnectionAttempt(approved: true)
-                                            }
-                                            .buttonStyle(.ikBorderedProminent)
-                                            .ikButtonFullWidth(true)
-                                            .ikButtonLoading(isLoading)
-                                            .controlSize(.large)
-                                        }
-                                    }
-                                    .frame(maxHeight: .infinity, alignment: .bottom)
-                                }
-                            }
+                    Group {
+                        switch currentContent {
+                        case .main:
+                            MainContentView(session: session, connectionConfirmationRequest: connectionConfirmationRequest)
+                                .padding(.top, value: spaceConstrained ? .small : .giant)
+                        case .error:
+                            InformationContentView(text: "!We couldn't process your request. Please try again later.")
+                                .padding(.top, value: spaceConstrained ? .small : .large)
+                        case .connectionRefused:
+                            InformationContentView(
+                                text: "!Connection refused.",
+                                additionalAction: .init(title: "!Modify password") {}
+                            )
+                            .padding(.top, value: spaceConstrained ? .small : .large)
                         }
-                        .padding(IKPadding.large)
-                        .background {
-                            RoundedRectangle(cornerRadius: IKRadius.large)
-                                .strokeBorder(Color.Custom.cardOutline, lineWidth: 1)
-                                .background(
-                                    RoundedRectangle(cornerRadius: IKRadius.large)
-                                        .fill(Color.backgroundSecondary)
-                                )
-                        }
-                        .padding(IKPadding.medium)
                     }
                     .frame(maxWidth: 600)
                 }
@@ -165,28 +145,30 @@ struct ConnectionConfirmationView: View {
         .navigationViewStyle(.stack)
         .ikButtonTheme(.feature)
     }
-
-    func validateConnectionAttempt(approved: Bool) {
-        isLoading = true
-        Task {
-            do {
-                _ = try await session.apiFetcher.validateConnectionAttempt(
-                    id: connectionConfirmationRequest.id,
-                    approved: approved
-                )
-                dismiss()
-            } catch {
-                // TODO: Error screens do not exist
-            }
-            isLoading = false
-        }
-    }
 }
 
-#Preview {
+#Preview("Main") {
     ConnectionConfirmationView(
         session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
                                                      apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
         connectionConfirmationRequest: .preview
+    )
+}
+
+#Preview("Error") {
+    ConnectionConfirmationView(
+        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
+                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
+        connectionConfirmationRequest: .preview,
+        currentContent: .error
+    )
+}
+
+#Preview("Connection refused") {
+    ConnectionConfirmationView(
+        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
+                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
+        connectionConfirmationRequest: .preview,
+        currentContent: .connectionRefused
     )
 }
