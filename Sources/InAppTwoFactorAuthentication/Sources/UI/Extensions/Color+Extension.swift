@@ -36,5 +36,11 @@ extension Color {
             light: UIColor.greyMouse,
             dark: UIColor.greyOrca
         )
+
+        /// light: greyMouse / dark: greyOrca
+        static let cardOutline = Color(
+            light: UIColor.clear,
+            dark: UIColor.greyOrca
+        )
     }
 }
