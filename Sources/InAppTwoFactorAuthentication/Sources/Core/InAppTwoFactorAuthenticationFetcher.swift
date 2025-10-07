@@ -46,8 +46,7 @@ struct MockInAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetc
         RemoteChallenge.preview
     }
 
-    func validateChallenge(uuid: String, approved: Bool) async throws {
-    }
+    func validateChallenge(uuid: String, approved: Bool) async throws {}
 }
 
 struct InAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchable {

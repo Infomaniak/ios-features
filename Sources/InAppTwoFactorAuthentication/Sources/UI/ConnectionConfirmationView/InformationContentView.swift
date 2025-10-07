@@ -26,8 +26,8 @@ struct InformationAction {
 
 struct InformationContentView: View {
     let text: String
-    var additionalAction: InformationAction? = nil
-    let onClose: (() -> Void)
+    var additionalAction: InformationAction?
+    let onClose: () -> Void
 
     var body: some View {
         VStack {
@@ -56,5 +56,5 @@ struct InformationContentView: View {
 }
 
 #Preview {
-    InformationContentView(text: "An error occurred", additionalAction: InformationAction(title: "Retry") {})
+    InformationContentView(text: "An error occurred", additionalAction: InformationAction(title: "Retry") {}) {}
 }
