@@ -28,7 +28,7 @@ extension Color {
         /// light: greyElephant / dark: greyShark
         static let textSecondary = Color(
             light: UIColor.greyElephant,
-            dark: UIColor.greyShark
+            dark: UIColor.greyMouse
         )
 
         /// light: greyMouse / dark: greyOrca
