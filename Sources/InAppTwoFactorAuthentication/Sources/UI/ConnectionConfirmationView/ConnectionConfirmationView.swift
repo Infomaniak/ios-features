@@ -130,6 +130,7 @@ struct ConnectionConfirmationView: View {
                             .font(.Custom.title2)
                             .foregroundStyle(Color.Custom.textPrimary)
                             .multilineTextAlignment(.center)
+                            .padding(IKPadding.medium)
                     }
 
                     Group {
