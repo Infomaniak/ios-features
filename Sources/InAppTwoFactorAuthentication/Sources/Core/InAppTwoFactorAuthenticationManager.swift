@@ -79,13 +79,26 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
 
     @MainActor
     private func displayConnectionAttemptWindowFor(completeSession: CheckConnectionAttemptResult) {
-        currentWindow = ConnectionAttemptWindow(
-            session: completeSession.session,
-            connectionAttempt: completeSession.challenge,
-            windowScene: lastActiveScene
-        ) { [weak self] in
-            self?.currentWindow?.resignKey()
-            self?.currentWindow = nil
+        if let existingRootViewController = currentWindow?.rootViewController {
+            existingRootViewController.dismiss(animated: true) { [weak self] in
+                self?.currentWindow = ConnectionAttemptWindow(
+                    session: completeSession.session,
+                    connectionAttempt: completeSession.challenge,
+                    windowScene: self?.lastActiveScene
+                ) { [weak self] in
+                    self?.currentWindow?.resignKey()
+                    self?.currentWindow = nil
+                }
+            }
+        } else {
+            currentWindow = ConnectionAttemptWindow(
+                session: completeSession.session,
+                connectionAttempt: completeSession.challenge,
+                windowScene: lastActiveScene
+            ) { [weak self] in
+                self?.currentWindow?.resignKey()
+                self?.currentWindow = nil
+            }
         }
     }
 }
