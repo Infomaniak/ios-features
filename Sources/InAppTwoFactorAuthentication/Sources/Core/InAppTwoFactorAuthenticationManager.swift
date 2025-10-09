@@ -71,6 +71,10 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
                 return nil
             }
 
+            guard attempt.type == .approval else {
+                return nil // Only approval challenges are currently supported
+            }
+
             return (session: session, challenge: attempt)
         } catch {
             return nil
@@ -79,13 +83,26 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
 
     @MainActor
     private func displayConnectionAttemptWindowFor(completeSession: CheckConnectionAttemptResult) {
-        currentWindow = ConnectionAttemptWindow(
-            session: completeSession.session,
-            connectionAttempt: completeSession.challenge,
-            windowScene: lastActiveScene
-        ) { [weak self] in
-            self?.currentWindow?.resignKey()
-            self?.currentWindow = nil
+        if let existingRootViewController = currentWindow?.rootViewController {
+            existingRootViewController.dismiss(animated: true) { [weak self] in
+                self?.currentWindow = ConnectionAttemptWindow(
+                    session: completeSession.session,
+                    connectionAttempt: completeSession.challenge,
+                    windowScene: self?.lastActiveScene
+                ) { [weak self] in
+                    self?.currentWindow?.resignKey()
+                    self?.currentWindow = nil
+                }
+            }
+        } else {
+            currentWindow = ConnectionAttemptWindow(
+                session: completeSession.session,
+                connectionAttempt: completeSession.challenge,
+                windowScene: lastActiveScene
+            ) { [weak self] in
+                self?.currentWindow?.resignKey()
+                self?.currentWindow = nil
+            }
         }
     }
 }

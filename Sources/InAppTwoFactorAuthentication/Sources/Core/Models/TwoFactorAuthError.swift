@@ -20,7 +20,7 @@ import Foundation
 import InfomaniakCoreUIResources
 import SwiftUI
 
-struct DomainError: Sendable, Error {
+struct TwoFactorAuthError: Sendable, Error {
     let title: String
     let localizedDescription: String
     let apiCode: String?
@@ -28,7 +28,7 @@ struct DomainError: Sendable, Error {
     let headerColor: Color
     let headerImage: Image
 
-    static let challengeExpired = DomainError(
+    static let challengeExpired = TwoFactorAuthError(
         title: Localizable.twoFactorAuthExpiredErrorTitle,
         localizedDescription: Localizable.twoFactorAuthCheckOriginDescription,
         apiCode: "challenge_expired",
@@ -36,7 +36,7 @@ struct DomainError: Sendable, Error {
         headerImage: Image(.xmark)
     )
 
-    static let objectNotFound = DomainError(
+    static let objectNotFound = TwoFactorAuthError(
         title: Localizable.twoFactorAuthAlreadyProcessedErrorTitle,
         localizedDescription: Localizable.twoFactorAuthCheckOriginDescription,
         apiCode: "object_not_found",
@@ -44,7 +44,7 @@ struct DomainError: Sendable, Error {
         headerImage: Image(.deviceArrowRotate)
     )
 
-    static let unknown = DomainError(
+    static let unknown = TwoFactorAuthError(
         title: CoreUILocalizable.anErrorHasOccurred,
         localizedDescription: Localizable.twoFactorAuthGenericErrorDescription,
         headerColor: .ikRed,
@@ -69,9 +69,9 @@ struct DomainError: Sendable, Error {
 
     init?(apiCode: String) {
         switch apiCode {
-        case DomainError.challengeExpired.apiCode:
+        case TwoFactorAuthError.challengeExpired.apiCode:
             self = .challengeExpired
-        case DomainError.objectNotFound.apiCode:
+        case TwoFactorAuthError.objectNotFound.apiCode:
             self = .objectNotFound
         default:
             return nil
