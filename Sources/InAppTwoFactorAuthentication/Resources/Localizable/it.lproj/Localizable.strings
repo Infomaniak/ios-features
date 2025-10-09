@@ -4,7 +4,7 @@
  * Locale: it, Italian
  * Tagged: ios, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !kSuite, !kSuiteUtils, !my kSuite, !privacy
  * Exported by: Philippe Weidmann
- * Exported at: Fri, 26 Sep 2025 08:14:24 +0200
+ * Exported at: Tue, 07 Oct 2025 09:07:58 +0200
  */
 
 /* loco:68d52770d78cd0b5b102a952 */
@@ -17,31 +17,40 @@
 "buttonDeny" = "Negare";
 
 /* loco:68d4f8d82bc1b93265068752 */
-"buttonModifyPassword" = "Modifica della password";
+"buttonEditPassword" = "Modifica della password";
+
+/* loco:68da784d25d05d451b04f663 */
+"twoFactorAuthAlreadyProcessedErrorTitle" = "Questa richiesta è già stata elaborata";
+
+/* loco:68da78cbe3aba64d960ff0c2 */
+"twoFactorAuthCheckOriginDescription" = "Non hai avviato tu questa azione? Controlla i tuoi dispositivi attivi e disconnetti quelli che non riconosci.";
 
 /* loco:68c04f14ec33731be0018cb8 */
 "twoFactorAuthConfirmationDescription" = "Confermando questa connessione, autorizzi questo dispositivo ad accedere al tuo account Infomaniak.";
 
-/* loco:68d525efa14e70cfc4037845 */
-"twoFactorAuthConnectionAlreadyValidatedTitle" = "Questa connessione è già stata convalidata da un altro dispositivo";
-
-/* loco:68d525a2a14e70cfc4037842 */
-"twoFactorAuthConnectionExpiredTitle" = "Questa richiesta di connessione è scaduta";
-
 /* loco:68d5248990faa534e505f204 */
-"twoFactorAuthConnectionRefusedDescription" = "È stato rifiutato un tentativo di connessione. Per proteggere il vostro account, cambiate la password. Se siete voi la fonte di questo tentativo, provate ad accedere di nuovo.";
+"twoFactorAuthConnectionRejectedDescription" = "È stato rifiutato un tentativo di connessione. Per proteggere il vostro account, cambiate la password. Se siete voi la fonte di questo tentativo, provate ad accedere di nuovo.";
 
 /* loco:68d5247e90faa534e505f202 */
-"twoFactorAuthConnectionRefusedTitle" = "Connessione rifiutata";
-
-/* loco:68d525cbd0a3850b780837f2 */
-"twoFactorAuthConnectionValidationDescription" = "Non avete avviato la convalida? Controllare l’attività degli ultimi dispositivi utilizzati.";
+"twoFactorAuthConnectionRejectedTitle" = "Connessione rifiutata";
 
 /* loco:68c04d95fa5d09365f02c055 */
 "twoFactorAuthDeviceLabel" = "Dispositivo";
 
+/* loco:68da77e9a0c5c4a1d809d4c4 */
+"twoFactorAuthExpiredErrorTitle" = "Questa richiesta di connessione è scaduta";
+
+/* loco:68de2abbe02b752bd80f2782 */
+"twoFactorAuthGenericErrorDescription" = "Impossibile completare l’operazione.\\nRiprova.";
+
 /* loco:68c04e0aec33731be0018cb4 */
 "twoFactorAuthLocationLabel" = "Luogo";
+
+/* loco:68de26e7e0ead3ef030b71f2 */
+"twoFactorAuthNoNetworkErrorDescription" = "Impossibile completare l’operazione.\\nControllare la connessione e riprovare.";
+
+/* loco:68de2516c411b0f8b20a4832 */
+"twoFactorAuthNoNetworkErrorTitle" = "Nessuna rete";
 
 /* loco:68c053c71ea34fd57a062325 */
 "twoFactorAuthTryingToLogInTitle" = "Stai cercando di accedere?";

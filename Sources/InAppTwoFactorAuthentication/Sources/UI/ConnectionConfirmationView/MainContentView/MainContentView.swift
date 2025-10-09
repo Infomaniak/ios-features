@@ -20,13 +20,19 @@ import DesignSystem
 import InfomaniakCoreSwiftUI
 import SwiftUI
 
+enum LoadingState {
+    case idle
+    case loadingApprove
+    case loadingDeny
+}
+
 struct MainContentView: View {
-    @State private var isLoading = false
+    @State private var loadingState: LoadingState = .idle
 
     let session: InAppTwoFactorAuthenticationSession
     let connectionConfirmationRequest: RemoteChallenge
     let onSuccess: ((Bool) -> Void)?
-    let onError: ((Error) -> Void)?
+    let onError: ((DomainError) -> Void)?
 
     var body: some View {
         ZStack {
@@ -70,7 +76,8 @@ struct MainContentView: View {
                                 }
                                 .buttonStyle(.ikBordered)
                                 .ikButtonFullWidth(true)
-                                .ikButtonLoading(isLoading)
+                                .ikButtonLoading(loadingState == .loadingDeny)
+                                .disabled(loadingState == .loadingApprove)
                                 .controlSize(.large)
 
                                 Button(Localizable.buttonApprove) {
@@ -78,7 +85,8 @@ struct MainContentView: View {
                                 }
                                 .buttonStyle(.ikBorderedProminent)
                                 .ikButtonFullWidth(true)
-                                .ikButtonLoading(isLoading)
+                                .ikButtonLoading(loadingState == .loadingApprove)
+                                .disabled(loadingState == .loadingDeny)
                                 .controlSize(.large)
                             }
                         }
@@ -100,7 +108,7 @@ struct MainContentView: View {
     }
 
     func validateConnectionAttempt(approved: Bool) {
-        isLoading = true
+        loadingState = approved ? .loadingApprove : .loadingDeny
         Task {
             do {
                 _ = try await session.apiFetcher.validateChallenge(
@@ -108,10 +116,10 @@ struct MainContentView: View {
                     approved: approved
                 )
                 onSuccess?(approved)
-            } catch {
+            } catch let error as DomainError {
                 onError?(error)
             }
-            isLoading = false
+            loadingState = .idle
         }
     }
 }

@@ -50,17 +50,39 @@ extension IKButtonTheme {
 
 enum ConnectionConfirmationContent {
     case main
-    case error
+    case error(DomainError)
     case connectionRefused
 
     var title: String {
         switch self {
         case .main:
-            Localizable.twoFactorAuthTryingToLogInTitle
-        case .error:
-            "!An error occurred"
+            return Localizable.twoFactorAuthTryingToLogInTitle
+        case .error(let error):
+            return error.title
         case .connectionRefused:
-            Localizable.twoFactorAuthConnectionRefusedTitle
+            return Localizable.twoFactorAuthConnectionRejectedTitle
+        }
+    }
+
+    var headerColor: Color {
+        switch self {
+        case .main:
+            return .featurePrimary
+        case .error(let error):
+            return error.headerColor
+        case .connectionRefused:
+            return .ikOrange
+        }
+    }
+
+    var headerImage: Image {
+        switch self {
+        case .main:
+            return Image(.shield)
+        case .error(let error):
+            return error.headerImage
+        case .connectionRefused:
+            return Image(.stopHandSlash)
         }
     }
 }
@@ -96,9 +118,9 @@ struct ConnectionConfirmationView: View {
                     VStack(spacing: IKPadding.medium) {
                         ZStack {
                             Circle()
-                                .fill(Color.featurePrimary)
+                                .fill(currentContent.headerColor)
                                 .frame(width: 48, height: 48)
-                            Image(.shield)
+                            currentContent.headerImage
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: IKIconSize.large.rawValue)
@@ -123,19 +145,16 @@ struct ConnectionConfirmationView: View {
                                     currentContent = .connectionRefused
                                 }
                             } onError: { error in
-                                currentContent = .error
+                                currentContent = .error(error)
                             }
                             .padding(.top, value: spaceConstrained ? .small : .giant)
-                        case .error:
-                            InformationContentView(
-                                text: CoreUILocalizable.anErrorHasOccurred,
-                                onClose: dismiss.callAsFunction
-                            )
-                            .padding(.top, value: spaceConstrained ? .small : .large)
+                        case .error(let error):
+                            InformationContentView(text: error.localizedDescription, onClose: dismiss.callAsFunction)
+                                .padding(.top, value: spaceConstrained ? .small : .large)
                         case .connectionRefused:
                             InformationContentView(
-                                text: Localizable.twoFactorAuthConnectionRefusedDescription,
-                                additionalAction: .init(title: Localizable.buttonModifyPassword) {
+                                text: Localizable.twoFactorAuthConnectionRejectedDescription,
+                                additionalAction: .init(title: Localizable.buttonEditPassword) {
                                     guard let modifyPasswordURL =
                                         URL(string: "https://manager.\(ApiEnvironment.current.host)/v3/ng/profile/edit-password")
                                     else {
@@ -172,20 +191,47 @@ struct ConnectionConfirmationView: View {
     )
 }
 
-#Preview("Error") {
-    ConnectionConfirmationView(
-        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
-                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
-        connectionConfirmationRequest: .preview,
-        currentContent: .error
-    )
-}
-
 #Preview("Connection refused") {
     ConnectionConfirmationView(
         session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
                                                      apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
         connectionConfirmationRequest: .preview,
         currentContent: .connectionRefused
+    )
+}
+
+#Preview("Error - Unknown") {
+    ConnectionConfirmationView(
+        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
+                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
+        connectionConfirmationRequest: .preview,
+        currentContent: .error(DomainError.unknown)
+    )
+}
+
+#Preview("Error - Challenge Expired") {
+    ConnectionConfirmationView(
+        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
+                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
+        connectionConfirmationRequest: .preview,
+        currentContent: .error(DomainError.challengeExpired)
+    )
+}
+
+#Preview("Error - Challenge Not found") {
+    ConnectionConfirmationView(
+        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
+                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
+        connectionConfirmationRequest: .preview,
+        currentContent: .error(DomainError.objectNotFound)
+    )
+}
+
+#Preview("Error - Network Error") {
+    ConnectionConfirmationView(
+        session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
+                                                     apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
+        connectionConfirmationRequest: .preview,
+        currentContent: .error(DomainError(networkError: URLError(.networkConnectionLost)))
     )
 }

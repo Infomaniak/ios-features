@@ -4,7 +4,7 @@
  * Locale: en, English
  * Tagged: ios, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !kSuite, !kSuiteUtils, !my kSuite, !privacy
  * Exported by: Philippe Weidmann
- * Exported at: Fri, 26 Sep 2025 08:14:24 +0200
+ * Exported at: Tue, 07 Oct 2025 09:07:57 +0200
  */
 
 /* loco:68d52770d78cd0b5b102a952 */
@@ -17,31 +17,40 @@
 "buttonDeny" = "Deny";
 
 /* loco:68d4f8d82bc1b93265068752 */
-"buttonModifyPassword" = "Modify password";
+"buttonEditPassword" = "Edit password";
+
+/* loco:68da784d25d05d451b04f663 */
+"twoFactorAuthAlreadyProcessedErrorTitle" = "This request has already been processed";
+
+/* loco:68da78cbe3aba64d960ff0c2 */
+"twoFactorAuthCheckOriginDescription" = "You didn’t initiate this action? Check your active devices, and disconnect the ones you don’t recognize.";
 
 /* loco:68c04f14ec33731be0018cb8 */
 "twoFactorAuthConfirmationDescription" = "Confirming this login attempt will allow that device to access your Infomaniak account";
 
-/* loco:68d525efa14e70cfc4037845 */
-"twoFactorAuthConnectionAlreadyValidatedTitle" = "This connection has already been validated from another device";
-
-/* loco:68d525a2a14e70cfc4037842 */
-"twoFactorAuthConnectionExpiredTitle" = "This connection request has expired";
-
 /* loco:68d5248990faa534e505f204 */
-"twoFactorAuthConnectionRefusedDescription" = "You have refused a login attempt. To secure your account, change your password. If you are the source of this attempt, try logging in again.";
+"twoFactorAuthConnectionRejectedDescription" = "You have refused a login attempt. To secure your account, change your password. If you are the source of this attempt, try logging in again.";
 
 /* loco:68d5247e90faa534e505f202 */
-"twoFactorAuthConnectionRefusedTitle" = "Connection Refused";
-
-/* loco:68d525cbd0a3850b780837f2 */
-"twoFactorAuthConnectionValidationDescription" = "You didn’t initiate this validation? Check the activity of your last used devices.";
+"twoFactorAuthConnectionRejectedTitle" = "Connection Rejected";
 
 /* loco:68c04d95fa5d09365f02c055 */
 "twoFactorAuthDeviceLabel" = "Device";
 
+/* loco:68da77e9a0c5c4a1d809d4c4 */
+"twoFactorAuthExpiredErrorTitle" = "This login request has expired";
+
+/* loco:68de2abbe02b752bd80f2782 */
+"twoFactorAuthGenericErrorDescription" = "Unable to complete the operation.\\nPlease try again.";
+
 /* loco:68c04e0aec33731be0018cb4 */
 "twoFactorAuthLocationLabel" = "Location";
+
+/* loco:68de26e7e0ead3ef030b71f2 */
+"twoFactorAuthNoNetworkErrorDescription" = "Unable to complete the operation.\\nCheck your connection and try again.";
+
+/* loco:68de2516c411b0f8b20a4832 */
+"twoFactorAuthNoNetworkErrorTitle" = "No network connection";
 
 /* loco:68c053c71ea34fd57a062325 */
 "twoFactorAuthTryingToLogInTitle" = "Are you trying to login?";
