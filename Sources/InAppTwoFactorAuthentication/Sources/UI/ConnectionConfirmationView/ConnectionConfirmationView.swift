@@ -115,7 +115,7 @@ struct ConnectionConfirmationView: View {
         NavigationView {
             FittingView { spaceConstrained in
                 VStack(spacing: 0) {
-                    VStack(spacing: IKPadding.medium) {
+                    VStack(spacing: IKPadding.large) {
                         ZStack {
                             Circle()
                                 .fill(currentContent.headerColor)
@@ -130,7 +130,7 @@ struct ConnectionConfirmationView: View {
                             .font(.Custom.title2)
                             .foregroundStyle(Color.Custom.textPrimary)
                             .multilineTextAlignment(.center)
-                            .padding(IKPadding.medium)
+                            .padding(.horizontal, value: .medium)
                     }
 
                     Group {
@@ -151,7 +151,7 @@ struct ConnectionConfirmationView: View {
                             .padding(.top, value: spaceConstrained ? .small : .giant)
                         case .error(let error):
                             InformationContentView(text: error.localizedDescription, onClose: dismiss.callAsFunction)
-                                .padding(.top, value: spaceConstrained ? .small : .large)
+                                .padding(.top, value: .large)
                         case .connectionRefused:
                             InformationContentView(
                                 text: Localizable.twoFactorAuthConnectionRejectedDescription,
@@ -165,7 +165,7 @@ struct ConnectionConfirmationView: View {
                                 },
                                 onClose: dismiss.callAsFunction
                             )
-                            .padding(.top, value: spaceConstrained ? .small : .large)
+                            .padding(.top, value: .large)
                         }
                     }
                     .frame(maxWidth: 600)
