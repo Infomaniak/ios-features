@@ -18,23 +18,26 @@
 
 import SwiftUI
 
-extension Color {
-    enum Custom {
-        /// light: greyOrca / dark: greyRabbit
-        static let textPrimary = Color(
-            light: UIColor.greyOrca,
-            dark: UIColor.greyRabbit
-        )
-        /// light: greyElephant / dark: greyShark
-        static let textSecondary = Color(
-            light: UIColor.greyElephant,
-            dark: UIColor.greyShark
-        )
+struct TimeAgoView: View {
+    let challengeCreatedAt: Date
 
-        /// light: greyMouse / dark: greyOrca
-        static let divider = Color(
-            light: UIColor.greyMouse,
-            dark: UIColor.greyOrca
-        )
+    var body: some View {
+        TimelineView(.periodic(from: challengeCreatedAt, by: 60)) { context in
+            Text(text(for: context.date))
+        }
     }
+
+    func text(for date: Date) -> String {
+        let secondsAgo = Int(date.timeIntervalSince(challengeCreatedAt))
+
+        if secondsAgo >= 60 {
+            return Localizable.twoFactorAuthMinutesAgoLabel(secondsAgo / 60)
+        } else {
+            return Localizable.twoFactorAuthJustNowLabel
+        }
+    }
+}
+
+#Preview {
+    TimeAgoView(challengeCreatedAt: Date())
 }

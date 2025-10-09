@@ -25,11 +25,15 @@ let package = Package(
         .library(
             name: "KSuiteUtils",
             targets: ["KSuiteUtils"]
+        ),
+        .library(
+            name: "InAppTwoFactorAuthentication",
+            targets: ["InAppTwoFactorAuthentication"]
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/Infomaniak/ios-core-ui", .upToNextMajor(from: "23.0.0")),
-        .package(url: "https://github.com/Infomaniak/ios-core", .upToNextMajor(from: "17.0.0")),
+        .package(url: "https://github.com/Infomaniak/ios-core-ui", .upToNextMajor(from: "24.0.0")),
+        .package(url: "https://github.com/Infomaniak/ios-core", .upToNextMajor(from: "18.0.0")),
         .package(url: "https://github.com/Infomaniak/ios-dependency-injection", .upToNextMajor(from: "2.0.3")),
         .package(url: "https://github.com/kean/Nuke", .upToNextMajor(from: "12.1.3"))
     ],
@@ -61,6 +65,18 @@ let package = Package(
         ),
         .target(
             name: "InterAppLogin",
+            dependencies: [
+                .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
+                .product(name: "InfomaniakCore", package: "ios-core"),
+                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
+                .product(name: "InfomaniakCoreUIResources", package: "ios-core-ui"),
+                .product(name: "DesignSystem", package: "ios-core-ui"),
+                .product(name: "Nuke", package: "Nuke"),
+                .product(name: "NukeUI", package: "Nuke")
+            ]
+        ),
+        .target(
+            name: "InAppTwoFactorAuthentication",
             dependencies: [
                 .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
                 .product(name: "InfomaniakCore", package: "ios-core"),

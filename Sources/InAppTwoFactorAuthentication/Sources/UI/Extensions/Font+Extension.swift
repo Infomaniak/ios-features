@@ -18,23 +18,18 @@
 
 import SwiftUI
 
-extension Color {
+extension Font {
     enum Custom {
-        /// light: greyOrca / dark: greyRabbit
-        static let textPrimary = Color(
-            light: UIColor.greyOrca,
-            dark: UIColor.greyRabbit
-        )
-        /// light: greyElephant / dark: greyShark
-        static let textSecondary = Color(
-            light: UIColor.greyElephant,
-            dark: UIColor.greyShark
-        )
+        /// Figma name: *Titre H2*
+        static let title2 = Font.dynamicTypeSizeFont(size: 18, weight: .semibold, relativeTo: .title2)
 
-        /// light: greyMouse / dark: greyOrca
-        static let divider = Color(
-            light: UIColor.greyMouse,
-            dark: UIColor.greyOrca
-        )
+        /// Figma name: *Body Medium*
+        static let headline = Font.dynamicTypeSizeFont(size: 16, weight: .medium, relativeTo: .headline)
+
+        /// Figma name: *Body Regular*
+        static let body = Font.dynamicTypeSizeFont(size: 16, weight: .regular, relativeTo: .body)
+
+        /// Figma name: *Body Small Regular*
+        static let callout = Font.dynamicTypeSizeFont(size: 14, weight: .regular, relativeTo: .callout)
     }
 }

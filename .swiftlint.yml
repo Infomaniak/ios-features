@@ -43,6 +43,7 @@ excluded:
  - Sources/InterAppLogin/Generated
  - Sources/KSuiteUtils/Generated
  - Sources/KSuite/Generated
+ - Sources/InAppTwoFactorAuthentication/Generated
 custom_rules:
   private_state:
     included:

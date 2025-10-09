@@ -28,12 +28,18 @@ extension Color {
         /// light: greyElephant / dark: greyShark
         static let textSecondary = Color(
             light: UIColor.greyElephant,
-            dark: UIColor.greyShark
+            dark: UIColor.greyMouse
         )
 
         /// light: greyMouse / dark: greyOrca
         static let divider = Color(
             light: UIColor.greyMouse,
+            dark: UIColor.greyOrca
+        )
+
+        /// light: greyMouse / dark: greyOrca
+        static let cardOutline = Color(
+            light: UIColor.clear,
             dark: UIColor.greyOrca
         )
     }

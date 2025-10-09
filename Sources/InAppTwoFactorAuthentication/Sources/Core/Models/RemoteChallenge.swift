@@ -16,25 +16,36 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import SwiftUI
+import Foundation
 
-extension Color {
-    enum Custom {
-        /// light: greyOrca / dark: greyRabbit
-        static let textPrimary = Color(
-            light: UIColor.greyOrca,
-            dark: UIColor.greyRabbit
-        )
-        /// light: greyElephant / dark: greyShark
-        static let textSecondary = Color(
-            light: UIColor.greyElephant,
-            dark: UIColor.greyShark
-        )
+enum DeviceType: String, Decodable {
+    case computer
+    case phone
+    case tablet
+}
 
-        /// light: greyMouse / dark: greyOrca
-        static let divider = Color(
-            light: UIColor.greyMouse,
-            dark: UIColor.greyOrca
-        )
+struct Device: Decodable {
+    let name: String
+    let type: DeviceType
+}
+
+enum ChallengeType: String, Decodable {
+    case approval
+    case unknown
+
+    init(from decoder: any Decoder) throws {
+        let singleKeyContainer = try decoder.singleValueContainer()
+        let value = try singleKeyContainer.decode(String.self)
+
+        self = ChallengeType(rawValue: value) ?? .unknown
     }
+}
+
+struct RemoteChallenge: Decodable {
+    let uuid: String
+    let type: ChallengeType
+    let device: Device
+    let location: String
+    let createdAt: Date
+    let expiresAt: Date
 }
