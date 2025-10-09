@@ -71,6 +71,10 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
                 return nil
             }
 
+            guard attempt.type == .approval else {
+                return nil // Only approval challenges are currently supported
+            }
+
             return (session: session, challenge: attempt)
         } catch {
             return nil
