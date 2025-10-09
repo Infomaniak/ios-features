@@ -39,7 +39,7 @@ extension Endpoint {
 
 protocol InAppTwoFactorAuthenticationFetchable {
     func latestChallenge() async throws -> RemoteChallenge?
-    func validateChallenge(uuid: String, approved: Bool) async throws(DomainError)
+    func validateChallenge(uuid: String, approved: Bool) async throws(TwoFactorAuthError)
 }
 
 struct MockInAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchable {
@@ -47,7 +47,7 @@ struct MockInAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetc
         RemoteChallenge.preview
     }
 
-    func validateChallenge(uuid: String, approved: Bool) async throws(DomainError) {}
+    func validateChallenge(uuid: String, approved: Bool) async throws(TwoFactorAuthError) {}
 }
 
 struct InAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchable {
@@ -65,7 +65,7 @@ struct InAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchabl
         return try await apiFetcher.perform(request: request, overrideDecoder: decoder)
     }
 
-    func validateChallenge(uuid: String, approved: Bool) async throws(DomainError) {
+    func validateChallenge(uuid: String, approved: Bool) async throws(TwoFactorAuthError) {
         do {
             if approved {
                 let request = apiFetcher.authenticatedRequest(.validateChallenge(uuid: uuid), method: .patch)
@@ -75,11 +75,11 @@ struct InAppTwoFactorAuthenticationFetcher: InAppTwoFactorAuthenticationFetchabl
                 let _: Empty = try await apiFetcher.perform(request: request, overrideDecoder: decoder)
             }
         } catch let error as ErrorWithCode {
-            throw DomainError(apiCode: error.code) ?? .unknown
+            throw TwoFactorAuthError(apiCode: error.code) ?? .unknown
         } catch let error as URLError {
-            throw DomainError(networkError: error)
+            throw TwoFactorAuthError(networkError: error)
         } catch {
-            throw DomainError.unknown
+            throw TwoFactorAuthError.unknown
         }
     }
 }

@@ -50,7 +50,7 @@ extension IKButtonTheme {
 
 enum ConnectionConfirmationContent {
     case main
-    case error(DomainError)
+    case error(TwoFactorAuthError)
     case connectionRefused
 
     var title: String {
@@ -206,7 +206,7 @@ struct ConnectionConfirmationView: View {
         session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
                                                      apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
         connectionConfirmationRequest: .preview,
-        currentContent: .error(DomainError.unknown)
+        currentContent: .error(TwoFactorAuthError.unknown)
     )
 }
 
@@ -215,7 +215,7 @@ struct ConnectionConfirmationView: View {
         session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
                                                      apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
         connectionConfirmationRequest: .preview,
-        currentContent: .error(DomainError.challengeExpired)
+        currentContent: .error(TwoFactorAuthError.challengeExpired)
     )
 }
 
@@ -224,7 +224,7 @@ struct ConnectionConfirmationView: View {
         session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
                                                      apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
         connectionConfirmationRequest: .preview,
-        currentContent: .error(DomainError.objectNotFound)
+        currentContent: .error(TwoFactorAuthError.objectNotFound)
     )
 }
 
@@ -233,6 +233,6 @@ struct ConnectionConfirmationView: View {
         session: InAppTwoFactorAuthenticationSession(user: PreviewUser.preview,
                                                      apiFetcher: MockInAppTwoFactorAuthenticationFetcher()),
         connectionConfirmationRequest: .preview,
-        currentContent: .error(DomainError(networkError: URLError(.networkConnectionLost)))
+        currentContent: .error(TwoFactorAuthError(networkError: URLError(.networkConnectionLost)))
     )
 }
