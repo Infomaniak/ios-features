@@ -39,9 +39,9 @@ extension IKButtonTheme {
     static let feature = IKButtonTheme(
         primary: Color.featurePrimary,
         secondary: .white,
-        tertiary: Color.featureSecondary,
-        disabledPrimary: Color.featurePrimary.opacity(0.8),
-        disabledSecondary: .white.opacity(0.8),
+        tertiary: Color.featureTertiary,
+        disabledPrimary: Color.featureDisabled,
+        disabledSecondary: Color.featureSecondaryDisabled,
         error: Color.red,
         smallFont: .Custom.headline,
         mediumFont: .Custom.headline
