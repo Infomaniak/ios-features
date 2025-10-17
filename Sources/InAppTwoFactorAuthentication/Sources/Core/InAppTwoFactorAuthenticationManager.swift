@@ -26,10 +26,17 @@ public protocol InAppTwoFactorAuthenticationManagerable {
 
 public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthenticationManagerable {
     private weak var lastActiveScene: UIWindowScene?
+
+    private var currentAttemptUUID: String?
     private var currentWindow: UIWindow?
+
+    private let checkIntervalSeconds: TimeInterval
+    private var lastCheckedConnectionAttemptsDate: Date?
+
     private typealias CheckConnectionAttemptResult = (session: InAppTwoFactorAuthenticationSession, challenge: RemoteChallenge)
 
-    public init() {
+    public init(checkIntervalSeconds: TimeInterval = 30) {
+        self.checkIntervalSeconds = checkIntervalSeconds
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleNotification(_:)),
@@ -44,7 +51,12 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
     }
 
     public func checkConnectionAttempts(using sessions: [InAppTwoFactorAuthenticationSession]) {
-        guard !sessions.isEmpty else { return }
+        guard !sessions.isEmpty,
+              Date().timeIntervalSince(lastCheckedConnectionAttemptsDate ?? .distantPast) > checkIntervalSeconds else {
+            return
+        }
+
+        lastCheckedConnectionAttemptsDate = Date()
 
         Task {
             await withTaskGroup(of: CheckConnectionAttemptResult?.self) { group in
@@ -84,23 +96,31 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
     @MainActor
     private func displayConnectionAttemptWindowFor(completeSession: CheckConnectionAttemptResult) {
         if let existingRootViewController = currentWindow?.rootViewController {
+            guard currentAttemptUUID != completeSession.challenge.uuid else {
+                return
+            }
+
             existingRootViewController.dismiss(animated: true) { [weak self] in
+                self?.currentAttemptUUID = completeSession.challenge.uuid
                 self?.currentWindow = ConnectionAttemptWindow(
                     session: completeSession.session,
                     connectionAttempt: completeSession.challenge,
                     windowScene: self?.lastActiveScene
                 ) { [weak self] in
                     self?.currentWindow?.resignKey()
+                    self?.currentAttemptUUID = nil
                     self?.currentWindow = nil
                 }
             }
         } else {
+            currentAttemptUUID = completeSession.challenge.uuid
             currentWindow = ConnectionAttemptWindow(
                 session: completeSession.session,
                 connectionAttempt: completeSession.challenge,
                 windowScene: lastActiveScene
             ) { [weak self] in
                 self?.currentWindow?.resignKey()
+                self?.currentAttemptUUID = nil
                 self?.currentWindow = nil
             }
         }
