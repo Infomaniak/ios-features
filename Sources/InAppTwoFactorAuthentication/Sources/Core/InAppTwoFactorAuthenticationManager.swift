@@ -27,9 +27,14 @@ public protocol InAppTwoFactorAuthenticationManagerable {
 public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthenticationManagerable {
     private weak var lastActiveScene: UIWindowScene?
     private var currentWindow: UIWindow?
+
+    private let checkIntervalSeconds: TimeInterval
+    private var lastCheckedConnectionAttemptsDate: Date?
+
     private typealias CheckConnectionAttemptResult = (session: InAppTwoFactorAuthenticationSession, challenge: RemoteChallenge)
 
-    public init() {
+    public init(checkIntervalSeconds: TimeInterval = 30) {
+        self.checkIntervalSeconds = checkIntervalSeconds
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleNotification(_:)),
@@ -44,7 +49,12 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
     }
 
     public func checkConnectionAttempts(using sessions: [InAppTwoFactorAuthenticationSession]) {
-        guard !sessions.isEmpty else { return }
+        guard !sessions.isEmpty,
+              Date().timeIntervalSince(lastCheckedConnectionAttemptsDate ?? .distantPast) > checkIntervalSeconds else {
+            return
+        }
+
+        lastCheckedConnectionAttemptsDate = Date()
 
         Task {
             await withTaskGroup(of: CheckConnectionAttemptResult?.self) { group in
