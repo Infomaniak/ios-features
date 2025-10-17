@@ -26,6 +26,8 @@ public protocol InAppTwoFactorAuthenticationManagerable {
 
 public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthenticationManagerable {
     private weak var lastActiveScene: UIWindowScene?
+
+    private var currentAttemptUUID: String?
     private var currentWindow: UIWindow?
 
     private let checkIntervalSeconds: TimeInterval
@@ -94,23 +96,31 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
     @MainActor
     private func displayConnectionAttemptWindowFor(completeSession: CheckConnectionAttemptResult) {
         if let existingRootViewController = currentWindow?.rootViewController {
+            guard currentAttemptUUID != completeSession.challenge.uuid else {
+                return
+            }
+
             existingRootViewController.dismiss(animated: true) { [weak self] in
+                self?.currentAttemptUUID = completeSession.challenge.uuid
                 self?.currentWindow = ConnectionAttemptWindow(
                     session: completeSession.session,
                     connectionAttempt: completeSession.challenge,
                     windowScene: self?.lastActiveScene
                 ) { [weak self] in
                     self?.currentWindow?.resignKey()
+                    self?.currentAttemptUUID = nil
                     self?.currentWindow = nil
                 }
             }
         } else {
+            currentAttemptUUID = completeSession.challenge.uuid
             currentWindow = ConnectionAttemptWindow(
                 session: completeSession.session,
                 connectionAttempt: completeSession.challenge,
                 windowScene: lastActiveScene
             ) { [weak self] in
                 self?.currentWindow?.resignKey()
+                self?.currentAttemptUUID = nil
                 self?.currentWindow = nil
             }
         }
