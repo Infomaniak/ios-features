@@ -22,6 +22,7 @@ import UIKit
 
 public protocol InAppTwoFactorAuthenticationManagerable {
     func checkConnectionAttempts(using sessions: [InAppTwoFactorAuthenticationSession])
+    func checkConnectionAttempts(using session: InAppTwoFactorAuthenticationSession)
 }
 
 public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthenticationManagerable {
@@ -74,6 +75,16 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
                     return
                 }
             }
+        }
+    }
+
+    public func checkConnectionAttempts(using session: InAppTwoFactorAuthenticationSession) {
+        Task {
+            guard let completeSession = await checkConnectionAttemptWith(session: session) else {
+                return
+            }
+
+            await displayConnectionAttemptWindowFor(completeSession: completeSession)
         }
     }
 
