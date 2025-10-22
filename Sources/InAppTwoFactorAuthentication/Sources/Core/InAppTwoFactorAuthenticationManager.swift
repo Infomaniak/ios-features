@@ -23,9 +23,12 @@ import UIKit
 public protocol InAppTwoFactorAuthenticationManagerable {
     func checkConnectionAttempts(using sessions: [InAppTwoFactorAuthenticationSession])
     func checkConnectionAttempts(using session: InAppTwoFactorAuthenticationSession)
+    func handleRemoteNotification(_ notification: UNNotification) -> InAppTwoFactorAuthenticationManager.UserId?
 }
 
 public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthenticationManagerable {
+    public typealias UserId = Int
+
     private weak var lastActiveScene: UIWindowScene?
 
     private var currentAttemptUUID: String?
@@ -86,6 +89,18 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
 
             await displayConnectionAttemptWindowFor(completeSession: completeSession)
         }
+    }
+
+    public func handleRemoteNotification(_ notification: UNNotification) -> UserId? {
+        guard let userInfo = notification.request.content.userInfo as? [String: Any],
+              let type = userInfo[NotificationUserInfoKeys.type] as? String,
+              type == NotificationType.challengeApproval,
+              let userId = userInfo[NotificationUserInfoKeys.userId] as? Int
+        else {
+            return nil
+        }
+
+        return userId
     }
 
     private func checkConnectionAttemptWith(session: InAppTwoFactorAuthenticationSession) async -> CheckConnectionAttemptResult? {
