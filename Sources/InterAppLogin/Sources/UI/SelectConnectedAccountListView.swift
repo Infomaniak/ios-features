@@ -27,14 +27,17 @@ struct SelectConnectedAccountListView: View {
     @State private var selectedAccountIds: Set<Int>
 
     private let connectedAccounts: [ConnectedAccount]
+    private let allowsMultipleSelection: Bool
     private let onAddAccount: () -> Void
     private let onSelectedAccountSaved: (Set<Int>) -> Void
 
     init(connectedAccounts: [ConnectedAccount],
          currentlySelectedAccountIds: Set<Int>,
+         allowsMultipleSelection: Bool,
          onAddAccount: @escaping () -> Void,
          onSelectedAccountSaved: @escaping (Set<Int>) -> Void) {
         self.connectedAccounts = connectedAccounts
+        self.allowsMultipleSelection = allowsMultipleSelection
         _selectedAccountIds = State(wrappedValue: currentlySelectedAccountIds)
         self.onAddAccount = onAddAccount
         self.onSelectedAccountSaved = onSelectedAccountSaved
@@ -48,7 +51,11 @@ struct SelectConnectedAccountListView: View {
                         selectedAccountIds.contains(account.userId)
                     }, set: { isSelected in
                         if isSelected {
-                            selectedAccountIds.insert(account.userId)
+                            if allowsMultipleSelection {
+                                selectedAccountIds.insert(account.userId)
+                            } else {
+                                selectedAccountIds = [account.userId]
+                            }
                         } else if selectedAccountIds.count > 1 {
                             selectedAccountIds.remove(account.userId)
                         }
@@ -92,7 +99,7 @@ struct SelectConnectedAccountListView: View {
     }
 }
 
-#Preview {
+#Preview("Multi Selection") {
     Text("Hello World")
         .floatingPanel(
             isPresented: .constant(true),
@@ -102,6 +109,24 @@ struct SelectConnectedAccountListView: View {
             SelectConnectedAccountListView(
                 connectedAccounts: [PreviewHelper.connectedAccount, PreviewHelper.connectedAccount2],
                 currentlySelectedAccountIds: [PreviewHelper.connectedAccount.userId],
+                allowsMultipleSelection: true,
+                onAddAccount: {},
+                onSelectedAccountSaved: { _ in }
+            )
+        }
+}
+
+#Preview("Single Selection") {
+    Text("Hello World")
+        .floatingPanel(
+            isPresented: .constant(true),
+            title: "Select one account",
+            backgroundColor: .backgroundSecondary
+        ) {
+            SelectConnectedAccountListView(
+                connectedAccounts: [PreviewHelper.connectedAccount, PreviewHelper.connectedAccount2],
+                currentlySelectedAccountIds: [PreviewHelper.connectedAccount.userId],
+                allowsMultipleSelection: false,
                 onAddAccount: {},
                 onSelectedAccountSaved: { _ in }
             )
