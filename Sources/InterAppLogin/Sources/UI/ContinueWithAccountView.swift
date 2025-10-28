@@ -77,7 +77,7 @@ struct ManyAccountView: View {
 }
 
 public struct ContinueWithAccountView: View {
-    @State private var isAccountShowingAccountSelections = false
+    @State private var isShowingAccountsSelection = false
     @State private var accounts: [ConnectedAccount]?
     @State private var selectedAccountIds = Set<Int>()
 
@@ -116,7 +116,7 @@ public struct ContinueWithAccountView: View {
                         .disabled(isLoading)
                 } else {
                     Button {
-                        isAccountShowingAccountSelections.toggle()
+                        isShowingAccountsSelection.toggle()
                     } label: {
                         if accounts.count == 1 || selectedAccountIds.count == 1, let selectedAccount = selectedAccounts.first {
                             OneAccountView(account: selectedAccount)
@@ -153,7 +153,7 @@ public struct ContinueWithAccountView: View {
             }
         }
         .floatingPanel(
-            isPresented: $isAccountShowingAccountSelections,
+            isPresented: $isShowingAccountsSelection,
             title: InterAppLoginLocalizable.Localizable.selectAccountPanelTitle,
             backgroundColor: .backgroundSecondary
         ) {
