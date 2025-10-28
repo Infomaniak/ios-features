@@ -77,12 +77,13 @@ struct ManyAccountView: View {
 }
 
 public struct ContinueWithAccountView: View {
-    @State private var isAccountShowingAccountSelections = false
+    @State private var isShowingAccountsSelection = false
     @State private var accounts: [ConnectedAccount]?
     @State private var selectedAccountIds = Set<Int>()
 
     private let isLoading: Bool
     private let excludingUserIds: [Int]
+    private let allowsMultipleSelection: Bool
     private let onLoginPressed: () -> Void
     private let onLoginWithAccountsPressed: ([ConnectedAccount]) -> Void
     private let onCreateAccountPressed: () -> Void
@@ -91,13 +92,21 @@ public struct ContinueWithAccountView: View {
         accounts?.filter { selectedAccountIds.contains($0.userId) } ?? []
     }
 
+    private var selectAccountPanelTitle: String {
+        allowsMultipleSelection ?
+            InterAppLoginLocalizable.Localizable.selectAccountPanelTitle :
+            InterAppLoginLocalizable.Localizable.selectSingleAccountPanelTitle
+    }
+
     public init(isLoading: Bool,
                 excludingUserIds: [Int] = [],
+                allowsMultipleSelection: Bool = true,
                 onLoginPressed: @escaping () -> Void,
                 onLoginWithAccountsPressed: @escaping ([ConnectedAccount]) -> Void,
                 onCreateAccountPressed: @escaping () -> Void) {
-        self.excludingUserIds = excludingUserIds
         self.isLoading = isLoading
+        self.excludingUserIds = excludingUserIds
+        self.allowsMultipleSelection = allowsMultipleSelection
         self.onLoginPressed = onLoginPressed
         self.onLoginWithAccountsPressed = onLoginWithAccountsPressed
         self.onCreateAccountPressed = onCreateAccountPressed
@@ -116,7 +125,7 @@ public struct ContinueWithAccountView: View {
                         .disabled(isLoading)
                 } else {
                     Button {
-                        isAccountShowingAccountSelections.toggle()
+                        isShowingAccountsSelection.toggle()
                     } label: {
                         if accounts.count == 1 || selectedAccountIds.count == 1, let selectedAccount = selectedAccounts.first {
                             OneAccountView(account: selectedAccount)
@@ -153,13 +162,14 @@ public struct ContinueWithAccountView: View {
             }
         }
         .floatingPanel(
-            isPresented: $isAccountShowingAccountSelections,
-            title: InterAppLoginLocalizable.Localizable.selectAccountPanelTitle,
+            isPresented: $isShowingAccountsSelection,
+            title: selectAccountPanelTitle,
             backgroundColor: .backgroundSecondary
         ) {
             SelectConnectedAccountListView(
                 connectedAccounts: accounts ?? [],
                 currentlySelectedAccountIds: selectedAccountIds,
+                allowsMultipleSelection: allowsMultipleSelection,
                 onAddAccount: onAddAccountPressed,
                 onSelectedAccountSaved: onSelectedAccountSaved
             )
