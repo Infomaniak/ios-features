@@ -78,7 +78,7 @@ struct SelectConnectedAccountListView: View {
                         .iconSize(.large)
                         .foregroundStyle(.tint)
 
-                    Text(InterAppLoginLocalizable.Localizable.buttonUseOtherAccount)
+                    Text(InterAppLoginLocalizable.buttonUseOtherAccount)
                         .foregroundStyle(Color.Custom.textPrimary)
                         .font(.Custom.body)
                         .frame(maxWidth: .infinity, alignment: .leading)

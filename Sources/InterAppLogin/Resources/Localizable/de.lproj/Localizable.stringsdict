@@ -3,10 +3,10 @@
 <!--
  Loco ios export: Xcode Stringsdict (legacy)
  Project: CoreUI
- Locale: fr, French
- Tagged: ios-stringsdict, !common, !emoji-reaction, !ios, !my kSuite, !privacy
+ Locale: de, German
+ Tagged: ios-stringsdict, !common, !emoji-reaction, !inapp2fa, !kSuite, !kSuiteUtils, !my kSuite, !privacy
  Exported by: Philippe Weidmann
- Exported at: Fri, 04 Jul 2025 13:55:36 +0200
+ Exported at: Tue, 28 Oct 2025 09:34:38 +0100
 -->
 <plist version="1.0">
   <dict>
@@ -21,9 +21,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Continuer avec ce compte</string>
+        <string>Weiter mit diesem Konto</string>
         <key>other</key>
-        <string>Continuer avec ces comptes</string>
+        <string>Weiter mit diesen Konten</string>
       </dict>
     </dict>
     <key>selectedAccountCountLabel</key>
@@ -37,9 +37,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d compte sélectionné</string>
+        <string>%d Konto ausgewählt</string>
         <key>other</key>
-        <string>%d comptes sélectionnés</string>
+        <string>%d Konten ausgewählt</string>
       </dict>
     </dict>
   </dict>
