@@ -62,7 +62,7 @@ struct ManyAccountView: View {
         HStack(spacing: IKPadding.mini) {
             ConnectedAccountAvatarStackView(accounts: selectedAccounts)
 
-            Text(InterAppLoginLocalizable.PluralLocalizable.selectedAccountCountLabel(selectedAccounts.count))
+            Text(InterAppLoginLocalizable.selectedAccountCountLabel(selectedAccounts.count))
                 .frame(maxWidth: .infinity)
                 .lineLimit(1)
 
@@ -94,8 +94,8 @@ public struct ContinueWithAccountView: View {
 
     private var selectAccountPanelTitle: String {
         allowsMultipleSelection ?
-            InterAppLoginLocalizable.Localizable.selectAccountPanelTitle :
-            InterAppLoginLocalizable.Localizable.selectSingleAccountPanelTitle
+            InterAppLoginLocalizable.selectAccountPanelTitle :
+            InterAppLoginLocalizable.selectSingleAccountPanelTitle
     }
 
     public init(isLoading: Bool,
@@ -116,11 +116,11 @@ public struct ContinueWithAccountView: View {
         VStack(spacing: IKPadding.mini) {
             if let accounts {
                 if accounts.isEmpty {
-                    Button(InterAppLoginLocalizable.Localizable.buttonLogin, action: onLoginPressed)
+                    Button(InterAppLoginLocalizable.buttonLogin, action: onLoginPressed)
                         .buttonStyle(.ikBorderedProminent)
                         .ikButtonLoading(isLoading)
 
-                    Button(InterAppLoginLocalizable.Localizable.buttonCreateAccount, action: onCreateAccountPressed)
+                    Button(InterAppLoginLocalizable.buttonCreateAccount, action: onCreateAccountPressed)
                         .buttonStyle(.ikBorderless)
                         .disabled(isLoading)
                 } else {
@@ -136,7 +136,7 @@ public struct ContinueWithAccountView: View {
                     .buttonStyle(.outlined)
                     .disabled(isLoading)
 
-                    Button(InterAppLoginLocalizable.PluralLocalizable.buttonContinueWithAccounts(selectedAccountIds.count)) {
+                    Button(InterAppLoginLocalizable.buttonContinueWithAccounts(selectedAccountIds.count)) {
                         onLoginWithAccountsPressed(selectedAccounts)
                     }
                     .buttonStyle(.ikBorderedProminent)
