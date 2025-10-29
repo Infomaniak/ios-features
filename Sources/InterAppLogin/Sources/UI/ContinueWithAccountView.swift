@@ -155,7 +155,11 @@ public struct ContinueWithAccountView: View {
                 !excludingUserIds.contains(connectedAccount.userId)
             }
 
-            selectedAccountIds = Set(accounts.compactMap(\.userId))
+            if allowsMultipleSelection {
+                selectedAccountIds = Set(accounts.compactMap(\.userId))
+            } else if let firstAccount = accounts.first {
+                selectedAccountIds = [firstAccount.userId]
+            }
 
             withAnimation {
                 self.accounts = accounts
