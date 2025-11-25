@@ -84,6 +84,8 @@ public struct ContinueWithAccountView: View {
     private let isLoading: Bool
     private let excludingUserIds: [Int]
     private let allowsMultipleSelection: Bool
+    private let primaryButtonTitle: String?
+    private let secondaryButtonTitle: String?
     private let onLoginPressed: () -> Void
     private let onLoginWithAccountsPressed: ([ConnectedAccount]) -> Void
     private let onCreateAccountPressed: () -> Void
@@ -101,12 +103,16 @@ public struct ContinueWithAccountView: View {
     public init(isLoading: Bool,
                 excludingUserIds: [Int] = [],
                 allowsMultipleSelection: Bool = true,
+                primaryButtonTitle: String? = nil,
+                secondaryButtonTitle: String? = nil,
                 onLoginPressed: @escaping () -> Void,
                 onLoginWithAccountsPressed: @escaping ([ConnectedAccount]) -> Void,
                 onCreateAccountPressed: @escaping () -> Void) {
         self.isLoading = isLoading
         self.excludingUserIds = excludingUserIds
         self.allowsMultipleSelection = allowsMultipleSelection
+        self.primaryButtonTitle = primaryButtonTitle
+        self.secondaryButtonTitle = secondaryButtonTitle
         self.onLoginPressed = onLoginPressed
         self.onLoginWithAccountsPressed = onLoginWithAccountsPressed
         self.onCreateAccountPressed = onCreateAccountPressed
@@ -116,11 +122,11 @@ public struct ContinueWithAccountView: View {
         VStack(spacing: IKPadding.mini) {
             if let accounts {
                 if accounts.isEmpty {
-                    Button(InterAppLoginLocalizable.buttonLogin, action: onLoginPressed)
+                    Button(primaryButtonTitle ?? InterAppLoginLocalizable.buttonLogin, action: onLoginPressed)
                         .buttonStyle(.ikBorderedProminent)
                         .ikButtonLoading(isLoading)
 
-                    Button(InterAppLoginLocalizable.buttonCreateAccount, action: onCreateAccountPressed)
+                    Button(secondaryButtonTitle ?? InterAppLoginLocalizable.buttonCreateAccount, action: onCreateAccountPressed)
                         .buttonStyle(.ikBorderless)
                         .disabled(isLoading)
                 } else {
