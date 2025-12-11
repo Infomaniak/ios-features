@@ -50,7 +50,8 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
     }
 
     @objc private func handleNotification(_ notification: Notification) {
-        guard let scene = notification.object as? UIWindowScene else { return }
+        guard let scene = notification.object as? UIWindowScene,
+              scene.session.role == .windowApplication else { return }
         lastActiveScene = scene
     }
 
