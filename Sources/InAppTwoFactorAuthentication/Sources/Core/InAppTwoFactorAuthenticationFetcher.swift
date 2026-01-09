@@ -23,7 +23,16 @@ import InfomaniakCoreUIResources
 
 extension ApiEnvironment {
     var loginHost: String {
-        return "login.\(host)"
+        switch self {
+        case .prod, .preprod:
+            return "login.\(host)"
+        case .customHost(let host):
+            if host.contains("orphan") {
+                return "login.\(ApiEnvironment.preprod.host)"
+            }
+
+            return "login.\(host)"
+        }
     }
 }
 
