@@ -21,7 +21,7 @@ import Foundation
 import InfomaniakCore
 import InfomaniakCoreUIResources
 
-extension ApiEnvironment {
+public extension ApiEnvironment {
     var loginHost: String {
         switch self {
         case .prod, .preprod:
