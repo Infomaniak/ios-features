@@ -16,38 +16,37 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Testing
 import InfomaniakFeatures
+import Testing
 
 @Suite("ApiEnvironment loginHost tests")
 struct ApiEnvironmentLoginHostTests {
-
     @Test("Production environment login host")
-    func testProductionLoginHost() {
+    func productionLoginHost() {
         let environment = ApiEnvironment.prod
         #expect(environment.loginHost == "login.infomaniak.com")
     }
 
     @Test("Preproduction environment login host")
-    func testPreproductionLoginHost() {
+    func preproductionLoginHost() {
         let environment = ApiEnvironment.preprod
         #expect(environment.loginHost == "login.preprod.dev.infomaniak.ch")
     }
 
     @Test("Custom host environment login host")
-    func testCustomHostLoginHost() {
+    func customHostLoginHost() {
         let environment = ApiEnvironment.customHost("example.com")
         #expect(environment.loginHost == "login.example.com")
     }
 
     @Test("Custom host with orphan should use preprod login host")
-    func testCustomHostWithOrphanLoginHost() {
+    func customHostWithOrphanLoginHost() {
         let environment = ApiEnvironment.customHost("orphan.example.com")
         #expect(environment.loginHost == "login.preprod.dev.infomaniak.ch")
     }
 
     @Test("Custom host without orphan should use its own login host")
-    func testCustomHostWithoutOrphanLoginHost() {
+    func customHostWithoutOrphanLoginHost() {
         let environment = ApiEnvironment.customHost("custom.example.com")
         #expect(environment.loginHost == "login.custom.example.com")
     }
