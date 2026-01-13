@@ -50,4 +50,16 @@ struct ApiEnvironmentLoginHostTests {
         let environment = ApiEnvironment.customHost("custom.example.com")
         #expect(environment.loginHost == "login.custom.example.com")
     }
+
+    @Test("Custom host with mail-mr should use preprod login host")
+    func customHostWithMailMrLoginHost() {
+        let environment = ApiEnvironment.customHost("mail-mr.example.com")
+        #expect(environment.loginHost == "login.preprod.dev.infomaniak.ch")
+    }
+
+    @Test("Custom host without mail-mr should use its own login host")
+    func customHostWithoutMailMrLoginHost() {
+        let environment = ApiEnvironment.customHost("mail-custom.example.com")
+        #expect(environment.loginHost == "login.mail-custom.example.com")
+    }
 }
