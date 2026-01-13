@@ -27,7 +27,7 @@ public extension ApiEnvironment {
         case .prod, .preprod:
             return "login.\(host)"
         case .customHost(let host):
-            if host.contains("orphan") {
+            if host.contains("orphan") || host.contains("mail-mr") {
                 return "login.\(ApiEnvironment.preprod.host)"
             }
 
