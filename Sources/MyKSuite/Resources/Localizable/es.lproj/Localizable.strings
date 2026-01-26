@@ -2,13 +2,10 @@
  * Loco ios export: Xcode Strings (legacy)
  * Project: CoreUI
  * Locale: es, Spanish
- * Tagged: ios, !common, !privacy
- * Exported by: Ambroise Decouttere
- * Exported at: Tue, 04 Feb 2025 11:20:34 +0100
+ * Tagged: ios, !appIntegrity, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !kSuiteUtils, !network, !privacy
+ * Exported by: Valentin Perignon
+ * Exported at: Mon, 26 Jan 2026 12:58:38 +0100
  */
-
-/* loco:679237f6daa3807fa008b175 */
-"buttonClose" = "Cerrar";
 
 /* loco:67988071a77178d0df04c2a2 */
 "iOSMyKSuiteDashboardSubscriptionButton" = "Gestionar mi suscripción";
@@ -26,7 +23,7 @@
 "myKSuiteDashboardFreeTrialButton" = "Prueba gratuita";
 
 /* loco:679b59981c4d7d32f6069642 */
-"myKSuiteDashboardFreeTrialDescription" = "Obtenga más funcionalidad y almacenamiento con mi kSuite+";
+"myKSuiteDashboardFreeTrialDescription" = "Obtenga más funcionalidad y almacenamiento con my kSuite+";
 
 /* loco:679b584f89ba84ff710b5872 */
 "myKSuiteDashboardFreeTrialTitle" = "30 días gratis";
@@ -68,16 +65,16 @@
 "myKSuiteUpgradeDescription" = "Más espacio, más posibilidades y más flexibilidad para hacer lo que le gusta.";
 
 /* loco:679237c7ece9f81d070d4662 */
-"myKSuiteUpgradeDetails" = "Para beneficiarse de mi kSuite+, modifique su oferta desde su interfaz web.";
+"myKSuiteUpgradeDetails" = "Para beneficiarse de my kSuite+, modifique su oferta desde su interfaz web.";
 
 /* loco:67a09ba06899047858006672 */
-"myKSuiteUpgradeDriveLabel" = "1 TB para tus fotos, documentos y archivos";
+"myKSuiteUpgradeDriveLabel" = "1 ó 6 TB para sus fotos, documentos y archivos";
+
+/* loco:67a226592abfba62b90b27c2 */
+"myKSuiteUpgradeDropboxLabel" = "Cajas de depósito, edición PDF…";
 
 /* loco:6797782f5ab272f013013552 */
 "myKSuiteUpgradeLabel" = "Y aún más.";
-
-/* loco:67a09be0720a8a9a3b0ece64 */
-"myKSuiteUpgradePdfEditionLabel" = "Edición en PDF";
 
 /* loco:67a09ac2665e51f3f20f6674 */
 "myKSuiteUpgradeRedirectLabel" = "Redirecciones, recordatorios personalizados…";
