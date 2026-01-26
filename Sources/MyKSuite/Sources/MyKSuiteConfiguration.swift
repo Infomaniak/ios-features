@@ -48,7 +48,7 @@ public enum MyKSuiteConfiguration {
                 ),
                 KSuiteLabel(
                     icon: MyKSuiteResources.folderArrowUp.swiftUIImage,
-                    text: MyKSuiteLocalizable.myKSuiteUpgradePdfEditionLabel
+                    text: MyKSuiteLocalizable.myKSuiteUpgradeDropboxLabel
                 ),
                 KSuiteLabel(
                     icon: MyKSuiteResources.gift.swiftUIImage,
