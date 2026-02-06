@@ -35,7 +35,7 @@ struct HeaderView<Content: View>: View {
                 avatarView()
                     .frame(width: 24, height: 24)
             }
-            .frame(width: 24, height: 24)
+            .frame(width: 40, height: 40)
             .overlay {
                 Circle()
                     .strokeBorder(ColorHelper.gradient, lineWidth: 1)
