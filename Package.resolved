@@ -1,5 +1,5 @@
 {
-  "originHash" : "d2e5fa4db56adac7f7ccce45a16497517c0a21a74d477d8ea1d70ec59e538076",
+  "originHash" : "90a31b2e34836ef3e075308f3a9cdbd9f16b8779fd49b785dbbe7b20cbf15d3e",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Infomaniak/ios-core",
       "state" : {
-        "revision" : "6de479a2b1532d13ee7794d29aebe7ed9b568129",
-        "version" : "18.1.0"
+        "revision" : "c9e513f953f04408f535ab53458ff56096e02f3e",
+        "version" : "18.6.0"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Infomaniak/ios-core-ui",
       "state" : {
-        "revision" : "16663433d134f70bf1dbd966b0f292a0941018ea",
-        "version" : "24.0.0"
+        "revision" : "40f37f59dc2aeba44285a1cfed48a380aca65da1",
+        "version" : "24.5.0"
       }
     },
     {
@@ -44,15 +44,6 @@
       "state" : {
         "revision" : "36d1c1886880695c735711c9e9226b07394e6035",
         "version" : "7.3.1"
-      }
-    },
-    {
-      "identity" : "kingfisher",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/onevcat/Kingfisher",
-      "state" : {
-        "revision" : "2ef543ee21d63734e1c004ad6c870255e8716c50",
-        "version" : "7.12.0"
       }
     },
     {
