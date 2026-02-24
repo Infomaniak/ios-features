@@ -32,7 +32,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/Infomaniak/ios-core-ui", .upToNextMajor(from: "24.0.0")),
+        .package(url: "https://github.com/Infomaniak/ios-core-ui", .upToNextMajor(from: "24.5.0")),
         .package(url: "https://github.com/Infomaniak/ios-core", .upToNextMajor(from: "18.1.0")),
         .package(url: "https://github.com/Infomaniak/ios-dependency-injection", .upToNextMajor(from: "2.0.3")),
         .package(url: "https://github.com/kean/Nuke", .upToNextMajor(from: "12.1.3"))

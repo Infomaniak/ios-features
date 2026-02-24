@@ -29,7 +29,7 @@ extension ButtonStyle where Self == OutlinedButtonStyle {
 
 struct OutlinedButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
-
+    @Environment(\.ikButtonTheme) private var theme
     @Environment(\.ikButtonLoading) private var isLoading
 
     private var foreground: Color {
@@ -54,7 +54,7 @@ struct OutlinedButtonStyle: ButtonStyle {
             .modifier(IKButtonOpacityAnimationModifier(isPressed: configuration.isPressed))
             .allowsHitTesting(!isLoading)
             .background(
-                RoundedRectangle(cornerRadius: IKRadius.large)
+                RoundedRectangle(cornerRadius: theme.cornerRadius)
                     .stroke(Color.Custom.divider, lineWidth: 0.5)
             )
     }
