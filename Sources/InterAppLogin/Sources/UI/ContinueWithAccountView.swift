@@ -143,7 +143,11 @@ public struct ContinueWithAccountView: View {
                     .ikButtonLoading(isLoading)
                 }
             } else {
-                ProgressView()
+                HStack(spacing: IKPadding.mini) {
+                    ProgressView()
+                    Text(InterAppLoginLocalizable.crossAppLoginAccountsLoaderTitle)
+                        .font(.Custom.body)
+                }
             }
         }
         .ikButtonFullWidth(true)

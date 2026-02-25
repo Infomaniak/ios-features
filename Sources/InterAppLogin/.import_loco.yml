@@ -1,0 +1,5 @@
+platform: ios
+
+localizable_path: Resources/Localizable
+
+filters: [ interapplogin ]

@@ -20,6 +20,8 @@ internal enum InterAppLoginLocalizable {
   internal static let buttonLogin = InterAppLoginLocalizable.tr("Localizable", "buttonLogin", fallback: "Login")
   /// loco:68404629d6574c876e05b382
   internal static let buttonUseOtherAccount = InterAppLoginLocalizable.tr("Localizable", "buttonUseOtherAccount", fallback: "Use another account")
+  /// loco:690b415f049c5b3a8d041e52
+  internal static let crossAppLoginAccountsLoaderTitle = InterAppLoginLocalizable.tr("Localizable", "crossAppLoginAccountsLoaderTitle", fallback: "Fetching your accounts…")
   /// loco:684044c80031d880680d8e12
   internal static let selectAccountPanelTitle = InterAppLoginLocalizable.tr("Localizable", "selectAccountPanelTitle", fallback: "Select one or multiple accounts")
   /// Plural format key: "%#@value@"
