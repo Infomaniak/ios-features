@@ -2,9 +2,9 @@
  * Loco ios export: Xcode Strings (legacy)
  * Project: CoreUI
  * Locale: en, English
- * Tagged: ios, !common, !emoji-reaction, !inapp2fa, !ios-stringsdict, !kSuite, !kSuiteUtils, !my kSuite, !privacy
- * Exported by: Philippe Weidmann
- * Exported at: Tue, 28 Oct 2025 09:34:38 +0100
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !bugtracker, !common, !emoji-reaction, !inapp2fa, !ios-stringsdict, !kSuite, !kSuiteUtils, !my kSuite, !network, !privacy
+ * Exported by: Baptiste Griva
+ * Exported at: Wed, 25 Feb 2026 08:59:56 +0100
  */
 
 /* loco:684003a81687be54da004145 */
@@ -15,6 +15,9 @@
 
 /* loco:68404629d6574c876e05b382 */
 "buttonUseOtherAccount" = "Use another account";
+
+/* loco:690b415f049c5b3a8d041e52 */
+"crossAppLoginAccountsLoaderTitle" = "Fetching your accounts…";
 
 /* loco:684044c80031d880680d8e12 */
 "selectAccountPanelTitle" = "Select one or multiple accounts";
