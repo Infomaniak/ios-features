@@ -1,0 +1,77 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: nb, Norwegian Bokmål
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !my kSuite, !network, !privacy
+ * Exported by: Philippe Weidmann
+ * Exported at: Mon, 16 Mar 2026 12:55:52 +0100
+ */
+
+/* loco:688b74f0e9091ea68006a122 */
+"kSuiteBusinessKChatLabel" = "kChat: delte kanaler, ubegrenset integrasjon med andre applikasjoner";
+
+/* loco:688b751e7a16f4c4af056e83 */
+"kSuiteBusinessKDriveLabel" = "kDrive: innholdssøk, utvidet versjonshistorikk";
+
+/* loco:688b75c7b687ddc15d066a62 */
+"kSuiteBusinessMicrosoftLabel" = "Microsoft Office Online-integrasjon";
+
+/* loco:688b6cbb8ac935ed130e3705 */
+"kSuiteBusinessOfferDescription" = "Optimaliser dine utvekslinger og strukturer samarbeidet i hele organisasjonen din.";
+
+/* loco:688b6c6b70085c4be6071a92 */
+"kSuiteBusinessOfferTitle" = "Få innflytelse og kontroll med bedriftstilbudet";
+
+/* loco:688b754fc9d22f4a32076322 */
+"kSuiteBusinessSecurityLabel" = "Sikkerhet: SSO-pålogging, PC-sikkerhetskopi, etc.";
+
+/* loco:688b75ae838dac7b2a000af2 */
+"kSuiteEnterpriseFunctionalityLabel" = "Avanserte funksjoner: Premium Support, Egendefinert merkevare, etc.";
+
+/* loco:688b756a5ca0bb203300e474 */
+"kSuiteEnterpriseKChatLabel" = "kChat: 200 eksterne brukere, opptil 1000 offentlige/private kanaler";
+
+/* loco:68b84862605b115d670aa203 */
+"kSuiteEnterpriseKDriveLabel" = "kDrive: 365-dagers oppbevaring av filversjoner";
+
+/* loco:688b6cde60be19d6ba01e729 */
+"kSuiteEnterpriseOfferDescription" = "Et sikkert samarbeidsmiljø selv for de mest krevende teamene.";
+
+/* loco:688b6c8768c1a651fc07c764 */
+"kSuiteEnterpriseOfferTitle" = "Sikre, sentraliser, kontroller med Enterprise-tilbudet";
+
+/* loco:68949e85cf319fb7c803f312 */
+"kSuiteGetProDescription" = "Opprett og samarbeid uten grenser";
+
+/* loco:68949e54810c56a6160a31b4 */
+"kSuiteGetProTitle" = "Få kSuite";
+
+/* loco:688b74ceafa0be317a0bef62 */
+"kSuiteMoreLabel" = "Og mye, mye mer!";
+
+/* loco:688b74b977353df30e0cd682 */
+"kSuiteStandardEuriaLabel" = "Euria: video transkripsjon, bildeopprettelse, etc.";
+
+/* loco:688b7484149384c94b09fc12 */
+"kSuiteStandardKChatLabel" = "kChat: ubegrenset meldingshistorikk, flere kanaler, etc.";
+
+/* loco:688b74a0121272a5e3036d02 */
+"kSuiteStandardMailLabel" = "Mail: ubegrenset e-postlagring, planlagte sendinger, etc.";
+
+/* loco:688b6ca1bfc9faabc80f7aa4 */
+"kSuiteStandardOfferDescription" = "Gi teamet ditt de essensielle verktøyene for å samarbeide effektivt daglig.";
+
+/* loco:688b6c5368c1a651fc07c763 */
+"kSuiteStandardOfferTitle" = "Skift gir med standardtilbudet";
+
+/* loco:688b7452e7d2ef7c92095802 */
+"kSuiteStorageLabel" = "%@ per kDrive- og kChat-sky lagringsbruker";
+
+/* loco:68949e21e9102e1eb00a6d04 */
+"kSuiteUpgradeButton" = "UTVIKLE";
+
+/* loco:688b6c0168c1a651fc07c762 */
+"kSuiteUpgradeDetails" = "For å oppgradere tilbudet ditt, bruk webgrensesnittet.";
+
+/* loco:689321dbe19fe82cd7087412 */
+"kSuiteUpgradeDetailsContactAdmin" = "Kontakt administratoren din for å oppgradere tilbudet ditt.";

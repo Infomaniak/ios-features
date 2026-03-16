@@ -1,0 +1,7 @@
+platform: ios
+
+localizable_path: Resources/Localizable
+
+filters: [ kSuite ]
+
+languages: [ da, de, el, en, es, fi, fr, it, nb, nl, pl, pt, sv ]

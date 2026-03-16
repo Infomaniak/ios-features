@@ -10,8 +10,6 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum KSuiteLocalizable {
-  /// loco:689321dbe19fe82cd7087412
-  public static let kSuiteUpgradeDetailsContactAdmin = KSuiteLocalizable.tr("Localizable", " kSuiteUpgradeDetailsContactAdmin", fallback: "Contact your administrator to upgrade your offer.")
   /// loco:688b74f0e9091ea68006a122
   public static let kSuiteBusinessKChatLabel = KSuiteLocalizable.tr("Localizable", "kSuiteBusinessKChatLabel", fallback: "kChat: shared channels, unlimited integration with other applications")
   /// loco:688b751e7a16f4c4af056e83
@@ -29,7 +27,7 @@ public enum KSuiteLocalizable {
   /// loco:688b756a5ca0bb203300e474
   public static let kSuiteEnterpriseKChatLabel = KSuiteLocalizable.tr("Localizable", "kSuiteEnterpriseKChatLabel", fallback: "kChat: 200 external users, up to 1000 public/private channels")
   /// loco:68b84862605b115d670aa203
-  public static let kSuiteEnterpriseKDriveLabel = KSuiteLocalizable.tr("Localizable", "kSuiteEnterpriseKDriveLabel", fallback: "kDrive: 5,000 public sharing links, up to 1,000 dropboxes")
+  public static let kSuiteEnterpriseKDriveLabel = KSuiteLocalizable.tr("Localizable", "kSuiteEnterpriseKDriveLabel", fallback: "kDrive: 365-day file version retention")
   /// loco:688b6cde60be19d6ba01e729
   public static let kSuiteEnterpriseOfferDescription = KSuiteLocalizable.tr("Localizable", "kSuiteEnterpriseOfferDescription", fallback: "A secure collaboration environment for even the most demanding teams.")
   /// loco:688b6c8768c1a651fc07c764
@@ -58,6 +56,8 @@ public enum KSuiteLocalizable {
   public static let kSuiteUpgradeButton = KSuiteLocalizable.tr("Localizable", "kSuiteUpgradeButton", fallback: "EVOLVE")
   /// loco:688b6c0168c1a651fc07c762
   public static let kSuiteUpgradeDetails = KSuiteLocalizable.tr("Localizable", "kSuiteUpgradeDetails", fallback: "To upgrade your offer, use the web interface.")
+  /// loco:689321dbe19fe82cd7087412
+  public static let kSuiteUpgradeDetailsContactAdmin = KSuiteLocalizable.tr("Localizable", "kSuiteUpgradeDetailsContactAdmin", fallback: "Contact your administrator to upgrade your offer.")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
