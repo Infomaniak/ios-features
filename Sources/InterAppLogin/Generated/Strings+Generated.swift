@@ -18,6 +18,8 @@ internal enum InterAppLoginLocalizable {
   internal static let buttonCreateAccount = InterAppLoginLocalizable.tr("Localizable", "buttonCreateAccount", fallback: "Create an account")
   /// loco:6840035e1687be54da004142
   internal static let buttonLogin = InterAppLoginLocalizable.tr("Localizable", "buttonLogin", fallback: "Login")
+  /// loco:6926cbbd4b24c1898e020922
+  internal static let buttonStart = InterAppLoginLocalizable.tr("Localizable", "buttonStart", fallback: "Start")
   /// loco:68404629d6574c876e05b382
   internal static let buttonUseOtherAccount = InterAppLoginLocalizable.tr("Localizable", "buttonUseOtherAccount", fallback: "Use another account")
   /// loco:690b415f049c5b3a8d041e52

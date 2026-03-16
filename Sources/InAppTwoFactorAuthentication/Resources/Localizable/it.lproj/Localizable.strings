@@ -2,13 +2,10 @@
  * Loco ios export: Xcode Strings (legacy)
  * Project: CoreUI
  * Locale: it, Italian
- * Tagged: ios, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !kSuite, !kSuiteUtils, !my kSuite, !privacy
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !bugtracker, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !kSuite, !my kSuite, !network, !privacy
  * Exported by: Philippe Weidmann
- * Exported at: Thu, 09 Oct 2025 08:30:37 +0200
+ * Exported at: Mon, 16 Mar 2026 12:41:19 +0100
  */
-
-/* loco:68d52770d78cd0b5b102a952 */
-" twoFactorAuthJustNowLabel" = "Ora";
 
 /* loco:68d4f859fceae6b843046de7 */
 "buttonApprove" = "Approvare";
@@ -29,7 +26,7 @@
 "twoFactorAuthConfirmationDescription" = "Confermando questa connessione, autorizzi questo dispositivo ad accedere al tuo account Infomaniak.";
 
 /* loco:68d5248990faa534e505f204 */
-"twoFactorAuthConnectionRejectedDescription" = "È stato rifiutato un tentativo di connessione. Per proteggere il vostro account, cambiate la password.\nSe siete voi la fonte di questo tentativo, provate ad accedere di nuovo.";
+"twoFactorAuthConnectionRejectedDescription" = "È stato rifiutato un tentativo di connessione. Per proteggere il vostro account, cambiate la password.\n\nSe siete voi la fonte di questo tentativo, provate ad accedere di nuovo.";
 
 /* loco:68d5247e90faa534e505f202 */
 "twoFactorAuthConnectionRejectedTitle" = "Connessione rifiutata";
@@ -42,6 +39,9 @@
 
 /* loco:68de2abbe02b752bd80f2782 */
 "twoFactorAuthGenericErrorDescription" = "Impossibile completare l’operazione.\nRiprova.";
+
+/* loco:68d52770d78cd0b5b102a952 */
+"twoFactorAuthJustNowLabel" = "Ora";
 
 /* loco:68c04e0aec33731be0018cb4 */
 "twoFactorAuthLocationLabel" = "Luogo";

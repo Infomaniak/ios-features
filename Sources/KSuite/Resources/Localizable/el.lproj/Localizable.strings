@@ -1,0 +1,77 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: el, Greek
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !my kSuite, !network, !privacy
+ * Exported by: Philippe Weidmann
+ * Exported at: Mon, 16 Mar 2026 12:55:52 +0100
+ */
+
+/* loco:688b74f0e9091ea68006a122 */
+"kSuiteBusinessKChatLabel" = "kChat: κοινά κανάλια, απεριόριστη ενσωμάτωση με άλλες εφαρμογές";
+
+/* loco:688b751e7a16f4c4af056e83 */
+"kSuiteBusinessKDriveLabel" = "kDrive: αναζήτηση περιεχομένου, εκτεταμένο ιστορικό εκδόσεων";
+
+/* loco:688b75c7b687ddc15d066a62 */
+"kSuiteBusinessMicrosoftLabel" = "Ενσωμάτωση Microsoft Office Online";
+
+/* loco:688b6cbb8ac935ed130e3705 */
+"kSuiteBusinessOfferDescription" = "Βελτιστοποιήστε τις επικοινωνίες σας και δομήστε τη συνεργασία σε ολόκληρο τον οργανισμό σας.";
+
+/* loco:688b6c6b70085c4be6071a92 */
+"kSuiteBusinessOfferTitle" = "Αποκτήστε αντίκτυπο και έλεγχο με την προσφορά για επαγγελματίες";
+
+/* loco:688b754fc9d22f4a32076322 */
+"kSuiteBusinessSecurityLabel" = "Ασφάλεια: σύνδεση SSO, αντίγραφο ασφαλείας PC κ.λπ.";
+
+/* loco:688b75ae838dac7b2a000af2 */
+"kSuiteEnterpriseFunctionalityLabel" = "Προηγμένες λειτουργίες: Premium Υποστήριξη, Εταιρική Εικόνα Μάρκας κ.λπ.";
+
+/* loco:688b756a5ca0bb203300e474 */
+"kSuiteEnterpriseKChatLabel" = "kChat: 200 εξωτερικοί χρήστες, έως και 1000 δημόσια/ιδιωτικά κανάλια";
+
+/* loco:68b84862605b115d670aa203 */
+"kSuiteEnterpriseKDriveLabel" = "kDrive: διατήρηση εκδόσεων αρχείων για 365 ημέρες";
+
+/* loco:688b6cde60be19d6ba01e729 */
+"kSuiteEnterpriseOfferDescription" = "Ένα ασφαλές περιβάλλον συνεργασίας ακόμα και για τις πιο απαιτητικές ομάδες.";
+
+/* loco:688b6c8768c1a651fc07c764 */
+"kSuiteEnterpriseOfferTitle" = "Ασφαλίστε, κεντροποιήστε, ελέγξτε με την προσφορά Enterprise";
+
+/* loco:68949e85cf319fb7c803f312 */
+"kSuiteGetProDescription" = "Δημιουργήστε και συνεργαστείτε χωρίς όρια";
+
+/* loco:68949e54810c56a6160a31b4 */
+"kSuiteGetProTitle" = "Αποκτήστε το kSuite";
+
+/* loco:688b74ceafa0be317a0bef62 */
+"kSuiteMoreLabel" = "Και πολλά, πολλά περισσότερα!";
+
+/* loco:688b74b977353df30e0cd682 */
+"kSuiteStandardEuriaLabel" = "Euria: μεταγραφή βίντεο, δημιουργία εικόνας κ.λπ.";
+
+/* loco:688b7484149384c94b09fc12 */
+"kSuiteStandardKChatLabel" = "kChat: απεριόριστο ιστορικό μηνυμάτων, περισσότερα κανάλια κ.λπ.";
+
+/* loco:688b74a0121272a5e3036d02 */
+"kSuiteStandardMailLabel" = "Mail: απεριόριστος αποθηκευτικός χώρος αλληλογραφίας, προγραμματισμένες αποστολές κ.λπ.";
+
+/* loco:688b6ca1bfc9faabc80f7aa4 */
+"kSuiteStandardOfferDescription" = "Δώστε στην ομάδα σας τα απαραίτητα εργαλεία για αποτελεσματική καθημερινή συνεργασία.";
+
+/* loco:688b6c5368c1a651fc07c763 */
+"kSuiteStandardOfferTitle" = "Ανεβάστε επίπεδο με την τυπική προσφορά";
+
+/* loco:688b7452e7d2ef7c92095802 */
+"kSuiteStorageLabel" = "%@ υπηρεσία αποθήκευσης cloud ανά χρήστη στο kDrive και kChat";
+
+/* loco:68949e21e9102e1eb00a6d04 */
+"kSuiteUpgradeButton" = "ΕΞΕΛΙΧΘΕΙΤΕ";
+
+/* loco:688b6c0168c1a651fc07c762 */
+"kSuiteUpgradeDetails" = "Για να αναβαθμίσετε την προσφορά σας, χρησιμοποιήστε τη διαδικτυακή διεπαφή.";
+
+/* loco:689321dbe19fe82cd7087412 */
+"kSuiteUpgradeDetailsContactAdmin" = "Επικοινωνήστε με τον διαχειριστή σας για να αναβαθμίσετε την προσφορά σας.";

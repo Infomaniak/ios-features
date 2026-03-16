@@ -10,8 +10,6 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Localizable {
-  /// loco:68d52770d78cd0b5b102a952
-  internal static let twoFactorAuthJustNowLabel = Localizable.tr("Localizable", " twoFactorAuthJustNowLabel", fallback: "Just now")
   /// loco:68d4f859fceae6b843046de7
   internal static let buttonApprove = Localizable.tr("Localizable", "buttonApprove", fallback: "Approve")
   /// loco:68d4f873098af73894089853
@@ -21,11 +19,11 @@ internal enum Localizable {
   /// loco:68da784d25d05d451b04f663
   internal static let twoFactorAuthAlreadyProcessedErrorTitle = Localizable.tr("Localizable", "twoFactorAuthAlreadyProcessedErrorTitle", fallback: "This request has already been processed")
   /// loco:68da78cbe3aba64d960ff0c2
-  internal static let twoFactorAuthCheckOriginDescription = Localizable.tr("Localizable", "twoFactorAuthCheckOriginDescription", fallback: "You didn’t initiate this action? Check your active devices, and disconnect the ones you don’t recognize.")
+  internal static let twoFactorAuthCheckOriginDescription = Localizable.tr("Localizable", "twoFactorAuthCheckOriginDescription", fallback: "You didn’t initiate this action?\nCheck your active devices, and disconnect the ones you don’t recognize.")
   /// loco:68c04f14ec33731be0018cb8
   internal static let twoFactorAuthConfirmationDescription = Localizable.tr("Localizable", "twoFactorAuthConfirmationDescription", fallback: "Confirming this login attempt will allow that device to access your Infomaniak account")
   /// loco:68d5248990faa534e505f204
-  internal static let twoFactorAuthConnectionRejectedDescription = Localizable.tr("Localizable", "twoFactorAuthConnectionRejectedDescription", fallback: "You have refused a login attempt. To secure your account, change your password. If you are the source of this attempt, try logging in again.")
+  internal static let twoFactorAuthConnectionRejectedDescription = Localizable.tr("Localizable", "twoFactorAuthConnectionRejectedDescription", fallback: "You have refused a login attempt. To secure your account, change your password.\n\nIf you are the source of this attempt, try logging in again.")
   /// loco:68d5247e90faa534e505f202
   internal static let twoFactorAuthConnectionRejectedTitle = Localizable.tr("Localizable", "twoFactorAuthConnectionRejectedTitle", fallback: "Connection Rejected")
   /// loco:68c04d95fa5d09365f02c055
@@ -34,6 +32,8 @@ internal enum Localizable {
   internal static let twoFactorAuthExpiredErrorTitle = Localizable.tr("Localizable", "twoFactorAuthExpiredErrorTitle", fallback: "This login request has expired")
   /// loco:68de2abbe02b752bd80f2782
   internal static let twoFactorAuthGenericErrorDescription = Localizable.tr("Localizable", "twoFactorAuthGenericErrorDescription", fallback: "Unable to complete the operation.\nPlease try again.")
+  /// loco:68d52770d78cd0b5b102a952
+  internal static let twoFactorAuthJustNowLabel = Localizable.tr("Localizable", "twoFactorAuthJustNowLabel", fallback: "Just now")
   /// loco:68c04e0aec33731be0018cb4
   internal static let twoFactorAuthLocationLabel = Localizable.tr("Localizable", "twoFactorAuthLocationLabel", fallback: "Location")
   /// Plural format key: "%#@value@"
