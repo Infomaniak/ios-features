@@ -3,10 +3,10 @@
 <!--
  Loco ios export: Xcode Stringsdict (legacy)
  Project: CoreUI
- Locale: es, Spanish
+ Locale: pl, Polish
  Tagged: ios-stringsdict, !accountsBottomSheet, !appIntegrity, !bugtracker, !common, !emoji-reaction, !interapplogin, !ios, !kSuite, !my kSuite, !network, !privacy
  Exported by: Philippe Weidmann
- Exported at: Mon, 16 Mar 2026 12:41:19 +0100
+ Exported at: Mon, 16 Mar 2026 12:41:20 +0100
 -->
 <plist version="1.0">
   <dict>
@@ -21,9 +21,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>hace un minuto</string>
+        <string>Minutę temu</string>
+        <key>few</key>
+        <string>%d minuty temu</string>
+        <key>many</key>
+        <string>%d minut temu</string>
         <key>other</key>
-        <string>hace %d minutos</string>
+        <string>%d minut temu</string>
       </dict>
     </dict>
   </dict>

@@ -3,7 +3,7 @@
 <!--
  Loco ios export: Xcode Stringsdict (legacy)
  Project: CoreUI
- Locale: es, Spanish
+ Locale: da, Danish
  Tagged: ios-stringsdict, !accountsBottomSheet, !appIntegrity, !bugtracker, !common, !emoji-reaction, !interapplogin, !ios, !kSuite, !my kSuite, !network, !privacy
  Exported by: Philippe Weidmann
  Exported at: Mon, 16 Mar 2026 12:41:19 +0100
@@ -21,9 +21,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>hace un minuto</string>
+        <string>Et minut siden</string>
         <key>other</key>
-        <string>hace %d minutos</string>
+        <string>%d minutter siden</string>
       </dict>
     </dict>
   </dict>

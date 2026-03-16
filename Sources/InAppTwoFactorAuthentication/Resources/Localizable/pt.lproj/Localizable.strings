@@ -1,0 +1,59 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: pt, Portuguese
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !bugtracker, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !kSuite, !my kSuite, !network, !privacy
+ * Exported by: Philippe Weidmann
+ * Exported at: Mon, 16 Mar 2026 12:41:19 +0100
+ */
+
+/* loco:68d4f859fceae6b843046de7 */
+"buttonApprove" = "Aprovar";
+
+/* loco:68d4f873098af73894089853 */
+"buttonDeny" = "Recusar";
+
+/* loco:68d4f8d82bc1b93265068752 */
+"buttonEditPassword" = "Editar palavra-passe";
+
+/* loco:68da784d25d05d451b04f663 */
+"twoFactorAuthAlreadyProcessedErrorTitle" = "Este pedido já foi processado";
+
+/* loco:68da78cbe3aba64d960ff0c2 */
+"twoFactorAuthCheckOriginDescription" = "Não iniciou esta ação?\nVerifique os seus dispositivos ativos e desligue os que não reconhece.";
+
+/* loco:68c04f14ec33731be0018cb8 */
+"twoFactorAuthConfirmationDescription" = "Confirmar esta tentativa de login permitirá que esse dispositivo aceda à sua conta Infomaniak";
+
+/* loco:68d5248990faa534e505f204 */
+"twoFactorAuthConnectionRejectedDescription" = "Recusou uma tentativa de login. Para proteger a sua conta, altere a sua palavra-passe.\n\nSe foi a origem desta tentativa, tente iniciar sessão novamente.";
+
+/* loco:68d5247e90faa534e505f202 */
+"twoFactorAuthConnectionRejectedTitle" = "Ligação recusada";
+
+/* loco:68c04d95fa5d09365f02c055 */
+"twoFactorAuthDeviceLabel" = "Dispositivo";
+
+/* loco:68da77e9a0c5c4a1d809d4c4 */
+"twoFactorAuthExpiredErrorTitle" = "Este pedido de login expirou";
+
+/* loco:68de2abbe02b752bd80f2782 */
+"twoFactorAuthGenericErrorDescription" = "Não foi possível concluir a operação.\nPor favor, tente novamente.";
+
+/* loco:68d52770d78cd0b5b102a952 */
+"twoFactorAuthJustNowLabel" = "Agora mesmo";
+
+/* loco:68c04e0aec33731be0018cb4 */
+"twoFactorAuthLocationLabel" = "Localização";
+
+/* loco:68de26e7e0ead3ef030b71f2 */
+"twoFactorAuthNoNetworkErrorDescription" = "Não foi possível concluir a operação.\nVerifique a sua ligação e tente novamente.";
+
+/* loco:68de2516c411b0f8b20a4832 */
+"twoFactorAuthNoNetworkErrorTitle" = "Sem ligação à rede";
+
+/* loco:68c053c71ea34fd57a062325 */
+"twoFactorAuthTryingToLogInTitle" = "Está a tentar iniciar sessão?";
+
+/* loco:68c04d446368e16b82076535 */
+"twoFactorAuthWhenLabel" = "Quando";

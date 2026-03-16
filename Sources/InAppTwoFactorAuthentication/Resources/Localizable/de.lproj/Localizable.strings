@@ -2,19 +2,16 @@
  * Loco ios export: Xcode Strings (legacy)
  * Project: CoreUI
  * Locale: de, German
- * Tagged: ios, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !kSuite, !kSuiteUtils, !my kSuite, !privacy
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !bugtracker, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !kSuite, !my kSuite, !network, !privacy
  * Exported by: Philippe Weidmann
- * Exported at: Thu, 09 Oct 2025 08:30:37 +0200
+ * Exported at: Mon, 16 Mar 2026 12:41:19 +0100
  */
 
-/* loco:68d52770d78cd0b5b102a952 */
-" twoFactorAuthJustNowLabel" = "Jetzt";
-
 /* loco:68d4f859fceae6b843046de7 */
-"buttonApprove" = "Genehmigen Sie";
+"buttonApprove" = "Bestätigen";
 
 /* loco:68d4f873098af73894089853 */
-"buttonDeny" = "Verweigern";
+"buttonDeny" = "Ablehnen";
 
 /* loco:68d4f8d82bc1b93265068752 */
 "buttonEditPassword" = "Passwort ändern";
@@ -29,7 +26,7 @@
 "twoFactorAuthConfirmationDescription" = "Durch die Bestätigung dieser Verbindung wird diesem Gerät der Zugriff auf Ihr Infomaniak-Konto gestattet.";
 
 /* loco:68d5248990faa534e505f204 */
-"twoFactorAuthConnectionRejectedDescription" = "Sie haben einen Anmeldeversuch abgelehnt. Um Ihr Konto zu sichern, ändern Sie Ihr Passwort.\nWenn Sie diesen Versuch veranlasst haben, versuchen Sie es erneut, sich anzumelden.";
+"twoFactorAuthConnectionRejectedDescription" = "Sie haben einen Anmeldeversuch abgelehnt. Um Ihr Konto zu sichern, ändern Sie Ihr Passwort.\n\nWenn Sie diesen Versuch veranlasst haben, versuchen Sie es erneut, sich anzumelden.";
 
 /* loco:68d5247e90faa534e505f202 */
 "twoFactorAuthConnectionRejectedTitle" = "Verbindung Abgelehnt";
@@ -42,6 +39,9 @@
 
 /* loco:68de2abbe02b752bd80f2782 */
 "twoFactorAuthGenericErrorDescription" = "Der Vorgang konnte nicht abgeschlossen werden.\nBitte versuchen Sie es erneut.";
+
+/* loco:68d52770d78cd0b5b102a952 */
+"twoFactorAuthJustNowLabel" = "Jetzt";
 
 /* loco:68c04e0aec33731be0018cb4 */
 "twoFactorAuthLocationLabel" = "Ort";

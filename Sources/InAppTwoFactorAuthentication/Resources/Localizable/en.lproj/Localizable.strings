@@ -2,13 +2,10 @@
  * Loco ios export: Xcode Strings (legacy)
  * Project: CoreUI
  * Locale: en, English
- * Tagged: ios, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !kSuite, !kSuiteUtils, !my kSuite, !privacy
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !bugtracker, !common, !emoji-reaction, !interapplogin, !ios-stringsdict, !kSuite, !my kSuite, !network, !privacy
  * Exported by: Philippe Weidmann
- * Exported at: Thu, 09 Oct 2025 08:30:37 +0200
+ * Exported at: Mon, 16 Mar 2026 12:41:19 +0100
  */
-
-/* loco:68d52770d78cd0b5b102a952 */
-" twoFactorAuthJustNowLabel" = "Just now";
 
 /* loco:68d4f859fceae6b843046de7 */
 "buttonApprove" = "Approve";
@@ -29,7 +26,7 @@
 "twoFactorAuthConfirmationDescription" = "Confirming this login attempt will allow that device to access your Infomaniak account";
 
 /* loco:68d5248990faa534e505f204 */
-"twoFactorAuthConnectionRejectedDescription" = "You have refused a login attempt. To secure your account, change your password.\nIf you are the source of this attempt, try logging in again.";
+"twoFactorAuthConnectionRejectedDescription" = "You have refused a login attempt. To secure your account, change your password.\n\nIf you are the source of this attempt, try logging in again.";
 
 /* loco:68d5247e90faa534e505f202 */
 "twoFactorAuthConnectionRejectedTitle" = "Connection Rejected";
@@ -42,6 +39,9 @@
 
 /* loco:68de2abbe02b752bd80f2782 */
 "twoFactorAuthGenericErrorDescription" = "Unable to complete the operation.\nPlease try again.";
+
+/* loco:68d52770d78cd0b5b102a952 */
+"twoFactorAuthJustNowLabel" = "Just now";
 
 /* loco:68c04e0aec33731be0018cb4 */
 "twoFactorAuthLocationLabel" = "Location";
