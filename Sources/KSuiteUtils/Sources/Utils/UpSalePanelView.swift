@@ -18,6 +18,7 @@
 
 import DesignSystem
 import InfomaniakCoreSwiftUI
+import InfomaniakCoreUIResources
 import SwiftUI
 
 public struct UpSalePanelView: View {
@@ -80,7 +81,7 @@ public struct UpSalePanelView: View {
                 Text(additionalText)
 
                 Button(action: dismiss.callAsFunction) {
-                    Text(KSuiteUtilsLocalizable.buttonClose)
+                    Text(CoreUILocalizable.buttonClose)
                         .foregroundStyle(ColorHelper.primary)
                 }
                 .ikButtonFullWidth(true)

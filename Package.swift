@@ -53,7 +53,8 @@ let package = Package(
             dependencies: [
                 "KSuiteUtils",
                 .product(name: "DesignSystem", package: "ios-core-ui"),
-                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui")
+                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
+                .product(name: "InfomaniakCoreUIResources", package: "ios-core-ui")
             ]
         ),
         .target(
