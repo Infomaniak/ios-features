@@ -1,29 +1,29 @@
 /*
  * Loco ios export: Xcode Strings (legacy)
  * Project: CoreUI
- * Locale: es, Spanish
+ * Locale: sv, Swedish
  * Tagged: ios, !accountsBottomSheet, !appIntegrity, !bugtracker, !common, !emoji-reaction, !inapp2fa, !ios-stringsdict, !kSuite, !my kSuite, !network, !privacy
  * Exported by: Philippe Weidmann
  * Exported at: Mon, 16 Mar 2026 12:52:57 +0100
  */
 
 /* loco:684003a81687be54da004145 */
-"buttonCreateAccount" = "Crear una cuenta";
+"buttonCreateAccount" = "Skapa ett konto";
 
 /* loco:6840035e1687be54da004142 */
-"buttonLogin" = "Inicio de sesión";
+"buttonLogin" = "Logga in";
 
 /* loco:6926cbbd4b24c1898e020922 */
-"buttonStart" = "Empezar";
+"buttonStart" = "Starta";
 
 /* loco:68404629d6574c876e05b382 */
-"buttonUseOtherAccount" = "Utilizar otra cuenta";
+"buttonUseOtherAccount" = "Använd ett annat konto";
 
 /* loco:690b415f049c5b3a8d041e52 */
-"crossAppLoginAccountsLoaderTitle" = "Buscando sus cuentas…";
+"crossAppLoginAccountsLoaderTitle" = "Hämtar dina konton…";
 
 /* loco:684044c80031d880680d8e12 */
-"selectAccountPanelTitle" = "Seleccione una o varias cuentas";
+"selectAccountPanelTitle" = "Välj ett eller flera konton";
 
 /* loco:69007f6a2a2aa4b5eb0d4632 */
-"selectSingleAccountPanelTitle" = "Seleccione una cuenta";
+"selectSingleAccountPanelTitle" = "Välj ett konto";

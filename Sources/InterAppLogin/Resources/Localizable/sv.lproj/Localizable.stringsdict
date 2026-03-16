@@ -3,7 +3,7 @@
 <!--
  Loco ios export: Xcode Stringsdict (legacy)
  Project: CoreUI
- Locale: it, Italian
+ Locale: sv, Swedish
  Tagged: ios-stringsdict, !accountsBottomSheet, !appIntegrity, !bugtracker, !common, !emoji-reaction, !inapp2fa, !ios, !kSuite, !my kSuite, !network, !privacy
  Exported by: Philippe Weidmann
  Exported at: Mon, 16 Mar 2026 12:52:57 +0100
@@ -21,9 +21,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Continua con questo account</string>
+        <string>Fortsätt med detta konto</string>
         <key>other</key>
-        <string>Continua con questi conti</string>
+        <string>Fortsätt med dessa konton</string>
       </dict>
     </dict>
     <key>selectedAccountCountLabel</key>
@@ -37,9 +37,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d conto selezionato</string>
+        <string>%d konto valt</string>
         <key>other</key>
-        <string>%d conti selezionati</string>
+        <string>%d konton valda</string>
       </dict>
     </dict>
   </dict>
