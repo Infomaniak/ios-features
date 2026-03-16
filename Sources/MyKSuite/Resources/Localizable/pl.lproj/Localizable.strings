@@ -1,0 +1,86 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: pl, Polish
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !network, !privacy
+ * Exported by: Philippe Weidmann
+ * Exported at: Mon, 16 Mar 2026 12:57:29 +0100
+ */
+
+/* loco:67988071a77178d0df04c2a2 */
+"iOSMyKSuiteDashboardSubscriptionButton" = "Zarządzaj moją subskrypcją";
+
+/* loco:67988027c473dfc0db0a3472 */
+"iOSMyKSuiteDashboardSubscriptionLabel" = "Aby anulować lub zmienić częstotliwość subskrypcji, przejdź do ustawień Apple Store.";
+
+/* loco:679b829c204ad8c39009eb82 */
+"myKSuiteDashboardDataUnlimited" = "Nieograniczone";
+
+/* loco:679876cf3e99103cb30382f2 */
+"myKSuiteDashboardFreeMailLabel" = "Darmowy adres e-mail na całe życie";
+
+/* loco:679b589f89ba84ff710b5874 */
+"myKSuiteDashboardFreeTrialButton" = "Rozpocznij bezpłatny okres próbny";
+
+/* loco:679b59981c4d7d32f6069642 */
+"myKSuiteDashboardFreeTrialDescription" = "Uzyskaj więcej funkcjonalności i przestrzeni dyskowej z my kSuite+";
+
+/* loco:679b584f89ba84ff710b5872 */
+"myKSuiteDashboardFreeTrialTitle" = "30 dni za darmo";
+
+/* loco:67987d5be4acb82fc404d842 */
+"myKSuiteDashboardFunctionalityCustomReminders" = "Dostosuj niedostępne godziny dla przypomnień i zaplanowanych wysyłek";
+
+/* loco:67987b1aeb6331b99c0e21a2 */
+"myKSuiteDashboardFunctionalityLimit" = "Ograniczone dzienne wysyłki";
+
+/* loco:679879a94707871eef016f62 */
+"myKSuiteDashboardFunctionalityMailAndDrive" = "Przestrzeń dla Mail i kDrive";
+
+/* loco:6798773f8b7f37b34c037b62 */
+"myKSuiteDashboardLimitedFunctionalityLabel" = "Ograniczone funkcjonalności";
+
+/* loco:67987dbd8cfda44abb022a82 */
+"myKSuiteDashboardPaymentMethod" = "Metoda płatności";
+
+/* loco:679b3ce9888ce359ae045214 */
+"myKSuiteDashboardTitle" = "Moja subskrypcja";
+
+/* loco:67987d9bec08565146015402 */
+"myKSuiteDashboardTrialPeriod" = "Okres próbny";
+
+/* loco:679886c5531841f73a055a22 */
+"myKSuiteDashboardUntil" = "Do %@";
+
+/* loco:67a1e9d4782ef3341305bf04 */
+"myKSuiteManageSubscriptionButton" = "Zarządzaj moją ofertą";
+
+/* loco:67a1e976f29a9fc7070991f2 */
+"myKSuiteManageSubscriptionDescription" = "Aby zarządzać lub anulować subskrypcję, zaloguj się do interfejsu internetowego kSuite";
+
+/* loco:67a0c9effbc50b7a78076222 */
+"myKSuiteUpgradeBenefitsTitle" = "TWOJE KORZYŚCI";
+
+/* loco:679237aa626480c0ac0e9462 */
+"myKSuiteUpgradeDescription" = "Więcej przestrzeni, więcej możliwości i więcej elastyczności, aby robić to, co kochasz.";
+
+/* loco:679237c7ece9f81d070d4662 */
+"myKSuiteUpgradeDetails" = "Aby skorzystać z my kSuite+, zmień ofertę w interfejsie internetowym.";
+
+/* loco:67a09ba06899047858006672 */
+"myKSuiteUpgradeDriveLabel" = "1 lub 6 TB na Twoje zdjęcia, dokumenty i pliki";
+
+/* loco:67a226592abfba62b90b27c2 */
+"myKSuiteUpgradeDropboxLabel" = "Skrzynki odbiorcze, edycja PDF…";
+
+/* loco:6797782f5ab272f013013552 */
+"myKSuiteUpgradeLabel" = "I jeszcze więcej!";
+
+/* loco:67a09ac2665e51f3f20f6674 */
+"myKSuiteUpgradeRedirectLabel" = "Przekierowania, dostosowane przypomnienia…";
+
+/* loco:67923789817186d0f903c802 */
+"myKSuiteUpgradeTitle" = "Daj więcej przestrzeni swoim pomysłom";
+
+/* loco:67a09a9cc9835c47c000ca62 */
+"myKSuiteUpgradeUnlimitedMailLabel" = "Nieograniczona przestrzeń pocztowa i wysyłanie";
