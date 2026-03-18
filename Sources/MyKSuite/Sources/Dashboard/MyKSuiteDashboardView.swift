@@ -102,11 +102,11 @@ public struct MyKSuiteDashboardView<Content: View>: View {
 private struct ViewControllerAccessor: UIViewControllerRepresentable {
     let onResolve: (UIViewController) -> Void
 
-    func makeUIViewController(context: Context) -> UIViewController {
+    func makeUIViewController(context _: Context) -> UIViewController {
         return UIViewController()
     }
 
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+    func updateUIViewController(_ uiViewController: UIViewController, context _: Context) {
         onResolve(uiViewController)
     }
 }
