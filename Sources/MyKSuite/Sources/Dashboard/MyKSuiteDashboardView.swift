@@ -94,8 +94,8 @@ public struct MyKSuiteDashboardView<Content: View>: View {
     @MainActor
     private func closeSheet() {
         @InjectService var platformDetector: PlatformDetectable
-        if platformDetector.isMacCatalyst {
-            currentViewController?.presentingViewController?.dismiss(animated: true)
+        if platformDetector.isMacCatalyst, let currentViewController {
+            currentViewController.presentingViewController?.dismiss(animated: true)
         } else {
             dismiss()
         }
