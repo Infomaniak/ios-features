@@ -28,6 +28,7 @@ public struct MyKSuiteDashboardView<Content: View>: View {
 
     @Environment(\.dismiss) private var dismiss
 
+    @State private var currentViewController: UIViewController?
     @State private var myKSuite: MyKSuite?
     private let apiFetcher: KSuiteApiFetchable
     private let userId: Int
@@ -61,13 +62,16 @@ public struct MyKSuiteDashboardView<Content: View>: View {
                     .resizable()
                     .fixedSize(horizontal: false, vertical: true)
                     .ignoresSafeArea()
+                ViewControllerAccessor { controller in
+                    currentViewController = controller
+                }
             }
             .navigationTitle(MyKSuiteLocalizable.myKSuiteDashboardTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(role: .destructive) {
-                        dismiss()
+                        closeSheet()
                     } label: {
                         Image(systemName: "xmark")
                     }
@@ -83,6 +87,27 @@ public struct MyKSuiteDashboardView<Content: View>: View {
                 Logger.general.error("Error fetching my ksuite: \(error)")
             }
         }
+    }
+
+    @MainActor
+    private func closeSheet() {
+        @InjectService var platformDetector: PlatformDetectable
+        dismiss()
+        if platformDetector.isMacCatalyst {
+            currentViewController?.presentingViewController?.dismiss(animated: true)
+        }
+    }
+}
+
+private struct ViewControllerAccessor: UIViewControllerRepresentable {
+    let onResolve: (UIViewController) -> Void
+
+    func makeUIViewController(context: Context) -> UIViewController {
+        return UIViewController()
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        onResolve(uiViewController)
     }
 }
 
