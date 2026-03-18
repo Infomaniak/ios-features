@@ -62,6 +62,8 @@ public struct MyKSuiteDashboardView<Content: View>: View {
                     .resizable()
                     .fixedSize(horizontal: false, vertical: true)
                     .ignoresSafeArea()
+            }
+            .background {
                 ViewControllerAccessor { controller in
                     currentViewController = controller
                 }
