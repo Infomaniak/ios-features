@@ -106,7 +106,10 @@ private struct ViewControllerAccessor: UIViewControllerRepresentable {
     let onResolve: (UIViewController) -> Void
 
     func makeUIViewController(context _: Context) -> UIViewController {
-        return UIViewController()
+        let controller = UIViewController()
+        controller.view.backgroundColor = .clear
+        controller.view.isUserInteractionEnabled = false
+        return controller
     }
 
     func updateUIViewController(_ uiViewController: UIViewController, context _: Context) {
