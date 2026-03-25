@@ -23,6 +23,7 @@ import UIKit
 public protocol InAppTwoFactorAuthenticationManagerable {
     func checkConnectionAttempts(using sessions: [InAppTwoFactorAuthenticationSession])
     func checkConnectionAttempts(using session: InAppTwoFactorAuthenticationSession)
+    func checkConnectionAttemptsFor(session: InAppTwoFactorAuthenticationSession) async
     func handleRemoteNotification(_ notification: UNNotification) -> InAppTwoFactorAuthenticationManager.UserId?
 }
 
@@ -84,12 +85,16 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
 
     public func checkConnectionAttempts(using session: InAppTwoFactorAuthenticationSession) {
         Task {
-            guard let completeSession = await checkConnectionAttemptWith(session: session) else {
-                return
-            }
-
-            await displayConnectionAttemptWindowFor(completeSession: completeSession)
+            await checkConnectionAttemptsFor(session: session)
         }
+    }
+
+    public func checkConnectionAttemptsFor(session: InAppTwoFactorAuthenticationSession) async {
+        guard let completeSession = await checkConnectionAttemptWith(session: session) else {
+            return
+        }
+
+        await displayConnectionAttemptWindowFor(completeSession: completeSession)
     }
 
     public func handleRemoteNotification(_ notification: UNNotification) -> UserId? {
