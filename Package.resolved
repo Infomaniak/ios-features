@@ -1,5 +1,5 @@
 {
-  "originHash" : "90a31b2e34836ef3e075308f3a9cdbd9f16b8779fd49b785dbbe7b20cbf15d3e",
+  "originHash" : "5c6fa554b270fcc3943c9a86a01e35a68bc8051f77478b7dc26707cef181106f",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -38,12 +38,21 @@
       }
     },
     {
+      "identity" : "ios-device-check",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Infomaniak/ios-device-check",
+      "state" : {
+        "revision" : "d20a4959683e7c19faec674b1fd269e3167e5133",
+        "version" : "1.1.1"
+      }
+    },
+    {
       "identity" : "ios-login",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Infomaniak/ios-login",
       "state" : {
-        "revision" : "36d1c1886880695c735711c9e9226b07394e6035",
-        "version" : "7.3.1"
+        "revision" : "3ead81cbaf8c1aa1c7daf45904f77e4b1634aa85",
+        "version" : "7.8.0"
       }
     },
     {
