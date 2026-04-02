@@ -21,6 +21,21 @@ import Foundation
 import InfomaniakCoreSwiftUI
 import SwiftUI
 
+public extension EnvironmentValues {
+    var outlinedButtonBackgroundColor: Color {
+        get {
+            self[OutlinedButtonBackgroundKey.self]
+        }
+        set {
+            self[OutlinedButtonBackgroundKey.self] = newValue
+        }
+    }
+
+    private struct OutlinedButtonBackgroundKey: EnvironmentKey {
+        static let defaultValue = Color.Surface.tertiarySystemBackground
+    }
+}
+
 extension ButtonStyle where Self == OutlinedButtonStyle {
     static var outlined: OutlinedButtonStyle {
         return OutlinedButtonStyle()
@@ -31,6 +46,7 @@ struct OutlinedButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.ikButtonTheme) private var theme
     @Environment(\.ikButtonLoading) private var isLoading
+    @Environment(\.outlinedButtonBackgroundColor) private var backgroundColor
 
     private var foreground: Color {
         if isEnabled {
@@ -53,6 +69,7 @@ struct OutlinedButtonStyle: ButtonStyle {
             .contentShape(Rectangle())
             .modifier(IKButtonOpacityAnimationModifier(isPressed: configuration.isPressed))
             .allowsHitTesting(!isLoading)
+            .background(backgroundColor, in: RoundedRectangle(cornerRadius: theme.cornerRadius))
             .background(
                 RoundedRectangle(cornerRadius: theme.cornerRadius)
                     .stroke(Color.Custom.divider, lineWidth: 0.5)
@@ -66,6 +83,9 @@ struct OutlinedButtonStyle: ButtonStyle {
 
         Button("Hello, World!") {}
             .ikButtonFullWidth(true)
+
+        Button("Hello, World!") {}
+            .environment(\.outlinedButtonBackgroundColor, .red)
     }
     .buttonStyle(.outlined)
 }
