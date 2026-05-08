@@ -52,7 +52,7 @@ struct InformationContentView: View {
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
         }
-        .padding(.horizontal, value: .large)
+        .padding(IKPadding.large)
     }
 }
 
