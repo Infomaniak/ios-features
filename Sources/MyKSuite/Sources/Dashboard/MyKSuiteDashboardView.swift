@@ -28,6 +28,7 @@ public struct MyKSuiteDashboardView<Content: View>: View {
 
     @Environment(\.dismiss) private var dismiss
 
+    @State private var currentViewController: UIViewController?
     @State private var myKSuite: MyKSuite?
     private let apiFetcher: KSuiteApiFetchable
     private let userId: Int
@@ -62,12 +63,17 @@ public struct MyKSuiteDashboardView<Content: View>: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .ignoresSafeArea()
             }
+            .background {
+                ViewControllerAccessor { controller in
+                    currentViewController = controller
+                }
+            }
             .navigationTitle(MyKSuiteLocalizable.myKSuiteDashboardTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(role: .destructive) {
-                        dismiss()
+                        closeSheet()
                     } label: {
                         Image(systemName: "xmark")
                     }
@@ -83,6 +89,31 @@ public struct MyKSuiteDashboardView<Content: View>: View {
                 Logger.general.error("Error fetching my ksuite: \(error)")
             }
         }
+    }
+
+    @MainActor
+    private func closeSheet() {
+        @InjectService var platformDetector: PlatformDetectable
+        if platformDetector.isMacCatalyst, let currentViewController {
+            currentViewController.presentingViewController?.dismiss(animated: true)
+        } else {
+            dismiss()
+        }
+    }
+}
+
+private struct ViewControllerAccessor: UIViewControllerRepresentable {
+    let onResolve: (UIViewController) -> Void
+
+    func makeUIViewController(context _: Context) -> UIViewController {
+        let controller = UIViewController()
+        controller.view.backgroundColor = .clear
+        controller.view.isUserInteractionEnabled = false
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context _: Context) {
+        onResolve(uiViewController)
     }
 }
 
