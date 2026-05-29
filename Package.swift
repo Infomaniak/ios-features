@@ -29,6 +29,10 @@ let package = Package(
         .library(
             name: "InAppTwoFactorAuthentication",
             targets: ["InAppTwoFactorAuthentication"]
+        ),
+        .library(
+            name: "AppLock",
+            targets: ["AppLock"]
         )
     ],
     dependencies: [
@@ -90,6 +94,15 @@ let package = Package(
                 .product(name: "DesignSystem", package: "ios-core-ui"),
                 .product(name: "Nuke", package: "Nuke"),
                 .product(name: "NukeUI", package: "Nuke")
+            ]
+        ),
+        .target(
+            name: "AppLock",
+            dependencies: [
+                .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
+                .product(name: "InfomaniakCore", package: "ios-core"),
+                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
+                .product(name: "DesignSystem", package: "ios-core-ui"),
             ]
         ),
         .testTarget(name: "MyKSuiteTests", dependencies: ["MyKSuite"])
