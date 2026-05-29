@@ -73,7 +73,7 @@ struct LockedAppView: View {
     private func unlockApp() {
         guard !isEvaluatingPolicy else { return }
 
-        Task {
+        Task { @MainActor in
             isEvaluatingPolicy = true
             if await (try? appLockHelper.evaluatePolicy(reason: Localizable.lockAppTitle)) == true {
                 appLockHelper.setTime()

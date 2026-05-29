@@ -101,8 +101,9 @@ let package = Package(
             dependencies: [
                 .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
                 .product(name: "InfomaniakCore", package: "ios-core"),
+                .product(name: "InfomaniakCoreCommonUI", package: "ios-core-ui"),
                 .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
-                .product(name: "DesignSystem", package: "ios-core-ui"),
+                .product(name: "DesignSystem", package: "ios-core-ui")
             ]
         ),
         .testTarget(name: "MyKSuiteTests", dependencies: ["MyKSuite"])

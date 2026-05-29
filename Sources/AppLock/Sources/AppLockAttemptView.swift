@@ -17,7 +17,6 @@
  */
 
 import Foundation
-import InfomaniakCore
 import SwiftUI
 import UIKit
 

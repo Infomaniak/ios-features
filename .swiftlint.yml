@@ -44,6 +44,7 @@ excluded:
  - Sources/KSuiteUtils/Generated
  - Sources/KSuite/Generated
  - Sources/InAppTwoFactorAuthentication/Generated
+ - Sources/AppLock/Generated
 custom_rules:
   private_state:
     included:
