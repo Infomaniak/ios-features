@@ -1,5 +1,5 @@
 {
-  "originHash" : "5c6fa554b270fcc3943c9a86a01e35a68bc8051f77478b7dc26707cef181106f",
+  "originHash" : "1310b31aa6d79aca5a2f2e9ca68153ba8dab0a4ec15b7f3fa5fdfdcc1b6da8e9",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Infomaniak/ios-core-ui",
       "state" : {
-        "revision" : "40f37f59dc2aeba44285a1cfed48a380aca65da1",
-        "version" : "24.5.0"
+        "branch" : "feat/remove-app-lock",
+        "revision" : "e56afe2c4be77962a3d7389bf05433bff16f9cfe"
       }
     },
     {
