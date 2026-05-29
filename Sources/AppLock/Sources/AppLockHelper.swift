@@ -25,6 +25,7 @@ public final class AppLockHelper {
 
     let logoImage: Image
     let lockImage: Image
+    let userDefaults: UserDefaults
     private var deviceHasBeenLocked = false
     private var isAuthenticating = false
     private let intervalToLockApp: TimeInterval
@@ -35,13 +36,19 @@ public final class AppLockHelper {
 
     public var isAppLocked: Bool {
         let timeHasExpired = timeSinceAppEnteredBackground + intervalToLockApp < Date().timeIntervalSince1970
-        return UserDefaults.standard.isAppLockEnabled && isAvailable() && (timeHasExpired || deviceHasBeenLocked)
+        return userDefaults.isAppLockEnabled && isAvailable() && (timeHasExpired || deviceHasBeenLocked)
     }
 
-    public init(intervalToLockApp: TimeInterval = AppLockHelper.lockAfterOneMinute, logoImage: Image, lockImage: Image) {
+    public init(
+        intervalToLockApp: TimeInterval = AppLockHelper.lockAfterOneMinute,
+        logoImage: Image,
+        lockImage: Image,
+        userDefaults: UserDefaults = UserDefaults.standard
+    ) {
         self.intervalToLockApp = intervalToLockApp
         self.lockImage = lockImage
         self.logoImage = logoImage
+        self.userDefaults = userDefaults
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(deviceDidLock),
                                                name: UIApplication.willResignActiveNotification,
