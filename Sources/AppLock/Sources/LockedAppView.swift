@@ -38,6 +38,8 @@ struct LockedAppView: View {
         ZStack {
             VStack(spacing: IKPadding.large) {
                 lockImage
+                    .resizable()
+                    .scaledToFit()
                     .frame(width: 187, height: 187)
 
                 Text(Localizable.lockAppTitle)
@@ -52,7 +54,7 @@ struct LockedAppView: View {
                         .frame(height: Self.onboardingLogoHeight)
                         .accessibilityHidden(true)
                 }
-                .frame(maxHeight: .infinity, alignment: .leading)
+                .frame(maxHeight: .infinity, alignment: .topLeading)
 
                 Button(Localizable.buttonUnlock, action: unlockApp)
                     .buttonStyle(.ikBorderedProminent)
