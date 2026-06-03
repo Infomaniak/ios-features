@@ -55,7 +55,7 @@ class AppLockAttemptWindow: UIWindow {
             hostingViewController.modalPresentationStyle = .fullScreen
             emptyRootViewController.present(hostingViewController, animated: true)
         }
-        windowLevel = .alert
+        windowLevel = .alert + 1
         makeKeyAndVisible()
 
         hostingViewController.onDisappear = onDisappear
