@@ -117,25 +117,13 @@ public final class AppLockHelper {
 
     @MainActor
     private func displayAppLockAttemptWindowFor() {
-        if let existingRootViewController = currentWindow?.rootViewController {
-            existingRootViewController.dismiss(animated: true) { [weak self] in
-                guard let self else { return }
-                currentWindow = AppLockAttemptWindow(
-                    lockImage: lockImage, logoImage: logoImage,
-                    windowScene: lastActiveScene
-                ) { [weak self] in
-                    self?.currentWindow?.resignKey()
-                    self?.currentWindow = nil
-                }
-            }
-        } else {
-            currentWindow = AppLockAttemptWindow(
-                lockImage: lockImage, logoImage: logoImage,
-                windowScene: lastActiveScene
-            ) { [weak self] in
-                self?.currentWindow?.resignKey()
-                self?.currentWindow = nil
-            }
+        guard currentWindow == nil else { return }
+        currentWindow = AppLockAttemptWindow(
+            lockImage: lockImage, logoImage: logoImage,
+            windowScene: lastActiveScene
+        ) { [weak self] in
+            self?.currentWindow?.resignKey()
+            self?.currentWindow = nil
         }
     }
 }
