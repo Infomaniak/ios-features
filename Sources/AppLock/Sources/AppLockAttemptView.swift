@@ -52,6 +52,7 @@ class AppLockAttemptWindow: UIWindow {
         let emptyRootViewController = UIViewController()
         rootViewController = emptyRootViewController
         Task { @MainActor in
+            hostingViewController.modalPresentationStyle = .fullScreen
             emptyRootViewController.present(hostingViewController, animated: true)
         }
         windowLevel = .alert
