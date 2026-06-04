@@ -31,6 +31,7 @@ struct LockedAppView: View {
 
     let lockImage: Image
     let logoImage: Image
+    let lockImageSize: CGFloat
 
     @State private var isEvaluatingPolicy = false
 
@@ -40,7 +41,7 @@ struct LockedAppView: View {
                 lockImage
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 187, height: 187)
+                    .frame(width: lockImageSize, height: lockImageSize)
 
                 Text(Localizable.lockAppTitle)
                     .font(Font(TextStyle.header2.font))
@@ -88,5 +89,5 @@ struct LockedAppView: View {
 }
 
 #Preview {
-    LockedAppView(lockImage: Image(systemName: "plane"), logoImage: Image(systemName: "lock"))
+    LockedAppView(lockImage: Image(systemName: "plane"), logoImage: Image(systemName: "lock"), lockImageSize: 187)
 }

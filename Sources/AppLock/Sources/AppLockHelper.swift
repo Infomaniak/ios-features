@@ -25,6 +25,7 @@ public final class AppLockHelper {
 
     let logoImage: Image
     let lockImage: Image
+    let lockImageSize: CGFloat
     let userDefaults: UserDefaults
     private var deviceHasBeenLocked = false
     private var isAuthenticating = false
@@ -43,6 +44,7 @@ public final class AppLockHelper {
         intervalToLockApp: TimeInterval = AppLockHelper.lockAfterOneMinute,
         logoImage: Image,
         lockImage: Image,
+        lockImageSize: CGFloat = 187,
         userDefaults: UserDefaults = UserDefaults.standard
     ) {
         self.intervalToLockApp = intervalToLockApp
@@ -57,6 +59,7 @@ public final class AppLockHelper {
                                                selector: #selector(handleNotification(_:)),
                                                name: UIScene.didActivateNotification,
                                                object: nil)
+        self.lockImageSize = lockImageSize
     }
 
     public func isAvailable(_ context: LAContext? = nil) -> Bool {
@@ -120,6 +123,7 @@ public final class AppLockHelper {
         guard currentWindow == nil else { return }
         currentWindow = AppLockAttemptWindow(
             lockImage: lockImage, logoImage: logoImage,
+            lockImageSize: lockImageSize,
             windowScene: lastActiveScene
         ) { [weak self] in
             self?.currentWindow?.resignKey()
