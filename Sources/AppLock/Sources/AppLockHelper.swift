@@ -51,14 +51,6 @@ public final class AppLockHelper {
         self.lockImage = lockImage
         self.logoImage = logoImage
         self.userDefaults = userDefaults
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(deviceDidLock),
-                                               name: UIApplication.willResignActiveNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handleNotification(_:)),
-                                               name: UIScene.didActivateNotification,
-                                               object: nil)
         self.lockImageSize = lockImageSize
     }
 
@@ -99,6 +91,17 @@ public final class AppLockHelper {
         }
 
         return unlocked
+    }
+
+    public func startObservation() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(deviceDidLock),
+                                               name: UIApplication.willResignActiveNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleNotification(_:)),
+                                               name: UIScene.didActivateNotification,
+                                               object: nil)
     }
 
     @objc private func deviceDidLock() {
