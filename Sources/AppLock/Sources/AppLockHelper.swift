@@ -73,23 +73,21 @@ public final class AppLockHelper {
         isAuthenticating = true
         defer { isAuthenticating = false }
 
-        return try await context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason)
-    }
-
-    public func evaluatePolicyInAppLockExtension(reason: String) async -> Bool {
-        guard userDefaults.isAppLockEnabled && isAppLocked else {
-            return false
-        }
-        var unlocked = false
-
-        unlocked = await (try? evaluatePolicy(
-            reason: reason
-        )) == true
+        let unlocked = try await context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason)
 
         if unlocked {
             setTime()
         }
 
+        return unlocked
+    }
+
+    public func evaluatePolicyInAppLockExtension(reason: String) async -> Bool {
+        guard userDefaults.isAppLockEnabled && isAppLocked else {
+            return true
+        }
+
+        let unlocked = await (try? evaluatePolicy(reason: reason)) == true
         return unlocked
     }
 
