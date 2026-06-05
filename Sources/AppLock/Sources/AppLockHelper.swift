@@ -16,16 +16,29 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import InfomaniakCoreSwiftUI
 import LocalAuthentication
 import SwiftUI
 import UIKit
 
-public final class AppLockHelper {
-    public static let lockAfterOneMinute: TimeInterval = 60
-
+public struct AppLockUIConfiguration: Sendable {
     let logoImage: Image
     let lockImage: Image
     let lockImageSize: CGFloat
+    let ikButtonTheme: IKButtonTheme
+
+    public init(logoImage: Image, lockImage: Image, lockImageSize: CGFloat = 187, ikButtonTheme: IKButtonTheme) {
+        self.logoImage = logoImage
+        self.lockImage = lockImage
+        self.lockImageSize = lockImageSize
+        self.ikButtonTheme = ikButtonTheme
+    }
+}
+
+public final class AppLockHelper {
+    public static let lockAfterOneMinute: TimeInterval = 60
+
+    let appLockUIConfiguration: AppLockUIConfiguration
     let userDefaults: UserDefaults
     private var deviceHasBeenLocked = false
     private var isAuthenticating = false
@@ -42,16 +55,12 @@ public final class AppLockHelper {
 
     public init(
         intervalToLockApp: TimeInterval = AppLockHelper.lockAfterOneMinute,
-        logoImage: Image,
-        lockImage: Image,
-        lockImageSize: CGFloat = 187,
+        appLockUIConfiguration: AppLockUIConfiguration,
         userDefaults: UserDefaults = UserDefaults.standard
     ) {
         self.intervalToLockApp = intervalToLockApp
-        self.lockImage = lockImage
-        self.logoImage = logoImage
+        self.appLockUIConfiguration = appLockUIConfiguration
         self.userDefaults = userDefaults
-        self.lockImageSize = lockImageSize
     }
 
     public func isAvailable(_ context: LAContext? = nil) -> Bool {
@@ -123,8 +132,7 @@ public final class AppLockHelper {
     private func displayAppLockAttemptWindowFor() {
         guard currentWindow == nil else { return }
         currentWindow = AppLockAttemptWindow(
-            lockImage: lockImage, logoImage: logoImage,
-            lockImageSize: lockImageSize,
+            appLockUIConfiguration: appLockUIConfiguration,
             windowScene: lastActiveScene
         ) { [weak self] in
             self?.currentWindow?.resignKey()

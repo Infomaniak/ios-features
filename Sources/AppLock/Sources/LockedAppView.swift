@@ -25,23 +25,20 @@ import SwiftUI
 
 struct LockedAppView: View {
     @Environment(\.dismiss) private var dismiss
-    @LazyInjectService var appLockHelper: AppLockHelper
 
     private static let onboardingLogoHeight: CGFloat = 56
 
-    let lockImage: Image
-    let logoImage: Image
-    let lockImageSize: CGFloat
+    let appLockUIConfiguration: AppLockUIConfiguration
 
     @State private var isEvaluatingPolicy = false
 
     var body: some View {
         ZStack {
             VStack(spacing: IKPadding.large) {
-                lockImage
+                appLockUIConfiguration.lockImage
                     .resizable()
                     .scaledToFit()
-                    .frame(width: lockImageSize, height: lockImageSize)
+                    .frame(width: appLockUIConfiguration.lockImageSize, height: appLockUIConfiguration.lockImageSize)
 
                 Text(Localizable.lockAppTitle)
                     .font(Font(TextStyle.header2.font))
@@ -49,7 +46,7 @@ struct LockedAppView: View {
             }
             VStack {
                 VStack {
-                    logoImage
+                    appLockUIConfiguration.logoImage
                         .resizable()
                         .scaledToFit()
                         .frame(height: Self.onboardingLogoHeight)
@@ -62,6 +59,7 @@ struct LockedAppView: View {
                     .controlSize(.large)
                     .ikButtonFullWidth(true)
                     .ikButtonLoading(isEvaluatingPolicy)
+                    .ikButtonTheme(appLockUIConfiguration.ikButtonTheme)
             }
             .padding(.top, IKPadding.large)
             .padding(.bottom, value: .giant)
@@ -74,6 +72,7 @@ struct LockedAppView: View {
     }
 
     private func unlockApp() {
+        @LazyInjectService var appLockHelper: AppLockHelper
         guard !isEvaluatingPolicy else { return }
 
         Task { @MainActor in
@@ -89,5 +88,19 @@ struct LockedAppView: View {
 }
 
 #Preview {
-    LockedAppView(lockImage: Image(systemName: "plane"), logoImage: Image(systemName: "lock"), lockImageSize: 187)
+    LockedAppView(appLockUIConfiguration: AppLockUIConfiguration(
+        logoImage: Image(systemName: "lock"),
+        lockImage: Image(systemName: "plane"),
+        lockImageSize: 187,
+        ikButtonTheme: .init(
+            primary: .red,
+            secondary: .blue,
+            tertiary: .green,
+            disabledPrimary: .yellow,
+            disabledSecondary: .purple,
+            error: .background,
+            smallFont: .callout,
+            mediumFont: .body
+        )
+    ))
 }

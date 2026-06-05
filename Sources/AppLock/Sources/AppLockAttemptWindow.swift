@@ -23,8 +23,8 @@ import UIKit
 class AppLockViewHostingViewController: UIHostingController<LockedAppView> {
     var onDisappear: (() -> Void)?
 
-    init(lockImage: Image, logoImage: Image, lockImageSize: CGFloat) {
-        super.init(rootView: LockedAppView(lockImage: lockImage, logoImage: logoImage, lockImageSize: lockImageSize))
+    init(appLockUIConfiguration: AppLockUIConfiguration) {
+        super.init(rootView: LockedAppView(appLockUIConfiguration: appLockUIConfiguration))
     }
 
     @available(*, unavailable)
@@ -42,16 +42,12 @@ class AppLockAttemptWindow: UIWindow {
     let hostingViewController: AppLockViewHostingViewController
 
     init(
-        lockImage: Image,
-        logoImage: Image,
-        lockImageSize: CGFloat,
+        appLockUIConfiguration: AppLockUIConfiguration,
         windowScene: UIWindowScene?,
         onDisappear: @escaping (() -> Void)
     ) {
         hostingViewController = AppLockViewHostingViewController(
-            lockImage: lockImage,
-            logoImage: logoImage,
-            lockImageSize: lockImageSize
+            appLockUIConfiguration: appLockUIConfiguration
         )
         if let windowScene {
             super.init(windowScene: windowScene)
