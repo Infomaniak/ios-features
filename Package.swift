@@ -29,11 +29,15 @@ let package = Package(
         .library(
             name: "InAppTwoFactorAuthentication",
             targets: ["InAppTwoFactorAuthentication"]
+        ),
+        .library(
+            name: "AppLock",
+            targets: ["AppLock"]
         )
     ],
     dependencies: [
         .package(url: "https://github.com/Infomaniak/ios-core", .upToNextMajor(from: "18.1.0")),
-        .package(url: "https://github.com/Infomaniak/ios-core-ui", .upToNextMajor(from: "24.5.0")),
+        .package(url: "https://github.com/Infomaniak/ios-core-ui", branch: "feat/remove-app-lock"),
         .package(url: "https://github.com/Infomaniak/ios-dependency-injection", .upToNextMajor(from: "2.0.3")),
         .package(url: "https://github.com/Infomaniak/ios-device-check", .upToNextMajor(from: "1.1.1")),
         .package(url: "https://github.com/Infomaniak/ios-login", .upToNextMajor(from: "7.8.0")),
@@ -90,6 +94,16 @@ let package = Package(
                 .product(name: "DesignSystem", package: "ios-core-ui"),
                 .product(name: "Nuke", package: "Nuke"),
                 .product(name: "NukeUI", package: "Nuke")
+            ]
+        ),
+        .target(
+            name: "AppLock",
+            dependencies: [
+                .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
+                .product(name: "InfomaniakCore", package: "ios-core"),
+                .product(name: "InfomaniakCoreCommonUI", package: "ios-core-ui"),
+                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
+                .product(name: "DesignSystem", package: "ios-core-ui")
             ]
         ),
         .testTarget(name: "MyKSuiteTests", dependencies: ["MyKSuite"])

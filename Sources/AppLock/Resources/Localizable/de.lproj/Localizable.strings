@@ -1,0 +1,14 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: de, German
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
+ * Exported by: Killian Mathias
+ * Exported at: Fri, 29 May 2026 08:37:58 +0200
+ */
+
+/* loco:6a1849ca76d70300160bccd4 */
+"buttonUnlock" = "Entsperren";
+
+/* loco:6a1847f59641afc06f0b2062 */
+"lockAppTitle" = "Anwendung gesperrt";
