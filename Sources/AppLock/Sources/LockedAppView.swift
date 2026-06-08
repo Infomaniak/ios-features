@@ -44,7 +44,7 @@ struct LockedAppView: View {
             }
             VStack {
                 VStack {
-                    appLockUIConfiguration.logoView
+                    appLockUIConfiguration.logoView()
                 }
                 .frame(maxHeight: .infinity, alignment: .topLeading)
 

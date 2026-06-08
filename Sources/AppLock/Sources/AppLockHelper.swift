@@ -18,31 +18,39 @@
 
 import InfomaniakCoreSwiftUI
 import LocalAuthentication
-@preconcurrency import SwiftUI
+import SwiftUI
 import UIKit
 
-public struct AppLockUIConfiguration: Sendable {
+public struct AppLockUIConfiguration {
     private static let onboardingLogoHeight: CGFloat = 56
 
-    let logoView: AnyView
+    let logoView: () -> AnyView
     let lockImage: Image
     let lockImageSize: CGFloat
     let ikButtonTheme: IKButtonTheme
 
     public init(logoImage: Image, lockImage: Image, lockImageSize: CGFloat = 187, ikButtonTheme: IKButtonTheme) {
-        let constructedView = logoImage
-            .resizable()
-            .scaledToFit()
-            .frame(height: Self.onboardingLogoHeight)
-            .accessibilityHidden(true)
-        logoView = AnyView(constructedView)
+        logoView = {
+            AnyView(
+                logoImage
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: Self.onboardingLogoHeight)
+                    .accessibilityHidden(true)
+            )
+        }
         self.lockImage = lockImage
         self.lockImageSize = lockImageSize
         self.ikButtonTheme = ikButtonTheme
     }
 
-    public init(logoView: some View, lockImage: Image, lockImageSize: CGFloat = 187, ikButtonTheme: IKButtonTheme) {
-        self.logoView = AnyView(logoView)
+    public init(
+        @ViewBuilder logoView: @escaping () -> AnyView,
+        lockImage: Image,
+        lockImageSize: CGFloat = 187,
+        ikButtonTheme: IKButtonTheme
+    ) {
+        self.logoView = logoView
         self.lockImage = lockImage
         self.lockImageSize = lockImageSize
         self.ikButtonTheme = ikButtonTheme
