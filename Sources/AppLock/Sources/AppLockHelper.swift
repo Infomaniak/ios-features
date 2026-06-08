@@ -21,31 +21,28 @@ import LocalAuthentication
 import SwiftUI
 import UIKit
 
-public struct AppLockUIConfiguration {
-    private static let onboardingLogoHeight: CGFloat = 56
+public protocol AppLockHelping {
+    func evaluatePolicy(reason: String) async throws -> Bool
+    func setTime()
+    func startObservation()
+    func isAvailable(_ context: LAContext?) -> Bool
+    func evaluatePolicyInAppLockExtension(reason: String) async -> Bool
+}
 
-    let logoView: () -> AnyView
+extension AppLockHelper: AppLockHelping {}
+
+public struct AppLockUIConfiguration<LogoView: View> {
+    private static var onboardingLogoHeight: CGFloat {
+        56
+    }
+
+    let logoView: () -> LogoView
     let lockImage: Image
     let lockImageSize: CGFloat
     let ikButtonTheme: IKButtonTheme
 
-    public init(logoImage: Image, lockImage: Image, lockImageSize: CGFloat = 187, ikButtonTheme: IKButtonTheme) {
-        logoView = {
-            AnyView(
-                logoImage
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: Self.onboardingLogoHeight)
-                    .accessibilityHidden(true)
-            )
-        }
-        self.lockImage = lockImage
-        self.lockImageSize = lockImageSize
-        self.ikButtonTheme = ikButtonTheme
-    }
-
     public init(
-        @ViewBuilder logoView: @escaping () -> AnyView,
+        @ViewBuilder logoView: @escaping () -> LogoView,
         lockImage: Image,
         lockImageSize: CGFloat = 187,
         ikButtonTheme: IKButtonTheme
@@ -57,10 +54,37 @@ public struct AppLockUIConfiguration {
     }
 }
 
-public final class AppLockHelper {
-    public static let lockAfterOneMinute: TimeInterval = 60
+public extension AppLockUIConfiguration where LogoView == AnyView {
+    init(
+        logoImage: Image,
+        lockImage: Image,
+        lockImageSize: CGFloat = 187,
+        ikButtonTheme: IKButtonTheme
+    ) {
+        let height = Self.onboardingLogoHeight
+        self.init(
+            logoView: {
+                AnyView(
+                    logoImage
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: height)
+                        .accessibilityHidden(true)
+                )
+            },
+            lockImage: lockImage,
+            lockImageSize: lockImageSize,
+            ikButtonTheme: ikButtonTheme
+        )
+    }
+}
 
-    let appLockUIConfiguration: AppLockUIConfiguration
+public final class AppLockHelper<LogoView: View> {
+    public static var lockAfterOneMinute: TimeInterval {
+        60
+    }
+
+    let appLockUIConfiguration: AppLockUIConfiguration<LogoView>
     let userDefaults: UserDefaults
     private var deviceHasBeenLocked = false
     private var isAuthenticating = false
@@ -77,7 +101,7 @@ public final class AppLockHelper {
 
     public init(
         intervalToLockApp: TimeInterval = AppLockHelper.lockAfterOneMinute,
-        appLockUIConfiguration: AppLockUIConfiguration,
+        appLockUIConfiguration: AppLockUIConfiguration<LogoView>,
         userDefaults: UserDefaults = UserDefaults.standard
     ) {
         self.intervalToLockApp = intervalToLockApp

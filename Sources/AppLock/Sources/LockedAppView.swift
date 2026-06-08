@@ -23,10 +23,10 @@ import InfomaniakCoreUIResources
 import InfomaniakDI
 import SwiftUI
 
-struct LockedAppView: View {
+struct LockedAppView<LogoView: View>: View {
     @Environment(\.dismiss) private var dismiss
 
-    let appLockUIConfiguration: AppLockUIConfiguration
+    let appLockUIConfiguration: AppLockUIConfiguration<LogoView>
 
     @State private var isEvaluatingPolicy = false
 
@@ -66,7 +66,7 @@ struct LockedAppView: View {
     }
 
     private func unlockApp() {
-        @LazyInjectService var appLockHelper: AppLockHelper
+        @LazyInjectService var appLockHelper: AppLockHelping
         guard !isEvaluatingPolicy else { return }
 
         Task { @MainActor in
