@@ -26,8 +26,6 @@ import SwiftUI
 struct LockedAppView: View {
     @Environment(\.dismiss) private var dismiss
 
-    private static let onboardingLogoHeight: CGFloat = 56
-
     let appLockUIConfiguration: AppLockUIConfiguration
 
     @State private var isEvaluatingPolicy = false
@@ -46,11 +44,7 @@ struct LockedAppView: View {
             }
             VStack {
                 VStack {
-                    appLockUIConfiguration.logoImage
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: Self.onboardingLogoHeight)
-                        .accessibilityHidden(true)
+                    appLockUIConfiguration.logoView
                 }
                 .frame(maxHeight: .infinity, alignment: .topLeading)
 
