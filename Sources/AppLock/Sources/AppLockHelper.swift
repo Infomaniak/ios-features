@@ -21,6 +21,11 @@ import LocalAuthentication
 import SwiftUI
 import UIKit
 
+public enum AppLockConstants {
+    public static let logoHeight: CGFloat = 56
+    public static let lockAfterOneMinute: TimeInterval = 60.0
+}
+
 public protocol AppLockHelping {
     func evaluatePolicy(reason: String) async throws -> Bool
     func setTime()
@@ -32,10 +37,6 @@ public protocol AppLockHelping {
 extension AppLockHelper: AppLockHelping {}
 
 public struct AppLockUIConfiguration<LogoView: View> {
-    private static var onboardingLogoHeight: CGFloat {
-        56
-    }
-
     let logoView: () -> LogoView
     let lockImage: Image
     let lockImageSize: CGFloat
@@ -61,14 +62,13 @@ public extension AppLockUIConfiguration where LogoView == AnyView {
         lockImageSize: CGFloat = 187,
         ikButtonTheme: IKButtonTheme
     ) {
-        let height = Self.onboardingLogoHeight
         self.init(
             logoView: {
                 AnyView(
                     logoImage
                         .resizable()
                         .scaledToFit()
-                        .frame(height: height)
+                        .frame(height: AppLockConstants.logoHeight)
                         .accessibilityHidden(true)
                 )
             },
@@ -80,10 +80,6 @@ public extension AppLockUIConfiguration where LogoView == AnyView {
 }
 
 public final class AppLockHelper<LogoView: View> {
-    public static var lockAfterOneMinute: TimeInterval {
-        60
-    }
-
     let appLockUIConfiguration: AppLockUIConfiguration<LogoView>
     let userDefaults: UserDefaults
     private var deviceHasBeenLocked = false
@@ -100,7 +96,7 @@ public final class AppLockHelper<LogoView: View> {
     }
 
     public init(
-        intervalToLockApp: TimeInterval = AppLockHelper.lockAfterOneMinute,
+        intervalToLockApp: TimeInterval = AppLockConstants.lockAfterOneMinute,
         appLockUIConfiguration: AppLockUIConfiguration<LogoView>,
         userDefaults: UserDefaults = UserDefaults.standard
     ) {
@@ -142,8 +138,7 @@ public final class AppLockHelper<LogoView: View> {
             return true
         }
 
-        let unlocked = await (try? evaluatePolicy(reason: reason)) == true
-        return unlocked
+        return await (try? evaluatePolicy(reason: reason)) == true
     }
 
     public func startObservation() {
