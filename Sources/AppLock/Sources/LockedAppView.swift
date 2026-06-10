@@ -23,12 +23,10 @@ import InfomaniakCoreUIResources
 import InfomaniakDI
 import SwiftUI
 
-struct LockedAppView: View {
+struct LockedAppView<LogoView: View>: View {
     @Environment(\.dismiss) private var dismiss
 
-    private static let onboardingLogoHeight: CGFloat = 56
-
-    let appLockUIConfiguration: AppLockUIConfiguration
+    let appLockUIConfiguration: AppLockUIConfiguration<LogoView>
 
     @State private var isEvaluatingPolicy = false
 
@@ -46,11 +44,7 @@ struct LockedAppView: View {
             }
             VStack {
                 VStack {
-                    appLockUIConfiguration.logoImage
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: Self.onboardingLogoHeight)
-                        .accessibilityHidden(true)
+                    appLockUIConfiguration.logoView()
                 }
                 .frame(maxHeight: .infinity, alignment: .topLeading)
 
@@ -72,7 +66,7 @@ struct LockedAppView: View {
     }
 
     private func unlockApp() {
-        @LazyInjectService var appLockHelper: AppLockHelper
+        @LazyInjectService var appLockHelper: AppLockHelping
         guard !isEvaluatingPolicy else { return }
 
         Task { @MainActor in

@@ -20,10 +20,10 @@ import Foundation
 import SwiftUI
 import UIKit
 
-class AppLockViewHostingViewController: UIHostingController<LockedAppView> {
+class AppLockViewHostingViewController<LogoView: View>: UIHostingController<LockedAppView<LogoView>> {
     var onDisappear: (() -> Void)?
 
-    init(appLockUIConfiguration: AppLockUIConfiguration) {
+    init(appLockUIConfiguration: AppLockUIConfiguration<LogoView>) {
         super.init(rootView: LockedAppView(appLockUIConfiguration: appLockUIConfiguration))
     }
 
@@ -38,15 +38,15 @@ class AppLockViewHostingViewController: UIHostingController<LockedAppView> {
     }
 }
 
-class AppLockAttemptWindow: UIWindow {
-    let hostingViewController: AppLockViewHostingViewController
+class AppLockAttemptWindow<LogoView: View>: UIWindow {
+    let hostingViewController: AppLockViewHostingViewController<LogoView>
 
     init(
-        appLockUIConfiguration: AppLockUIConfiguration,
+        appLockUIConfiguration: AppLockUIConfiguration<LogoView>,
         windowScene: UIWindowScene?,
         onDisappear: @escaping (() -> Void)
     ) {
-        hostingViewController = AppLockViewHostingViewController(
+        hostingViewController = AppLockViewHostingViewController<LogoView>(
             appLockUIConfiguration: appLockUIConfiguration
         )
         if let windowScene {
