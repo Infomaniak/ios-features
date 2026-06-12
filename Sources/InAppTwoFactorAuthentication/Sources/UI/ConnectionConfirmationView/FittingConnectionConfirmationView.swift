@@ -22,15 +22,9 @@ struct FittingView<Content: View>: View {
     @ViewBuilder let content: (Bool) -> Content
 
     var body: some View {
-        if #available(iOS 16.0, *) {
-            ViewThatFits(in: .vertical) {
-                content(false)
+        ViewThatFits(in: .vertical) {
+            content(false)
 
-                ScrollView {
-                    content(true)
-                }
-            }
-        } else {
             ScrollView {
                 content(true)
             }
