@@ -76,6 +76,7 @@ struct ManyAccountView: View {
     }
 }
 
+@available(iOS 16.4, *)
 public struct ContinueWithAccountView: View {
     @State private var isShowingAccountsSelection = false
     @State private var accounts: [ConnectedAccount]?
