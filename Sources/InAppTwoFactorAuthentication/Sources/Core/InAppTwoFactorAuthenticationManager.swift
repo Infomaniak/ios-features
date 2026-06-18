@@ -58,13 +58,6 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
             name: UIScene.didActivateNotification,
             object: nil
         )
-        #elseif canImport(AppKit)
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleNotification(_:)),
-            name: NSWindow.didBecomeKeyNotification,
-            object: nil
-        )
         #endif
     }
 
@@ -73,10 +66,6 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
         guard let scene = notification.object as? UIWindowScene,
               scene.session.role == .windowApplication else { return }
         lastActiveScene = scene
-        #elseif canImport(AppKit)
-        guard let window = notification.object as? NSWindow,
-              window !== currentWindow else { return }
-        _ = window
         #endif
     }
 
@@ -184,13 +173,13 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
         if let existingWindow = currentWindow {
             guard currentAttemptUUID != completeSession.challenge.uuid else { return }
 
-            existingWindow.orderOut(nil)
+            existingWindow.close()
             currentAttemptUUID = completeSession.challenge.uuid
             currentWindow = ConnectionAttemptWindow(
                 session: completeSession.session,
                 connectionAttempt: completeSession.challenge
             ) { [weak self] in
-                self?.currentWindow?.orderOut(nil)
+                self?.currentWindow?.close()
                 self?.currentAttemptUUID = nil
                 self?.currentWindow = nil
             }
@@ -200,7 +189,7 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
                 session: completeSession.session,
                 connectionAttempt: completeSession.challenge
             ) { [weak self] in
-                self?.currentWindow?.orderOut(nil)
+                self?.currentWindow?.close()
                 self?.currentAttemptUUID = nil
                 self?.currentWindow = nil
             }

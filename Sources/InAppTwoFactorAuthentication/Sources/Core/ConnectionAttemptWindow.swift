@@ -120,7 +120,7 @@ class ConnectionAttemptWindow: NSWindow {
         )
 
         let screenFrame = NSApplication.shared.keyWindow?.frame
-            ?? NSApplication.shared.windows.first(where: { $0.isVisible })?.frame
+            ?? NSApplication.shared.windows.first { $0.isVisible }?.frame
             ?? NSScreen.main?.frame
             ?? NSRect(x: 0, y: 0, width: 800, height: 600)
 
