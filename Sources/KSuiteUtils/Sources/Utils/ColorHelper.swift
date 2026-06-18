@@ -63,9 +63,14 @@ public enum ColorHelper {
 
 extension Color {
     init(light: Color, dark: Color) {
+        #if canImport(UIKit)
         self.init(light: UIColor(light), dark: UIColor(dark))
+        #elseif canImport(AppKit)
+        self.init(light: NSColor(light), dark: NSColor(dark))
+        #endif
     }
 
+    #if canImport(UIKit)
     private init(light: UIColor, dark: UIColor) {
         self.init(uiColor: UIColor { traits in
             switch traits.userInterfaceStyle {
@@ -80,4 +85,12 @@ extension Color {
             }
         })
     }
+
+    #elseif canImport(AppKit)
+    private init(light: NSColor, dark: NSColor) {
+        self.init(nsColor: NSColor(name: nil) { appearance in
+            appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua ? dark : light
+        })
+    }
+    #endif
 }

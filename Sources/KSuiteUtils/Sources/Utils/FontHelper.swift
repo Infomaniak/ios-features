@@ -18,9 +18,19 @@
 
 import SwiftUI
 
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
 public enum FontHelper {
     private static func dynamicTypeSizeFont(size: CGFloat, weight: Font.Weight, relativeTo textStyle: Font.TextStyle) -> Font {
+        #if canImport(UIKit)
         let fontFamily = UIFont.preferredFont(forTextStyle: .body).familyName
+        #elseif canImport(AppKit)
+        let fontFamily = NSFont.preferredFont(forTextStyle: .body, options: [:]).familyName ?? ""
+        #endif
         return Font.custom(fontFamily, size: size, relativeTo: textStyle).weight(weight)
     }
 

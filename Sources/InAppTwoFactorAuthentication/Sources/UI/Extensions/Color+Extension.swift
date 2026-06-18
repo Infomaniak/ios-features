@@ -18,29 +18,37 @@
 
 import SwiftUI
 
+#if canImport(UIKit)
+import UIKit
+
+private typealias PlatformColor = UIColor
+#elseif canImport(AppKit)
+import AppKit
+
+private typealias PlatformColor = NSColor
+#endif
+
 extension Color {
     enum Custom {
         /// light: greyOrca / dark: greyRabbit
         static let textPrimary = Color(
-            light: UIColor.greyOrca,
-            dark: UIColor.greyRabbit
+            light: PlatformColor.greyOrca,
+            dark: PlatformColor.greyRabbit
         )
-        /// light: greyElephant / dark: greyShark
+        /// light: greyElephant / dark: greyMouse
         static let textSecondary = Color(
-            light: UIColor.greyElephant,
-            dark: UIColor.greyMouse
+            light: PlatformColor.greyElephant,
+            dark: PlatformColor.greyMouse
         )
-
         /// light: greyMouse / dark: greyOrca
         static let divider = Color(
-            light: UIColor.greyMouse,
-            dark: UIColor.greyOrca
+            light: PlatformColor.greyMouse,
+            dark: PlatformColor.greyOrca
         )
-
-        /// light: greyMouse / dark: greyOrca
+        /// light: clear / dark: greyOrca
         static let cardOutline = Color(
-            light: UIColor.clear,
-            dark: UIColor.greyOrca
+            light: PlatformColor.clear,
+            dark: PlatformColor.greyOrca
         )
     }
 }

@@ -99,7 +99,7 @@ struct SelectConnectedAccountListView: View {
     }
 }
 
-@available(iOS 16.4, *)
+@available(iOS 16.4, macOS 13.3, *)
 #Preview("Multi Selection") {
     Text("Hello World")
         .floatingPanel(
@@ -117,7 +117,7 @@ struct SelectConnectedAccountListView: View {
         }
 }
 
-@available(iOS 16.4, *)
+@available(iOS 16.4, macOS 13.3, *)
 #Preview("Single Selection") {
     Text("Hello World")
         .floatingPanel(

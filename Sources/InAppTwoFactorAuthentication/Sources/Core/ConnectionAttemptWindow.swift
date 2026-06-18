@@ -19,8 +19,14 @@
 import Foundation
 import InfomaniakCore
 import SwiftUI
-import UIKit
 
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
+#if canImport(UIKit)
 class ConnectionConfirmationViewHostingViewController: UIHostingController<ConnectionConfirmationView> {
     var onDisappear: (() -> Void)?
 
@@ -80,3 +86,64 @@ class ConnectionAttemptWindow: UIWindow {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+#elseif canImport(AppKit)
+class ConnectionConfirmationViewHostingViewController: NSHostingController<ConnectionConfirmationView> {
+    var onDisappear: (() -> Void)?
+
+    init(session: InAppTwoFactorAuthenticationSession, connectionAttempt: RemoteChallenge) {
+        super.init(rootView: ConnectionConfirmationView(session: session, connectionConfirmationRequest: connectionAttempt))
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        onDisappear?()
+    }
+}
+
+class ConnectionAttemptWindow: NSWindow {
+    let hostingViewController: ConnectionConfirmationViewHostingViewController
+
+    init(
+        session: InAppTwoFactorAuthenticationSession,
+        connectionAttempt: RemoteChallenge,
+        onDisappear: @escaping (() -> Void)
+    ) {
+        hostingViewController = ConnectionConfirmationViewHostingViewController(
+            session: session,
+            connectionAttempt: connectionAttempt
+        )
+
+        let screenFrame = NSApplication.shared.keyWindow?.frame
+            ?? NSApplication.shared.windows.first(where: { $0.isVisible })?.frame
+            ?? NSScreen.main?.frame
+            ?? NSRect(x: 0, y: 0, width: 800, height: 600)
+
+        super.init(
+            contentRect: screenFrame,
+            styleMask: [.borderless, .fullSizeContentView],
+            backing: .buffered,
+            defer: false
+        )
+
+        contentViewController = hostingViewController
+
+        level = .modalPanel
+
+        makeKeyAndOrderFront(nil)
+
+        hostingViewController.onDisappear = onDisappear
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+#endif
