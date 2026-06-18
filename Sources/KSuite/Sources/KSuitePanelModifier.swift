@@ -19,6 +19,7 @@
 import InfomaniakCoreSwiftUI
 import SwiftUI
 
+@available(iOS 16.4, *)
 struct KSuitePanelModifier: ViewModifier {
     @Binding var isPresented: Bool
     let backgroundColor: Color
@@ -27,12 +28,18 @@ struct KSuitePanelModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .floatingPanel(isPresented: $isPresented, closeButtonHidden: true, backgroundColor: backgroundColor, topPadding: 0) {
+            .floatingPanel(
+                isPresented: $isPresented,
+                closeButtonHidden: true,
+                backgroundColor: backgroundColor,
+                topPadding: 0
+            ) {
                 KSuiteView(configuration: configuration, isAdmin: isAdmin)
             }
     }
 }
 
+@available(iOS 16.4, *)
 public extension View {
     func kSuitePanel(
         isPresented: Binding<Bool>,
@@ -49,6 +56,7 @@ public extension View {
     }
 }
 
+@available(iOS 16.4, *)
 #Preview {
     Text("Hello world!")
         .kSuitePanel(isPresented: .constant(true), configuration: .business, isAdmin: true)
