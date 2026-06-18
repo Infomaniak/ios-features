@@ -112,7 +112,7 @@ struct ConnectionConfirmationView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             FittingView { spaceConstrained in
                 VStack(spacing: 0) {
                     VStack(spacing: IKPadding.large) {
@@ -179,7 +179,6 @@ struct ConnectionConfirmationView: View {
                 }
             }
         }
-        .navigationViewStyle(.stack)
         .ikButtonTheme(.feature)
     }
 }

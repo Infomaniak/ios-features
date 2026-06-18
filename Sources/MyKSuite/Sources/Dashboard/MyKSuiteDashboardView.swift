@@ -40,7 +40,7 @@ public struct MyKSuiteDashboardView<Content: View>: View {
     }
 
     public var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: IKPadding.large) {
                     if let myKSuite {
@@ -63,18 +63,19 @@ public struct MyKSuiteDashboardView<Content: View>: View {
                     .ignoresSafeArea()
             }
             .navigationTitle(MyKSuiteLocalizable.myKSuiteDashboardTitle)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(role: .destructive) {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "xmark")
+            #if canImport(UIKit)
+                .navigationBarTitleDisplayMode(.inline)
+            #endif
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button(role: .destructive) {
+                            dismiss()
+                        } label: {
+                            Image(systemName: "xmark")
+                        }
                     }
                 }
-            }
         }
-        .navigationViewStyle(.stack)
         .task {
             myKSuite = await myKSuiteStore.getMyKSuite(id: userId)
             do {
@@ -86,7 +87,7 @@ public struct MyKSuiteDashboardView<Content: View>: View {
     }
 }
 
-@available(iOS 17.0, *)
+@available(iOS 17.0, macOS 14.0, *)
 #Preview {
     @Previewable @State var di = PreviewTargetAssembly()
     MyKSuiteDashboardView(apiFetcher: PreviewKSuiteFetcher(), userId: 0) { EmptyView() }

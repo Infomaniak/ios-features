@@ -16,12 +16,14 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#if canImport(UIKit)
 import DesignSystem
 import InfomaniakCoreCommonUI
 import InfomaniakCoreSwiftUI
 import InfomaniakCoreUIResources
 import InfomaniakDI
 import SwiftUI
+import UIKit
 
 struct LockedAppView<LogoView: View>: View {
     @Environment(\.dismiss) private var dismiss
@@ -98,3 +100,4 @@ struct LockedAppView<LogoView: View>: View {
         )
     ))
 }
+#endif

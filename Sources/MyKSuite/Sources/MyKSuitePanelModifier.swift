@@ -19,7 +19,7 @@
 import InfomaniakCoreSwiftUI
 import SwiftUI
 
-@available(iOS 16.4, *)
+@available(iOS 16.4, macOS 13.3, *)
 struct MyKSuitePanelModifier: ViewModifier {
     @Binding var isPresented: Bool
     let backgroundColor: Color
@@ -35,14 +35,14 @@ struct MyKSuitePanelModifier: ViewModifier {
     }
 }
 
-@available(iOS 16.4, *)
+@available(iOS 16.4, macOS 13.3, *)
 public extension View {
     func myKSuitePanel(isPresented: Binding<Bool>, backgroundColor: Color, configuration: MyKSuiteConfiguration) -> some View {
         modifier(MyKSuitePanelModifier(isPresented: isPresented, backgroundColor: backgroundColor, configuration: configuration))
     }
 }
 
-@available(iOS 16.4, *)
+@available(iOS 16.4, macOS 13.3, *)
 #Preview {
     Text("Hello world!")
         .myKSuitePanel(isPresented: .constant(true), backgroundColor: .white, configuration: .kDrive)

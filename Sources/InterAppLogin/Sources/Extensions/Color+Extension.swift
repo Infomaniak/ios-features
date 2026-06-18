@@ -18,28 +18,43 @@
 
 import SwiftUI
 
+#if canImport(UIKit)
+import UIKit
+
+private typealias PlatformColor = UIColor
+#elseif canImport(AppKit)
+import AppKit
+
+private typealias PlatformColor = NSColor
+#endif
+
 extension Color {
     enum Custom {
         /// light: greyOrca / dark: greyRabbit
         static let textPrimary = Color(
-            light: UIColor.greyOrca,
-            dark: UIColor.greyRabbit
+            light: PlatformColor.greyOrca,
+            dark: PlatformColor.greyRabbit
         )
         /// light: greyElephant / dark: greyShark
         static let textSecondary = Color(
-            light: UIColor.greyElephant,
-            dark: UIColor.greyShark
+            light: PlatformColor.greyElephant,
+            dark: PlatformColor.greyShark
         )
-
         /// light: greyMouse / dark: greyOrca
         static let divider = Color(
-            light: UIColor.greyMouse,
-            dark: UIColor.greyOrca
+            light: PlatformColor.greyMouse,
+            dark: PlatformColor.greyOrca
         )
     }
 
     enum Surface {
         /// systemBackground
-        static let tertiarySystemBackground: Color = .init(uiColor: .tertiarySystemBackground)
+        static let tertiarySystemBackground: Color = {
+            #if canImport(UIKit)
+            Color(uiColor: .tertiarySystemBackground)
+            #elseif canImport(AppKit)
+            Color(nsColor: .controlBackgroundColor)
+            #endif
+        }()
     }
 }

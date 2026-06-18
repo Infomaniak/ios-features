@@ -54,10 +54,6 @@ private struct OneAccountView: View {
 struct ManyAccountView: View {
     let selectedAccounts: [ConnectedAccount]
 
-    init(selectedAccounts: [ConnectedAccount]) {
-        self.selectedAccounts = selectedAccounts
-    }
-
     var body: some View {
         HStack(spacing: IKPadding.mini) {
             ConnectedAccountAvatarStackView(accounts: selectedAccounts)
@@ -76,7 +72,7 @@ struct ManyAccountView: View {
     }
 }
 
-@available(iOS 16.4, *)
+@available(iOS 16.4, macOS 13.3, *)
 public struct ContinueWithAccountView: View {
     @State private var isShowingAccountsSelection = false
     @State private var accounts: [ConnectedAccount]?
@@ -200,7 +196,7 @@ public struct ContinueWithAccountView: View {
     }
 }
 
-@available(iOS 17, *)
+@available(iOS 17, macOS 14.0, *)
 #Preview("Accounts") {
     @Previewable @State var di = PreviewTargetAssembly(emptyAccounts: false)
     VStack(spacing: IKPadding.huge) {
@@ -220,7 +216,7 @@ public struct ContinueWithAccountView: View {
     .padding()
 }
 
-@available(iOS 17, *)
+@available(iOS 17, macOS 14.0, *)
 #Preview("No accounts") {
     @Previewable @State var di = PreviewTargetAssembly(emptyAccounts: true)
     VStack {

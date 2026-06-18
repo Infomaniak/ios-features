@@ -18,7 +18,13 @@
 
 import Foundation
 import InfomaniakCore
+
+#if canImport(UIKit)
 import UIKit
+#elseif canImport(AppKit)
+import AppKit
+import UserNotifications
+#endif
 
 public protocol InAppTwoFactorAuthenticationManagerable {
     func checkConnectionAttempts(using sessions: [InAppTwoFactorAuthenticationSession])
@@ -30,30 +36,37 @@ public protocol InAppTwoFactorAuthenticationManagerable {
 public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthenticationManagerable {
     public typealias UserId = Int
 
-    private weak var lastActiveScene: UIWindowScene?
-
     private var currentAttemptUUID: String?
-    private var currentWindow: UIWindow?
-
     private let checkIntervalSeconds: TimeInterval
     private var lastCheckedConnectionAttemptsDate: Date?
+
+    #if canImport(UIKit)
+    private weak var lastActiveScene: UIWindowScene?
+    private var currentWindow: UIWindow?
+    #elseif canImport(AppKit)
+    private var currentWindow: NSWindow?
+    #endif
 
     private typealias CheckConnectionAttemptResult = (session: InAppTwoFactorAuthenticationSession, challenge: RemoteChallenge)
 
     public init(checkIntervalSeconds: TimeInterval = 30) {
         self.checkIntervalSeconds = checkIntervalSeconds
+        #if canImport(UIKit)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleNotification(_:)),
             name: UIScene.didActivateNotification,
             object: nil
         )
+        #endif
     }
 
     @objc private func handleNotification(_ notification: Notification) {
+        #if canImport(UIKit)
         guard let scene = notification.object as? UIWindowScene,
               scene.session.role == .windowApplication else { return }
         lastActiveScene = scene
+        #endif
     }
 
     public func checkConnectionAttempts(using sessions: [InAppTwoFactorAuthenticationSession]) {
@@ -127,10 +140,9 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
 
     @MainActor
     private func displayConnectionAttemptWindowFor(completeSession: CheckConnectionAttemptResult) {
+        #if canImport(UIKit)
         if let existingRootViewController = currentWindow?.rootViewController {
-            guard currentAttemptUUID != completeSession.challenge.uuid else {
-                return
-            }
+            guard currentAttemptUUID != completeSession.challenge.uuid else { return }
 
             existingRootViewController.dismiss(animated: true) { [weak self] in
                 self?.currentAttemptUUID = completeSession.challenge.uuid
@@ -156,5 +168,32 @@ public final class InAppTwoFactorAuthenticationManager: InAppTwoFactorAuthentica
                 self?.currentWindow = nil
             }
         }
+
+        #elseif canImport(AppKit)
+        if let existingWindow = currentWindow {
+            guard currentAttemptUUID != completeSession.challenge.uuid else { return }
+
+            existingWindow.close()
+            currentAttemptUUID = completeSession.challenge.uuid
+            currentWindow = ConnectionAttemptWindow(
+                session: completeSession.session,
+                connectionAttempt: completeSession.challenge
+            ) { [weak self] in
+                self?.currentWindow?.close()
+                self?.currentAttemptUUID = nil
+                self?.currentWindow = nil
+            }
+        } else {
+            currentAttemptUUID = completeSession.challenge.uuid
+            currentWindow = ConnectionAttemptWindow(
+                session: completeSession.session,
+                connectionAttempt: completeSession.challenge
+            ) { [weak self] in
+                self?.currentWindow?.close()
+                self?.currentAttemptUUID = nil
+                self?.currentWindow = nil
+            }
+        }
+        #endif
     }
 }

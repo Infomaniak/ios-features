@@ -16,6 +16,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#if canImport(UIKit)
 import InfomaniakCoreSwiftUI
 import LocalAuthentication
 import SwiftUI
@@ -142,14 +143,18 @@ public final class AppLockHelper<LogoView: View> {
     }
 
     public func startObservation() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(deviceDidLock),
-                                               name: UIApplication.willResignActiveNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handleNotification(_:)),
-                                               name: UIScene.didActivateNotification,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(deviceDidLock),
+            name: UIApplication.willResignActiveNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleNotification(_:)),
+            name: UIScene.didActivateNotification,
+            object: nil
+        )
     }
 
     @objc private func deviceDidLock() {
@@ -158,7 +163,8 @@ public final class AppLockHelper<LogoView: View> {
     }
 
     @objc private func handleNotification(_ notification: Notification) {
-        guard let scene = notification.object as? UIWindowScene, scene.session.role == .windowApplication else {
+        guard let scene = notification.object as? UIWindowScene,
+              scene.session.role == .windowApplication else {
             return
         }
         lastActiveScene = scene
@@ -172,6 +178,7 @@ public final class AppLockHelper<LogoView: View> {
     @MainActor
     private func displayAppLockAttemptWindowFor() {
         guard currentWindow == nil else { return }
+
         currentWindow = AppLockAttemptWindow(
             appLockUIConfiguration: appLockUIConfiguration,
             windowScene: lastActiveScene
@@ -181,3 +188,4 @@ public final class AppLockHelper<LogoView: View> {
         }
     }
 }
+#endif
