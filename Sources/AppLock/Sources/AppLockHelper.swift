@@ -146,7 +146,7 @@ public final class AppLockHelper<LogoView: View> {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(deviceDidLock),
-            name: UIApplication.willResignActiveNotification,
+            name: UIApplication.protectedDataWillBecomeUnavailableNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
