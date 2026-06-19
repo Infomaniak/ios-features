@@ -60,6 +60,7 @@ class AppLockAttemptWindow<LogoView: View>: UIWindow {
         rootViewController = emptyRootViewController
         Task { @MainActor in
             hostingViewController.modalPresentationStyle = .fullScreen
+            hostingViewController.modalTransitionStyle = .crossDissolve
             emptyRootViewController.present(hostingViewController, animated: true)
         }
         windowLevel = .alert + 1
