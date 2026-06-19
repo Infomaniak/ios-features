@@ -61,9 +61,8 @@ struct LockedAppView<LogoView: View>: View {
             .padding(.bottom, value: .giant)
         }
         .padding(.horizontal, value: .large)
-        .onAppear {
-            unlockApp()
-        }
+        .onAppear(perform: unlockApp)
+        .sceneLifecycle(willEnterForeground: unlockApp)
         .matomoView(view: ["LockedAppView"])
     }
 
