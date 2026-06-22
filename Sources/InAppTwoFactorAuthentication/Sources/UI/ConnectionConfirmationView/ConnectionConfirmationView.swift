@@ -91,12 +91,13 @@ struct ConnectionConfirmationView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
 
-    @State private var currentContent: ConnectionConfirmationContent = .main
+    @State private var currentContent: ConnectionConfirmationContent
 
     let session: InAppTwoFactorAuthenticationSession
     let connectionConfirmationRequest: RemoteChallenge
 
     init(session: InAppTwoFactorAuthenticationSession, connectionConfirmationRequest: RemoteChallenge) {
+        _currentContent = State(wrappedValue: .main)
         self.connectionConfirmationRequest = connectionConfirmationRequest
         self.session = session
     }
@@ -106,7 +107,7 @@ struct ConnectionConfirmationView: View {
         connectionConfirmationRequest: RemoteChallenge,
         currentContent: ConnectionConfirmationContent
     ) {
-        self.currentContent = currentContent
+        _currentContent = State(wrappedValue: currentContent)
         self.session = session
         self.connectionConfirmationRequest = connectionConfirmationRequest
     }
