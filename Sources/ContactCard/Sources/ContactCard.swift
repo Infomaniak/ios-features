@@ -15,3 +15,57 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+import Foundation
+import SwiftUI
+
+struct ContactCard: View {
+    @Environment(\.contactCardTheme) private var contactCardTheme
+
+    var body: some View {
+        ContactCardOnBoardingView()
+            .environment(\.contactCardTheme, .pink)
+    }
+}
+
+#Preview {
+    ContactCard()
+        .environment(\.contactCardTheme, .pink)
+}
+
+// MARK: - ContactCardThemePreview
+
+struct ContactCardThemePreview {
+    let primary: Color
+    let secondary: Color
+    let onAccent: Color
+    let navBarBackground: Color
+    let snackbarActionColor: Color
+
+    static let pink = ContactCardThemePreview(
+        primary: Color(red: 0.91, green: 0.12, blue: 0.39),
+        secondary: Color(red: 0.96, green: 0.73, blue: 0.85),
+        onAccent: Color.white,
+        navBarBackground: Color(red: 0.20, green: 0.04, blue: 0.11),
+        snackbarActionColor: Color(red: 0.96, green: 0.73, blue: 0.85)
+    )
+
+    static let blue = ContactCardThemePreview(
+        primary: Color(red: 0.13, green: 0.46, blue: 0.96),
+        secondary: Color(red: 0.72, green: 0.85, blue: 0.98),
+        onAccent: Color.white,
+        navBarBackground: Color(red: 0.04, green: 0.13, blue: 0.29),
+        snackbarActionColor: Color(red: 0.72, green: 0.85, blue: 0.98)
+    )
+}
+
+private struct ContactCardThemeKey: EnvironmentKey {
+    static let defaultValue: ContactCardThemePreview = .pink
+}
+
+extension EnvironmentValues {
+    var contactCardTheme: ContactCardThemePreview {
+        get { self[ContactCardThemeKey.self] }
+        set { self[ContactCardThemeKey.self] = newValue }
+    }
+}
