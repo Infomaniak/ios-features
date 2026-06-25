@@ -77,3 +77,30 @@ extension EnvironmentValues {
         set { self[ContactCardThemeKey.self] = newValue }
     }
 }
+
+// MARK: Enum
+
+enum MyString {
+    static let contactCardOnBaoardingTitle = "Créez votre carte de visite"
+    static let contactCardOnBaoardingDescription = "Partagez vos coordonnées d'un simple scan. Vos contacts vous enregistrent en une seconde — même hors ligne."
+    static let contactCardOnBaoardingFirstItem = "Un QR code qui contient déjà tout"
+    static let contactCardOnBaoardingSecondItem = "Aucun compte requis côté destinataire"
+    static let contactCardOnBaoardingThirdItem = "Fonctionne hors ligne"
+    static let contactCardOnBaoardingCreate = "Créer ma carte de visite"
+
+    static let formTextFieldFirstName = "Prénom"
+    static let formTextFieldLastName = "Nom"
+    static let formTextFieldEmail = "Adresse e-mail"
+    static let formTextFieldPhone = "Numéro de téléphone"
+    static let formTextFieldCompany = "Entreprise"
+    static let formTextFieldWebSite = "Site internet"
+    static let formTextFieldLinkedIn = "LinkedIn"
+    static let formRequiredFields = "Champs obligatoires."
+    static let formNoRequiredFields = "Champs facultatifs."
+}
+
+enum MyImage {
+    static let contactCardOnBoardingFirstItem = Image(systemName: "qrcode")
+    static let contactCardOnBoardingSecondItem = Image(systemName: "checkmark")
+    static let contactCardOnBoardingThirdItem = Image(systemName: "clock")
+}

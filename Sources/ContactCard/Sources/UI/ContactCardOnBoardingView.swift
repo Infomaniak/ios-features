@@ -21,21 +21,6 @@ import Foundation
 import InfomaniakCoreSwiftUI
 import SwiftUI
 
-enum MyString {
-    static let contactCardOnBaoardingTitle = "Créez votre carte de visite"
-    static let contactCardOnBaoardingDescription = "Partagez vos coordonnées d'un simple scan. Vos contacts vous enregistrent en une seconde — même hors ligne."
-    static let contactCardOnBaoardingFirstItem = "Un QR code qui contient déjà tout"
-    static let contactCardOnBaoardingSecondItem = "Aucun compte requis côté destinataire"
-    static let contactCardOnBaoardingThirdItem = "Fonctionne hors ligne"
-    static let contactCardOnBaoardingCreate = "Créer ma carte de visite"
-}
-
-enum MyImage {
-    static let contactCardOnBoardingFirstItem = Image(systemName: "qrcode")
-    static let contactCardOnBoardingSecondItem = Image(systemName: "checkmark")
-    static let contactCardOnBoardingThirdItem = Image(systemName: "clock")
-}
-
 @available(iOS 16.4, *)
 struct ContactCardOnBoardingView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
@@ -104,6 +89,7 @@ struct ContactCardOnBoardingView: View {
             .padding(.horizontal, IKPadding.large)
             .padding(.bottom, IKPadding.mini)
         })
+        .background(contactCardTheme.onAccent)
     }
 }
 
