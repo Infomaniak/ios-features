@@ -33,44 +33,10 @@ struct ContactCardFormView: View {
     @State var website = ""
     @State var linkedin = ""
 
-    @State private var avatarItem: PhotosPickerItem?
-    @State private var avatarImage: Image?
-
     var body: some View {
         Form {
-            ZStack(alignment: .bottomTrailing) {
-                PhotosPicker(selection: $avatarItem, matching: .images, photoLibrary: .shared()) {
-                    if avatarImage != nil {
-                        avatarImage?
-                            .resizable()
-                            .clipShape(.circle)
-                            .scaledToFill()
-                            .frame(width: 115, height: 115)
-
-                    } else {
-                        Image(systemName: "person.crop.circle")
-                            .resizable()
-                            .clipShape(.circle)
-                            .scaledToFill()
-                            .frame(width: 115, height: 115)
-                    }
-                }
-
-                Image(systemName: "camera")
-                    .colorInvert()
-                    .padding(IKPadding.small)
-                    .background(.black, in: .circle)
-                    .overlay {
-                        Circle().stroke(Color(UIColor.systemGray6), lineWidth: 5)
-                    }
-                    .offset(x: IKPadding.micro, y: IKPadding.micro)
-            }
-            .task(id: avatarItem) {
-                if let loaded = try? await avatarItem?.loadTransferable(type: Image.self) {
-                    avatarImage = loaded
-                }
-            }
-            .frame(maxWidth: .infinity)
+            ContactCardAvatarPickerView()
+                .frame(maxWidth: .infinity)
 
             Section {
                 TextField(MyString.formTextFieldFirstName, text: $firstname)
