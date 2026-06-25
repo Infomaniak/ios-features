@@ -44,6 +44,7 @@ struct ContactCardThemePreview {
     let primaryText: Color
     let secondaryText: Color
     let onAccent: Color
+    let background: Color
     let navBarBackground: Color
     let snackbarActionColor: Color
 
@@ -53,6 +54,7 @@ struct ContactCardThemePreview {
         primaryText: Color(.black),
         secondaryText: Color(.darkGray),
         onAccent: Color.white,
+        background: Color(UIColor.systemGray6),
         navBarBackground: Color(red: 0.20, green: 0.04, blue: 0.11),
         snackbarActionColor: Color(red: 0.96, green: 0.73, blue: 0.85)
     )
@@ -63,6 +65,7 @@ struct ContactCardThemePreview {
         primaryText: Color(.black),
         secondaryText: Color(.darkGray),
         onAccent: Color.white,
+        background: Color(UIColor.systemGray6),
         navBarBackground: Color(red: 0.04, green: 0.13, blue: 0.29),
         snackbarActionColor: Color(red: 0.72, green: 0.85, blue: 0.98)
     )

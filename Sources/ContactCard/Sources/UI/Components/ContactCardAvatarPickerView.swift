@@ -49,7 +49,7 @@ struct ContactCardAvatarPickerView: View {
                 .padding(IKPadding.small)
                 .background(.black, in: .circle)
                 .overlay {
-                    Circle().stroke(Color(UIColor.systemGray6), lineWidth: 5)
+                    Circle().stroke(Color(UIColor.systemGray5), lineWidth: 5)
                 }
                 .offset(x: IKPadding.micro, y: IKPadding.micro)
         }

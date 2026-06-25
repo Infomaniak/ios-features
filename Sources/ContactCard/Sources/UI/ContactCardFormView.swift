@@ -52,6 +52,7 @@ struct ContactCardFormView: View {
             ContactCardAvatarPickerView(userProfile: userProfile)
                 .environment(\.contactCardTheme, contactCardTheme)
                 .frame(maxWidth: .infinity)
+                .listRowBackground(contactCardTheme.background)
 
             Section {
                 TextField(MyString.formTextFieldFirstName, text: $firstname)
@@ -65,7 +66,7 @@ struct ContactCardFormView: View {
                     .foregroundStyle(contactCardTheme.secondaryText)
                     .padding(.bottom, IKPadding.medium)
             }
-            .listRowBackground(Color(UIColor.systemGray6))
+            .listRowBackground(Color(UIColor.systemGray5))
 
             Section {
                 TextField(MyString.formTextFieldCompany, text: $company)
@@ -76,11 +77,11 @@ struct ContactCardFormView: View {
                 Text(MyString.formNoRequiredFields)
                     .foregroundStyle(contactCardTheme.secondaryText)
             }
-            .listRowBackground(Color(UIColor.systemGray6))
+            .listRowBackground(Color(UIColor.systemGray5))
         }
         .formStyle(.grouped)
         .scrollContentBackground(.hidden)
-        .background(contactCardTheme.onAccent)
+        .background(contactCardTheme.background)
         .foregroundColor(contactCardTheme.primaryText)
     }
 }

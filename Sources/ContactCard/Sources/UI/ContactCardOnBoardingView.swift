@@ -89,7 +89,7 @@ struct ContactCardOnBoardingView: View {
             .padding(.horizontal, IKPadding.large)
             .padding(.bottom, IKPadding.mini)
         })
-        .background(contactCardTheme.onAccent)
+        .background(contactCardTheme.background)
     }
 }
 
