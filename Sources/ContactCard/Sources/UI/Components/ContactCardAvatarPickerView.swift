@@ -17,13 +17,18 @@
  */
 
 import DesignSystem
+import InfomaniakCore
 import InfomaniakCoreSwiftUI
 import PhotosUI
 import SwiftUI
 
 struct ContactCardAvatarPickerView: View {
+    @Environment(\.contactCardTheme) private var contactCardTheme
+
     @State private var avatarItem: PhotosPickerItem?
     @State private var avatarImage: Image?
+
+    let userProfile: UserProfile
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -34,13 +39,29 @@ struct ContactCardAvatarPickerView: View {
                         .clipShape(.circle)
                         .scaledToFill()
                         .frame(width: 115, height: 115)
-
                 } else {
-                    Image(systemName: "person.crop.circle")
-                        .resizable()
-                        .clipShape(.circle)
-                        .scaledToFill()
-                        .frame(width: 115, height: 115)
+                    Group {
+                        if let rawAvatarURL = userProfile.avatar,
+                           let avatarURL = URL(string: rawAvatarURL) {
+                            AsyncImage(url: avatarURL) { phase in
+                                if let image = phase.image {
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 115, height: 115)
+                                } else {
+                                    initialsView
+                                }
+                            }
+                        } else {
+                            initialsView
+                        }
+                    }
+                    .clipShape(Circle())
+                    .background(
+                        Circle()
+                            .stroke(Color(UIColor.gray))
+                    )
                 }
             }
 
@@ -59,8 +80,17 @@ struct ContactCardAvatarPickerView: View {
             }
         }
     }
+
+    private var initialsView: some View {
+        InitialsView(
+            initials: NameFormatter(fullName: userProfile.displayName).initials,
+            backgroundColor: Color.backgroundColor(from: userProfile.email.hash),
+            foregroundColor: contactCardTheme.secondary,
+            size: 115
+        )
+    }
 }
 
 #Preview {
-    ContactCardAvatarPickerView()
+    ContactCardAvatarPickerView(userProfile: ProfilFake.fakeUserProfile)
 }

@@ -17,6 +17,7 @@
  */
 
 import DesignSystem
+import InfomaniakCore
 import InfomaniakCoreSwiftUI
 import PhotosUI
 import SwiftUI
@@ -33,9 +34,12 @@ struct ContactCardFormView: View {
     @State var website = ""
     @State var linkedin = ""
 
+    let userProfile: UserProfile
+
     var body: some View {
         Form {
-            ContactCardAvatarPickerView()
+            ContactCardAvatarPickerView(userProfile: userProfile)
+                .environment(\.contactCardTheme, contactCardTheme)
                 .frame(maxWidth: .infinity)
 
             Section {
@@ -71,5 +75,5 @@ struct ContactCardFormView: View {
 }
 
 #Preview {
-    ContactCardFormView()
+    ContactCardFormView(userProfile: ProfilFake.fakeUserProfile)
 }
