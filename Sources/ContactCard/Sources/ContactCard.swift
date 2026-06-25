@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import InfomaniakCore
 import SwiftUI
 
 @available(iOS 16.4, *)
@@ -103,4 +104,15 @@ enum MyImage {
     static let contactCardOnBoardingFirstItem = Image(systemName: "qrcode")
     static let contactCardOnBoardingSecondItem = Image(systemName: "checkmark")
     static let contactCardOnBoardingThirdItem = Image(systemName: "clock")
+}
+
+enum ProfilFake {
+    static let fakeUserProfile = UserProfile(
+        id: 42,
+        displayName: "Camille Mercier",
+        firstName: "Camille",
+        lastName: "Mercier",
+        email: "camille.mercier@example.com",
+        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=512&h=512&fit=crop"
+    )
 }
