@@ -92,5 +92,5 @@ struct ContactCardAvatarPickerView: View {
 }
 
 #Preview {
-    ContactCardAvatarPickerView(userProfile: ProfilFake.fakeUserProfile)
+    ContactCardAvatarPickerView(userProfile: ProfileFake.fakeUserProfile)
 }

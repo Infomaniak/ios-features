@@ -36,6 +36,17 @@ struct ContactCardFormView: View {
 
     let userProfile: UserProfile
 
+    init(userProfile: UserProfile) {
+        self.userProfile = userProfile
+        _firstname = State(initialValue: userProfile.firstName)
+        _lastname = State(initialValue: userProfile.lastName)
+        _email = State(initialValue: userProfile.email)
+        _phone = State(initialValue: "")
+        _company = State(initialValue: "")
+        _website = State(initialValue: "")
+        _linkedin = State(initialValue: "")
+    }
+
     var body: some View {
         Form {
             ContactCardAvatarPickerView(userProfile: userProfile)
@@ -75,5 +86,5 @@ struct ContactCardFormView: View {
 }
 
 #Preview {
-    ContactCardFormView(userProfile: ProfilFake.fakeUserProfile)
+    ContactCardFormView(userProfile: ProfileFake.fakeUserProfile)
 }

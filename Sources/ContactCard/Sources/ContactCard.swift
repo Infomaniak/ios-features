@@ -106,7 +106,7 @@ enum MyImage {
     static let contactCardOnBoardingThirdItem = Image(systemName: "clock")
 }
 
-enum ProfilFake {
+enum ProfileFake {
     static let fakeUserProfile = UserProfile(
         id: 42,
         displayName: "Camille Mercier",
