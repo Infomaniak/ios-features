@@ -24,7 +24,9 @@ import SwiftUI
 
 struct UserProfileAvatarView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
+
     let userProfile: UserProfile
+    let size: CGFloat
 
     var body: some View {
         Group {
@@ -35,7 +37,7 @@ struct UserProfileAvatarView: View {
                         image
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 115, height: 115)
+                            .frame(width: size, height: size)
                     } else {
                         initialsView
                     }
@@ -62,5 +64,5 @@ struct UserProfileAvatarView: View {
 }
 
 #Preview {
-    UserProfileAvatarView(userProfile: ProfileFake.fakeUserProfile)
+    UserProfileAvatarView(userProfile: ProfileFake.fakeUserProfile, size: 115)
 }

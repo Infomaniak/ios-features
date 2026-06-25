@@ -40,7 +40,7 @@ struct ContactCardAvatarPickerView: View {
                         .scaledToFill()
                         .frame(width: 115, height: 115)
                 } else {
-                    UserProfileAvatarView(userProfile: userProfile)
+                    UserProfileAvatarView(userProfile: userProfile, size: 115)
                 }
             }
 
