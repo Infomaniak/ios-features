@@ -101,6 +101,9 @@ enum MyString {
     static let formTextFieldLinkedIn = "LinkedIn"
     static let formRequiredFields = "Champs obligatoires."
     static let formNoRequiredFields = "Champs facultatifs."
+
+    static let qrCodeShared = "Partager"
+    static let qrCodeSharedImage = "square.and.arrow.up"
 }
 
 enum MyImage {
