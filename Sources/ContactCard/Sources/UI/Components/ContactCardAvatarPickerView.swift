@@ -40,28 +40,7 @@ struct ContactCardAvatarPickerView: View {
                         .scaledToFill()
                         .frame(width: 115, height: 115)
                 } else {
-                    Group {
-                        if let rawAvatarURL = userProfile.avatar,
-                           let avatarURL = URL(string: rawAvatarURL) {
-                            AsyncImage(url: avatarURL) { phase in
-                                if let image = phase.image {
-                                    image
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 115, height: 115)
-                                } else {
-                                    initialsView
-                                }
-                            }
-                        } else {
-                            initialsView
-                        }
-                    }
-                    .clipShape(Circle())
-                    .background(
-                        Circle()
-                            .stroke(Color(UIColor.gray))
-                    )
+                    UserProfileAvatarView(userProfile: userProfile)
                 }
             }
 
@@ -79,15 +58,6 @@ struct ContactCardAvatarPickerView: View {
                 avatarImage = loaded
             }
         }
-    }
-
-    private var initialsView: some View {
-        InitialsView(
-            initials: NameFormatter(fullName: userProfile.displayName).initials,
-            backgroundColor: Color.backgroundColor(from: userProfile.email.hash),
-            foregroundColor: contactCardTheme.secondary,
-            size: 115
-        )
     }
 }
 
