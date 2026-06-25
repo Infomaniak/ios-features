@@ -16,6 +16,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import DesignSystem
 import Foundation
 import InfomaniakCoreSwiftUI
 import SwiftUI
@@ -35,16 +36,78 @@ enum MyImage {
     static let contactCardOnBoardingThirdItem = Image(systemName: "clock")
 }
 
+@available(iOS 16.4, *)
 struct ContactCardOnBoardingView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
     var body: some View {
-        Text("ContactCardOnBoardingView")
-            .padding(value: .medium)
-            .background(contactCardTheme.primary)
+        ScrollView {
+            VStack {
+                OnBoardingHeaderView()
+                    .environment(\.contactCardTheme, contactCardTheme)
+                    .padding(.top, IKPadding.giant)
+
+                Text(MyString.contactCardOnBaoardingDescription)
+                    .multilineTextAlignment(.center)
+                    .font(.Custom.body)
+                    .foregroundStyle(contactCardTheme.secondaryText)
+                    .padding(.horizontal, IKPadding.medium)
+                    .padding(.top, IKPadding.mini)
+                    .padding(.bottom, IKPadding.huge)
+
+                VStack(spacing: IKPadding.medium) {
+                    FeatureItemCell(
+                        icon: MyImage.contactCardOnBoardingFirstItem,
+                        text: MyString.contactCardOnBaoardingFirstItem
+                    )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, IKPadding.mini)
+
+                    FeatureItemCell(
+                        icon: MyImage.contactCardOnBoardingSecondItem,
+                        text: MyString.contactCardOnBaoardingSecondItem
+                    )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, IKPadding.mini)
+
+                    FeatureItemCell(
+                        icon: MyImage.contactCardOnBoardingThirdItem,
+                        text: MyString.contactCardOnBaoardingThirdItem
+                    )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, IKPadding.mini)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.horizontal, IKPadding.huge)
+        }
+        .scrollBounceBehavior(.basedOnSize)
+        .safeAreaInset(edge: .bottom, content: {
+            Button(MyString.contactCardOnBaoardingCreate) {
+                // Nothing for now (navigation will be added later)
+            }
+            .buttonStyle(.ikBorderedProminent)
+            .ikButtonFullWidth(true)
+            .controlSize(.large)
+            .ikButtonTheme(
+                IKButtonTheme(
+                    primary: contactCardTheme.primary,
+                    secondary: contactCardTheme.secondary,
+                    tertiary: Color.gray,
+                    disabledPrimary: Color.gray,
+                    disabledSecondary: Color.white,
+                    error: Color.red,
+                    smallFont: .body,
+                    mediumFont: .headline
+                )
+            )
+            .padding(.horizontal, IKPadding.large)
+            .padding(.bottom, IKPadding.mini)
+        })
     }
 }
 
+@available(iOS 16.4, *)
 #Preview {
     ContactCardOnBoardingView()
 }

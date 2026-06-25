@@ -19,6 +19,7 @@
 import Foundation
 import SwiftUI
 
+@available(iOS 16.4, *)
 struct ContactCard: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
@@ -28,6 +29,7 @@ struct ContactCard: View {
     }
 }
 
+@available(iOS 16.4, *)
 #Preview {
     ContactCard()
         .environment(\.contactCardTheme, .pink)
