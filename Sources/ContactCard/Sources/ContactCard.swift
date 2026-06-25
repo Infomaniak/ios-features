@@ -38,13 +38,17 @@ struct ContactCard: View {
 struct ContactCardThemePreview {
     let primary: Color
     let secondary: Color
+    let primaryText: Color
+    let secondaryText: Color
     let onAccent: Color
     let navBarBackground: Color
     let snackbarActionColor: Color
 
     static let pink = ContactCardThemePreview(
-        primary: Color(red: 0.91, green: 0.12, blue: 0.39),
+        primary: Color(red: 0.81, green: 0.12, blue: 0.39),
         secondary: Color(red: 0.96, green: 0.73, blue: 0.85),
+        primaryText: Color(.black),
+        secondaryText: Color(.darkGray),
         onAccent: Color.white,
         navBarBackground: Color(red: 0.20, green: 0.04, blue: 0.11),
         snackbarActionColor: Color(red: 0.96, green: 0.73, blue: 0.85)
@@ -53,6 +57,8 @@ struct ContactCardThemePreview {
     static let blue = ContactCardThemePreview(
         primary: Color(red: 0.13, green: 0.46, blue: 0.96),
         secondary: Color(red: 0.72, green: 0.85, blue: 0.98),
+        primaryText: Color(.black),
+        secondaryText: Color(.darkGray),
         onAccent: Color.white,
         navBarBackground: Color(red: 0.04, green: 0.13, blue: 0.29),
         snackbarActionColor: Color(red: 0.72, green: 0.85, blue: 0.98)
