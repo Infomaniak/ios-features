@@ -25,6 +25,8 @@ import SwiftUI
 struct ContactCardOnBoardingView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
+    let onCreateButtonTapped: () -> Void
+
     var body: some View {
         ScrollView {
             VStack {
@@ -69,7 +71,7 @@ struct ContactCardOnBoardingView: View {
         .scrollBounceBehavior(.basedOnSize)
         .safeAreaInset(edge: .bottom, content: {
             Button(MyString.contactCardOnBaoardingCreate) {
-                // Nothing for now (navigation will be added later)
+                onCreateButtonTapped()
             }
             .buttonStyle(.ikBorderedProminent)
             .ikButtonFullWidth(true)
@@ -95,5 +97,5 @@ struct ContactCardOnBoardingView: View {
 
 @available(iOS 16.4, *)
 #Preview {
-    ContactCardOnBoardingView()
+    ContactCardOnBoardingView(onCreateButtonTapped: {})
 }

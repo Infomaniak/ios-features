@@ -24,16 +24,34 @@ import SwiftUI
 struct ContactCard: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
+    @State private var path = NavigationPath()
+    let userProfile: UserProfile
+
     var body: some View {
-        ContactCardOnBoardingView()
+        NavigationStack(path: $path) {
+            ContactCardOnBoardingView(onCreateButtonTapped: {
+                path.append(ContactCardRoute.form(userProfile))
+            })
             .environment(\.contactCardTheme, .pink)
+            .navigationDestination(for: ContactCardRoute.self) { route in
+                switch route {
+                case .form(let profile):
+                    ContactCardFormView(userProfile: profile)
+                        .environment(\.contactCardTheme, .pink)
+                }
+            }
+        }
     }
 }
 
 @available(iOS 16.4, *)
 #Preview {
-    ContactCard()
+    ContactCard(userProfile: ProfileFake.fakeUserProfile)
         .environment(\.contactCardTheme, .pink)
+}
+
+enum ContactCardRoute: Hashable {
+    case form(UserProfile)
 }
 
 // MARK: - ContactCardThemePreview
