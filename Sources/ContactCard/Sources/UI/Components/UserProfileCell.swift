@@ -24,18 +24,18 @@ import SwiftUI
 struct UserProfileCell: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
-    let userProfile: UserProfile
+    let contactCard: ContactCard
 
     var body: some View {
         HStack(spacing: IKPadding.medium) {
-            UserProfileAvatarView(userProfile: userProfile, size: 40)
+            UserProfileAvatarView(userProfile: ProfileFake.fakeUserProfile, size: 40)
 
             VStack(alignment: .leading, spacing: IKPadding.micro) {
-                Text("\(userProfile.firstName) \(userProfile.lastName)")
+                Text("\(contactCard.firstName) \(contactCard.lastName)")
                     .font(.Custom.title2)
                     .foregroundStyle(contactCardTheme.primaryText)
 
-                Text("\(userProfile.email)")
+                Text("\(contactCard.email)")
                     .font(.Custom.body)
                     .foregroundStyle(contactCardTheme.secondaryText)
                     .lineLimit(0)
@@ -46,5 +46,5 @@ struct UserProfileCell: View {
 }
 
 #Preview {
-    UserProfileCell(userProfile: ProfileFake.fakeUserProfile)
+    UserProfileCell(contactCard: ProfileFake.fakeContactCard)
 }

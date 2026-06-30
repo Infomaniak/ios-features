@@ -25,28 +25,42 @@ struct ContactCardView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
     @State private var path = NavigationPath()
-    let userProfile: UserProfile
+
+    let userId: Int
+    @State private var contactCardProfile: ContactCard? = nil
 
     var body: some View {
         NavigationStack(path: $path) {
-            ContactCardOnBoardingView(onCreateButtonTapped: {
-                path.append(ContactCardRoute.form(userProfile))
-            })
-            .environment(\.contactCardTheme, .pink)
-            .navigationDestination(for: ContactCardRoute.self) { route in
-                switch route {
-                case .form(let profile):
-                    ContactCardFormView(userProfile: profile)
-                        .environment(\.contactCardTheme, .pink)
+            if let contactCardProfile {
+                ContactCardQRCodeView(contactCard: contactCardProfile)
+                    .environment(\.contactCardTheme, .pink)
+            } else {
+                ContactCardOnBoardingView(onCreateButtonTapped: {
+                    path.append(ContactCardRoute.form(ProfileFake.fakeUserProfile))
+                })
+                .environment(\.contactCardTheme, .pink)
+                .navigationDestination(for: ContactCardRoute.self) { route in
+                    switch route {
+                    case .form(let profile):
+                        ContactCardFormView(userProfile: profile)
+                            .environment(\.contactCardTheme, .pink)
+                    }
                 }
             }
+        }.task {
+            await fetchContactCard()
         }
+    }
+
+    private func fetchContactCard() async {
+        // TODO: Change this, the goal is get contactCard with path if existe
+        contactCardProfile = nil
     }
 }
 
 @available(iOS 16.4, *)
 #Preview {
-    ContactCardView(userProfile: ProfileFake.fakeUserProfile)
+    ContactCardView(userId: 42)
         .environment(\.contactCardTheme, .pink)
 }
 
@@ -139,6 +153,18 @@ enum ProfileFake {
         email: "camille.mercier@example.com",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=512&h=512&fit=crop"
     )
+
+    static let fakeContactCardsLinks: [ContactCardLink] = [
+        .init(type: .website, url: "https://joe.doe.fr"),
+        .init(type: .linkedIn, url: "https://linkedin.com/in/joe.doe")
+    ]
+
+    static let fakeContactCard = ContactCard(
+        id: 43,
+        firstName: "Joe",
+        lastName: "Doe",
+        email: "joe.doe@example.com",
+        phone: "+44 777 123 456",
+        links: fakeContactCardsLinks
+    )
 }
-
-

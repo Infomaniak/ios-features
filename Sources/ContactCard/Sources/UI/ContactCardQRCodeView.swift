@@ -25,7 +25,7 @@ import SwiftUI
 struct ContactCardQRCodeView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
-    let userProfile: UserProfile
+    let contactCard: ContactCard
 
     var body: some View {
         VStack {
@@ -45,7 +45,7 @@ struct ContactCardQRCodeView: View {
                 )
                 .padding(.bottom, IKPadding.huge)
 
-            UserProfileCell(userProfile: userProfile)
+            UserProfileCell(contactCard: contactCard)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, IKPadding.huge)
@@ -78,5 +78,5 @@ struct ContactCardQRCodeView: View {
 }
 
 #Preview {
-    ContactCardQRCodeView(userProfile: ProfileFake.fakeUserProfile)
+    ContactCardQRCodeView(contactCard: ProfileFake.fakeContactCard)
 }
