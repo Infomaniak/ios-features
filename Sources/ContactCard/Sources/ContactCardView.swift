@@ -28,6 +28,7 @@ struct ContactCardView: View {
 
     @State private var contactCardProfile: ContactCard? = nil
     var userProfile: UserProfile
+    var rootPath: URL
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -56,15 +57,13 @@ struct ContactCardView: View {
 
     private func fetchContactCard() async {
         // TODO: Change this, the goal is get contactCard with path if existe
-        let fetchJson: Data? = nil
-        guard let fetchJson else { return }
-        contactCardProfile = await contactCardProfile?.loadIfNeed(jsonData: fetchJson)
+        contactCardProfile = await ContactCardManager(rootPath: rootPath).load(userId: userProfile.id)
     }
 }
 
 @available(iOS 16.4, *)
 #Preview {
-    ContactCardView(userProfile: ProfileFake.fakeUserProfile)
+    ContactCardView(userProfile: ProfileFake.fakeUserProfile, rootPath: URL.temporaryDirectory)
         .environment(\.contactCardTheme, .pink)
 }
 
