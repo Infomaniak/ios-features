@@ -26,6 +26,8 @@ struct ContactCardFormView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
     @Environment(\.dismiss) private var dismiss
 
+    @Binding var path: NavigationPath
+
     @State var firstname = ""
     @State var lastname = ""
     @State var email = ""
@@ -35,10 +37,13 @@ struct ContactCardFormView: View {
     @State var website = ""
     @State var linkedin = ""
 
-    let userProfile: UserProfile
+    var userProfile: UserProfile
+    var rootPath: URL
 
-    init(userProfile: UserProfile) {
+    init(path: Binding<NavigationPath>, userProfile: UserProfile, rootPath: URL) {
+        _path = path
         self.userProfile = userProfile
+        self.rootPath = rootPath
         _firstname = State(initialValue: userProfile.firstName)
         _lastname = State(initialValue: userProfile.lastName)
         _email = State(initialValue: userProfile.email)
@@ -87,7 +92,23 @@ struct ContactCardFormView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(MyString.formbuttonCreate) {
-                    // TODO: Add logic to creat QRCode and register contactCard.json
+                    let links: [ContactCardLink] = [
+                        ContactCardLink(type: .website, url: self.website),
+                        ContactCardLink(type: .linkedIn, url: self.linkedin)
+                    ]
+                    let myCard = ContactCard(
+                        id: 0,
+                        firstName: self.firstname,
+                        lastName: self.lastname,
+                        email: self.email,
+                        phone: self.phone,
+                        company: self.company,
+                        links: links
+                    )
+                    Task {
+                        await ContactCardManager(rootPath: rootPath).save(contactCard: myCard, userId: userProfile.id)
+                        path.append(ContactCardRoute.qrCode(userProfile, myCard))
+                    }
                 }
             }
 
@@ -102,6 +123,18 @@ struct ContactCardFormView: View {
     }
 }
 
+struct ContactCardFormViewPreview: View {
+    @State var path = NavigationPath()
+
+    var body: some View {
+        ContactCardFormView(
+            path: $path,
+            userProfile: ProfileFake.fakeUserProfile,
+            rootPath: FileManager.default.temporaryDirectory
+        )
+    }
+}
+
 #Preview {
-    ContactCardFormView(userProfile: ProfileFake.fakeUserProfile)
+    ContactCardFormViewPreview()
 }

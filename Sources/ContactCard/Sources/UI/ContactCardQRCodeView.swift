@@ -24,7 +24,11 @@ import SwiftUI
 
 struct ContactCardQRCodeView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
+    @Environment(\.dismiss) private var dismiss
 
+    @Binding var path: NavigationPath
+
+    let userProfile: UserProfile
     let contactCard: ContactCard
 
     var body: some View {
@@ -74,9 +78,35 @@ struct ContactCardQRCodeView: View {
             .padding(.bottom, IKPadding.mini)
         })
         .background(contactCardTheme.background)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {} label: {
+                    Label("Menu", systemImage: "ellipsis")
+                }
+            }
+
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    path = NavigationPath()
+                } label: {
+                    Label("Back", systemImage: "chevron.left")
+                }
+            }
+        }
+        .toolbarBackground(contactCardTheme.secondary.opacity(0.5), for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+    }
+}
+
+struct ContactCardQRCodeViewPreview: View {
+    @State var path = NavigationPath()
+
+    var body: some View {
+        ContactCardQRCodeView(path: $path, userProfile: ProfileFake.fakeUserProfile, contactCard: ProfileFake.fakeContactCard)
     }
 }
 
 #Preview {
-    ContactCardQRCodeView(contactCard: ProfileFake.fakeContactCard)
+    ContactCardQRCodeViewPreview()
 }

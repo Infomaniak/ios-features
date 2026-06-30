@@ -24,29 +24,32 @@ import SwiftUI
 struct ContactCardView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
-    @State private var path = NavigationPath()
+    @Binding var path: NavigationPath
 
     @State private var contactCardProfile: ContactCard? = nil
-    var userProfile: UserProfile
-    var rootPath: URL
+    let userProfile: UserProfile
+    let rootPath: URL
 
     var body: some View {
         NavigationStack(path: $path) {
             if let contactCardProfile {
-                ContactCardQRCodeView(contactCard: contactCardProfile)
+                ContactCardQRCodeView(path: $path, userProfile: userProfile, contactCard: contactCardProfile)
                     .environment(\.contactCardTheme, .pink)
             } else {
                 ContactCardOnBoardingView(onCreateButtonTapped: {
-                    path.append(ContactCardRoute.form(userProfile))
+                    path.append(ContactCardRoute.form(userProfile, rootPath))
                 })
                 .environment(\.contactCardTheme, .pink)
                 .navigationDestination(for: ContactCardRoute.self) { route in
                     switch route {
-                    case .form(let profile):
-                        ContactCardFormView(userProfile: profile)
+                    case .form(let profile, let root):
+                        ContactCardFormView(path: $path, userProfile: profile, rootPath: root)
                             .environment(\.contactCardTheme, .pink)
                             .navigationTitle(MyString.formTitle)
                             .navigationBarBackButtonHidden()
+
+                    case .qrCode(let profile, let card):
+                        ContactCardQRCodeView(path: $path, userProfile: profile, contactCard: card)
                     }
                 }
             }
@@ -56,19 +59,28 @@ struct ContactCardView: View {
     }
 
     private func fetchContactCard() async {
-        // TODO: Change this, the goal is get contactCard with path if existe
         contactCardProfile = await ContactCardManager(rootPath: rootPath).load(userId: userProfile.id)
     }
 }
 
 @available(iOS 16.4, *)
+struct ContactCardViewPreview: View {
+    @State var path = NavigationPath()
+
+    var body: some View {
+        ContactCardView(path: $path, userProfile: ProfileFake.fakeUserProfile, rootPath: URL.temporaryDirectory)
+    }
+}
+
+@available(iOS 16.4, *)
 #Preview {
-    ContactCardView(userProfile: ProfileFake.fakeUserProfile, rootPath: URL.temporaryDirectory)
+    ContactCardViewPreview()
         .environment(\.contactCardTheme, .pink)
 }
 
 enum ContactCardRoute: Hashable {
-    case form(UserProfile)
+    case form(UserProfile, URL)
+    case qrCode(UserProfile, ContactCard)
 }
 
 // MARK: - ContactCardThemePreview
