@@ -21,6 +21,17 @@ import Foundation
 import InfomaniakCore
 import InfomaniakCoreSwiftUI
 import SwiftUI
+import UniformTypeIdentifiers
+
+private struct VCardTransferable: Transferable {
+    let vCardString: String
+
+    static var transferRepresentation: some TransferRepresentation {
+        DataRepresentation(exportedContentType: .vCard) { item in
+            Data(item.vCardString.utf8)
+        }
+    }
+}
 
 struct ContactCardQRCodeView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
@@ -58,9 +69,13 @@ struct ContactCardQRCodeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, IKPadding.huge)
         .safeAreaInset(edge: .bottom, content: {
-            Button {
-                // Nothing for now (navigation will be added later)
-            } label: {
+            ShareLink(
+                item: VCardTransferable(vCardString: contactCard.makeVCardString()),
+                preview: SharePreview(
+                    "\(contactCard.firstName) \(contactCard.lastName)",
+                    image: Image(systemName: "person.crop.circle")
+                )
+            ) {
                 Label(MyString.qrCodeShared, systemImage: MyString.qrCodeSharedImage)
             }
             .buttonStyle(.ikBorderedProminent)
