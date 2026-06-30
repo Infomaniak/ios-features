@@ -19,30 +19,16 @@
 import DesignSystem
 import InfomaniakCore
 import InfomaniakCoreSwiftUI
-import PhotosUI
 import SwiftUI
 
 struct ContactCardAvatarPickerView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
-    @State private var avatarItem: PhotosPickerItem?
-    @State private var avatarImage: Image?
-
     let userProfile: UserProfile
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            PhotosPicker(selection: $avatarItem, matching: .images, photoLibrary: .shared()) {
-                if avatarImage != nil {
-                    avatarImage?
-                        .resizable()
-                        .clipShape(.circle)
-                        .scaledToFill()
-                        .frame(width: 115, height: 115)
-                } else {
-                    UserProfileAvatarView(userProfile: userProfile, size: 115)
-                }
-            }
+            UserProfileAvatarView(userProfile: userProfile, size: 115)
 
             Image(systemName: "camera")
                 .colorInvert()
@@ -52,11 +38,6 @@ struct ContactCardAvatarPickerView: View {
                     Circle().stroke(Color(UIColor.systemGray5), lineWidth: 5)
                 }
                 .offset(x: IKPadding.micro, y: IKPadding.micro)
-        }
-        .task(id: avatarItem) {
-            if let loaded = try? await avatarItem?.loadTransferable(type: Image.self) {
-                avatarImage = loaded
-            }
         }
     }
 }
