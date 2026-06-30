@@ -54,4 +54,41 @@ final class ContactCardTest: XCTestCase {
         XCTAssertTrue(vcf.contains("item4.X-ABLabel:Facebook"))
         XCTAssertTrue(vcf.contains("END:VCARD"))
     }
+
+    func testLoadIfNeedJsonToContactCard() async {
+        let myLinks: [ContactCardLink] = [
+            ContactCardLink(type: .website, url: "https://www.john.doe.com/"),
+            ContactCardLink(type: .linkedIn, url: "https://www.linkedin.com/john.doe")
+        ]
+
+        let myTestProfil = ContactCard(
+            id: 42,
+            firstName: "John",
+            lastName: "Doe",
+            email: "john.doe@example.com",
+            phone: "+33 612-345-678",
+            company: "TestCorp",
+            links: myLinks
+        )
+
+        let jsonData = await myTestProfil.save()
+        XCTAssertFalse(jsonData.isEmpty, "Le JSON ne devrait pas être vide")
+
+        let decoded = await myTestProfil.loadIfNeed(jsonData: jsonData)
+
+        XCTAssertNotNil(decoded)
+        XCTAssertEqual(decoded?.id, 42)
+        XCTAssertEqual(decoded?.firstName, "John")
+        XCTAssertEqual(decoded?.lastName, "Doe")
+        XCTAssertEqual(decoded?.email, "john.doe@example.com")
+        XCTAssertEqual(decoded?.phone, "+33 612-345-678")
+        XCTAssertEqual(decoded?.company, "TestCorp")
+        XCTAssertEqual(decoded?.links?.count, 2)
+        XCTAssertEqual(decoded?.links?.first?.type, .website)
+        XCTAssertEqual(decoded?.links?.first?.url, "https://www.john.doe.com/")
+
+        let invalidJson = Data("not json".utf8)
+        let failure = await myTestProfil.loadIfNeed(jsonData: invalidJson)
+        XCTAssertNil(failure, "Un JSON invalide doit retourner nil")
+    }
 }

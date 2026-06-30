@@ -46,6 +46,26 @@ import Foundation
         self.links = links
     }
 
+    public func save() async -> Data {
+        let encoder = JSONEncoder()
+        do {
+            return try encoder.encode(self)
+        } catch {
+            // TODO: Add logger
+            return Data()
+        }
+    }
+
+    public func loadIfNeed(jsonData: Data) async -> ContactCard? {
+        let decoder = JSONDecoder()
+        do {
+            return try decoder.decode(ContactCard.self, from: jsonData)
+        } catch {
+            // TODO: Add logger
+            return nil
+        }
+    }
+
     public func makeVCardString() -> String {
         let website = links?.first(where: { $0.type == .website })?.url ?? ""
         let linkedIn = links?.first(where: { $0.type == .linkedIn })?.url ?? ""
@@ -73,8 +93,8 @@ import Foundation
 }
 
 public struct ContactCardLink: Codable, Hashable {
-    let type: ContactCardType
-    let url: String
+    public let type: ContactCardType
+    public let url: String
 
     public init(
         type: ContactCardType,

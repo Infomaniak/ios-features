@@ -26,8 +26,8 @@ struct ContactCardView: View {
 
     @State private var path = NavigationPath()
 
-    let userId: Int
     @State private var contactCardProfile: ContactCard? = nil
+    var userProfile: UserProfile
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -36,7 +36,7 @@ struct ContactCardView: View {
                     .environment(\.contactCardTheme, .pink)
             } else {
                 ContactCardOnBoardingView(onCreateButtonTapped: {
-                    path.append(ContactCardRoute.form(ProfileFake.fakeUserProfile))
+                    path.append(ContactCardRoute.form(userProfile))
                 })
                 .environment(\.contactCardTheme, .pink)
                 .navigationDestination(for: ContactCardRoute.self) { route in
@@ -56,13 +56,15 @@ struct ContactCardView: View {
 
     private func fetchContactCard() async {
         // TODO: Change this, the goal is get contactCard with path if existe
-        contactCardProfile = nil
+        let fetchJson: Data? = nil
+        guard let fetchJson else { return }
+        contactCardProfile = await contactCardProfile?.loadIfNeed(jsonData: fetchJson)
     }
 }
 
 @available(iOS 16.4, *)
 #Preview {
-    ContactCardView(userId: 42)
+    ContactCardView(userProfile: ProfileFake.fakeUserProfile)
         .environment(\.contactCardTheme, .pink)
 }
 
