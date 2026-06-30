@@ -27,9 +27,13 @@ struct ContactCardQRCodeView: View {
     @Environment(\.dismiss) private var dismiss
 
     @Binding var path: NavigationPath
+    @State private var showDeleteConfirmation = false
 
     let userProfile: UserProfile
     let contactCard: ContactCard
+    let rootPath: URL
+    let onDelete: (() -> Void)?
+    let onUpdate: ((ContactCard) -> Void)?
 
     var body: some View {
         VStack {
@@ -79,19 +83,31 @@ struct ContactCardQRCodeView: View {
         })
         .background(contactCardTheme.background)
         .navigationBarBackButtonHidden(true)
+        .alert(MyString.qrCodeDeleteAlertTitle, isPresented: $showDeleteConfirmation) {
+            Button(MyString.qrCodeDeleteAlertConfirm, role: .destructive) {
+                Task {
+                    await ContactCardManager(rootPath: rootPath).delete(userId: userProfile.id)
+                    path = NavigationPath()
+                    onDelete?()
+                }
+            }
+            Button(MyString.qrCodeDeleteAlertCancel, role: .cancel) {}
+        } message: {
+            Text(MyString.qrCodeDeleteAlertMessage)
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
                     Button {
-                        //
+                        path.append(ContactCardRoute.form(userProfile, rootPath, contactCard))
                     } label: {
-                        Label("Modifier", systemImage: "pencil")
+                        Label(MyString.qrCodeMenuEdit, systemImage: "pencil")
                     }
 
-                    Button {
-                        //
+                    Button(role: .destructive) {
+                        showDeleteConfirmation = true
                     } label: {
-                        Label("Supprimer", systemImage: "trash")
+                        Label(MyString.qrCodeMenuDelete, systemImage: "trash")
                     }
                 } label: {
                     Label("More", systemImage: "ellipsis")
@@ -115,7 +131,14 @@ struct ContactCardQRCodeViewPreview: View {
     @State var path = NavigationPath()
 
     var body: some View {
-        ContactCardQRCodeView(path: $path, userProfile: ProfileFake.fakeUserProfile, contactCard: ProfileFake.fakeContactCard)
+        ContactCardQRCodeView(
+            path: $path,
+            userProfile: ProfileFake.fakeUserProfile,
+            contactCard: ProfileFake.fakeContactCard,
+            rootPath: FileManager.default.temporaryDirectory,
+            onDelete: nil,
+            onUpdate: nil
+        )
     }
 }
 

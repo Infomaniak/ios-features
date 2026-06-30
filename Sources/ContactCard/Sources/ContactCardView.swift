@@ -32,25 +32,41 @@ struct ContactCardView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            if let contactCardProfile {
-                ContactCardQRCodeView(path: $path, userProfile: userProfile, contactCard: contactCardProfile)
+            Group {
+                if let contactCardProfile {
+                    ContactCardQRCodeView(
+                        path: $path,
+                        userProfile: userProfile,
+                        contactCard: contactCardProfile,
+                        rootPath: rootPath,
+                        onDelete: { self.contactCardProfile = nil },
+                        onUpdate: { self.contactCardProfile = $0 }
+                    )
                     .environment(\.contactCardTheme, .pink)
-            } else {
-                ContactCardOnBoardingView(onCreateButtonTapped: {
-                    path.append(ContactCardRoute.form(userProfile, rootPath))
-                })
-                .environment(\.contactCardTheme, .pink)
-                .navigationDestination(for: ContactCardRoute.self) { route in
-                    switch route {
-                    case .form(let profile, let root):
-                        ContactCardFormView(path: $path, userProfile: profile, rootPath: root)
-                            .environment(\.contactCardTheme, .pink)
-                            .navigationTitle(MyString.formTitle)
-                            .navigationBarBackButtonHidden()
+                } else {
+                    ContactCardOnBoardingView(onCreateButtonTapped: {
+                        path.append(ContactCardRoute.form(userProfile, rootPath, nil))
+                    })
+                    .environment(\.contactCardTheme, .pink)
+                }
+            }
+            .navigationDestination(for: ContactCardRoute.self) { route in
+                switch route {
+                case .form(let profile, let root, let existingCard):
+                    ContactCardFormView(path: $path, userProfile: profile, rootPath: root, existingCard: existingCard)
+                        .environment(\.contactCardTheme, .pink)
+                        .navigationTitle(MyString.formTitle)
+                        .navigationBarBackButtonHidden()
 
-                    case .qrCode(let profile, let card):
-                        ContactCardQRCodeView(path: $path, userProfile: profile, contactCard: card)
-                    }
+                case .qrCode(let profile, let card):
+                    ContactCardQRCodeView(
+                        path: $path,
+                        userProfile: profile,
+                        contactCard: card,
+                        rootPath: rootPath,
+                        onDelete: { self.contactCardProfile = nil },
+                        onUpdate: { self.contactCardProfile = $0 }
+                    )
                 }
             }
         }.task {
@@ -79,7 +95,7 @@ struct ContactCardViewPreview: View {
 }
 
 enum ContactCardRoute: Hashable {
-    case form(UserProfile, URL)
+    case form(UserProfile, URL, ContactCard?)
     case qrCode(UserProfile, ContactCard)
 }
 
@@ -148,12 +164,19 @@ enum MyString {
     static let formTextFieldLinkedIn = "LinkedIn"
     static let formRequiredFields = "Champs obligatoires."
     static let formNoRequiredFields = "Champs facultatifs."
-    static let formbuttonCreate = "Créer"
-    static let formbuttonCancel = "Annuler"
+    static let formButtonRegister = "Enregistrer"
+    static let formButtonCreate = "Créer"
+    static let formButtonCancel = "Annuler"
     static let formTitle = "Carte de visite"
 
     static let qrCodeShared = "Partager"
     static let qrCodeSharedImage = "square.and.arrow.up"
+    static let qrCodeMenuEdit = "Modifier"
+    static let qrCodeMenuDelete = "Supprimer"
+    static let qrCodeDeleteAlertTitle = "Supprimer la carte de visite"
+    static let qrCodeDeleteAlertMessage = "La suppression désactive votre carte et son QR. Les personnes qui vous ont déjà enregistré ne sont pas affectées. Vous pourrez la recréer à tout moment."
+    static let qrCodeDeleteAlertConfirm = "Supprimer"
+    static let qrCodeDeleteAlertCancel = "Annuler"
 }
 
 enum MyImage {

@@ -34,6 +34,15 @@ struct ContactCardManager {
         }
     }
 
+    func delete(userId: Int) async {
+        let filePath = rootPath.appending(path: folderName).appending(path: "\(userId).json")
+        do {
+            try FileManager.default.removeItem(at: filePath)
+        } catch {
+            // TODO: Add logger
+        }
+    }
+
     func load(userId: Int) async -> ContactCard? {
         let rootPathL = rootPath.appending(path: folderName).appending(path: "\(userId).json")
         let decoder = JSONDecoder()

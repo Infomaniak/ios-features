@@ -39,18 +39,20 @@ struct ContactCardFormView: View {
 
     var userProfile: UserProfile
     var rootPath: URL
+    var existingCard: ContactCard?
 
-    init(path: Binding<NavigationPath>, userProfile: UserProfile, rootPath: URL) {
+    init(path: Binding<NavigationPath>, userProfile: UserProfile, rootPath: URL, existingCard: ContactCard? = nil) {
         _path = path
         self.userProfile = userProfile
         self.rootPath = rootPath
-        _firstname = State(initialValue: userProfile.firstName)
-        _lastname = State(initialValue: userProfile.lastName)
-        _email = State(initialValue: userProfile.email)
-        _phone = State(initialValue: "")
-        _company = State(initialValue: "")
-        _website = State(initialValue: "")
-        _linkedin = State(initialValue: "")
+        self.existingCard = existingCard
+        _firstname = State(initialValue: existingCard?.firstName ?? userProfile.firstName)
+        _lastname = State(initialValue: existingCard?.lastName ?? userProfile.lastName)
+        _email = State(initialValue: existingCard?.email ?? userProfile.email)
+        _phone = State(initialValue: existingCard?.phone ?? "")
+        _company = State(initialValue: existingCard?.company ?? "")
+        _website = State(initialValue: existingCard?.links?.first(where: { $0.type == .website })?.url ?? "")
+        _linkedin = State(initialValue: existingCard?.links?.first(where: { $0.type == .linkedIn })?.url ?? "")
     }
 
     var body: some View {
@@ -91,7 +93,7 @@ struct ContactCardFormView: View {
         .foregroundColor(contactCardTheme.primaryText)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(MyString.formbuttonCreate) {
+                Button((existingCard == nil) ? MyString.formButtonCreate : MyString.formButtonRegister) {
                     let links: [ContactCardLink] = [
                         ContactCardLink(type: .website, url: self.website),
                         ContactCardLink(type: .linkedIn, url: self.linkedin)
@@ -113,7 +115,7 @@ struct ContactCardFormView: View {
             }
 
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(MyString.formbuttonCancel) {
+                Button(MyString.formButtonCancel) {
                     dismiss()
                 }
             }
