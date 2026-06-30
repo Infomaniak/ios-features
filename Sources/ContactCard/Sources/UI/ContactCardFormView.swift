@@ -24,6 +24,7 @@ import SwiftUI
 
 struct ContactCardFormView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
+    @Environment(\.dismiss) private var dismiss
 
     @State var firstname = ""
     @State var lastname = ""
@@ -83,6 +84,21 @@ struct ContactCardFormView: View {
         .scrollContentBackground(.hidden)
         .background(contactCardTheme.background)
         .foregroundColor(contactCardTheme.primaryText)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(MyString.formbuttonCreate) {
+                    // TODO: Add logic to creat QRCode and register contactCard.json
+                }
+            }
+
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(MyString.formbuttonCancel) {
+                    dismiss()
+                }
+            }
+        }
+        .toolbarBackground(contactCardTheme.secondary.opacity(0.5), for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
     }
 }
 

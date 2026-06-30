@@ -44,6 +44,8 @@ struct ContactCardView: View {
                     case .form(let profile):
                         ContactCardFormView(userProfile: profile)
                             .environment(\.contactCardTheme, .pink)
+                            .navigationTitle(MyString.formTitle)
+                            .navigationBarBackButtonHidden()
                     }
                 }
             }
@@ -133,6 +135,9 @@ enum MyString {
     static let formTextFieldLinkedIn = "LinkedIn"
     static let formRequiredFields = "Champs obligatoires."
     static let formNoRequiredFields = "Champs facultatifs."
+    static let formbuttonCreate = "Créer"
+    static let formbuttonCancel = "Annuler"
+    static let formTitle = "Carte de visite"
 
     static let qrCodeShared = "Partager"
     static let qrCodeSharedImage = "square.and.arrow.up"
