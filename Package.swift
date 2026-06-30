@@ -68,7 +68,9 @@ let package = Package(
                 .product(name: "InfomaniakCoreCommonUI", package: "ios-core-ui"),
                 .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
                 .product(name: "DesignSystem", package: "ios-core-ui"),
-                .product(name: "QRCode", package: "QRCode")
+                .product(name: "QRCode", package: "QRCode"),
+                .product(name: "Nuke", package: "Nuke"),
+                .product(name: "NukeUI", package: "Nuke")
             ]
         ),
         .target(

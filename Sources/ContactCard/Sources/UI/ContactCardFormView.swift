@@ -99,12 +99,13 @@ struct ContactCardFormView: View {
                         ContactCardLink(type: .linkedIn, url: self.linkedin)
                     ]
                     let myCard = ContactCard(
-                        id: 0,
+                        id: existingCard?.id ?? userProfile.id,
                         firstName: self.firstname,
                         lastName: self.lastname,
                         email: self.email,
                         phone: self.phone,
                         company: self.company,
+                        avatarURL: userProfile.avatar,
                         links: links
                     )
                     Task {

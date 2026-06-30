@@ -20,16 +20,25 @@ import DesignSystem
 import Foundation
 import InfomaniakCore
 import InfomaniakCoreSwiftUI
+import Nuke
+import NukeUI
 import SwiftUI
 import UniformTypeIdentifiers
 
 private struct VCardTransferable: Transferable {
-    let vCardString: String
+    let contactCard: ContactCard
 
     static var transferRepresentation: some TransferRepresentation {
         DataRepresentation(exportedContentType: .vCard) { item in
-            Data(item.vCardString.utf8)
+            let photoData = await item.getCacheAvatarData()
+            return Data(item.contactCard.makeVCardString(photoData: photoData).utf8)
         }
+    }
+
+    private func getCacheAvatarData() async -> PlatformImage? {
+        guard let urlString = contactCard.avatarURL,
+              let url = URL(string: urlString) else { return nil }
+        return try? await ImagePipeline.shared.image(for: url)
     }
 }
 
@@ -67,7 +76,7 @@ struct ContactCardQRCodeView: View {
         .padding(.horizontal, IKPadding.huge)
         .safeAreaInset(edge: .bottom, content: {
             ShareLink(
-                item: VCardTransferable(vCardString: contactCard.makeVCardString()),
+                item: VCardTransferable(contactCard: contactCard),
                 preview: SharePreview(
                     "\(contactCard.firstName) \(contactCard.lastName)",
                     image: Image(systemName: "person.crop.circle")

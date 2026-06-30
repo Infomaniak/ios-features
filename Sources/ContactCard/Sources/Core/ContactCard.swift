@@ -16,8 +16,9 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Contacts
 import Foundation
+import Nuke
+import NukeUI
 
 @frozen public struct ContactCard: Codable, Hashable {
     public let id: Int
@@ -26,6 +27,7 @@ import Foundation
     public let email: String
     public let phone: String
     public let company: String?
+    public let avatarURL: String?
     public let links: [ContactCardLink]?
 
     public init(
@@ -35,6 +37,7 @@ import Foundation
         email: String,
         phone: String,
         company: String? = nil,
+        avatarURL: String? = nil,
         links: [ContactCardLink]? = nil
     ) {
         self.id = id
@@ -43,32 +46,31 @@ import Foundation
         self.email = email
         self.phone = phone
         self.company = company
+        self.avatarURL = avatarURL
         self.links = links
     }
 
-    public func makeVCardString() -> String {
+    public func makeVCardString(photoData: PlatformImage? = nil) -> String {
         let website = links?.first(where: { $0.type == .website })?.url ?? ""
         let linkedIn = links?.first(where: { $0.type == .linkedIn })?.url ?? ""
         let twitter = links?.first(where: { $0.type == .twitter })?.url ?? ""
         let facebook = links?.first(where: { $0.type == .facebook })?.url ?? ""
-        return """
-        BEGIN:VCARD
-        VERSION:3.0
-        N:\(lastName);\(firstName);;;
-        FN:\(firstName) \(lastName)
-        ORG:\(company ?? "")
-        TEL;TYPE=CELL:\(phone)
-        EMAIL;TYPE=INTERNET:\(email)
-        item1.URL:\(website)
-        item1.X-ABLabel:Website
-        item2.URL:\(linkedIn)
-        item2.X-ABLabel:LinkedIn
-        item3.URL:\(twitter)
-        item3.X-ABLabel:Twitter
-        item4.URL:\(facebook)
-        item4.X-ABLabel:Facebook
-        END:VCARD
-        """
+
+        var base64String: String? = nil
+
+        if let photoData,
+           let imageData = photoData.jpegData(compressionQuality: 1.0) {
+            base64String = imageData.base64EncodedString()
+        }
+
+        let photoLine: String
+        if let base64String {
+            photoLine = "PHOTO;ENCODING=b;TYPE=JPEG:\(base64String)\r\n"
+        } else {
+            photoLine = ""
+        }
+
+        return "BEGIN:VCARD\r\nVERSION:3.0\r\nN:\(lastName);\(firstName);;;\r\nFN:\(firstName) \(lastName)\r\nORG:\(company ?? "")\r\nTEL;TYPE=CELL:\(phone)\r\nEMAIL;TYPE=INTERNET:\(email)\r\n\(photoLine)item1.URL:\(website)\r\nitem1.X-ABLabel:Website\r\nitem2.URL:\(linkedIn)\r\nitem2.X-ABLabel:LinkedIn\r\nitem3.URL:\(twitter)\r\nitem3.X-ABLabel:Twitter\r\nitem4.URL:\(facebook)\r\nitem4.X-ABLabel:Facebook\r\nEND:VCARD"
     }
 }
 
@@ -76,10 +78,7 @@ public struct ContactCardLink: Codable, Hashable {
     public let type: ContactCardType
     public let url: String
 
-    public init(
-        type: ContactCardType,
-        url: String
-    ) {
+    public init(type: ContactCardType, url: String) {
         self.type = type
         self.url = url
     }
