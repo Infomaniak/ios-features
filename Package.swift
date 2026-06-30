@@ -46,7 +46,8 @@ let package = Package(
         .package(url: "https://github.com/Infomaniak/ios-dependency-injection", .upToNextMajor(from: "2.0.3")),
         .package(url: "https://github.com/Infomaniak/ios-device-check", .upToNextMajor(from: "1.1.1")),
         .package(url: "https://github.com/Infomaniak/ios-login", .upToNextMajor(from: "7.8.0")),
-        .package(url: "https://github.com/kean/Nuke", .upToNextMajor(from: "12.1.3"))
+        .package(url: "https://github.com/kean/Nuke", .upToNextMajor(from: "12.1.3")),
+        .package(url: "https://github.com/dagronf/QRCode", .upToNextMajor(from: "16.0.0"))
     ],
     targets: [
         .target(
@@ -66,7 +67,8 @@ let package = Package(
                 .product(name: "InfomaniakCore", package: "ios-core"),
                 .product(name: "InfomaniakCoreCommonUI", package: "ios-core-ui"),
                 .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
-                .product(name: "DesignSystem", package: "ios-core-ui")
+                .product(name: "DesignSystem", package: "ios-core-ui"),
+                .product(name: "QRCode", package: "QRCode")
             ]
         ),
         .target(

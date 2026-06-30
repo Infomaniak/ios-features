@@ -48,11 +48,8 @@ struct ContactCardQRCodeView: View {
 
     var body: some View {
         VStack {
-            Image(systemName: "qrcode")
-                .resizable()
-                .scaledToFit()
+            ContactCardQRCodeGeneratorView(userProfile: userProfile, contactCard: contactCard)
                 .frame(width: 250, height: 250)
-                .foregroundColor(contactCardTheme.primaryText)
                 .padding(IKPadding.large)
                 .background(contactCardTheme.onAccent, in: .rect(cornerRadius: IKRadius.large))
                 .overlay(

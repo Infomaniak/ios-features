@@ -171,6 +171,7 @@ enum MyString {
 
     static let qrCodeShared = "Partager"
     static let qrCodeSharedImage = "square.and.arrow.up"
+    static let qrCodeGenerationError = "Impossible de générer le QR code"
     static let qrCodeMenuEdit = "Modifier"
     static let qrCodeMenuDelete = "Supprimer"
     static let qrCodeDeleteAlertTitle = "Supprimer la carte de visite"

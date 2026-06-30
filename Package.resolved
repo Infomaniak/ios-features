@@ -1,5 +1,5 @@
 {
-  "originHash" : "ea0f4518aa8121bb98445dbbe3b570e21024434c9c407c3ce1b9ba08e48604d2",
+  "originHash" : "3eac65328110554d5ff127a57deade73de431b3323638205be971c16f1106731",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -92,6 +92,15 @@
       }
     },
     {
+      "identity" : "qrcode",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/QRCode",
+      "state" : {
+        "revision" : "91900003d081fe0c5382b622f323356831733ca6",
+        "version" : "16.1.2"
+      }
+    },
+    {
       "identity" : "realm-core",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
@@ -116,6 +125,24 @@
       "state" : {
         "revision" : "2c420d31d0c31b525fa9e7c552ef0fc9d924befc",
         "version" : "9.17.1"
+      }
+    },
+    {
+      "identity" : "swift-qrcode-generator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/swift-qrcode-generator",
+      "state" : {
+        "revision" : "5ca09b6a2ad190f94aa3d6ddef45b187f8c0343b",
+        "version" : "1.0.3"
+      }
+    },
+    {
+      "identity" : "swiftimagereadwrite",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/SwiftImageReadWrite",
+      "state" : {
+        "revision" : "02c141026a0c5d74635a457d2d0964c4cb8935b3",
+        "version" : "1.4.1"
       }
     },
     {
