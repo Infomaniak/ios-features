@@ -121,6 +121,7 @@ let package = Package(
                 .product(name: "DesignSystem", package: "ios-core-ui")
             ]
         ),
-        .testTarget(name: "MyKSuiteTests", dependencies: ["MyKSuite"])
+        .testTarget(name: "MyKSuiteTests", dependencies: ["MyKSuite"]),
+        .testTarget(name: "ContactCardTests", dependencies: ["ContactCard"])
     ]
 )

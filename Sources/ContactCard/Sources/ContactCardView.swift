@@ -21,7 +21,7 @@ import InfomaniakCore
 import SwiftUI
 
 @available(iOS 16.4, *)
-struct ContactCard: View {
+struct ContactCardView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
     @State private var path = NavigationPath()
@@ -46,7 +46,7 @@ struct ContactCard: View {
 
 @available(iOS 16.4, *)
 #Preview {
-    ContactCard(userProfile: ProfileFake.fakeUserProfile)
+    ContactCardView(userProfile: ProfileFake.fakeUserProfile)
         .environment(\.contactCardTheme, .pink)
 }
 
@@ -140,3 +140,5 @@ enum ProfileFake {
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=512&h=512&fit=crop"
     )
 }
+
+
