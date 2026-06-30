@@ -81,8 +81,20 @@ struct ContactCardQRCodeView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {} label: {
-                    Label("Menu", systemImage: "ellipsis")
+                Menu {
+                    Button {
+                        //
+                    } label: {
+                        Label("Modifier", systemImage: "pencil")
+                    }
+
+                    Button {
+                        //
+                    } label: {
+                        Label("Supprimer", systemImage: "trash")
+                    }
+                } label: {
+                    Label("More", systemImage: "ellipsis")
                 }
             }
 
