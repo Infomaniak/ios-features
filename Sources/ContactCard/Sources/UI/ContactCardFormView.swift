@@ -22,6 +22,11 @@ import InfomaniakCoreSwiftUI
 import PhotosUI
 import SwiftUI
 
+private struct IdentifiableURL: Identifiable {
+    let id = UUID()
+    var value: String
+}
+
 struct ContactCardFormView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
     @Environment(\.dismiss) private var dismiss
@@ -32,10 +37,14 @@ struct ContactCardFormView: View {
     @State var lastname = ""
     @State var email = ""
     @State var phone = ""
-
     @State var company = ""
-    @State var website = ""
+
     @State var linkedin = ""
+    @State var facebook = ""
+    @State var instagram = ""
+    @State var x = ""
+    @State var website = ""
+    @State private var additionalURLs: [IdentifiableURL] = []
 
     var userProfile: UserProfile
     var rootPath: URL
@@ -51,17 +60,17 @@ struct ContactCardFormView: View {
         _email = State(initialValue: existingCard?.email ?? userProfile.email)
         _phone = State(initialValue: existingCard?.phone ?? "")
         _company = State(initialValue: existingCard?.company ?? "")
-        _website = State(initialValue: existingCard?.links?.first(where: { $0.type == .website })?.url ?? "")
         _linkedin = State(initialValue: existingCard?.links?.first(where: { $0.type == .linkedIn })?.url ?? "")
+        _facebook = State(initialValue: existingCard?.links?.first(where: { $0.type == .facebook })?.url ?? "")
+        _instagram = State(initialValue: existingCard?.links?.first(where: { $0.type == .instagram })?.url ?? "")
+        _x = State(initialValue: existingCard?.links?.first(where: { $0.type == .x })?.url ?? "")
+        let websiteLinks = existingCard?.links?.filter { $0.type == .website } ?? []
+        _website = State(initialValue: websiteLinks.first?.url ?? "")
+        _additionalURLs = State(initialValue: websiteLinks.dropFirst().map { IdentifiableURL(value: $0.url) })
     }
 
     var body: some View {
         Form {
-            ContactCardAvatarPickerView(userProfile: userProfile)
-                .environment(\.contactCardTheme, contactCardTheme)
-                .frame(maxWidth: .infinity)
-                .listRowBackground(contactCardTheme.background)
-
             Section {
                 TextField(MyString.formTextFieldFirstName, text: $firstname)
                 TextField(MyString.formTextFieldLastName, text: $lastname)
@@ -69,35 +78,75 @@ struct ContactCardFormView: View {
                     .keyboardType(.emailAddress)
                 TextField(MyString.formTextFieldPhone, text: $phone)
                     .keyboardType(.phonePad)
-            } footer: {
-                Text(MyString.formRequiredFields)
+                TextField(MyString.formTextFieldCompany, text: $company)
+            } header: {
+                Text(MyString.formGeneralInformation)
                     .foregroundStyle(contactCardTheme.secondaryText)
-                    .padding(.bottom, IKPadding.medium)
+                    .font(.Custom.callout)
+                    .padding(.bottom, IKPadding.mini)
             }
-            .listRowBackground(Color(UIColor.systemGray5))
+            .listRowBackground(contactCardTheme.background)
 
             Section {
-                TextField(MyString.formTextFieldCompany, text: $company)
+                TextField(MyString.formTextFieldLinkedIn, text: $linkedin)
+                    .keyboardType(.URL)
+                TextField(MyString.formTextFieldFacebook, text: $facebook)
+                    .keyboardType(.URL)
+                TextField(MyString.formTextFieldInstagram, text: $instagram)
+                    .keyboardType(.URL)
+                TextField(MyString.formTextFieldX, text: $x)
+                    .keyboardType(.URL)
                 TextField(MyString.formTextFieldWebSite, text: $website)
                     .keyboardType(.URL)
-                TextField(MyString.formTextFieldLinkedIn, text: $linkedin)
-            } footer: {
-                Text(MyString.formNoRequiredFields)
+
+                ForEach($additionalURLs) { $entry in
+                    HStack {
+                        TextField(MyString.formTextFieldOtherUrl, text: $entry.value)
+                            .keyboardType(.URL)
+                        Button {
+                            additionalURLs.removeAll { $0.id == entry.id }
+                        } label: {
+                            Image(.bin)
+                        }
+                        .buttonStyle(.borderless)
+                    }
+                }
+
+                Button {
+                    additionalURLs.append(IdentifiableURL(value: ""))
+                } label: {
+                    HStack {
+                        Image(.add)
+                        Text(MyString.formButtonAddUrl)
+                            .font(.Custom.headline)
+                            .foregroundStyle(contactCardTheme.primary)
+                    }
+                }
+            } header: {
+                Text(MyString.formLinksAndSocialNetwork)
                     .foregroundStyle(contactCardTheme.secondaryText)
+                    .font(.Custom.callout)
+                    .padding(.bottom, IKPadding.mini)
             }
-            .listRowBackground(Color(UIColor.systemGray5))
+            .listRowBackground(contactCardTheme.background)
         }
+        .padding(.top, IKPadding.large)
         .formStyle(.grouped)
         .scrollContentBackground(.hidden)
-        .background(contactCardTheme.background)
+        .background(contactCardTheme.backgroundTint)
         .foregroundColor(contactCardTheme.primaryText)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button((existingCard == nil) ? MyString.formButtonCreate : MyString.formButtonRegister) {
-                    let links: [ContactCardLink] = [
-                        ContactCardLink(type: .website, url: self.website),
-                        ContactCardLink(type: .linkedIn, url: self.linkedin)
-                    ]
+                    var links: [ContactCardLink] = []
+                    if !website.isEmpty { links.append(ContactCardLink(type: .website, url: website)) }
+                    if !linkedin.isEmpty { links.append(ContactCardLink(type: .linkedIn, url: linkedin)) }
+                    if !facebook.isEmpty { links.append(ContactCardLink(type: .facebook, url: facebook)) }
+                    if !instagram.isEmpty { links.append(ContactCardLink(type: .instagram, url: instagram)) }
+                    if !x.isEmpty { links.append(ContactCardLink(type: .x, url: x)) }
+                    for entry in additionalURLs where !entry.value.isEmpty {
+                        links.append(ContactCardLink(type: .other, url: entry.value))
+                    }
                     let myCard = ContactCard(
                         id: existingCard?.id ?? userProfile.id,
                         firstName: self.firstname,

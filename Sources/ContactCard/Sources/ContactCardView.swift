@@ -161,15 +161,23 @@ enum MyString {
     static let contactCardOnBaoardingThirdItem = "Toujours accessible, même hors-ligne"
     static let contactCardOnBaoardingCreate = "Commencer"
 
-    static let formTextFieldFirstName = "Prénom"
-    static let formTextFieldLastName = "Nom"
-    static let formTextFieldEmail = "Adresse e-mail"
-    static let formTextFieldPhone = "Numéro de téléphone"
+    static let formTextFieldFirstName = "Prénom*"
+    static let formTextFieldLastName = "Nom*"
+    static let formTextFieldEmail = "Mail*"
+    static let formTextFieldPhone = "Téléphone*"
     static let formTextFieldCompany = "Entreprise"
-    static let formTextFieldWebSite = "Site internet"
+
     static let formTextFieldLinkedIn = "LinkedIn"
-    static let formRequiredFields = "Champs obligatoires."
-    static let formNoRequiredFields = "Champs facultatifs."
+    static let formTextFieldFacebook = "Facebook"
+    static let formTextFieldInstagram = "Instagram"
+    static let formTextFieldX = "X"
+    static let formTextFieldWebSite = "Site internet"
+    static let formTextFieldOtherUrl = "Autre URL"
+    static let formButtonAddUrl = "Ajouter une URL"
+
+    static let formGeneralInformation = "Informations générales"
+    static let formLinksAndSocialNetwork = "Liens et réseaux sociaux"
+
     static let formButtonRegister = "Enregistrer"
     static let formButtonCreate = "Créer"
     static let formButtonCancel = "Annuler"
@@ -180,6 +188,7 @@ enum MyString {
     static let qrCodeGenerationError = "Impossible de générer le QR code"
     static let qrCodeMenuEdit = "Modifier"
     static let qrCodeMenuDelete = "Supprimer"
+
     static let qrCodeDeleteAlertTitle = "Supprimer la carte de visite"
     static let qrCodeDeleteAlertMessage = "La suppression désactive votre carte et son QR. Les personnes qui vous ont déjà enregistré ne sont pas affectées. Vous pourrez la recréer à tout moment."
     static let qrCodeDeleteAlertConfirm = "Supprimer"
