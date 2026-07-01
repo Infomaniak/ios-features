@@ -22,24 +22,24 @@ import SwiftUI
 
 struct FeatureItemCell: View {
     @Environment(\.contactCardTheme) var contactCardTheme
-    let icon: Image
     let text: String
 
     var body: some View {
-        HStack(spacing: IKPadding.medium) {
-            icon
+        HStack(spacing: IKPadding.mini) {
+            Image(.smallCheck)
+                .renderingMode(.template)
                 .resizable()
                 .scaledToFit()
                 .frame(width: IKIconSize.medium.rawValue, height: IKIconSize.medium.rawValue)
-                .foregroundColor(contactCardTheme.primary)
-                .padding(IKPadding.small)
-                .background(contactCardTheme.secondary, in: .circle)
+                .foregroundStyle(contactCardTheme.primary)
 
             Text(text)
+                .font(.Custom.callout)
+                .fontWeight(.medium)
         }
     }
 }
 
 #Preview {
-    FeatureItemCell(icon: MyImage.contactCardOnBoardingFirstItem, text: MyString.contactCardOnBaoardingFirstItem)
+    FeatureItemCell(text: MyString.contactCardOnBaoardingFirstItem)
 }

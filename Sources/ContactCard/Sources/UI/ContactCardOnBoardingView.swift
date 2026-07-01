@@ -28,46 +28,52 @@ struct ContactCardOnBoardingView: View {
     let onCreateButtonTapped: () -> Void
 
     var body: some View {
-        ScrollView {
-            VStack {
-                OnBoardingHeaderView()
-                    .environment(\.contactCardTheme, contactCardTheme)
-                    .padding(.top, IKPadding.giant)
+        ZStack(alignment: .top) {
+            Image(.backgroundOnboarding)
+                .resizable()
+                .scaledToFit()
+                .scaleEffect(x: -1, y: 1.25)
+                .frame(maxWidth: .infinity)
+                .allowsHitTesting(false)
+                .foregroundStyle(contactCardTheme.secondary).opacity(0.5)
 
-                Text(MyString.contactCardOnBaoardingDescription)
-                    .multilineTextAlignment(.center)
-                    .font(.Custom.body)
-                    .foregroundStyle(contactCardTheme.secondaryText)
-                    .padding(.horizontal, IKPadding.medium)
-                    .padding(.top, IKPadding.mini)
-                    .padding(.bottom, IKPadding.huge)
+            ScrollView {
+                VStack {
+                    Color.clear
+                        .frame(height: 75)
 
-                VStack(spacing: IKPadding.medium) {
-                    FeatureItemCell(
-                        icon: MyImage.contactCardOnBoardingFirstItem,
-                        text: MyString.contactCardOnBaoardingFirstItem
-                    )
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, IKPadding.mini)
+                    OnBoardingHeaderView()
+                        .environment(\.contactCardTheme, contactCardTheme)
+                        .padding(.top, IKPadding.giant)
 
-                    FeatureItemCell(
-                        icon: MyImage.contactCardOnBoardingSecondItem,
-                        text: MyString.contactCardOnBaoardingSecondItem
-                    )
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, IKPadding.mini)
+                    Text(MyString.contactCardOnBaoardingDescription)
+                        .multilineTextAlignment(.center)
+                        .font(.Custom.body)
+                        .foregroundStyle(contactCardTheme.secondaryText)
+                        .padding(.vertical, IKPadding.medium)
+                        .padding(.horizontal, IKPadding.large)
 
-                    FeatureItemCell(
-                        icon: MyImage.contactCardOnBoardingThirdItem,
-                        text: MyString.contactCardOnBaoardingThirdItem
-                    )
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, IKPadding.mini)
+                    VStack(spacing: IKPadding.mini) {
+                        let myStrings = [
+                            MyString.contactCardOnBaoardingFirstItem,
+                            MyString.contactCardOnBaoardingSecondItem,
+                            MyString.contactCardOnBaoardingThirdItem
+                        ]
+                        
+                        ForEach(myStrings, id: \.self) { itemString in
+                            FeatureItemCell(
+                                text: itemString
+                            )
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, IKPadding.large)
+                        }
+                    }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(IKPadding.medium)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(.horizontal, IKPadding.huge)
         }
+        .ignoresSafeArea(.all)
         .scrollBounceBehavior(.basedOnSize)
         .safeAreaInset(edge: .bottom, content: {
             Button(MyString.contactCardOnBaoardingCreate) {

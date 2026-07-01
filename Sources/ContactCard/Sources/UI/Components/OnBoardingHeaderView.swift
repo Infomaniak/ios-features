@@ -25,17 +25,15 @@ struct OnBoardingHeaderView: View {
 
     var body: some View {
         VStack(spacing: IKPadding.huge) {
-            MyImage.contactCardOnBoardingFirstItem
+            Image(.illuOnboarding)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 80, height: 80)
+                .frame(width: 270, height: 270)
                 .foregroundColor(contactCardTheme.primary)
-                .padding(IKPadding.huge)
-                .background(contactCardTheme.secondary, in: .rect(cornerRadius: IKRadius.large))
 
             Text(MyString.contactCardOnBaoardingTitle)
                 .multilineTextAlignment(.center)
-                .font(.Custom.largeTitle)
+                .font(.Custom.title1)
                 .foregroundStyle(contactCardTheme.primaryText)
         }
     }

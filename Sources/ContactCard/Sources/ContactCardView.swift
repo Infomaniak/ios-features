@@ -111,6 +111,7 @@ struct ContactCardThemePreview {
     let secondaryText: Color
     let onAccent: Color
     let background: Color
+    let backgroundTint: Color
     let navBarBackground: Color
     let snackbarActionColor: Color
 
@@ -120,7 +121,8 @@ struct ContactCardThemePreview {
         primaryText: Color(.black),
         secondaryText: Color(.darkGray),
         onAccent: Color.white,
-        background: Color(UIColor.systemGray6),
+        background: .white,
+        backgroundTint: Color(.systemGray6),
         navBarBackground: Color(red: 0.20, green: 0.04, blue: 0.11),
         snackbarActionColor: Color(red: 0.96, green: 0.73, blue: 0.85)
     )
@@ -131,7 +133,8 @@ struct ContactCardThemePreview {
         primaryText: Color(.black),
         secondaryText: Color(.darkGray),
         onAccent: Color.white,
-        background: Color(UIColor.systemGray6),
+        background: .white,
+        backgroundTint: Color(.systemGray6),
         navBarBackground: Color(red: 0.04, green: 0.13, blue: 0.29),
         snackbarActionColor: Color(red: 0.72, green: 0.85, blue: 0.98)
     )
@@ -152,11 +155,11 @@ extension EnvironmentValues {
 
 enum MyString {
     static let contactCardOnBaoardingTitle = "Créez votre carte de visite"
-    static let contactCardOnBaoardingDescription = "Partagez vos coordonnées d'un simple scan. Vos contacts vous enregistrent en une seconde — même hors ligne."
-    static let contactCardOnBaoardingFirstItem = "Un QR code qui contient déjà tout"
+    static let contactCardOnBaoardingDescription = "Faites scanner votre QR code d’un simple geste. vos contacts vous enregistrent en un clin d’oeil, avec ou sans connexion"
+    static let contactCardOnBaoardingFirstItem = "Toutes vos informations dans un QR code"
     static let contactCardOnBaoardingSecondItem = "Aucun compte requis côté destinataire"
-    static let contactCardOnBaoardingThirdItem = "Fonctionne hors ligne"
-    static let contactCardOnBaoardingCreate = "Créer ma carte de visite"
+    static let contactCardOnBaoardingThirdItem = "Toujours accessible, même hors-ligne"
+    static let contactCardOnBaoardingCreate = "Commencer"
 
     static let formTextFieldFirstName = "Prénom"
     static let formTextFieldLastName = "Nom"

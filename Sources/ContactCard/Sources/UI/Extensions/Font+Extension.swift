@@ -23,6 +23,9 @@ extension Font {
         /// Figma name: *Titre H1*
         static let largeTitle = Font.dynamicTypeSizeFont(size: 32, weight: .bold, relativeTo: .largeTitle)
 
+        /// Figma name: *Titre H1*
+        static let title1 = Font.dynamicTypeSizeFont(size: 22, weight: .semibold, relativeTo: .title)
+
         /// Figma name: *Titre H2*
         static let title2 = Font.dynamicTypeSizeFont(size: 18, weight: .semibold, relativeTo: .title2)
 
