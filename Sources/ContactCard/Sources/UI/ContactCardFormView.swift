@@ -104,19 +104,25 @@ struct ContactCardFormView: View {
                         TextField(MyString.formTextFieldOtherUrl, text: $entry.value)
                             .keyboardType(.URL)
                         Button {
-                            additionalURLs.removeAll { $0.id == entry.id }
+                            withAnimation {
+                                additionalURLs.removeAll { $0.id == entry.id }
+                            }
                         } label: {
                             Image(.bin)
+                                .foregroundStyle(contactCardTheme.primary)
                         }
                         .buttonStyle(.borderless)
                     }
                 }
 
                 Button {
-                    additionalURLs.append(IdentifiableURL(value: ""))
+                    withAnimation {
+                        additionalURLs.append(IdentifiableURL(value: ""))
+                    }
                 } label: {
                     HStack {
                         Image(.add)
+                            .foregroundStyle(contactCardTheme.primary)
                         Text(MyString.formButtonAddUrl)
                             .font(.Custom.headline)
                             .foregroundStyle(contactCardTheme.primary)
