@@ -67,6 +67,9 @@ struct ContactCardView: View {
                         onDelete: { self.contactCardProfile = nil },
                         onUpdate: { self.contactCardProfile = $0 }
                     )
+                    .environment(\.contactCardTheme, .pink)
+                    .navigationTitle(MyString.formTitle)
+                    .navigationBarBackButtonHidden()
                 }
             }
         }.task {
