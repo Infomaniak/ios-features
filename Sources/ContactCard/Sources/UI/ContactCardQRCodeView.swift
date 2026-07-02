@@ -56,24 +56,36 @@ struct ContactCardQRCodeView: View {
     let onUpdate: ((ContactCard) -> Void)?
 
     var body: some View {
-        VStack {
-            ContactCardQRCodeGeneratorView(userProfile: userProfile, contactCard: contactCard)
-                .frame(width: 250, height: 250)
-                .padding(IKPadding.large)
-                .background(contactCardTheme.onAccent, in: .rect(cornerRadius: IKRadius.large))
-                .overlay(
-                    QRFrameShape(cornerLength: 250 / 8)
-                        .stroke(
-                            contactCardTheme.primary,
-                            style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round)
-                        )
-                )
-                .padding(.bottom, IKPadding.huge)
+        ScrollView {
+            VStack(spacing: 0) {
+                ZStack(alignment: .top) {
+                    Rectangle()
+                        .foregroundStyle(contactCardTheme.primary)
+                        .frame(width: .infinity, height: 80)
 
-            UserProfileCell(contactCard: contactCard)
+                    ContactCardQRCodeGeneratorView(userProfile: userProfile, contactCard: contactCard)
+                        .frame(width: 200, height: 200)
+                        .padding(IKPadding.large)
+                        .background(contactCardTheme.onAccent, in: RoundedRectangle(cornerRadius: IKRadius.large))
+                        .shadow(color: .black.opacity(0.12), radius: 6, x: 0, y: 2)
+                        .padding(.top, IKPadding.huge)
+                        .padding(.bottom, IKPadding.mini)
+                }
+                .frame(maxWidth: .infinity)
+
+                UserProfileCell(contactCard: contactCard)
+                    .padding(.horizontal, IKPadding.large)
+                    .padding(.bottom, IKPadding.large)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.white)
+            }
+            .background(.white)
+            .clipShape(RoundedRectangle(cornerRadius: IKRadius.large))
+            .padding(IKPadding.medium)
+            .padding(.bottom, IKPadding.large)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.horizontal, IKPadding.huge)
+        .background(contactCardTheme.secondary.opacity(0.5))
         .safeAreaInset(edge: .bottom, content: {
             ShareLink(
                 item: VCardTransferable(contactCard: contactCard),
@@ -82,7 +94,7 @@ struct ContactCardQRCodeView: View {
                     image: Image(systemName: "person.crop.circle")
                 )
             ) {
-                Label(MyString.qrCodeShared, systemImage: MyString.qrCodeSharedImage)
+                Text(MyString.qrCodeShared)
             }
             .buttonStyle(.ikBorderedProminent)
             .ikButtonFullWidth(true)
@@ -102,7 +114,6 @@ struct ContactCardQRCodeView: View {
             .padding(.horizontal, IKPadding.large)
             .padding(.bottom, IKPadding.mini)
         })
-        .background(contactCardTheme.background)
         .navigationBarBackButtonHidden(true)
         .alert(MyString.qrCodeDeleteAlertTitle, isPresented: $showDeleteConfirmation) {
             Button(MyString.qrCodeDeleteAlertConfirm, role: .destructive) {
@@ -139,12 +150,12 @@ struct ContactCardQRCodeView: View {
                 Button {
                     path = NavigationPath()
                 } label: {
-                    Label("Back", systemImage: "chevron.left")
+                    Label("Back", systemImage: "xmark")
                 }
             }
         }
-        .toolbarBackground(contactCardTheme.secondary.opacity(0.5), for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarBackground(.hidden, for: .navigationBar)
+        .background(contactCardTheme.secondary.opacity(0.5))
     }
 }
 

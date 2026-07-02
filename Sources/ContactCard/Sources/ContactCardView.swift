@@ -43,6 +43,8 @@ struct ContactCardView: View {
                         onUpdate: { self.contactCardProfile = $0 }
                     )
                     .environment(\.contactCardTheme, .pink)
+                    .navigationTitle(MyString.formTitle)
+                    .navigationBarTitleDisplayMode(.inline)
                 } else {
                     ContactCardOnBoardingView(onCreateButtonTapped: {
                         path.append(ContactCardRoute.form(userProfile, rootPath, nil))
@@ -56,6 +58,7 @@ struct ContactCardView: View {
                     ContactCardFormView(path: $path, userProfile: profile, rootPath: root, existingCard: existingCard)
                         .environment(\.contactCardTheme, .pink)
                         .navigationTitle(MyString.formTitle)
+                        .navigationBarTitleDisplayMode(.inline)
                         .navigationBarBackButtonHidden()
 
                 case .qrCode(let profile, let card):
@@ -69,6 +72,7 @@ struct ContactCardView: View {
                     )
                     .environment(\.contactCardTheme, .pink)
                     .navigationTitle(MyString.formTitle)
+                    .navigationBarTitleDisplayMode(.inline)
                     .navigationBarBackButtonHidden()
                 }
             }
@@ -161,10 +165,10 @@ enum MyString {
     static let contactCardOnBaoardingThirdItem = "Toujours accessible, même hors-ligne"
     static let contactCardOnBaoardingCreate = "Commencer"
 
-    static let formTextFieldFirstName = "Prénom*"
-    static let formTextFieldLastName = "Nom*"
-    static let formTextFieldEmail = "Mail*"
-    static let formTextFieldPhone = "Téléphone*"
+    static let formTextFieldFirstName = "Prénom"
+    static let formTextFieldLastName = "Nom"
+    static let formTextFieldEmail = "Mail"
+    static let formTextFieldPhone = "Téléphone"
     static let formTextFieldCompany = "Entreprise"
 
     static let formTextFieldLinkedIn = "LinkedIn"
@@ -182,6 +186,9 @@ enum MyString {
     static let formButtonCreate = "Créer"
     static let formButtonCancel = "Annuler"
     static let formTitle = "Carte de visite"
+
+    static let validationAlertTitle = "Champs obligatoires"
+    static let validationAlertMessage = "Veuillez remplir tous les champs obligatoires (prénom, nom, email, téléphone)."
 
     static let qrCodeShared = "Partager"
     static let qrCodeSharedImage = "square.and.arrow.up"
@@ -213,7 +220,12 @@ enum ProfileFake {
 
     static let fakeContactCardsLinks: [ContactCardLink] = [
         .init(type: .website, url: "https://joe.doe.fr"),
-        .init(type: .linkedIn, url: "https://linkedin.com/in/joe.doe")
+        .init(type: .linkedIn, url: "https://linkedin.com/in/joe.doe"),
+        .init(type: .facebook, url: "https://facebook.com/in/joe.doe"),
+        .init(type: .instagram, url: "https://instagram.com/in/joe.doe"),
+        .init(type: .x, url: "https://x.com/in/joe.doe"),
+        .init(type: .other, url: "https://other1.com/in/joe.doe"),
+        .init(type: .other, url: "https://other2.com/in/joe.doe")
     ]
 
     static let fakeContactCard = ContactCard(
@@ -222,6 +234,7 @@ enum ProfileFake {
         lastName: "Doe",
         email: "joe.doe@example.com",
         phone: "+44 777 123 456",
+        company: "Infomaniak",
         links: fakeContactCardsLinks
     )
 }

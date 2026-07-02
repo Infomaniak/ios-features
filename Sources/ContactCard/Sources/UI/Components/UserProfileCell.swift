@@ -17,7 +17,6 @@
  */
 
 import DesignSystem
-import Foundation
 import InfomaniakCore
 import SwiftUI
 
@@ -26,25 +25,121 @@ struct UserProfileCell: View {
 
     let contactCard: ContactCard
 
+    private static let maxVisibleSocialIcons = 4
+
+    private var infoRows: [(label: String, value: String)] {
+        var rows: [(String, String)] = []
+        if let company = contactCard.company, !company.isEmpty {
+            rows.append((MyString.formTextFieldCompany, company))
+        }
+        if !contactCard.phone.isEmpty {
+            rows.append((MyString.formTextFieldPhone, contactCard.phone))
+        }
+        if let website = contactCard.links?.first(where: { $0.type == .website }) {
+            rows.append((MyString.formTextFieldWebSite, website.url))
+        }
+        return rows
+    }
+
+    private var socialLinks: [ContactCardLink] {
+        contactCard.links?.filter { $0.type != .website } ?? []
+    }
+
     var body: some View {
-        HStack(spacing: IKPadding.medium) {
-            UserProfileAvatarView(userProfile: ProfileFake.fakeUserProfile, size: 40)
-
-            VStack(alignment: .leading, spacing: IKPadding.micro) {
+        VStack(spacing: IKPadding.medium) {
+            VStack(spacing: IKPadding.micro) {
                 Text("\(contactCard.firstName) \(contactCard.lastName)")
-                    .font(.Custom.title2)
+                    .font(.Custom.title1)
                     .foregroundStyle(contactCardTheme.primaryText)
-
-                Text("\(contactCard.email)")
-                    .font(.Custom.body)
-                    .foregroundStyle(contactCardTheme.secondaryText)
-                    .lineLimit(0)
+                    .multilineTextAlignment(.center)
+                Text(contactCard.email)
+                    .font(.Custom.headline)
+                    .foregroundStyle(contactCardTheme.primary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
-            .frame(maxWidth: 225)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(IKPadding.medium)
+
+            if !infoRows.isEmpty {
+                VStack(spacing: IKPadding.mini) {
+                    ForEach(infoRows, id: \.label) { row in
+                        ContactInfoRow(label: row.label, value: row.value, valueColor: contactCardTheme.primary)
+                        Divider()
+                    }
+                }
+            }
+
+            if !socialLinks.isEmpty {
+                SocialLinksRow(links: socialLinks, maxVisible: Self.maxVisibleSocialIcons, color: contactCardTheme.primary)
+            }
+        }
+    }
+}
+
+private struct ContactInfoRow: View {
+    let label: String
+    let value: String
+    let valueColor: Color
+
+    var body: some View {
+        HStack(alignment: .firstTextBaseline) {
+            Text(label)
+                .foregroundStyle(.secondary)
+            Spacer()
+            Text(value)
+                .foregroundStyle(valueColor)
+                .lineLimit(1)
+                .truncationMode(.tail)
+        }
+        .font(.subheadline)
+    }
+}
+
+private struct SocialLinksRow: View {
+    let links: [ContactCardLink]
+    let maxVisible: Int
+    let color: Color
+
+    private var visibleLinks: [ContactCardLink] {
+        Array(links.prefix(maxVisible))
+    }
+
+    private var overflow: Int {
+        max(0, links.count - maxVisible)
+    }
+
+    var body: some View {
+        HStack(spacing: IKPadding.small) {
+            ForEach(visibleLinks, id: \.url) { link in
+                link.type.systemImageName
+                    .foregroundStyle(color)
+                    .font(.system(size: 16, weight: .medium))
+            }
+            if overflow > 0 {
+                Text("+\(overflow)")
+                    .font(.subheadline.bold())
+                    .foregroundStyle(color)
+            }
+            Spacer()
+        }
+    }
+}
+
+extension ContactCardType {
+    var systemImageName: Image {
+        switch self {
+        case .linkedIn: return Image(.linkedin)
+        case .instagram: return Image(.intagram)
+        case .facebook: return Image(.facebook)
+        case .x: return Image(.link)
+        case .website: return Image(.link)
+        case .other: return Image(.link)
         }
     }
 }
 
 #Preview {
     UserProfileCell(contactCard: ProfileFake.fakeContactCard)
+        .padding()
 }

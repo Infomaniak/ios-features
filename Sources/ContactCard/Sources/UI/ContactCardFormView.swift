@@ -50,6 +50,12 @@ struct ContactCardFormView: View {
     var rootPath: URL
     var existingCard: ContactCard?
 
+    private var isFormValid: Bool {
+        !firstname.isEmpty && !lastname.isEmpty && !email.isEmpty && !phone.isEmpty
+    }
+
+    @State private var showValidationAlert = false
+
     init(path: Binding<NavigationPath>, userProfile: UserProfile, rootPath: URL, existingCard: ContactCard? = nil) {
         _path = path
         self.userProfile = userProfile
@@ -70,114 +76,147 @@ struct ContactCardFormView: View {
     }
 
     var body: some View {
+        formContent
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    trailingToolbarContent
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(MyString.formButtonCancel) {
+                        dismiss()
+                    }
+                }
+            }
+            .toolbarBackground(contactCardTheme.secondary.opacity(0.5), for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+    }
+
+    private var formContent: some View {
         Form {
-            Section {
-                TextField(MyString.formTextFieldFirstName, text: $firstname)
-                TextField(MyString.formTextFieldLastName, text: $lastname)
-                TextField(MyString.formTextFieldEmail, text: $email)
-                    .keyboardType(.emailAddress)
-                TextField(MyString.formTextFieldPhone, text: $phone)
-                    .keyboardType(.phonePad)
-                TextField(MyString.formTextFieldCompany, text: $company)
-            } header: {
-                Text(MyString.formGeneralInformation)
-                    .foregroundStyle(contactCardTheme.secondaryText)
-                    .font(.Custom.callout)
-                    .padding(.bottom, IKPadding.mini)
-            }
-            .listRowBackground(contactCardTheme.background)
-
-            Section {
-                TextField(MyString.formTextFieldLinkedIn, text: $linkedin)
-                    .keyboardType(.URL)
-                TextField(MyString.formTextFieldFacebook, text: $facebook)
-                    .keyboardType(.URL)
-                TextField(MyString.formTextFieldInstagram, text: $instagram)
-                    .keyboardType(.URL)
-                TextField(MyString.formTextFieldX, text: $x)
-                    .keyboardType(.URL)
-                TextField(MyString.formTextFieldWebSite, text: $website)
-                    .keyboardType(.URL)
-
-                ForEach($additionalURLs) { $entry in
-                    HStack {
-                        TextField(MyString.formTextFieldOtherUrl, text: $entry.value)
-                            .keyboardType(.URL)
-                        Button {
-                            withAnimation {
-                                additionalURLs.removeAll { $0.id == entry.id }
-                            }
-                        } label: {
-                            Image(.bin)
-                                .foregroundStyle(contactCardTheme.primary)
-                        }
-                        .buttonStyle(.borderless)
-                    }
-                }
-
-                Button {
-                    withAnimation {
-                        additionalURLs.append(IdentifiableURL(value: ""))
-                    }
-                } label: {
-                    HStack {
-                        Image(.add)
-                            .foregroundStyle(contactCardTheme.primary)
-                        Text(MyString.formButtonAddUrl)
-                            .font(.Custom.headline)
-                            .foregroundStyle(contactCardTheme.primary)
-                    }
-                }
-            } header: {
-                Text(MyString.formLinksAndSocialNetwork)
-                    .foregroundStyle(contactCardTheme.secondaryText)
-                    .font(.Custom.callout)
-                    .padding(.bottom, IKPadding.mini)
-            }
-            .listRowBackground(contactCardTheme.background)
+            generalInformationSection
+            linksSection
+        }
+        .alert(MyString.validationAlertTitle, isPresented: $showValidationAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(MyString.validationAlertMessage)
         }
         .padding(.top, IKPadding.large)
         .formStyle(.grouped)
         .scrollContentBackground(.hidden)
         .background(contactCardTheme.backgroundTint)
         .foregroundColor(contactCardTheme.primaryText)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button((existingCard == nil) ? MyString.formButtonCreate : MyString.formButtonRegister) {
-                    var links: [ContactCardLink] = []
-                    if !website.isEmpty { links.append(ContactCardLink(type: .website, url: website)) }
-                    if !linkedin.isEmpty { links.append(ContactCardLink(type: .linkedIn, url: linkedin)) }
-                    if !facebook.isEmpty { links.append(ContactCardLink(type: .facebook, url: facebook)) }
-                    if !instagram.isEmpty { links.append(ContactCardLink(type: .instagram, url: instagram)) }
-                    if !x.isEmpty { links.append(ContactCardLink(type: .x, url: x)) }
-                    for entry in additionalURLs where !entry.value.isEmpty {
-                        links.append(ContactCardLink(type: .other, url: entry.value))
-                    }
-                    let myCard = ContactCard(
-                        id: existingCard?.id ?? userProfile.id,
-                        firstName: self.firstname,
-                        lastName: self.lastname,
-                        email: self.email,
-                        phone: self.phone,
-                        company: self.company,
-                        avatarURL: userProfile.avatar,
-                        links: links
-                    )
-                    Task {
-                        await ContactCardManager(rootPath: rootPath).save(contactCard: myCard, userId: userProfile.id)
-                        path.append(ContactCardRoute.qrCode(userProfile, myCard))
-                    }
-                }
-            }
+    }
 
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(MyString.formButtonCancel) {
-                    dismiss()
+    private var generalInformationSection: some View {
+        Section {
+            TextField("\(MyString.formTextFieldFirstName)*", text: $firstname)
+            TextField("\(MyString.formTextFieldLastName)*", text: $lastname)
+            TextField("\(MyString.formTextFieldEmail)*", text: $email)
+                .keyboardType(.emailAddress)
+            TextField("\(MyString.formTextFieldPhone)*", text: $phone)
+                .keyboardType(.phonePad)
+            TextField(MyString.formTextFieldCompany, text: $company)
+        } header: {
+            Text(MyString.formGeneralInformation)
+                .foregroundStyle(contactCardTheme.secondaryText)
+                .font(.Custom.callout)
+                .padding(.bottom, IKPadding.mini)
+        }
+        .listRowBackground(contactCardTheme.background)
+    }
+
+    private var linksSection: some View {
+        Section {
+            TextField(MyString.formTextFieldLinkedIn, text: $linkedin)
+                .keyboardType(.URL)
+            TextField(MyString.formTextFieldFacebook, text: $facebook)
+                .keyboardType(.URL)
+            TextField(MyString.formTextFieldInstagram, text: $instagram)
+                .keyboardType(.URL)
+            TextField(MyString.formTextFieldX, text: $x)
+                .keyboardType(.URL)
+            TextField(MyString.formTextFieldWebSite, text: $website)
+                .keyboardType(.URL)
+            additionalURLsRows
+            addURLButton
+        } header: {
+            Text(MyString.formLinksAndSocialNetwork)
+                .foregroundStyle(contactCardTheme.secondaryText)
+                .font(.Custom.callout)
+                .padding(.bottom, IKPadding.mini)
+        }
+        .listRowBackground(contactCardTheme.background)
+    }
+
+    private var additionalURLsRows: some View {
+        ForEach($additionalURLs) { $entry in
+            HStack {
+                TextField(MyString.formTextFieldOtherUrl, text: $entry.value)
+                    .keyboardType(.URL)
+                Button {
+                    withAnimation {
+                        additionalURLs.removeAll { $0.id == entry.id }
+                    }
+                } label: {
+                    Image(.bin)
+                        .foregroundStyle(contactCardTheme.primary)
                 }
+                .buttonStyle(.borderless)
             }
         }
-        .toolbarBackground(contactCardTheme.secondary.opacity(0.5), for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
+    }
+
+    private var addURLButton: some View {
+        Button {
+            withAnimation {
+                additionalURLs.append(IdentifiableURL(value: ""))
+            }
+        } label: {
+            HStack {
+                Image(.add)
+                    .foregroundStyle(contactCardTheme.primary)
+                Text(MyString.formButtonAddUrl)
+                    .font(.Custom.headline)
+                    .foregroundStyle(contactCardTheme.primary)
+            }
+        }
+    }
+
+    private var trailingToolbarContent: some View {
+        Button((existingCard == nil) ? MyString.formButtonCreate : MyString.formButtonRegister) {
+            if isFormValid {
+                create()
+            } else {
+                showValidationAlert = true
+            }
+        }
+    }
+
+    func create() {
+        var links: [ContactCardLink] = []
+        if !website.isEmpty { links.append(ContactCardLink(type: .website, url: website)) }
+        if !linkedin.isEmpty { links.append(ContactCardLink(type: .linkedIn, url: linkedin)) }
+        if !facebook.isEmpty { links.append(ContactCardLink(type: .facebook, url: facebook)) }
+        if !instagram.isEmpty { links.append(ContactCardLink(type: .instagram, url: instagram)) }
+        if !x.isEmpty { links.append(ContactCardLink(type: .x, url: x)) }
+        for entry in additionalURLs where !entry.value.isEmpty {
+            links.append(ContactCardLink(type: .other, url: entry.value))
+        }
+        let myCard = ContactCard(
+            id: existingCard?.id ?? userProfile.id,
+            firstName: firstname,
+            lastName: lastname,
+            email: email,
+            phone: phone,
+            company: company,
+            avatarURL: userProfile.avatar,
+            links: links
+        )
+        Task {
+            await ContactCardManager(rootPath: rootPath).save(contactCard: myCard, userId: userProfile.id)
+            path.append(ContactCardRoute.qrCode(userProfile, myCard))
+        }
     }
 }
 

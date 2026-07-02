@@ -56,17 +56,20 @@ struct ContactCardQRCodeGeneratorView: View {
     }
 
     private func computeQRCode(foregroundColor: CGColor? = nil) async {
-        let fg = foregroundColor ?? UIColor(contactCardTheme.primary).cgColor
+        let fg = foregroundColor ?? UIColor(contactCardTheme.primaryText).cgColor
         let bg = UIColor(contactCardTheme.onAccent).cgColor
-        let doc = QRCode.Document(utf8String: contactCard.makeVCardString(), errorCorrection: .high)
+        let doc = QRCode.Document(utf8String: contactCard.makeVCardString(forQRCode: true), errorCorrection: .high)
         doc.design.foregroundColor(fg)
         doc.design.backgroundColor(bg)
 
-        // TODO: Add true infomaniak logo
-        if let cgImage = renderSFSymbol("k.square.fill", color: UIColor(contactCardTheme.primary), size: 100) {
+        if let avatarString = userProfile.avatar,
+           let avatarURL = URL(string: avatarString),
+           let (data, _) = try? await URLSession.shared.data(from: avatarURL),
+           let uiImage = UIImage(data: data),
+           let cgImage = makeCircularImage(uiImage).cgImage {
             doc.logoTemplate = QRCode.LogoTemplate(
                 image: cgImage,
-                path: CGPath(rect: CGRect(x: 0.35, y: 0.35, width: 0.30, height: 0.30), transform: nil),
+                path: CGPath(ellipseIn: CGRect(x: 0.35, y: 0.35, width: 0.30, height: 0.30), transform: nil),
                 inset: 3
             )
         }
@@ -74,13 +77,13 @@ struct ContactCardQRCodeGeneratorView: View {
         generatedDocument = doc
     }
 
-    private func renderSFSymbol(_ name: String, color: UIColor, size: CGFloat) -> CGImage? {
-        guard let symbol = UIImage(systemName: name)?
-            .withTintColor(color, renderingMode: .alwaysOriginal) else { return nil }
-        let bounds = CGSize(width: size, height: size)
-        return UIGraphicsImageRenderer(size: bounds).image { _ in
-            symbol.draw(in: CGRect(origin: .zero, size: bounds))
-        }.cgImage
+    private func makeCircularImage(_ image: UIImage) -> UIImage {
+        let size = CGSize(width: 120, height: 120)
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            let rect = CGRect(origin: .zero, size: size)
+            UIBezierPath(ovalIn: rect).addClip()
+            image.draw(in: rect)
+        }
     }
 }
 
