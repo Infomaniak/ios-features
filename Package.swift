@@ -47,7 +47,7 @@ let package = Package(
         .package(url: "https://github.com/Infomaniak/ios-device-check", .upToNextMajor(from: "1.1.1")),
         .package(url: "https://github.com/Infomaniak/ios-login", .upToNextMajor(from: "7.8.0")),
         .package(url: "https://github.com/kean/Nuke", .upToNextMajor(from: "12.1.3")),
-        .package(url: "https://github.com/dagronf/QRCode", .upToNextMajor(from: "16.0.0"))
+        .package(url: "https://github.com/dagronf/QRCode", .upToNextMajor(from: "28.0.0"))
     ],
     targets: [
         .target(

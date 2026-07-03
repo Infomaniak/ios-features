@@ -58,16 +58,16 @@ struct ContactCardQRCodeGeneratorView: View {
     private func computeQRCode(foregroundColor: CGColor? = nil) async {
         let fg = foregroundColor ?? UIColor(contactCardTheme.primaryText).cgColor
         let bg = UIColor(contactCardTheme.onAccent).cgColor
-        let doc = QRCode.Document(utf8String: contactCard.makeVCardString(forQRCode: true), errorCorrection: .high)
-        doc.design.foregroundColor(fg)
-        doc.design.backgroundColor(bg)
+        let doc = try? QRCode.Document(utf8String: contactCard.makeVCardString(forQRCode: true), errorCorrection: .high)
+        doc?.design.foregroundColor(fg)
+        doc?.design.backgroundColor(bg)
 
         if let avatarString = userProfile.avatar,
            let avatarURL = URL(string: avatarString),
            let (data, _) = try? await URLSession.shared.data(from: avatarURL),
            let uiImage = UIImage(data: data),
            let cgImage = makeCircularImage(uiImage).cgImage {
-            doc.logoTemplate = QRCode.LogoTemplate(
+            doc?.logoTemplate = QRCode.LogoTemplate(
                 image: cgImage,
                 path: CGPath(ellipseIn: CGRect(x: 0.35, y: 0.35, width: 0.30, height: 0.30), transform: nil),
                 inset: 3
