@@ -23,6 +23,7 @@ import SwiftUI
 
 @available(iOS 16.4, *)
 struct ContactCardOnBoardingView: View {
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.contactCardTheme) private var contactCardTheme
 
     let onCreateButtonTapped: () -> Void
@@ -59,7 +60,7 @@ struct ContactCardOnBoardingView: View {
                             MyString.contactCardOnBaoardingSecondItem,
                             MyString.contactCardOnBaoardingThirdItem
                         ]
-                        
+
                         ForEach(myStrings, id: \.self) { itemString in
                             FeatureItemCell(
                                 text: itemString
@@ -96,6 +97,15 @@ struct ContactCardOnBoardingView: View {
             )
             .padding(.horizontal, IKPadding.large)
             .padding(.bottom, IKPadding.mini)
+        })
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Label("Back", systemImage: "xmark")
+                }
+            }
         })
         .background(contactCardTheme.background)
     }

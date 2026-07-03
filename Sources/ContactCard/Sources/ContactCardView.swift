@@ -21,16 +21,22 @@ import InfomaniakCore
 import SwiftUI
 
 @available(iOS 16.4, *)
-struct ContactCardView: View {
+public struct ContactCardView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
     @Binding var path: NavigationPath
 
     @State private var contactCardProfile: ContactCard? = nil
-    let userProfile: UserProfile
-    let rootPath: URL
+    public let userProfile: UserProfile
+    public let rootPath: URL
 
-    var body: some View {
+    public init(path: Binding<NavigationPath>, userProfile: UserProfile, rootPath: URL) {
+        _path = path
+        self.userProfile = userProfile
+        self.rootPath = rootPath
+    }
+
+    public var body: some View {
         NavigationStack(path: $path) {
             Group {
                 if let contactCardProfile {
