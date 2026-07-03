@@ -46,7 +46,8 @@ struct ContactCardQRCodeView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
     @Environment(\.dismiss) private var dismiss
 
-    @Binding var path: NavigationPath
+    @Binding var myState: StateCardView
+
     @State private var showDeleteConfirmation = false
 
     let userProfile: UserProfile
@@ -57,69 +58,17 @@ struct ContactCardQRCodeView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 0) {
-                ZStack(alignment: .top) {
-                    Rectangle()
-                        .foregroundStyle(contactCardTheme.primary)
-                        .frame(width: .infinity, height: 80)
-
-                    ContactCardQRCodeGeneratorView(userProfile: userProfile, contactCard: contactCard)
-                        .frame(width: 200, height: 200)
-                        .padding(IKPadding.large)
-                        .background(contactCardTheme.onAccent, in: RoundedRectangle(cornerRadius: IKRadius.large))
-                        .shadow(color: .black.opacity(0.12), radius: 6, x: 0, y: 2)
-                        .padding(.top, IKPadding.huge)
-                        .padding(.bottom, IKPadding.mini)
-                }
-                .frame(maxWidth: .infinity)
-
-                UserProfileCell(contactCard: contactCard)
-                    .padding(.horizontal, IKPadding.large)
-                    .padding(.bottom, IKPadding.large)
-                    .frame(maxWidth: .infinity)
-                    .background(Color.white)
-            }
-            .background(.white)
-            .clipShape(RoundedRectangle(cornerRadius: IKRadius.large))
-            .padding(IKPadding.medium)
-            .padding(.bottom, IKPadding.large)
+            cardContent
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(contactCardTheme.secondary.opacity(0.5))
-        .safeAreaInset(edge: .bottom, content: {
-            ShareLink(
-                item: VCardTransferable(contactCard: contactCard),
-                preview: SharePreview(
-                    "\(contactCard.firstName) \(contactCard.lastName)",
-                    image: Image(systemName: "person.crop.circle")
-                )
-            ) {
-                Text(MyString.qrCodeShared)
-            }
-            .buttonStyle(.ikBorderedProminent)
-            .ikButtonFullWidth(true)
-            .controlSize(.large)
-            .ikButtonTheme(
-                IKButtonTheme(
-                    primary: contactCardTheme.primary,
-                    secondary: contactCardTheme.secondary,
-                    tertiary: Color.gray,
-                    disabledPrimary: Color.gray,
-                    disabledSecondary: Color.white,
-                    error: Color.red,
-                    smallFont: .body,
-                    mediumFont: .headline
-                )
-            )
-            .padding(.horizontal, IKPadding.large)
-            .padding(.bottom, IKPadding.mini)
-        })
+        .safeAreaInset(edge: .bottom, content: { shareButton })
         .navigationBarBackButtonHidden(true)
         .alert(MyString.qrCodeDeleteAlertTitle, isPresented: $showDeleteConfirmation) {
             Button(MyString.qrCodeDeleteAlertConfirm, role: .destructive) {
                 Task {
                     await ContactCardManager(rootPath: rootPath).delete(userId: userProfile.id)
-                    path = NavigationPath()
+                    dismiss()
                     onDelete?()
                 }
             }
@@ -128,52 +77,104 @@ struct ContactCardQRCodeView: View {
             Text(MyString.qrCodeDeleteAlertMessage)
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Menu {
-                    Button {
-                        path.append(ContactCardRoute.form(userProfile, rootPath, contactCard))
-                    } label: {
-                        Label(MyString.qrCodeMenuEdit, systemImage: "pencil")
-                    }
-
-                    Button(role: .destructive) {
-                        showDeleteConfirmation = true
-                    } label: {
-                        Label(MyString.qrCodeMenuDelete, systemImage: "trash")
-                    }
-                } label: {
-                    Label("More", systemImage: "ellipsis")
-                }
-            }
-
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    path = NavigationPath()
-                } label: {
-                    Label("Back", systemImage: "xmark")
-                }
-            }
+            trailingToolbarItem
+            leadingToolbarItem
         }
         .toolbarBackground(.hidden, for: .navigationBar)
         .background(contactCardTheme.secondary.opacity(0.5))
     }
-}
 
-struct ContactCardQRCodeViewPreview: View {
-    @State var path = NavigationPath()
-
-    var body: some View {
-        ContactCardQRCodeView(
-            path: $path,
-            userProfile: ProfileFake.fakeUserProfile,
-            contactCard: ProfileFake.fakeContactCard,
-            rootPath: FileManager.default.temporaryDirectory,
-            onDelete: nil,
-            onUpdate: nil
-        )
+    var cardContent: some View {
+        VStack(spacing: 0) {
+            qrCodeSection
+            userProfileSection
+        }
+        .background(.white)
+        .clipShape(RoundedRectangle(cornerRadius: IKRadius.large))
+        .padding(IKPadding.medium)
+        .padding(.bottom, IKPadding.large)
     }
-}
 
-#Preview {
-    ContactCardQRCodeViewPreview()
+    private var qrCodeSection: some View {
+        ZStack(alignment: .top) {
+            Rectangle()
+                .foregroundStyle(contactCardTheme.primary)
+                .frame(width: .infinity, height: 80)
+
+            ContactCardQRCodeGeneratorView(userProfile: userProfile, contactCard: contactCard)
+                .frame(width: 200, height: 200)
+                .padding(IKPadding.large)
+                .background(contactCardTheme.onAccent, in: RoundedRectangle(cornerRadius: IKRadius.large))
+                .shadow(color: .black.opacity(0.12), radius: 6, x: 0, y: 2)
+                .padding(.top, IKPadding.huge)
+                .padding(.bottom, IKPadding.mini)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private var userProfileSection: some View {
+        UserProfileCell(contactCard: contactCard)
+            .padding(.horizontal, IKPadding.large)
+            .padding(.bottom, IKPadding.large)
+            .frame(maxWidth: .infinity)
+            .background(Color.white)
+    }
+
+    private var shareButton: some View {
+        let theme = IKButtonTheme(
+            primary: contactCardTheme.primary,
+            secondary: contactCardTheme.secondary,
+            tertiary: Color.gray,
+            disabledPrimary: Color.gray,
+            disabledSecondary: Color.white,
+            error: Color.red,
+            smallFont: .body,
+            mediumFont: .headline
+        )
+        return ShareLink(
+            item: VCardTransferable(contactCard: contactCard),
+            preview: SharePreview(
+                "\(contactCard.firstName) \(contactCard.lastName)",
+                image: Image(systemName: "person.crop.circle")
+            )
+        ) {
+            Text(MyString.qrCodeShared)
+        }
+        .buttonStyle(.ikBorderedProminent)
+        .ikButtonFullWidth(true)
+        .controlSize(.large)
+        .ikButtonTheme(theme)
+        .padding(.horizontal, IKPadding.large)
+        .padding(.bottom, IKPadding.mini)
+    }
+
+    private var trailingToolbarItem: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Menu {
+                Button {
+                    myState = .form(userProfile, rootPath, contactCard)
+                } label: {
+                    Label(MyString.qrCodeMenuEdit, systemImage: "pencil")
+                }
+
+                Button(role: .destructive) {
+                    showDeleteConfirmation = true
+                } label: {
+                    Label(MyString.qrCodeMenuDelete, systemImage: "trash")
+                }
+            } label: {
+                Label("More", systemImage: "ellipsis")
+            }
+        }
+    }
+
+    private var leadingToolbarItem: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+                dismiss()
+            } label: {
+                Label("Back", systemImage: "xmark")
+            }
+        }
+    }
 }

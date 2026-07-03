@@ -24,52 +24,35 @@ import SwiftUI
 public struct ContactCardView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
-    @Binding var path: NavigationPath
-
     @State private var contactCardProfile: ContactCard? = nil
     public let userProfile: UserProfile
     public let rootPath: URL
 
-    public init(path: Binding<NavigationPath>, userProfile: UserProfile, rootPath: URL) {
-        _path = path
+    @State var myState: StateCardView = .onBoarding
+
+    public init(userProfile: UserProfile, rootPath: URL) {
         self.userProfile = userProfile
         self.rootPath = rootPath
     }
 
     public var body: some View {
-        NavigationStack(path: $path) {
-            Group {
-                if let contactCardProfile {
-                    ContactCardQRCodeView(
-                        path: $path,
-                        userProfile: userProfile,
-                        contactCard: contactCardProfile,
-                        rootPath: rootPath,
-                        onDelete: { self.contactCardProfile = nil },
-                        onUpdate: { self.contactCardProfile = $0 }
-                    )
-                    .environment(\.contactCardTheme, .pink)
-                    .navigationTitle(MyString.formTitle)
-                    .navigationBarTitleDisplayMode(.inline)
-                } else {
+        NavigationStack {
+            ZStack {
+                switch myState {
+                case .onBoarding:
                     ContactCardOnBoardingView(onCreateButtonTapped: {
-                        path.append(ContactCardRoute.form(userProfile, rootPath, nil))
+                        myState = .form(userProfile, rootPath, nil)
                     })
                     .environment(\.contactCardTheme, .pink)
-                }
-            }
-            .navigationDestination(for: ContactCardRoute.self) { route in
-                switch route {
                 case .form(let profile, let root, let existingCard):
-                    ContactCardFormView(path: $path, userProfile: profile, rootPath: root, existingCard: existingCard)
+                    ContactCardFormView(myState: $myState, userProfile: profile, rootPath: root, existingCard: existingCard)
                         .environment(\.contactCardTheme, .pink)
                         .navigationTitle(MyString.formTitle)
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarBackButtonHidden()
-
                 case .qrCode(let profile, let card):
                     ContactCardQRCodeView(
-                        path: $path,
+                        myState: $myState,
                         userProfile: profile,
                         contactCard: card,
                         rootPath: rootPath,
@@ -82,13 +65,16 @@ public struct ContactCardView: View {
                     .navigationBarBackButtonHidden()
                 }
             }
-        }.task {
+        }
+        .task {
             await fetchContactCard()
         }
     }
 
     private func fetchContactCard() async {
         contactCardProfile = await ContactCardManager(rootPath: rootPath).load(userId: userProfile.id)
+        guard let contactCardProfile else { return }
+        myState = .qrCode(userProfile, contactCardProfile)
     }
 }
 
@@ -97,7 +83,7 @@ struct ContactCardViewPreview: View {
     @State var path = NavigationPath()
 
     var body: some View {
-        ContactCardView(path: $path, userProfile: ProfileFake.fakeUserProfile, rootPath: URL.temporaryDirectory)
+        ContactCardView(userProfile: ProfileFake.fakeUserProfile, rootPath: URL.temporaryDirectory)
     }
 }
 
@@ -107,7 +93,8 @@ struct ContactCardViewPreview: View {
         .environment(\.contactCardTheme, .pink)
 }
 
-enum ContactCardRoute: Hashable {
+enum StateCardView {
+    case onBoarding
     case form(UserProfile, URL, ContactCard?)
     case qrCode(UserProfile, ContactCard)
 }

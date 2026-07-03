@@ -31,7 +31,7 @@ struct ContactCardFormView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
     @Environment(\.dismiss) private var dismiss
 
-    @Binding var path: NavigationPath
+    @Binding var myState: StateCardView
 
     @State var firstname = ""
     @State var lastname = ""
@@ -56,8 +56,8 @@ struct ContactCardFormView: View {
 
     @State private var showValidationAlert = false
 
-    init(path: Binding<NavigationPath>, userProfile: UserProfile, rootPath: URL, existingCard: ContactCard? = nil) {
-        _path = path
+    init(myState: Binding<StateCardView>, userProfile: UserProfile, rootPath: URL, existingCard: ContactCard? = nil) {
+        _myState = myState
         self.userProfile = userProfile
         self.rootPath = rootPath
         self.existingCard = existingCard
@@ -215,23 +215,7 @@ struct ContactCardFormView: View {
         )
         Task {
             await ContactCardManager(rootPath: rootPath).save(contactCard: myCard, userId: userProfile.id)
-            path.append(ContactCardRoute.qrCode(userProfile, myCard))
+            myState = .qrCode(userProfile, myCard)
         }
     }
-}
-
-struct ContactCardFormViewPreview: View {
-    @State var path = NavigationPath()
-
-    var body: some View {
-        ContactCardFormView(
-            path: $path,
-            userProfile: ProfileFake.fakeUserProfile,
-            rootPath: FileManager.default.temporaryDirectory
-        )
-    }
-}
-
-#Preview {
-    ContactCardFormViewPreview()
 }
