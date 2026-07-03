@@ -111,12 +111,17 @@ struct ContactCardFormView: View {
     private var generalInformationSection: some View {
         Section {
             TextField("\(MyString.formTextFieldFirstName)*", text: $firstname)
+                .multilineTextAlignment(.leading)
             TextField("\(MyString.formTextFieldLastName)*", text: $lastname)
+                .multilineTextAlignment(.leading)
             TextField("\(MyString.formTextFieldEmail)*", text: $email)
+                .multilineTextAlignment(.leading)
                 .keyboardType(.emailAddress)
             TextField("\(MyString.formTextFieldPhone)*", text: $phone)
+                .multilineTextAlignment(.leading)
                 .keyboardType(.phonePad)
             TextField(MyString.formTextFieldCompany, text: $company)
+                .multilineTextAlignment(.leading)
         } header: {
             Text(MyString.formGeneralInformation)
                 .foregroundStyle(contactCardTheme.secondaryText)
@@ -129,14 +134,18 @@ struct ContactCardFormView: View {
     private var linksSection: some View {
         Section {
             TextField(MyString.formTextFieldLinkedIn, text: $linkedin)
+                .multilineTextAlignment(.leading)
                 .keyboardType(.URL)
             TextField(MyString.formTextFieldFacebook, text: $facebook)
+                .multilineTextAlignment(.leading)
                 .keyboardType(.URL)
             TextField(MyString.formTextFieldInstagram, text: $instagram)
+                .multilineTextAlignment(.leading)
                 .keyboardType(.URL)
             TextField(MyString.formTextFieldX, text: $x)
                 .keyboardType(.URL)
             TextField(MyString.formTextFieldWebSite, text: $website)
+                .multilineTextAlignment(.leading)
                 .keyboardType(.URL)
             additionalURLsRows
             addURLButton
@@ -153,6 +162,7 @@ struct ContactCardFormView: View {
         ForEach($additionalURLs) { $entry in
             HStack {
                 TextField(MyString.formTextFieldOtherUrl, text: $entry.value)
+                    .multilineTextAlignment(.leading)
                     .keyboardType(.URL)
                 Button {
                     withAnimation {
