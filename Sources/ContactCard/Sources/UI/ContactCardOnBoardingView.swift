@@ -36,7 +36,7 @@ struct ContactCardOnBoardingView: View {
                 .scaleEffect(x: -1, y: 1.25)
                 .frame(maxWidth: .infinity)
                 .allowsHitTesting(false)
-                .foregroundStyle(contactCardTheme.secondary).opacity(0.5)
+                .foregroundStyle(contactCardTheme.navBarBackground)
 
             ScrollView {
                 VStack {

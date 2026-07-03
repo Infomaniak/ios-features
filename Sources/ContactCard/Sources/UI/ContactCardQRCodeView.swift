@@ -61,7 +61,7 @@ struct ContactCardQRCodeView: View {
             cardContent
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(contactCardTheme.secondary.opacity(0.5))
+        .background(contactCardTheme.navBarBackground)
         .safeAreaInset(edge: .bottom, content: { shareButton })
         .navigationBarBackButtonHidden(true)
         .alert(MyString.qrCodeDeleteAlertTitle, isPresented: $showDeleteConfirmation) {
@@ -81,7 +81,7 @@ struct ContactCardQRCodeView: View {
             leadingToolbarItem
         }
         .toolbarBackground(.hidden, for: .navigationBar)
-        .background(contactCardTheme.secondary.opacity(0.5))
+        .background(contactCardTheme.navBarBackground)
     }
 
     var cardContent: some View {
@@ -89,7 +89,7 @@ struct ContactCardQRCodeView: View {
             qrCodeSection
             userProfileSection
         }
-        .background(.white)
+        .background(contactCardTheme.background)
         .clipShape(RoundedRectangle(cornerRadius: IKRadius.large))
         .padding(IKPadding.medium)
         .padding(.bottom, IKPadding.large)
@@ -102,12 +102,13 @@ struct ContactCardQRCodeView: View {
                 .frame(width: .infinity, height: 80)
 
             ContactCardQRCodeGeneratorView(userProfile: userProfile, contactCard: contactCard)
+                .environment(\.contactCardTheme, contactCardTheme)
                 .frame(width: 200, height: 200)
                 .padding(IKPadding.large)
-                .background(contactCardTheme.onAccent, in: RoundedRectangle(cornerRadius: IKRadius.large))
-                .shadow(color: .black.opacity(0.12), radius: 6, x: 0, y: 2)
+                .background(contactCardTheme.background, in: RoundedRectangle(cornerRadius: IKRadius.large))
+                .shadow(radius: 4, x: 0, y: 2)
                 .padding(.top, IKPadding.huge)
-                .padding(.bottom, IKPadding.mini)
+                .padding(.bottom, IKPadding.small)
         }
         .frame(maxWidth: .infinity)
     }
@@ -117,7 +118,7 @@ struct ContactCardQRCodeView: View {
             .padding(.horizontal, IKPadding.large)
             .padding(.bottom, IKPadding.large)
             .frame(maxWidth: .infinity)
-            .background(Color.white)
+            .background(contactCardTheme.background)
     }
 
     private var shareButton: some View {

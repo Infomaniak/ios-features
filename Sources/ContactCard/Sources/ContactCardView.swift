@@ -43,10 +43,10 @@ public struct ContactCardView: View {
                     ContactCardOnBoardingView(onCreateButtonTapped: {
                         myState = .form(userProfile, rootPath, nil)
                     })
-                    .environment(\.contactCardTheme, .pink)
+                    .environment(\.contactCardTheme, contactCardTheme)
                 case .form(let profile, let root, let existingCard):
                     ContactCardFormView(myState: $myState, userProfile: profile, rootPath: root, existingCard: existingCard)
-                        .environment(\.contactCardTheme, .pink)
+                        .environment(\.contactCardTheme, contactCardTheme)
                         .navigationTitle(MyString.formTitle)
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarBackButtonHidden()
@@ -59,7 +59,7 @@ public struct ContactCardView: View {
                         onDelete: { self.contactCardProfile = nil },
                         onUpdate: { self.contactCardProfile = $0 }
                     )
-                    .environment(\.contactCardTheme, .pink)
+                    .environment(\.contactCardTheme, contactCardTheme)
                     .navigationTitle(MyString.formTitle)
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarBackButtonHidden()
@@ -101,7 +101,7 @@ enum StateCardView {
 
 // MARK: - ContactCardThemePreview
 
-struct ContactCardThemePreview {
+public struct ContactCardThemePreview {
     let primary: Color
     let secondary: Color
     let primaryText: Color
@@ -111,6 +111,28 @@ struct ContactCardThemePreview {
     let backgroundTint: Color
     let navBarBackground: Color
     let snackbarActionColor: Color
+
+    public init(
+        primary: Color,
+        secondary: Color,
+        primaryText: Color,
+        secondaryText: Color,
+        onAccent: Color,
+        background: Color,
+        backgroundTint: Color,
+        navBarBackground: Color,
+        snackbarActionColor: Color
+    ) {
+        self.primary = primary
+        self.secondary = secondary
+        self.primaryText = primaryText
+        self.secondaryText = secondaryText
+        self.onAccent = onAccent
+        self.background = background
+        self.backgroundTint = backgroundTint
+        self.navBarBackground = navBarBackground
+        self.snackbarActionColor = snackbarActionColor
+    }
 
     static let pink = ContactCardThemePreview(
         primary: Color(red: 0.81, green: 0.12, blue: 0.39),
@@ -123,25 +145,13 @@ struct ContactCardThemePreview {
         navBarBackground: Color(red: 0.20, green: 0.04, blue: 0.11),
         snackbarActionColor: Color(red: 0.96, green: 0.73, blue: 0.85)
     )
-
-    static let blue = ContactCardThemePreview(
-        primary: Color(red: 0.13, green: 0.46, blue: 0.96),
-        secondary: Color(red: 0.72, green: 0.85, blue: 0.98),
-        primaryText: Color(.black),
-        secondaryText: Color(.darkGray),
-        onAccent: Color.white,
-        background: .white,
-        backgroundTint: Color(.systemGray6),
-        navBarBackground: Color(red: 0.04, green: 0.13, blue: 0.29),
-        snackbarActionColor: Color(red: 0.72, green: 0.85, blue: 0.98)
-    )
 }
 
 private struct ContactCardThemeKey: EnvironmentKey {
     static let defaultValue: ContactCardThemePreview = .pink
 }
 
-extension EnvironmentValues {
+public extension EnvironmentValues {
     var contactCardTheme: ContactCardThemePreview {
         get { self[ContactCardThemeKey.self] }
         set { self[ContactCardThemeKey.self] = newValue }

@@ -87,8 +87,8 @@ struct ContactCardFormView: View {
                     }
                 }
             }
-            .toolbarBackground(contactCardTheme.secondary.opacity(0.5), for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
+            .background(contactCardTheme.navBarBackground)
+            .toolbarBackground(.hidden, for: .navigationBar)
     }
 
     private var formContent: some View {
@@ -104,7 +104,6 @@ struct ContactCardFormView: View {
         .padding(.top, IKPadding.large)
         .formStyle(.grouped)
         .scrollContentBackground(.hidden)
-        .background(contactCardTheme.backgroundTint)
         .foregroundColor(contactCardTheme.primaryText)
     }
 
@@ -128,7 +127,6 @@ struct ContactCardFormView: View {
                 .font(.Custom.callout)
                 .padding(.bottom, IKPadding.mini)
         }
-        .listRowBackground(contactCardTheme.background)
     }
 
     private var linksSection: some View {
@@ -143,6 +141,7 @@ struct ContactCardFormView: View {
                 .multilineTextAlignment(.leading)
                 .keyboardType(.URL)
             TextField(MyString.formTextFieldX, text: $x)
+                .multilineTextAlignment(.leading)
                 .keyboardType(.URL)
             TextField(MyString.formTextFieldWebSite, text: $website)
                 .multilineTextAlignment(.leading)
@@ -155,7 +154,6 @@ struct ContactCardFormView: View {
                 .font(.Custom.callout)
                 .padding(.bottom, IKPadding.mini)
         }
-        .listRowBackground(contactCardTheme.background)
     }
 
     private var additionalURLsRows: some View {

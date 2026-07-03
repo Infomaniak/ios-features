@@ -56,8 +56,8 @@ struct ContactCardQRCodeGeneratorView: View {
     }
 
     @MainActor private func computeQRCode(foregroundColor: CGColor? = nil) async {
-        let fg = foregroundColor ?? UIColor(contactCardTheme.primaryText).cgColor
-        let bg = UIColor(contactCardTheme.onAccent).cgColor
+        let fg = foregroundColor ?? UIColor(.black).cgColor
+        let bg = UIColor(.white).cgColor
 
         do {
             var documentBuilder = try QRCode.build

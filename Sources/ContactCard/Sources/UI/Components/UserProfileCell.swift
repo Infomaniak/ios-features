@@ -85,7 +85,7 @@ private struct ContactInfoRow: View {
     var body: some View {
         HStack(alignment: .firstTextBaseline) {
             Text(label)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(valueColor)
             Spacer()
             Text(value)
                 .foregroundStyle(valueColor)
