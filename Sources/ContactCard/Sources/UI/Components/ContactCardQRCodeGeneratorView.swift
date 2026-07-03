@@ -34,7 +34,7 @@ struct ContactCardQRCodeGeneratorView: View {
     var body: some View {
         Group {
             if let generatedDocument {
-                QRCodeDocumentUIViewWrapper(document: generatedDocument)
+                QRCodeDocumentUIView(document: generatedDocument)
             } else if isShowingError {
                 VStack(spacing: IKPadding.small) {
                     Image(systemName: "exclamationmark.triangle.fill")
@@ -55,26 +55,36 @@ struct ContactCardQRCodeGeneratorView: View {
         }
     }
 
-    private func computeQRCode(foregroundColor: CGColor? = nil) async {
+    @MainActor private func computeQRCode(foregroundColor: CGColor? = nil) async {
         let fg = foregroundColor ?? UIColor(contactCardTheme.primaryText).cgColor
         let bg = UIColor(contactCardTheme.onAccent).cgColor
-        let doc = try? QRCode.Document(utf8String: contactCard.makeVCardString(forQRCode: true), errorCorrection: .high)
-        doc?.design.foregroundColor(fg)
-        doc?.design.backgroundColor(bg)
 
-        if let avatarString = userProfile.avatar,
-           let avatarURL = URL(string: avatarString),
-           let (data, _) = try? await URLSession.shared.data(from: avatarURL),
-           let uiImage = UIImage(data: data),
-           let cgImage = makeCircularImage(uiImage).cgImage {
-            doc?.logoTemplate = QRCode.LogoTemplate(
-                image: cgImage,
-                path: CGPath(ellipseIn: CGRect(x: 0.35, y: 0.35, width: 0.30, height: 0.30), transform: nil),
-                inset: 3
-            )
+        do {
+            var documentBuilder = try QRCode.build
+                .text(contactCard.makeVCardString(forQRCode: true))
+                .errorCorrection(.high)
+                .foregroundColor(fg)
+                .backgroundColor(bg)
+
+            if let avatarString = userProfile.avatar,
+               let avatarURL = URL(string: avatarString),
+               let (data, _) = try? await URLSession.shared.data(from: avatarURL),
+               let uiImage = UIImage(data: data),
+               let cgImage = makeCircularImage(uiImage).cgImage {
+                let template = QRCode.LogoTemplate(
+                    image: cgImage,
+                    path: CGPath(ellipseIn: CGRect(x: 0.35, y: 0.35, width: 0.30, height: 0.30), transform: nil),
+                    inset: 3
+                )
+
+                documentBuilder = documentBuilder.logo(template)
+            }
+
+            generatedDocument = documentBuilder.document
+        } catch {
+            generatedDocument = nil
+            isShowingError = true
         }
-
-        generatedDocument = doc
     }
 
     private func makeCircularImage(_ image: UIImage) -> UIImage {
