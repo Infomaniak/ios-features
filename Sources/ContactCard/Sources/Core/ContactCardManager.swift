@@ -9,17 +9,18 @@ import Foundation
 
 struct ContactCardManager {
     let rootPath: URL
-    let folderName = "contactcards"
+    let folderName = "ContactCards"
 
     func save(contactCard: ContactCard, userId: Int) async {
         let rootPathL = rootPath.appending(path: folderName)
-        let isFound = FileManager.default.fileExists(atPath: rootPathL.absoluteString)
+        let rootValidePath = rootPathL.path
+        let isFound = FileManager.default.fileExists(atPath: rootValidePath)
         let encoder = JSONEncoder()
 
         do {
             if !isFound {
                 try FileManager.default.createDirectory(
-                    atPath: rootPathL.absoluteString,
+                    atPath: rootValidePath,
                     withIntermediateDirectories: true,
                     attributes: nil
                 )
@@ -30,7 +31,7 @@ struct ContactCardManager {
             try jsonData.write(to: jsonFileURL)
 
         } catch {
-            // TODO: Add logger
+            print("ContactCard : catch save")
         }
     }
 
@@ -39,7 +40,7 @@ struct ContactCardManager {
         do {
             try FileManager.default.removeItem(at: filePath)
         } catch {
-            // TODO: Add logger
+            print("ContactCard : catch delete")
         }
     }
 
@@ -50,7 +51,7 @@ struct ContactCardManager {
             let jsonData = try Data(contentsOf: rootPathL)
             return try decoder.decode(ContactCard.self, from: jsonData)
         } catch {
-            // TODO: Add logger
+            print("ContactCard : catch load")
             return nil
         }
     }
