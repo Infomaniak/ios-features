@@ -158,9 +158,9 @@ struct ContactCardFormView: View {
     }
 
     private var additionalURLsRows: some View {
-        ForEach($additionalURLs) { $entry in
+        ForEach($additionalURLs) { entry in
             HStack {
-                TextField(Localizable.otherUrl, text: $entry.value)
+                TextField(Localizable.otherUrl, text: entry.value)
                     .multilineTextAlignment(.leading)
                     .keyboardType(.URL)
                 Button {

@@ -50,10 +50,10 @@ import NukeUI
         self.links = links
     }
 
-    public func makeVCardString(forQRCode QRCodeParentScreen: Bool = false, photoData: PlatformImage? = nil) -> String {
+    public func makeVCardString(forQRCode qrCodeParentScreen: Bool = false, photoData: PlatformImage? = nil) -> String {
         var base64String: String?
         if let photoData,
-           !QRCodeParentScreen,
+           !qrCodeParentScreen,
            let imageData = photoData.jpegData(compressionQuality: 1.0) {
             base64String = imageData.base64EncodedString()
         }
