@@ -56,8 +56,8 @@ public struct ContactCardView: View {
                         userProfile: profile,
                         contactCard: card,
                         rootPath: rootPath,
-                        onDelete: { self.contactCardProfile = nil },
-                        onUpdate: { self.contactCardProfile = $0 }
+                        onDelete: { contactCardProfile = nil },
+                        onUpdate: { contactCardProfile = $0 }
                     )
                     .environment(\.contactCardTheme, contactCardTheme)
                     .navigationTitle(Localizable.contactCardTitle)
