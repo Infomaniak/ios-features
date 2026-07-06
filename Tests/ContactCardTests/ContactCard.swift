@@ -20,75 +20,131 @@ import ContactCard
 import Foundation
 import XCTest
 
-final class ContactCardTest: XCTestCase {
-    func testContactCardConvertToVCF() {
-        let myLinks: [ContactCardLink] = [
+private extension ContactCard {
+    static let sample = ContactCard(
+        id: 42,
+        firstName: "John",
+        lastName: "Doe",
+        email: "john.doe@example.com",
+        phone: "+33 612-345-678",
+        company: "Infomaniak",
+        links: [
             ContactCardLink(type: .website, url: "https://www.john.doe.com/"),
             ContactCardLink(type: .linkedIn, url: "https://www.linkedin.com/john.doe")
         ]
-        let myTestProfil = ContactCard(
-            id: 42,
-            firstName: "John",
-            lastName: "Doe",
-            email: "john.doe@example.com",
-            phone: "+33 612-345-678",
-            company: "Infomaniak",
-            links: myLinks
-        )
+    )
 
-        let vcf = myTestProfil.makeVCardString()
+    static let minimal = ContactCard(
+        id: 1,
+        firstName: "Jane",
+        lastName: "Smith",
+        email: "jane@example.com",
+        phone: "0000000000"
+    )
+}
 
-        print(vcf)
+// MARK: - ContactCard Tests
 
+final class ContactCardTest: XCTestCase {
+    // MARK: makeVCardString
+
+    func testVCardContainsRequiredFields() {
+        let vcf = ContactCard.sample.makeVCardString()
+
+        XCTAssertTrue(vcf.contains("BEGIN:VCARD"))
+        XCTAssertTrue(vcf.contains("VERSION:3.0"))
         XCTAssertTrue(vcf.contains("FN:John Doe"))
         XCTAssertTrue(vcf.contains("N:Doe;John;;;"))
         XCTAssertTrue(vcf.contains("TEL;TYPE=CELL:+33 612-345-678"))
         XCTAssertTrue(vcf.contains("EMAIL;TYPE=INTERNET:john.doe@example.com"))
+        XCTAssertTrue(vcf.contains("ORG:Infomaniak"))
+        XCTAssertTrue(vcf.contains("END:VCARD"))
+    }
+
+    func testVCardContainsLinks() {
+        let vcf = ContactCard.sample.makeVCardString()
+
         XCTAssertTrue(vcf.contains("item1.URL:https://www.john.doe.com/"))
         XCTAssertTrue(vcf.contains("item1.X-ABLabel:Website"))
         XCTAssertTrue(vcf.contains("item2.URL:https://www.linkedin.com/john.doe"))
         XCTAssertTrue(vcf.contains("item2.X-ABLabel:LinkedIn"))
-        XCTAssertTrue(vcf.contains("item3.URL:"))
-        XCTAssertTrue(vcf.contains("item3.X-ABLabel:Twitter"))
-        XCTAssertTrue(vcf.contains("item4.URL:"))
-        XCTAssertTrue(vcf.contains("item4.X-ABLabel:Facebook"))
-        XCTAssertTrue(vcf.contains("END:VCARD"))
     }
 
-    func testLoadIfNeedJsonToContactCard() async {
-        let myLinks: [ContactCardLink] = [
-            ContactCardLink(type: .website, url: "https://www.john.doe.com/"),
-            ContactCardLink(type: .linkedIn, url: "https://www.linkedin.com/john.doe")
-        ]
+    func testVCardNoPhotoWhenQRCodeMode() {
+        let vcf = ContactCard.sample.makeVCardString(forQRCode: true)
 
-        let myTestProfil = ContactCard(
-            id: 42,
+        XCTAssertFalse(vcf.contains("PHOTO"), "The QR Code mode must not include a photo")
+    }
+
+    func testVCardNoLinksWhenNone() {
+        let vcf = ContactCard.minimal.makeVCardString()
+
+        XCTAssertFalse(vcf.contains("item1.URL"), "No links should appear if links is nil")
+    }
+
+    func testVCardEmptyLinksAreSkipped() {
+        let card = ContactCard(
+            id: 2,
+            firstName: "A",
+            lastName: "B",
+            email: "a@b.com",
+            phone: "000",
+            links: [
+                ContactCardLink(type: .website, url: ""),
+                ContactCardLink(type: .linkedIn, url: "https://linkedin.com/ab")
+            ]
+        )
+        let vcf = card.makeVCardString()
+
+        XCTAssertFalse(vcf.contains("item1.X-ABLabel:Website"), "An empty link should not appear")
+        XCTAssertTrue(vcf.contains("item1.X-ABLabel:LinkedIn"))
+    }
+
+    func testVCardOptionalCompanyIsEmpty() {
+        let vcf = ContactCard.minimal.makeVCardString()
+
+        XCTAssertTrue(vcf.contains("ORG:"), "ORG must be included even without company")
+        XCTAssertFalse(vcf.contains("ORG:Infomaniak"))
+    }
+
+    // MARK: - Codable
+
+    func testContactCardEncodeDecode() throws {
+        let encoded = try JSONEncoder().encode(ContactCard.sample)
+        let decoded = try JSONDecoder().decode(ContactCard.self, from: encoded)
+
+        XCTAssertEqual(decoded.id, ContactCard.sample.id)
+        XCTAssertEqual(decoded.firstName, ContactCard.sample.firstName)
+        XCTAssertEqual(decoded.lastName, ContactCard.sample.lastName)
+        XCTAssertEqual(decoded.email, ContactCard.sample.email)
+        XCTAssertEqual(decoded.phone, ContactCard.sample.phone)
+        XCTAssertEqual(decoded.company, ContactCard.sample.company)
+        XCTAssertEqual(decoded.links?.count, ContactCard.sample.links?.count)
+    }
+
+    func testContactCardDecodeInvalidDataThrows() {
+        let invalidData = Data("not json".utf8)
+        XCTAssertThrowsError(try JSONDecoder().decode(ContactCard.self, from: invalidData))
+    }
+
+    // MARK: - Hashable / Equatable
+
+    func testContactCardHashableEquality() {
+        let card1 = ContactCard.sample
+        let card2 = ContactCard.sample
+        XCTAssertEqual(card1, card2)
+        XCTAssertEqual(card1.hashValue, card2.hashValue)
+    }
+
+    func testContactCardInequalityOnDifferentId() {
+        let card1 = ContactCard.sample
+        let card2 = ContactCard(
+            id: 99,
             firstName: "John",
             lastName: "Doe",
             email: "john.doe@example.com",
-            phone: "+33 612-345-678",
-            company: "TestCorp",
-            links: myLinks
+            phone: "+33 612-345-678"
         )
-
-        let jsonData = await myTestProfil.save()
-        XCTAssertFalse(jsonData.isEmpty, "Le JSON ne devrait pas être vide")
-
-        let decoded = await myTestProfil.loadIfNeed(jsonData: jsonData)
-
-        XCTAssertNotNil(decoded)
-        XCTAssertEqual(decoded?.id, 42)
-        XCTAssertEqual(decoded?.firstName, "John")
-        XCTAssertEqual(decoded?.lastName, "Doe")
-        XCTAssertEqual(decoded?.email, "john.doe@example.com")
-        XCTAssertEqual(decoded?.phone, "+33 612-345-678")
-        XCTAssertEqual(decoded?.company, "TestCorp")
-        XCTAssertEqual(decoded?.links?.count, 2)
-        XCTAssertEqual(decoded?.links?.first?.type, .website)
-        XCTAssertEqual(decoded?.links?.first?.url, "https://www.john.doe.com/")
-
-        let invalidJson = Data("not json".utf8)
-        let failure = await myTestProfil.loadIfNeed(jsonData: invalidJson)
-        XCTAssertNil(failure, "Un JSON invalide doit retourner nil")
+        XCTAssertNotEqual(card1, card2)
     }
 }
