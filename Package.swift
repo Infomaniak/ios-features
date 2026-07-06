@@ -43,6 +43,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/Infomaniak/ios-core", .upToNextMajor(from: "19.0.0")),
         .package(url: "https://github.com/Infomaniak/ios-core-ui", .upToNextMajor(from: "26.0.0")),
+        .package(url: "https://github.com/Infomaniak/ios-core-uikit", .upToNextMajor(from: "2.0.0")),
         .package(url: "https://github.com/Infomaniak/ios-dependency-injection", .upToNextMajor(from: "2.0.3")),
         .package(url: "https://github.com/Infomaniak/ios-device-check", .upToNextMajor(from: "1.1.1")),
         .package(url: "https://github.com/Infomaniak/ios-login", .upToNextMajor(from: "7.8.0")),
@@ -68,6 +69,7 @@ let package = Package(
                 .product(name: "InfomaniakCoreCommonUI", package: "ios-core-ui"),
                 .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
                 .product(name: "DesignSystem", package: "ios-core-ui"),
+                .product(name: "IKSnackbar", package: "ios-core-uikit"),
                 .product(name: "QRCode", package: "QRCode"),
                 .product(name: "Nuke", package: "Nuke"),
                 .product(name: "NukeUI", package: "Nuke")

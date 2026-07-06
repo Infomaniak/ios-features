@@ -7,52 +7,40 @@
 
 import Foundation
 
-struct ContactCardManager {
+public struct ContactCardManager {
     let rootPath: URL
     let folderName = "ContactCards"
 
-    func save(contactCard: ContactCard, userId: Int) async {
-        let rootPathL = rootPath.appending(path: folderName)
-        let rootValidePath = rootPathL.path
-        let isFound = FileManager.default.fileExists(atPath: rootValidePath)
+    public init(rootPath: URL) {
+        self.rootPath = rootPath
+    }
+
+    public func save(contactCard: ContactCard, userId: Int) async throws {
+        let folderURL = rootPath.appending(path: folderName)
         let encoder = JSONEncoder()
 
-        do {
-            if !isFound {
-                try FileManager.default.createDirectory(
-                    atPath: rootValidePath,
-                    withIntermediateDirectories: true,
-                    attributes: nil
-                )
-            }
-            let jsonData = try encoder.encode(contactCard)
-            let jsonFileURL = rootPathL.appending(path: "\(userId).json")
-
-            try jsonData.write(to: jsonFileURL)
-
-        } catch {
-            print("ContactCard : catch save")
+        if !FileManager.default.fileExists(atPath: folderURL.path) {
+            try FileManager.default.createDirectory(
+                at: folderURL,
+                withIntermediateDirectories: true,
+                attributes: nil
+            )
         }
+
+        let jsonData = try encoder.encode(contactCard)
+        try jsonData.write(to: folderURL.appending(path: "\(userId).json"))
     }
 
-    func delete(userId: Int) async {
+    public func delete(userId: Int) async throws {
         let filePath = rootPath.appending(path: folderName).appending(path: "\(userId).json")
-        do {
-            try FileManager.default.removeItem(at: filePath)
-        } catch {
-            print("ContactCard : catch delete")
-        }
+        try FileManager.default.removeItem(at: filePath)
     }
 
-    func load(userId: Int) async -> ContactCard? {
-        let rootPathL = rootPath.appending(path: folderName).appending(path: "\(userId).json")
+    public func load(userId: Int) async throws -> ContactCard? {
+        let filePath = rootPath.appending(path: folderName).appending(path: "\(userId).json")
         let decoder = JSONDecoder()
-        do {
-            let jsonData = try Data(contentsOf: rootPathL)
-            return try decoder.decode(ContactCard.self, from: jsonData)
-        } catch {
-            print("ContactCard : catch load")
-            return nil
-        }
+
+        let jsonData = try Data(contentsOf: filePath)
+        return try decoder.decode(ContactCard.self, from: jsonData)
     }
 }

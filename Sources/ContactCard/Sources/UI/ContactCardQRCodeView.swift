@@ -61,13 +61,12 @@ struct ContactCardQRCodeView: View {
             cardContent
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(contactCardTheme.navBarBackground)
         .safeAreaInset(edge: .bottom, content: { shareButton })
         .navigationBarBackButtonHidden(true)
         .alert(MyString.qrCodeDeleteAlertTitle, isPresented: $showDeleteConfirmation) {
             Button(MyString.qrCodeDeleteAlertConfirm, role: .destructive) {
                 Task {
-                    await ContactCardManager(rootPath: rootPath).delete(userId: userProfile.id)
+                    try? await ContactCardManager(rootPath: rootPath).delete(userId: userProfile.id)
                     dismiss()
                     onDelete?()
                 }

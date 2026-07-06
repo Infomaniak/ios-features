@@ -72,24 +72,15 @@ public struct ContactCardView: View {
     }
 
     private func fetchContactCard() async {
-        contactCardProfile = await ContactCardManager(rootPath: rootPath).load(userId: userProfile.id)
+        contactCardProfile = try? await ContactCardManager(rootPath: rootPath).load(userId: userProfile.id)
         guard let contactCardProfile else { return }
         myState = .qrCode(userProfile, contactCardProfile)
     }
 }
 
 @available(iOS 16.4, *)
-struct ContactCardViewPreview: View {
-    @State var path = NavigationPath()
-
-    var body: some View {
-        ContactCardView(userProfile: ProfileFake.fakeUserProfile, rootPath: URL.temporaryDirectory)
-    }
-}
-
-@available(iOS 16.4, *)
 #Preview {
-    ContactCardViewPreview()
+    ContactCardView(userProfile: ProfileFake.fakeUserProfile, rootPath: URL.temporaryDirectory)
         .environment(\.contactCardTheme, .pink)
 }
 
@@ -99,66 +90,7 @@ enum StateCardView {
     case qrCode(UserProfile, ContactCard)
 }
 
-// MARK: - ContactCardThemePreview
-
-public struct ContactCardThemePreview {
-    let primary: Color
-    let secondary: Color
-    let primaryText: Color
-    let secondaryText: Color
-    let onAccent: Color
-    let background: Color
-    let backgroundTint: Color
-    let navBarBackground: Color
-    let snackbarActionColor: Color
-
-    public init(
-        primary: Color,
-        secondary: Color,
-        primaryText: Color,
-        secondaryText: Color,
-        onAccent: Color,
-        background: Color,
-        backgroundTint: Color,
-        navBarBackground: Color,
-        snackbarActionColor: Color
-    ) {
-        self.primary = primary
-        self.secondary = secondary
-        self.primaryText = primaryText
-        self.secondaryText = secondaryText
-        self.onAccent = onAccent
-        self.background = background
-        self.backgroundTint = backgroundTint
-        self.navBarBackground = navBarBackground
-        self.snackbarActionColor = snackbarActionColor
-    }
-
-    static let pink = ContactCardThemePreview(
-        primary: Color(red: 0.81, green: 0.12, blue: 0.39),
-        secondary: Color(red: 0.96, green: 0.73, blue: 0.85),
-        primaryText: Color(.black),
-        secondaryText: Color(.darkGray),
-        onAccent: Color.white,
-        background: .white,
-        backgroundTint: Color(.systemGray6),
-        navBarBackground: Color(red: 0.20, green: 0.04, blue: 0.11),
-        snackbarActionColor: Color(red: 0.96, green: 0.73, blue: 0.85)
-    )
-}
-
-private struct ContactCardThemeKey: EnvironmentKey {
-    static let defaultValue: ContactCardThemePreview = .pink
-}
-
-public extension EnvironmentValues {
-    var contactCardTheme: ContactCardThemePreview {
-        get { self[ContactCardThemeKey.self] }
-        set { self[ContactCardThemeKey.self] = newValue }
-    }
-}
-
-// MARK: Enum
+// MARK: - Enum
 
 enum MyString {
     static let contactCardOnBaoardingTitle = "Créez votre carte de visite"
@@ -203,12 +135,6 @@ enum MyString {
     static let qrCodeDeleteAlertMessage = "La suppression désactive votre carte et son QR. Les personnes qui vous ont déjà enregistré ne sont pas affectées. Vous pourrez la recréer à tout moment."
     static let qrCodeDeleteAlertConfirm = "Supprimer"
     static let qrCodeDeleteAlertCancel = "Annuler"
-}
-
-enum MyImage {
-    static let contactCardOnBoardingFirstItem = Image(systemName: "qrcode")
-    static let contactCardOnBoardingSecondItem = Image(systemName: "checkmark")
-    static let contactCardOnBoardingThirdItem = Image(systemName: "clock")
 }
 
 enum ProfileFake {

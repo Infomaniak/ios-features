@@ -114,7 +114,7 @@ private struct SocialLinksRow: View {
             ForEach(visibleLinks, id: \.url) { link in
                 link.type.systemImageName
                     .foregroundStyle(color)
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.Custom.headline)
             }
             if overflow > 0 {
                 Text("+\(overflow)")

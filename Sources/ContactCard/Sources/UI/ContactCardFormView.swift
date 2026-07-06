@@ -19,7 +19,7 @@
 import DesignSystem
 import InfomaniakCore
 import InfomaniakCoreSwiftUI
-import PhotosUI
+import OSLog
 import SwiftUI
 
 private struct IdentifiableURL: Identifiable {
@@ -33,18 +33,20 @@ struct ContactCardFormView: View {
 
     @Binding var myState: StateCardView
 
-    @State var firstname = ""
-    @State var lastname = ""
-    @State var email = ""
-    @State var phone = ""
-    @State var company = ""
+    @State private var firstname = ""
+    @State private var lastname = ""
+    @State private var email = ""
+    @State private var phone = ""
+    @State private var company = ""
 
-    @State var linkedin = ""
-    @State var facebook = ""
-    @State var instagram = ""
-    @State var x = ""
-    @State var website = ""
+    @State private var linkedin = ""
+    @State private var facebook = ""
+    @State private var instagram = ""
+    @State private var x = ""
+    @State private var website = ""
     @State private var additionalURLs: [IdentifiableURL] = []
+
+    @State private var showValidationAlert = false
 
     var userProfile: UserProfile
     var rootPath: URL
@@ -53,8 +55,6 @@ struct ContactCardFormView: View {
     private var isFormValid: Bool {
         !firstname.isEmpty && !lastname.isEmpty && !email.isEmpty && !phone.isEmpty
     }
-
-    @State private var showValidationAlert = false
 
     init(myState: Binding<StateCardView>, userProfile: UserProfile, rootPath: URL, existingCard: ContactCard? = nil) {
         _myState = myState
@@ -201,7 +201,7 @@ struct ContactCardFormView: View {
         }
     }
 
-    func create() {
+    private func create() {
         var links: [ContactCardLink] = []
         if !website.isEmpty { links.append(ContactCardLink(type: .website, url: website)) }
         if !linkedin.isEmpty { links.append(ContactCardLink(type: .linkedIn, url: linkedin)) }
@@ -222,8 +222,12 @@ struct ContactCardFormView: View {
             links: links
         )
         Task {
-            await ContactCardManager(rootPath: rootPath).save(contactCard: myCard, userId: userProfile.id)
-            myState = .qrCode(userProfile, myCard)
+            do {
+                try await ContactCardManager(rootPath: rootPath).save(contactCard: myCard, userId: userProfile.id)
+                myState = .qrCode(userProfile, myCard)
+            } catch {
+                Logger.general.error("Error save contact card :\(error)")
+            }
         }
     }
 }
