@@ -76,7 +76,7 @@ struct ContactCardOnBoardingView: View {
         }
         .ignoresSafeArea(.all)
         .scrollBounceBehavior(.basedOnSize)
-        .safeAreaInset(edge: .bottom, content: {
+        .safeAreaInset(edge: .bottom) {
             Button(Localizable.buttonCreate) {
                 onCreateButtonTapped()
             }
@@ -97,8 +97,8 @@ struct ContactCardOnBoardingView: View {
             )
             .padding(.horizontal, IKPadding.large)
             .padding(.bottom, IKPadding.mini)
-        })
-        .toolbar(content: {
+        }
+        .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
                     dismiss()
@@ -106,12 +106,12 @@ struct ContactCardOnBoardingView: View {
                     Label("Back", systemImage: "xmark")
                 }
             }
-        })
+        }
         .background(contactCardTheme.background)
     }
 }
 
 @available(iOS 16.4, *)
 #Preview {
-    ContactCardOnBoardingView(onCreateButtonTapped: {})
+    ContactCardOnBoardingView {}
 }

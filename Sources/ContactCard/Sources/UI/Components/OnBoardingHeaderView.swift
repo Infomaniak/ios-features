@@ -21,7 +21,7 @@ import InfomaniakCoreSwiftUI
 import SwiftUI
 
 struct OnBoardingHeaderView: View {
-    @Environment(\.contactCardTheme) var contactCardTheme
+    @Environment(\.contactCardTheme) private var contactCardTheme
 
     var body: some View {
         VStack(spacing: IKPadding.huge) {

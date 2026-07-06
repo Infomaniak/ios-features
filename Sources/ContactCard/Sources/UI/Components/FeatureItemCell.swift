@@ -21,7 +21,7 @@ import InfomaniakCoreSwiftUI
 import SwiftUI
 
 struct FeatureItemCell: View {
-    @Environment(\.contactCardTheme) var contactCardTheme
+    @Environment(\.contactCardTheme) private var contactCardTheme
     let text: String
 
     var body: some View {

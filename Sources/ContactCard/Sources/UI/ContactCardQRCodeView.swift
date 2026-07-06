@@ -62,7 +62,7 @@ struct ContactCardQRCodeView: View {
             cardContent
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .safeAreaInset(edge: .bottom, content: { shareButton })
+        .safeAreaInset(edge: .bottom) { shareButton }
         .navigationBarBackButtonHidden(true)
         .alert(Localizable.deleteAlertTitle, isPresented: $showDeleteConfirmation) {
             Button(Localizable.deleteButton, role: .destructive) {

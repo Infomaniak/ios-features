@@ -24,11 +24,11 @@ import SwiftUI
 public struct ContactCardView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
-    @State private var contactCardProfile: ContactCard? = nil
+    @State private var contactCardProfile: ContactCard?
+    @State private var myState: StateCardView = .onBoarding
+
     public let userProfile: UserProfile
     public let rootPath: URL
-
-    @State var myState: StateCardView = .onBoarding
 
     public init(userProfile: UserProfile, rootPath: URL) {
         self.userProfile = userProfile
@@ -40,9 +40,9 @@ public struct ContactCardView: View {
             ZStack {
                 switch myState {
                 case .onBoarding:
-                    ContactCardOnBoardingView(onCreateButtonTapped: {
+                    ContactCardOnBoardingView {
                         myState = .form(userProfile, rootPath, nil)
-                    })
+                    }
                     .environment(\.contactCardTheme, contactCardTheme)
                 case .form(let profile, let root, let existingCard):
                     ContactCardFormView(myState: $myState, userProfile: profile, rootPath: root, existingCard: existingCard)
@@ -91,6 +91,7 @@ enum StateCardView {
 }
 
 // MARK: - Fake Profile
+
 enum ProfileFake {
     static let fakeUserProfile = UserProfile(
         id: 42,
