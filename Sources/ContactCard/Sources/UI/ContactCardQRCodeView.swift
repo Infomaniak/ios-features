@@ -163,7 +163,7 @@ struct ContactCardQRCodeView: View {
                     Label(Localizable.deleteButton, systemImage: "trash")
                 }
             } label: {
-                Label("More", systemImage: "ellipsis")
+                Label(Localizable.buttonMore, systemImage: "ellipsis")
             }
         }
     }
@@ -173,7 +173,7 @@ struct ContactCardQRCodeView: View {
             Button {
                 dismiss()
             } label: {
-                Label("Back", systemImage: "xmark")
+                Label(CoreUILocalizable.buttonClose, systemImage: "xmark")
             }
         }
     }

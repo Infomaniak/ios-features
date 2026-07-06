@@ -4,7 +4,7 @@
  * Locale: es, Spanish
  * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
  * Exported by: Kylian Grandy
- * Exported at: Mon, 06 Jul 2026 14:56:38 +0200
+ * Exported at: Mon, 06 Jul 2026 17:25:57 +0200
  */
 
 /* loco:6a4b9b67bd16f080d90102e2 */
@@ -19,29 +19,35 @@
 /* loco:6a4b9c54d3716a1c8e0782f3 */
 "buttonCreate" = "Crear";
 
+/* loco:6a4bc7948b43c4c4c30df3d9 */
+"buttonMore" = "Más";
+
 /* loco:6a4b9a9c774c94b68f0ee222 */
 "company" = "Empresa";
 
 /* loco:6a4b98882db06191c30a2d62 */
-"contactCardOnBaoardingDescription" = "Deja que escaneen tu código QR con un solo gesto. Tus contactos podrán añadirte en un abrir y cerrar de ojos, tanto si hay conexión a Internet como si no.";
+"contactCardOnBoardingDescription" = "Deja que escaneen tu código QR con un solo gesto. Tus contactos podrán añadirte en un abrir y cerrar de ojos, tanto si hay conexión a Internet como si no.";
 
 /* loco:6a4b98dc61385ce8da05ce02 */
-"contactCardOnBaoardingFirstItem" = "Toda tu información en un código QR";
+"contactCardOnBoardingFirstItem" = "Toda tu información en un código QR";
 
 /* loco:6a4b9913dcfe91b97c0b6b82 */
-"contactCardOnBaoardingSecondItem" = "No es necesario que el destinatario tenga una cuenta";
+"contactCardOnBoardingSecondItem" = "No es necesario que el destinatario tenga una cuenta";
 
 /* loco:6a4b999aa82d0a517109ceb3 */
-"contactCardOnBaoardingStart" = "Empezar";
+"contactCardOnBoardingStart" = "Empezar";
 
 /* loco:6a4b993d0bd42849960af6f2 */
-"contactCardOnBaoardingThirdItem" = "Siempre accesible, incluso sin conexión";
+"contactCardOnBoardingThirdItem" = "Siempre accesible, incluso sin conexión";
 
 /* loco:6a4b981712adf2df780e5ea5 */
-"contactCardOnBaoardingTitle" = "Crea tu tarjeta de visita";
+"contactCardOnBoardingTitle" = "Crea tu tarjeta de visita";
 
 /* loco:6a4b9cb1bc130aadd700d435 */
 "contactCardTitle" = "Tarjeta de contacto";
+
+/* loco:6a4bc870019edb131005f5c2 */
+"continueButton" = "Continue";
 
 /* loco:6a4b9e3f01d1baf89d0c4213 */
 "deleteAlertDescription" = "Al eliminar tu tarjeta, esta y su código QR quedarán desactivados. Las personas que ya hayan guardado tu tarjeta no se verán afectadas. Puedes volver a crearla en cualquier momento.";

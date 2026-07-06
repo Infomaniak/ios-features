@@ -16,10 +16,12 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#if canImport(UIKit)
 import DesignSystem
 import InfomaniakCore
 import QRCode
 import SwiftUI
+import UIKit
 
 struct ContactCardQRCodeGeneratorView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
@@ -34,7 +36,7 @@ struct ContactCardQRCodeGeneratorView: View {
     var body: some View {
         Group {
             if let generatedDocument {
-                QRCodeDocumentUIView(document: generatedDocument)
+                QRCodeDocumentUIViewWrapper(document: generatedDocument)
             } else if isShowingError {
                 VStack(spacing: IKPadding.small) {
                     Image(systemName: "exclamationmark.triangle.fill")
@@ -109,3 +111,4 @@ private struct QRCodeDocumentUIViewWrapper: UIViewRepresentable {
         uiView.setNeedsDisplay()
     }
 }
+#endif

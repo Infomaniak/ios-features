@@ -98,7 +98,7 @@ struct ContactCardFormView: View {
             linksSection
         }
         .alert(Localizable.alertTitle, isPresented: $showValidationAlert) {
-            Button("OK", role: .cancel) {}
+            Button(Localizable.continueButton, role: .cancel) {}
         } message: {
             Text(Localizable.alertDescription)
         }

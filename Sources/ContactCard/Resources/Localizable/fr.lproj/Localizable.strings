@@ -4,7 +4,7 @@
  * Locale: fr, French
  * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
  * Exported by: Kylian Grandy
- * Exported at: Mon, 06 Jul 2026 14:56:38 +0200
+ * Exported at: Mon, 06 Jul 2026 17:25:57 +0200
  */
 
 /* loco:6a4b9b67bd16f080d90102e2 */
@@ -19,29 +19,35 @@
 /* loco:6a4b9c54d3716a1c8e0782f3 */
 "buttonCreate" = "Créer";
 
+/* loco:6a4bc7948b43c4c4c30df3d9 */
+"buttonMore" = "En savoir plus";
+
 /* loco:6a4b9a9c774c94b68f0ee222 */
 "company" = "Entreprise";
 
 /* loco:6a4b98882db06191c30a2d62 */
-"contactCardOnBaoardingDescription" = "Faites scanner votre code QR d’un simple geste. Vos contacts peuvent vous ajouter en un clin d’œil, avec ou sans connexion.";
+"contactCardOnBoardingDescription" = "Faites scanner votre code QR d’un simple geste. Vos contacts peuvent vous ajouter en un clin d’œil, avec ou sans connexion.";
 
 /* loco:6a4b98dc61385ce8da05ce02 */
-"contactCardOnBaoardingFirstItem" = "Toutes vos informations dans un code QR";
+"contactCardOnBoardingFirstItem" = "Toutes vos informations dans un code QR";
 
 /* loco:6a4b9913dcfe91b97c0b6b82 */
-"contactCardOnBaoardingSecondItem" = "Aucun compte requis côté destinataire";
+"contactCardOnBoardingSecondItem" = "Aucun compte requis côté destinataire";
 
 /* loco:6a4b999aa82d0a517109ceb3 */
-"contactCardOnBaoardingStart" = "Commencer";
+"contactCardOnBoardingStart" = "Commencer";
 
 /* loco:6a4b993d0bd42849960af6f2 */
-"contactCardOnBaoardingThirdItem" = "Toujours accessible, même hors ligne";
+"contactCardOnBoardingThirdItem" = "Toujours accessible, même hors ligne";
 
 /* loco:6a4b981712adf2df780e5ea5 */
-"contactCardOnBaoardingTitle" = "Créez votre carte de visite";
+"contactCardOnBoardingTitle" = "Créez votre carte de visite";
 
 /* loco:6a4b9cb1bc130aadd700d435 */
 "contactCardTitle" = "Carte de visite";
+
+/* loco:6a4bc870019edb131005f5c2 */
+"continueButton" = "Continue";
 
 /* loco:6a4b9e3f01d1baf89d0c4213 */
 "deleteAlertDescription" = "La suppression désactive votre carte et son QR. Les personnes qui vous ont déjà enregistré ne sont pas affectées. Vous pourrez la recréer à tout moment.";

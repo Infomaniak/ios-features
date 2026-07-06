@@ -41,5 +41,5 @@ struct FeatureItemCell: View {
 }
 
 #Preview {
-    FeatureItemCell(text: Localizable.contactCardOnBaoardingFirstItem)
+    FeatureItemCell(text: Localizable.contactCardOnBoardingFirstItem)
 }

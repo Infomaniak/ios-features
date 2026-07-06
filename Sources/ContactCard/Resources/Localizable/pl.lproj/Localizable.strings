@@ -4,7 +4,7 @@
  * Locale: pl, Polish
  * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
  * Exported by: Kylian Grandy
- * Exported at: Mon, 06 Jul 2026 14:56:38 +0200
+ * Exported at: Mon, 06 Jul 2026 17:25:57 +0200
  */
 
 /* loco:6a4b9b67bd16f080d90102e2 */
@@ -19,29 +19,35 @@
 /* loco:6a4b9c54d3716a1c8e0782f3 */
 "buttonCreate" = "Utwórz";
 
+/* loco:6a4bc7948b43c4c4c30df3d9 */
+"buttonMore" = "Więcej";
+
 /* loco:6a4b9a9c774c94b68f0ee222 */
 "company" = "Firma";
 
 /* loco:6a4b98882db06191c30a2d62 */
-"contactCardOnBaoardingDescription" = "Wystarczy jeden gest, by zeskanować Twój kod QR. Twoi znajomi mogą dodać Cię do kontaktów w mgnieniu oka – zarówno przy połączeniu z internetem, jak i bez niego.";
+"contactCardOnBoardingDescription" = "Wystarczy jeden gest, by zeskanować Twój kod QR. Twoi znajomi mogą dodać Cię do kontaktów w mgnieniu oka – zarówno przy połączeniu z internetem, jak i bez niego.";
 
 /* loco:6a4b98dc61385ce8da05ce02 */
-"contactCardOnBaoardingFirstItem" = "Wszystkie Twoje dane w kodzie QR";
+"contactCardOnBoardingFirstItem" = "Wszystkie Twoje dane w kodzie QR";
 
 /* loco:6a4b9913dcfe91b97c0b6b82 */
-"contactCardOnBaoardingSecondItem" = "Odbiorca nie musi posiadać konta";
+"contactCardOnBoardingSecondItem" = "Odbiorca nie musi posiadać konta";
 
 /* loco:6a4b999aa82d0a517109ceb3 */
-"contactCardOnBaoardingStart" = "Zacznij";
+"contactCardOnBoardingStart" = "Zacznij";
 
 /* loco:6a4b993d0bd42849960af6f2 */
-"contactCardOnBaoardingThirdItem" = "Zawsze dostępne, nawet w trybie offline";
+"contactCardOnBoardingThirdItem" = "Zawsze dostępne, nawet w trybie offline";
 
 /* loco:6a4b981712adf2df780e5ea5 */
-"contactCardOnBaoardingTitle" = "Stwórz swoją wizytówkę";
+"contactCardOnBoardingTitle" = "Stwórz swoją wizytówkę";
 
 /* loco:6a4b9cb1bc130aadd700d435 */
 "contactCardTitle" = "Wizytówka";
+
+/* loco:6a4bc870019edb131005f5c2 */
+"continueButton" = "Continue";
 
 /* loco:6a4b9e3f01d1baf89d0c4213 */
 "deleteAlertDescription" = "Usunięcie karty powoduje jej dezaktywację oraz dezaktywację powiązanego z nią kodu QR. Nie ma to wpływu na osoby, które już zapisały Twoją kartę. W każdej chwili możesz ją ponownie utworzyć.";

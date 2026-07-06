@@ -4,7 +4,7 @@
  * Locale: en, English
  * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
  * Exported by: Kylian Grandy
- * Exported at: Mon, 06 Jul 2026 14:56:38 +0200
+ * Exported at: Mon, 06 Jul 2026 17:25:57 +0200
  */
 
 /* loco:6a4b9b67bd16f080d90102e2 */
@@ -19,29 +19,35 @@
 /* loco:6a4b9c54d3716a1c8e0782f3 */
 "buttonCreate" = "Create";
 
+/* loco:6a4bc7948b43c4c4c30df3d9 */
+"buttonMore" = "More";
+
 /* loco:6a4b9a9c774c94b68f0ee222 */
 "company" = "Company";
 
 /* loco:6a4b98882db06191c30a2d62 */
-"contactCardOnBaoardingDescription" = "Have your QR code scanned with a single gesture. Your contacts can add you in the blink of an eye, with or without an internet connection.";
+"contactCardOnBoardingDescription" = "Have your QR code scanned with a single gesture. Your contacts can add you in the blink of an eye, with or without an internet connection.";
 
 /* loco:6a4b98dc61385ce8da05ce02 */
-"contactCardOnBaoardingFirstItem" = "All your information in a QR code";
+"contactCardOnBoardingFirstItem" = "All your information in a QR code";
 
 /* loco:6a4b9913dcfe91b97c0b6b82 */
-"contactCardOnBaoardingSecondItem" = "No account required on the recipient’s end";
+"contactCardOnBoardingSecondItem" = "No account required on the recipient’s end";
 
 /* loco:6a4b999aa82d0a517109ceb3 */
-"contactCardOnBaoardingStart" = "Get Started";
+"contactCardOnBoardingStart" = "Get Started";
 
 /* loco:6a4b993d0bd42849960af6f2 */
-"contactCardOnBaoardingThirdItem" = "Always accessible, even offline";
+"contactCardOnBoardingThirdItem" = "Always accessible, even offline";
 
 /* loco:6a4b981712adf2df780e5ea5 */
-"contactCardOnBaoardingTitle" = "Create Your Business Card";
+"contactCardOnBoardingTitle" = "Create Your Business Card";
 
 /* loco:6a4b9cb1bc130aadd700d435 */
 "contactCardTitle" = "Contact Card";
+
+/* loco:6a4bc870019edb131005f5c2 */
+"continueButton" = "Continue";
 
 /* loco:6a4b9e3f01d1baf89d0c4213 */
 "deleteAlertDescription" = "Deleting your card deactivates it and its QR code. People who have already saved your card will not be affected. You can recreate it at any time.";

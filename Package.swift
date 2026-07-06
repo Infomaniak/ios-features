@@ -64,12 +64,9 @@ let package = Package(
         .target(
             name: "ContactCard",
             dependencies: [
-                .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
                 .product(name: "InfomaniakCore", package: "ios-core"),
-                .product(name: "InfomaniakCoreCommonUI", package: "ios-core-ui"),
                 .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
                 .product(name: "DesignSystem", package: "ios-core-ui"),
-                .product(name: "IKSnackbar", package: "ios-core-uikit"),
                 .product(name: "QRCode", package: "QRCode"),
                 .product(name: "Nuke", package: "Nuke"),
                 .product(name: "NukeUI", package: "Nuke")

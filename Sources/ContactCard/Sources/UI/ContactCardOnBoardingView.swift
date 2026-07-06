@@ -19,6 +19,7 @@
 import DesignSystem
 import Foundation
 import InfomaniakCoreSwiftUI
+import InfomaniakCoreUIResources
 import SwiftUI
 
 @available(iOS 16.4, *)
@@ -47,7 +48,7 @@ struct ContactCardOnBoardingView: View {
                         .environment(\.contactCardTheme, contactCardTheme)
                         .padding(.top, IKPadding.giant)
 
-                    Text(Localizable.contactCardOnBaoardingDescription)
+                    Text(Localizable.contactCardOnBoardingDescription)
                         .multilineTextAlignment(.center)
                         .font(.Custom.body)
                         .foregroundStyle(contactCardTheme.secondaryText)
@@ -56,9 +57,9 @@ struct ContactCardOnBoardingView: View {
 
                     VStack(spacing: IKPadding.mini) {
                         let myStrings = [
-                            Localizable.contactCardOnBaoardingFirstItem,
-                            Localizable.contactCardOnBaoardingSecondItem,
-                            Localizable.contactCardOnBaoardingThirdItem
+                            Localizable.contactCardOnBoardingFirstItem,
+                            Localizable.contactCardOnBoardingSecondItem,
+                            Localizable.contactCardOnBoardingThirdItem
                         ]
 
                         ForEach(myStrings, id: \.self) { itemString in
@@ -103,7 +104,7 @@ struct ContactCardOnBoardingView: View {
                 Button {
                     dismiss()
                 } label: {
-                    Label("Back", systemImage: "xmark")
+                    Label(CoreUILocalizable.buttonClose, systemImage: "xmark")
                 }
             }
         }

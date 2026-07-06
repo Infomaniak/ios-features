@@ -31,7 +31,7 @@ struct OnBoardingHeaderView: View {
                 .frame(width: 270, height: 270)
                 .foregroundColor(contactCardTheme.primary)
 
-            Text(Localizable.contactCardOnBaoardingTitle)
+            Text(Localizable.contactCardOnBoardingTitle)
                 .multilineTextAlignment(.center)
                 .font(.Custom.title1)
                 .foregroundStyle(contactCardTheme.primaryText)

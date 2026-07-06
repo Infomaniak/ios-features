@@ -18,22 +18,26 @@ internal enum Localizable {
   internal static let alertTitle = Localizable.tr("Localizable", "alertTitle", fallback: "Required fields")
   /// loco:6a4b9c54d3716a1c8e0782f3
   internal static let buttonCreate = Localizable.tr("Localizable", "buttonCreate", fallback: "Create")
+  /// loco:6a4bc7948b43c4c4c30df3d9
+  internal static let buttonMore = Localizable.tr("Localizable", "buttonMore", fallback: "More")
   /// loco:6a4b9a9c774c94b68f0ee222
   internal static let company = Localizable.tr("Localizable", "company", fallback: "Company")
   /// loco:6a4b98882db06191c30a2d62
-  internal static let contactCardOnBaoardingDescription = Localizable.tr("Localizable", "contactCardOnBaoardingDescription", fallback: "Have your QR code scanned with a single gesture. Your contacts can add you in the blink of an eye, with or without an internet connection.")
+  internal static let contactCardOnBoardingDescription = Localizable.tr("Localizable", "contactCardOnBoardingDescription", fallback: "Have your QR code scanned with a single gesture. Your contacts can add you in the blink of an eye, with or without an internet connection.")
   /// loco:6a4b98dc61385ce8da05ce02
-  internal static let contactCardOnBaoardingFirstItem = Localizable.tr("Localizable", "contactCardOnBaoardingFirstItem", fallback: "All your information in a QR code")
+  internal static let contactCardOnBoardingFirstItem = Localizable.tr("Localizable", "contactCardOnBoardingFirstItem", fallback: "All your information in a QR code")
   /// loco:6a4b9913dcfe91b97c0b6b82
-  internal static let contactCardOnBaoardingSecondItem = Localizable.tr("Localizable", "contactCardOnBaoardingSecondItem", fallback: "No account required on the recipient’s end")
+  internal static let contactCardOnBoardingSecondItem = Localizable.tr("Localizable", "contactCardOnBoardingSecondItem", fallback: "No account required on the recipient’s end")
   /// loco:6a4b999aa82d0a517109ceb3
-  internal static let contactCardOnBaoardingStart = Localizable.tr("Localizable", "contactCardOnBaoardingStart", fallback: "Get Started")
+  internal static let contactCardOnBoardingStart = Localizable.tr("Localizable", "contactCardOnBoardingStart", fallback: "Get Started")
   /// loco:6a4b993d0bd42849960af6f2
-  internal static let contactCardOnBaoardingThirdItem = Localizable.tr("Localizable", "contactCardOnBaoardingThirdItem", fallback: "Always accessible, even offline")
+  internal static let contactCardOnBoardingThirdItem = Localizable.tr("Localizable", "contactCardOnBoardingThirdItem", fallback: "Always accessible, even offline")
   /// loco:6a4b981712adf2df780e5ea5
-  internal static let contactCardOnBaoardingTitle = Localizable.tr("Localizable", "contactCardOnBaoardingTitle", fallback: "Create Your Business Card")
+  internal static let contactCardOnBoardingTitle = Localizable.tr("Localizable", "contactCardOnBoardingTitle", fallback: "Create Your Business Card")
   /// loco:6a4b9cb1bc130aadd700d435
   internal static let contactCardTitle = Localizable.tr("Localizable", "contactCardTitle", fallback: "Contact Card")
+  /// loco:6a4bc870019edb131005f5c2
+  internal static let continueButton = Localizable.tr("Localizable", "continueButton", fallback: "Continue")
   /// loco:6a4b9e3f01d1baf89d0c4213
   internal static let deleteAlertDescription = Localizable.tr("Localizable", "deleteAlertDescription", fallback: "Deleting your card deactivates it and its QR code. People who have already saved your card will not be affected. You can recreate it at any time.")
   /// loco:6a4b9e19ac8f970c1e0773d2

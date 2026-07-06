@@ -4,7 +4,7 @@
  * Locale: fi, Finnish
  * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
  * Exported by: Kylian Grandy
- * Exported at: Mon, 06 Jul 2026 14:56:38 +0200
+ * Exported at: Mon, 06 Jul 2026 17:25:57 +0200
  */
 
 /* loco:6a4b9b67bd16f080d90102e2 */
@@ -19,29 +19,35 @@
 /* loco:6a4b9c54d3716a1c8e0782f3 */
 "buttonCreate" = "Luo";
 
+/* loco:6a4bc7948b43c4c4c30df3d9 */
+"buttonMore" = "Lisää";
+
 /* loco:6a4b9a9c774c94b68f0ee222 */
 "company" = "Yritys";
 
 /* loco:6a4b98882db06191c30a2d62 */
-"contactCardOnBaoardingDescription" = "QR-koodisi skannataan yhdellä eleellä. Ystäväsi voivat lisätä sinut yhteystietoihinsa silmänräpäyksessä, riippumatta siitä, onko internetyhteyttä vai ei.";
+"contactCardOnBoardingDescription" = "QR-koodisi skannataan yhdellä eleellä. Ystäväsi voivat lisätä sinut yhteystietoihinsa silmänräpäyksessä, riippumatta siitä, onko internetyhteyttä vai ei.";
 
 /* loco:6a4b98dc61385ce8da05ce02 */
-"contactCardOnBaoardingFirstItem" = "Kaikki tietosi QR-koodissa";
+"contactCardOnBoardingFirstItem" = "Kaikki tietosi QR-koodissa";
 
 /* loco:6a4b9913dcfe91b97c0b6b82 */
-"contactCardOnBaoardingSecondItem" = "Vastaanottajalta ei vaadita käyttäjätiliä";
+"contactCardOnBoardingSecondItem" = "Vastaanottajalta ei vaadita käyttäjätiliä";
 
 /* loco:6a4b999aa82d0a517109ceb3 */
-"contactCardOnBaoardingStart" = "Aloita";
+"contactCardOnBoardingStart" = "Aloita";
 
 /* loco:6a4b993d0bd42849960af6f2 */
-"contactCardOnBaoardingThirdItem" = "Aina käytettävissä, myös offline-tilassa";
+"contactCardOnBoardingThirdItem" = "Aina käytettävissä, myös offline-tilassa";
 
 /* loco:6a4b981712adf2df780e5ea5 */
-"contactCardOnBaoardingTitle" = "Luo oma käyntikorttisi";
+"contactCardOnBoardingTitle" = "Luo oma käyntikorttisi";
 
 /* loco:6a4b9cb1bc130aadd700d435 */
 "contactCardTitle" = "Yhteystietokortti";
+
+/* loco:6a4bc870019edb131005f5c2 */
+"continueButton" = "Continue";
 
 /* loco:6a4b9e3f01d1baf89d0c4213 */
 "deleteAlertDescription" = "Kortin poistaminen poistaa sen ja sen QR-koodin käytöstä. Tämä ei vaikuta niihin, jotka ovat jo tallentaneet korttisi. Voit luoda sen uudelleen milloin tahansa.";

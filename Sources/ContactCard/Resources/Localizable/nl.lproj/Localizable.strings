@@ -4,7 +4,7 @@
  * Locale: nl, Dutch; Flemish
  * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
  * Exported by: Kylian Grandy
- * Exported at: Mon, 06 Jul 2026 14:56:38 +0200
+ * Exported at: Mon, 06 Jul 2026 17:25:57 +0200
  */
 
 /* loco:6a4b9b67bd16f080d90102e2 */
@@ -19,29 +19,35 @@
 /* loco:6a4b9c54d3716a1c8e0782f3 */
 "buttonCreate" = "Aanmaken";
 
+/* loco:6a4bc7948b43c4c4c30df3d9 */
+"buttonMore" = "Meer";
+
 /* loco:6a4b9a9c774c94b68f0ee222 */
 "company" = "Bedrijf";
 
 /* loco:6a4b98882db06191c30a2d62 */
-"contactCardOnBaoardingDescription" = "Laat je QR-code met één enkel gebaar scannen. Je contacten kunnen je in een oogwenk toevoegen, met of zonder internetverbinding.";
+"contactCardOnBoardingDescription" = "Laat je QR-code met één enkel gebaar scannen. Je contacten kunnen je in een oogwenk toevoegen, met of zonder internetverbinding.";
 
 /* loco:6a4b98dc61385ce8da05ce02 */
-"contactCardOnBaoardingFirstItem" = "Al je gegevens in één QR-code";
+"contactCardOnBoardingFirstItem" = "Al je gegevens in één QR-code";
 
 /* loco:6a4b9913dcfe91b97c0b6b82 */
-"contactCardOnBaoardingSecondItem" = "De ontvanger hoeft geen account aan te maken";
+"contactCardOnBoardingSecondItem" = "De ontvanger hoeft geen account aan te maken";
 
 /* loco:6a4b999aa82d0a517109ceb3 */
-"contactCardOnBaoardingStart" = "Aan de slag";
+"contactCardOnBoardingStart" = "Aan de slag";
 
 /* loco:6a4b993d0bd42849960af6f2 */
-"contactCardOnBaoardingThirdItem" = "Altijd beschikbaar, zelfs offline";
+"contactCardOnBoardingThirdItem" = "Altijd beschikbaar, zelfs offline";
 
 /* loco:6a4b981712adf2df780e5ea5 */
-"contactCardOnBaoardingTitle" = "Maak uw visitekaartje";
+"contactCardOnBoardingTitle" = "Maak uw visitekaartje";
 
 /* loco:6a4b9cb1bc130aadd700d435 */
 "contactCardTitle" = "Contactkaart";
+
+/* loco:6a4bc870019edb131005f5c2 */
+"continueButton" = "Continue";
 
 /* loco:6a4b9e3f01d1baf89d0c4213 */
 "deleteAlertDescription" = "Als je je kaart verwijdert, worden zowel de kaart als de bijbehorende QR-code gedeactiveerd. Dit heeft geen gevolgen voor mensen die je kaart al hebben opgeslagen. Je kunt de kaart op elk moment opnieuw aanmaken.";

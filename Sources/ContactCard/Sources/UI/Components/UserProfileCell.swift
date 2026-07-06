@@ -130,7 +130,7 @@ extension ContactCardType {
     var systemImageName: Image {
         switch self {
         case .linkedIn: return Image(.linkedin)
-        case .instagram: return Image(.intagram)
+        case .instagram: return Image(.instagram)
         case .facebook: return Image(.facebook)
         case .x: return Image(.link)
         case .website: return Image(.link)
