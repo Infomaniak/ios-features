@@ -47,7 +47,7 @@ public struct ContactCardView: View {
                 case .form(let profile, let root, let existingCard):
                     ContactCardFormView(myState: $myState, userProfile: profile, rootPath: root, existingCard: existingCard)
                         .environment(\.contactCardTheme, contactCardTheme)
-                        .navigationTitle(MyString.formTitle)
+                        .navigationTitle(Localizable.contactCardTitle)
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarBackButtonHidden()
                 case .qrCode(let profile, let card):
@@ -60,7 +60,7 @@ public struct ContactCardView: View {
                         onUpdate: { self.contactCardProfile = $0 }
                     )
                     .environment(\.contactCardTheme, contactCardTheme)
-                    .navigationTitle(MyString.formTitle)
+                    .navigationTitle(Localizable.contactCardTitle)
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarBackButtonHidden()
                 }
@@ -90,53 +90,7 @@ enum StateCardView {
     case qrCode(UserProfile, ContactCard)
 }
 
-// MARK: - Enum
-
-enum MyString {
-    static let contactCardOnBaoardingTitle = "Créez votre carte de visite"
-    static let contactCardOnBaoardingDescription = "Faites scanner votre QR code d’un simple geste. vos contacts vous enregistrent en un clin d’oeil, avec ou sans connexion"
-    static let contactCardOnBaoardingFirstItem = "Toutes vos informations dans un QR code"
-    static let contactCardOnBaoardingSecondItem = "Aucun compte requis côté destinataire"
-    static let contactCardOnBaoardingThirdItem = "Toujours accessible, même hors-ligne"
-    static let contactCardOnBaoardingCreate = "Commencer"
-
-    static let formTextFieldFirstName = "Prénom"
-    static let formTextFieldLastName = "Nom"
-    static let formTextFieldEmail = "Mail"
-    static let formTextFieldPhone = "Téléphone"
-    static let formTextFieldCompany = "Entreprise"
-
-    static let formTextFieldLinkedIn = "LinkedIn"
-    static let formTextFieldFacebook = "Facebook"
-    static let formTextFieldInstagram = "Instagram"
-    static let formTextFieldX = "X"
-    static let formTextFieldWebSite = "Site internet"
-    static let formTextFieldOtherUrl = "Autre URL"
-    static let formButtonAddUrl = "Ajouter une URL"
-
-    static let formGeneralInformation = "Informations générales"
-    static let formLinksAndSocialNetwork = "Liens et réseaux sociaux"
-
-    static let formButtonRegister = "Enregistrer"
-    static let formButtonCreate = "Créer"
-    static let formButtonCancel = "Annuler"
-    static let formTitle = "Carte de visite"
-
-    static let validationAlertTitle = "Champs obligatoires"
-    static let validationAlertMessage = "Veuillez remplir tous les champs obligatoires (prénom, nom, email, téléphone)."
-
-    static let qrCodeShared = "Partager"
-    static let qrCodeSharedImage = "square.and.arrow.up"
-    static let qrCodeGenerationError = "Impossible de générer le QR code"
-    static let qrCodeMenuEdit = "Modifier"
-    static let qrCodeMenuDelete = "Supprimer"
-
-    static let qrCodeDeleteAlertTitle = "Supprimer la carte de visite"
-    static let qrCodeDeleteAlertMessage = "La suppression désactive votre carte et son QR. Les personnes qui vous ont déjà enregistré ne sont pas affectées. Vous pourrez la recréer à tout moment."
-    static let qrCodeDeleteAlertConfirm = "Supprimer"
-    static let qrCodeDeleteAlertCancel = "Annuler"
-}
-
+// MARK: - Fake Profile
 enum ProfileFake {
     static let fakeUserProfile = UserProfile(
         id: 42,

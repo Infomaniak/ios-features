@@ -1,0 +1,98 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: sv, Swedish
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
+ * Exported by: Kylian Grandy
+ * Exported at: Mon, 06 Jul 2026 14:56:38 +0200
+ */
+
+/* loco:6a4b9b67bd16f080d90102e2 */
+"addUrl" = "Lägg till webbadress";
+
+/* loco:6a4b9d07bc130aadd700d437 */
+"alertDescription" = "Fyll i alla obligatoriska fält (förnamn, efternamn, e-postadress, telefonnummer).";
+
+/* loco:6a4b9ce6d4245bfa0406af22 */
+"alertTitle" = "Obligatoriska fält";
+
+/* loco:6a4b9c54d3716a1c8e0782f3 */
+"buttonCreate" = "Skapa";
+
+/* loco:6a4b9a9c774c94b68f0ee222 */
+"company" = "Företag";
+
+/* loco:6a4b98882db06191c30a2d62 */
+"contactCardOnBaoardingDescription" = "Låt din QR-kod skannas med en enda gest. Dina kontakter kan lägga till dig på ett ögonblick, oavsett om de har internetuppkoppling eller inte.";
+
+/* loco:6a4b98dc61385ce8da05ce02 */
+"contactCardOnBaoardingFirstItem" = "All din information i en QR-kod";
+
+/* loco:6a4b9913dcfe91b97c0b6b82 */
+"contactCardOnBaoardingSecondItem" = "Mottagaren behöver inte ha något konto";
+
+/* loco:6a4b999aa82d0a517109ceb3 */
+"contactCardOnBaoardingStart" = "Kom igång";
+
+/* loco:6a4b993d0bd42849960af6f2 */
+"contactCardOnBaoardingThirdItem" = "Alltid tillgängligt, även offline";
+
+/* loco:6a4b981712adf2df780e5ea5 */
+"contactCardOnBaoardingTitle" = "Skapa ditt visitkort";
+
+/* loco:6a4b9cb1bc130aadd700d435 */
+"contactCardTitle" = "Kontaktkort";
+
+/* loco:6a4b9e3f01d1baf89d0c4213 */
+"deleteAlertDescription" = "När du tar bort ditt kort inaktiveras både kortet och dess QR-kod. Det påverkar inte de personer som redan har sparat ditt kort. Du kan skapa ett nytt kort när som helst.";
+
+/* loco:6a4b9e19ac8f970c1e0773d2 */
+"deleteAlertTitle" = "Ta bort kontaktkortet";
+
+/* loco:6a4b9e65ac8f970c1e0773d4 */
+"deleteButton" = "Ta bort";
+
+/* loco:6a4b9a1af5a40c56ce0fdec2 */
+"email" = "E-post";
+
+/* loco:6a4b9ae5962ed69f9e0406e2 */
+"facebook" = "Facebook";
+
+/* loco:6a4b99c21a71443d2e075653 */
+"firstName" = "Förnamn";
+
+/* loco:6a4b9bc63bfc66f09e0b1945 */
+"generalInformation" = "Allmän information";
+
+/* loco:6a4b9af5c4532701980bca1b */
+"instagram" = "Instagram";
+
+/* loco:6a4b99f1da8d075ab10d92f9 */
+"lastName" = "Efternamn";
+
+/* loco:6a4b9ad13c1285ac5806e422 */
+"linkedIn" = "LinkedIn";
+
+/* loco:6a4b9bfb27a74b691f04e233 */
+"linksAndSocialNetwork" = "Länkar och sociala nätverk";
+
+/* loco:6a4b9ddc111a71c69f0998f2 */
+"menuEdit" = "Redigera";
+
+/* loco:6a4b9b4a774c94b68f0ee224 */
+"otherUrl" = "Annan URL";
+
+/* loco:6a4b9a84c4532701980bca19 */
+"phone" = "Telefon";
+
+/* loco:6a4b9dbd983cc71bfb0a1c92 */
+"qrCodeGenerationError" = "Det går inte att skapa QR-koden";
+
+/* loco:6a4b9d878cdc0d546a04a343 */
+"sharedButton" = "Dela";
+
+/* loco:6a4b9b263bfc66f09e0b1942 */
+"webSite" = "Webbplats";
+
+/* loco:6a4b9b112d7064a7f1021fe2 */
+"x" = "X";

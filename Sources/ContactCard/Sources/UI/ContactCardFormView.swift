@@ -19,6 +19,7 @@
 import DesignSystem
 import InfomaniakCore
 import InfomaniakCoreSwiftUI
+import InfomaniakCoreUIResources
 import OSLog
 import SwiftUI
 
@@ -82,7 +83,7 @@ struct ContactCardFormView: View {
                     trailingToolbarContent
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(MyString.formButtonCancel) {
+                    Button(CoreUILocalizable.buttonCancel) {
                         dismiss()
                     }
                 }
@@ -96,10 +97,10 @@ struct ContactCardFormView: View {
             generalInformationSection
             linksSection
         }
-        .alert(MyString.validationAlertTitle, isPresented: $showValidationAlert) {
+        .alert(Localizable.alertTitle, isPresented: $showValidationAlert) {
             Button("OK", role: .cancel) {}
         } message: {
-            Text(MyString.validationAlertMessage)
+            Text(Localizable.alertDescription)
         }
         .padding(.top, IKPadding.large)
         .formStyle(.grouped)
@@ -109,20 +110,20 @@ struct ContactCardFormView: View {
 
     private var generalInformationSection: some View {
         Section {
-            TextField("\(MyString.formTextFieldFirstName)*", text: $firstname)
+            TextField("\(Localizable.firstName)*", text: $firstname)
                 .multilineTextAlignment(.leading)
-            TextField("\(MyString.formTextFieldLastName)*", text: $lastname)
+            TextField("\(Localizable.lastName)*", text: $lastname)
                 .multilineTextAlignment(.leading)
-            TextField("\(MyString.formTextFieldEmail)*", text: $email)
+            TextField("\(Localizable.email)*", text: $email)
                 .multilineTextAlignment(.leading)
                 .keyboardType(.emailAddress)
-            TextField("\(MyString.formTextFieldPhone)*", text: $phone)
+            TextField("\(Localizable.phone)*", text: $phone)
                 .multilineTextAlignment(.leading)
                 .keyboardType(.phonePad)
-            TextField(MyString.formTextFieldCompany, text: $company)
+            TextField(Localizable.company, text: $company)
                 .multilineTextAlignment(.leading)
         } header: {
-            Text(MyString.formGeneralInformation)
+            Text(Localizable.generalInformation)
                 .foregroundStyle(contactCardTheme.secondaryText)
                 .font(.Custom.callout)
                 .padding(.bottom, IKPadding.mini)
@@ -131,25 +132,25 @@ struct ContactCardFormView: View {
 
     private var linksSection: some View {
         Section {
-            TextField(MyString.formTextFieldLinkedIn, text: $linkedin)
+            TextField(Localizable.linkedIn, text: $linkedin)
                 .multilineTextAlignment(.leading)
                 .keyboardType(.URL)
-            TextField(MyString.formTextFieldFacebook, text: $facebook)
+            TextField(Localizable.facebook, text: $facebook)
                 .multilineTextAlignment(.leading)
                 .keyboardType(.URL)
-            TextField(MyString.formTextFieldInstagram, text: $instagram)
+            TextField(Localizable.instagram, text: $instagram)
                 .multilineTextAlignment(.leading)
                 .keyboardType(.URL)
-            TextField(MyString.formTextFieldX, text: $x)
+            TextField(Localizable.x, text: $x)
                 .multilineTextAlignment(.leading)
                 .keyboardType(.URL)
-            TextField(MyString.formTextFieldWebSite, text: $website)
+            TextField(Localizable.webSite, text: $website)
                 .multilineTextAlignment(.leading)
                 .keyboardType(.URL)
             additionalURLsRows
             addURLButton
         } header: {
-            Text(MyString.formLinksAndSocialNetwork)
+            Text(Localizable.linksAndSocialNetwork)
                 .foregroundStyle(contactCardTheme.secondaryText)
                 .font(.Custom.callout)
                 .padding(.bottom, IKPadding.mini)
@@ -159,7 +160,7 @@ struct ContactCardFormView: View {
     private var additionalURLsRows: some View {
         ForEach($additionalURLs) { $entry in
             HStack {
-                TextField(MyString.formTextFieldOtherUrl, text: $entry.value)
+                TextField(Localizable.otherUrl, text: $entry.value)
                     .multilineTextAlignment(.leading)
                     .keyboardType(.URL)
                 Button {
@@ -184,7 +185,7 @@ struct ContactCardFormView: View {
             HStack {
                 Image(.add)
                     .foregroundStyle(contactCardTheme.primary)
-                Text(MyString.formButtonAddUrl)
+                Text(Localizable.addUrl)
                     .font(.Custom.headline)
                     .foregroundStyle(contactCardTheme.primary)
             }
@@ -192,7 +193,7 @@ struct ContactCardFormView: View {
     }
 
     private var trailingToolbarContent: some View {
-        Button((existingCard == nil) ? MyString.formButtonCreate : MyString.formButtonRegister) {
+        Button((existingCard == nil) ? Localizable.buttonCreate : CoreUILocalizable.buttonSave) {
             if isFormValid {
                 create()
             } else {

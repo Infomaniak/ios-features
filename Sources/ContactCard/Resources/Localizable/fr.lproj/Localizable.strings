@@ -1,0 +1,98 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: fr, French
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
+ * Exported by: Kylian Grandy
+ * Exported at: Mon, 06 Jul 2026 14:56:38 +0200
+ */
+
+/* loco:6a4b9b67bd16f080d90102e2 */
+"addUrl" = "Ajouter une URL";
+
+/* loco:6a4b9d07bc130aadd700d437 */
+"alertDescription" = "Veuillez remplir tous les champs obligatoires (prénom, nom, e-mail, numéro de téléphone).";
+
+/* loco:6a4b9ce6d4245bfa0406af22 */
+"alertTitle" = "Champs obligatoires";
+
+/* loco:6a4b9c54d3716a1c8e0782f3 */
+"buttonCreate" = "Créer";
+
+/* loco:6a4b9a9c774c94b68f0ee222 */
+"company" = "Entreprise";
+
+/* loco:6a4b98882db06191c30a2d62 */
+"contactCardOnBaoardingDescription" = "Faites scanner votre code QR d’un simple geste. Vos contacts peuvent vous ajouter en un clin d’œil, avec ou sans connexion.";
+
+/* loco:6a4b98dc61385ce8da05ce02 */
+"contactCardOnBaoardingFirstItem" = "Toutes vos informations dans un code QR";
+
+/* loco:6a4b9913dcfe91b97c0b6b82 */
+"contactCardOnBaoardingSecondItem" = "Aucun compte requis côté destinataire";
+
+/* loco:6a4b999aa82d0a517109ceb3 */
+"contactCardOnBaoardingStart" = "Commencer";
+
+/* loco:6a4b993d0bd42849960af6f2 */
+"contactCardOnBaoardingThirdItem" = "Toujours accessible, même hors ligne";
+
+/* loco:6a4b981712adf2df780e5ea5 */
+"contactCardOnBaoardingTitle" = "Créez votre carte de visite";
+
+/* loco:6a4b9cb1bc130aadd700d435 */
+"contactCardTitle" = "Carte de visite";
+
+/* loco:6a4b9e3f01d1baf89d0c4213 */
+"deleteAlertDescription" = "La suppression désactive votre carte et son QR. Les personnes qui vous ont déjà enregistré ne sont pas affectées. Vous pourrez la recréer à tout moment.";
+
+/* loco:6a4b9e19ac8f970c1e0773d2 */
+"deleteAlertTitle" = "Supprimer la carte de visite";
+
+/* loco:6a4b9e65ac8f970c1e0773d4 */
+"deleteButton" = "Supprimer";
+
+/* loco:6a4b9a1af5a40c56ce0fdec2 */
+"email" = "E-mail";
+
+/* loco:6a4b9ae5962ed69f9e0406e2 */
+"facebook" = "Facebook";
+
+/* loco:6a4b99c21a71443d2e075653 */
+"firstName" = "Prénom";
+
+/* loco:6a4b9bc63bfc66f09e0b1945 */
+"generalInformation" = "Informations générales";
+
+/* loco:6a4b9af5c4532701980bca1b */
+"instagram" = "Instagram";
+
+/* loco:6a4b99f1da8d075ab10d92f9 */
+"lastName" = "Nom";
+
+/* loco:6a4b9ad13c1285ac5806e422 */
+"linkedIn" = "LinkedIn";
+
+/* loco:6a4b9bfb27a74b691f04e233 */
+"linksAndSocialNetwork" = "Liens et réseaux sociaux";
+
+/* loco:6a4b9ddc111a71c69f0998f2 */
+"menuEdit" = "Modifier";
+
+/* loco:6a4b9b4a774c94b68f0ee224 */
+"otherUrl" = "Autre URL";
+
+/* loco:6a4b9a84c4532701980bca19 */
+"phone" = "Téléphone";
+
+/* loco:6a4b9dbd983cc71bfb0a1c92 */
+"qrCodeGenerationError" = "Impossible de générer le code QR";
+
+/* loco:6a4b9d878cdc0d546a04a343 */
+"sharedButton" = "Partager";
+
+/* loco:6a4b9b263bfc66f09e0b1942 */
+"webSite" = "Site web";
+
+/* loco:6a4b9b112d7064a7f1021fe2 */
+"x" = "X";

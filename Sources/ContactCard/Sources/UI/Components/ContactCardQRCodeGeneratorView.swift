@@ -39,7 +39,7 @@ struct ContactCardQRCodeGeneratorView: View {
                 VStack(spacing: IKPadding.small) {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .font(.title)
-                    Text(MyString.qrCodeGenerationError)
+                    Text(Localizable.qrCodeGenerationError)
                         .font(.headline)
                 }
                 .foregroundStyle(Color.red)

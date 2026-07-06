@@ -30,13 +30,13 @@ struct UserProfileCell: View {
     private var infoRows: [(label: String, value: String)] {
         var rows: [(String, String)] = []
         if let company = contactCard.company, !company.isEmpty {
-            rows.append((MyString.formTextFieldCompany, company))
+            rows.append((Localizable.company, company))
         }
         if !contactCard.phone.isEmpty {
-            rows.append((MyString.formTextFieldPhone, contactCard.phone))
+            rows.append((Localizable.phone, contactCard.phone))
         }
         if let website = contactCard.links?.first(where: { $0.type == .website }) {
-            rows.append((MyString.formTextFieldWebSite, website.url))
+            rows.append((Localizable.webSite, website.url))
         }
         return rows
     }

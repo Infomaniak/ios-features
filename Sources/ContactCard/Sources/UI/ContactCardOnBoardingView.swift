@@ -47,7 +47,7 @@ struct ContactCardOnBoardingView: View {
                         .environment(\.contactCardTheme, contactCardTheme)
                         .padding(.top, IKPadding.giant)
 
-                    Text(MyString.contactCardOnBaoardingDescription)
+                    Text(Localizable.contactCardOnBaoardingDescription)
                         .multilineTextAlignment(.center)
                         .font(.Custom.body)
                         .foregroundStyle(contactCardTheme.secondaryText)
@@ -56,9 +56,9 @@ struct ContactCardOnBoardingView: View {
 
                     VStack(spacing: IKPadding.mini) {
                         let myStrings = [
-                            MyString.contactCardOnBaoardingFirstItem,
-                            MyString.contactCardOnBaoardingSecondItem,
-                            MyString.contactCardOnBaoardingThirdItem
+                            Localizable.contactCardOnBaoardingFirstItem,
+                            Localizable.contactCardOnBaoardingSecondItem,
+                            Localizable.contactCardOnBaoardingThirdItem
                         ]
 
                         ForEach(myStrings, id: \.self) { itemString in
@@ -77,7 +77,7 @@ struct ContactCardOnBoardingView: View {
         .ignoresSafeArea(.all)
         .scrollBounceBehavior(.basedOnSize)
         .safeAreaInset(edge: .bottom, content: {
-            Button(MyString.contactCardOnBaoardingCreate) {
+            Button(Localizable.buttonCreate) {
                 onCreateButtonTapped()
             }
             .buttonStyle(.ikBorderedProminent)

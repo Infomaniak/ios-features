@@ -20,6 +20,7 @@ import DesignSystem
 import Foundation
 import InfomaniakCore
 import InfomaniakCoreSwiftUI
+import InfomaniakCoreUIResources
 import Nuke
 import NukeUI
 import SwiftUI
@@ -63,17 +64,17 @@ struct ContactCardQRCodeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .safeAreaInset(edge: .bottom, content: { shareButton })
         .navigationBarBackButtonHidden(true)
-        .alert(MyString.qrCodeDeleteAlertTitle, isPresented: $showDeleteConfirmation) {
-            Button(MyString.qrCodeDeleteAlertConfirm, role: .destructive) {
+        .alert(Localizable.deleteAlertTitle, isPresented: $showDeleteConfirmation) {
+            Button(Localizable.deleteButton, role: .destructive) {
                 Task {
                     try? await ContactCardManager(rootPath: rootPath).delete(userId: userProfile.id)
                     dismiss()
                     onDelete?()
                 }
             }
-            Button(MyString.qrCodeDeleteAlertCancel, role: .cancel) {}
+            Button(CoreUILocalizable.buttonCancel, role: .cancel) {}
         } message: {
-            Text(MyString.qrCodeDeleteAlertMessage)
+            Text(Localizable.deleteAlertDescription)
         }
         .toolbar {
             trailingToolbarItem
@@ -134,11 +135,10 @@ struct ContactCardQRCodeView: View {
         return ShareLink(
             item: VCardTransferable(contactCard: contactCard),
             preview: SharePreview(
-                "\(contactCard.firstName) \(contactCard.lastName)",
-                image: Image(systemName: "person.crop.circle")
+                "\(contactCard.firstName) \(contactCard.lastName)"
             )
         ) {
-            Text(MyString.qrCodeShared)
+            Text(Localizable.sharedButton)
         }
         .buttonStyle(.ikBorderedProminent)
         .ikButtonFullWidth(true)
@@ -154,13 +154,13 @@ struct ContactCardQRCodeView: View {
                 Button {
                     myState = .form(userProfile, rootPath, contactCard)
                 } label: {
-                    Label(MyString.qrCodeMenuEdit, systemImage: "pencil")
+                    Label(Localizable.menuEdit, systemImage: "pencil")
                 }
 
                 Button(role: .destructive) {
                     showDeleteConfirmation = true
                 } label: {
-                    Label(MyString.qrCodeMenuDelete, systemImage: "trash")
+                    Label(Localizable.deleteButton, systemImage: "trash")
                 }
             } label: {
                 Label("More", systemImage: "ellipsis")
