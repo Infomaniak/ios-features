@@ -64,9 +64,11 @@ struct UserProfileCell: View {
 
             if !infoRows.isEmpty {
                 VStack(spacing: IKPadding.mini) {
-                    ForEach(infoRows, id: \.label) { row in
+                    ForEach(Array(infoRows.enumerated()), id: \.offset) { index, row in
                         ContactInfoRow(label: row.label, value: row.value, valueColor: contactCardTheme.primary)
-                        Divider()
+                        if index < infoRows.count - 1 || !socialLinks.isEmpty {
+                            Divider()
+                        }
                     }
                 }
             }

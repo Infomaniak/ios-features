@@ -94,6 +94,7 @@ struct ContactCardQRCodeView: View {
         .clipShape(RoundedRectangle(cornerRadius: IKRadius.large))
         .padding(IKPadding.medium)
         .padding(.bottom, IKPadding.large)
+        .frame(maxWidth: 400)
     }
 
     private var qrCodeSection: some View {
