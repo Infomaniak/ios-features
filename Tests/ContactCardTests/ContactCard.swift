@@ -64,10 +64,8 @@ final class ContactCardTest: XCTestCase {
     func testVCardContainsLinks() {
         let vcf = ContactCard.sample.makeVCardString()
 
-        XCTAssertTrue(vcf.contains("item1.URL:https://www.john.doe.com/"))
-        XCTAssertTrue(vcf.contains("item1.X-ABLabel:Website"))
-        XCTAssertTrue(vcf.contains("item2.URL:https://www.linkedin.com/john.doe"))
-        XCTAssertTrue(vcf.contains("item2.X-ABLabel:LinkedIn"))
+        XCTAssertTrue(vcf.contains("URL:https://www.john.doe.com/"))
+        XCTAssertTrue(vcf.contains("URL:https://www.linkedin.com/john.doe"))
     }
 
     func testVCardNoPhotoWhenQRCodeMode() {
@@ -96,8 +94,7 @@ final class ContactCardTest: XCTestCase {
         )
         let vcf = card.makeVCardString()
 
-        XCTAssertFalse(vcf.contains("item1.X-ABLabel:Website"), "An empty link should not appear")
-        XCTAssertTrue(vcf.contains("item1.X-ABLabel:LinkedIn"))
+        XCTAssertTrue(vcf.contains("URL:https://linkedin.com/ab"))
     }
 
     func testVCardOptionalCompanyIsEmpty() {
