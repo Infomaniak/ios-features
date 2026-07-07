@@ -63,9 +63,8 @@ import SwiftUI
         let photoLine = base64String.map { "PHOTO;ENCODING=b;TYPE=JPEG:\($0)\r\n" } ?? ""
 
         var urlLines = ""
-        for (index, link) in (links ?? []).filter({ !$0.url.isEmpty }).enumerated() {
-            let item = index + 1
-            urlLines += "item\(item).URL:\(link.url)\r\nitem\(item).X-ABLabel:\(link.type.vCardLabel)\r\n"
+        for (_, link) in (links ?? []).filter({ !$0.url.isEmpty }).enumerated() {
+            urlLines += "URL:\(link.url)\r\n"
         }
 
         return "BEGIN:VCARD\r\nVERSION:3.0\r\nN:\(lastName);\(firstName);;;\r\nFN:\(firstName) \(lastName)\r\nORG:\(company ?? "")\r\nTEL;TYPE=CELL:\(phone)\r\nEMAIL;TYPE=INTERNET:\(email)\r\n\(photoLine)\(urlLines)END:VCARD"
