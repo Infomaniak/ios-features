@@ -63,7 +63,7 @@ import SwiftUI
         let photoLine = base64String.map { "PHOTO;ENCODING=b;TYPE=JPEG:\($0)\r\n" } ?? ""
 
         var urlLines = ""
-        for (_, link) in (links ?? []).filter({ !$0.url.isEmpty }).enumerated() {
+        for link in (links ?? []).filter({ !$0.url.isEmpty }) {
             urlLines += "URL:\(link.url)\r\n"
         }
 
