@@ -19,11 +19,15 @@
 #if canImport(UIKit)
 import Foundation
 import InfomaniakCore
+import InfomaniakCoreCommonUI
+import InfomaniakDI
 import SwiftUI
 
 @available(iOS 16.4, *)
 public struct ContactCardView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
+
+    @LazyInjectService private var orientationManager: OrientationManageable
 
     @State private var contactCardProfile: ContactCard?
     @State private var myState: StateCardView = .onBoarding
@@ -69,6 +73,14 @@ public struct ContactCardView: View {
         }
         .task {
             await fetchContactCard()
+        }
+        .onAppear {
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                UIDevice.current
+                    .setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+                orientationManager.setOrientationLock(.portrait)
+                UIViewController.attemptRotationToDeviceOrientation()
+            }
         }
     }
 

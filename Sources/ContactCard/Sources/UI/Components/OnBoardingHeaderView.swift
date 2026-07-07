@@ -24,14 +24,11 @@ import SwiftUI
 struct OnBoardingHeaderView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
-    private var size: CGFloat = 270
-
     var body: some View {
         VStack(spacing: IKPadding.huge) {
             Image(.illuOnboarding)
                 .resizable()
                 .scaledToFit()
-                .frame(width: size, height: size)
                 .foregroundColor(contactCardTheme.primary)
 
             Text(Localizable.contactCardOnBoardingTitle)

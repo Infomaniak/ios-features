@@ -31,21 +31,19 @@ struct ContactCardOnBoardingView: View {
     let onCreateButtonTapped: () -> Void
 
     var body: some View {
-        ZStack(alignment: .top) {
-            Image(.backgroundOnboarding)
-                .resizable()
-                .scaledToFit()
-                .scaleEffect(x: -1, y: 1.25)
-                .frame(maxWidth: .infinity)
-                .allowsHitTesting(false)
-                .foregroundStyle(contactCardTheme.navBarBackground)
+        GeometryReader { geometry in
+            ZStack(alignment: .top) {
+                Image(.backgroundOnboarding)
+                    .resizable()
+                    .scaleEffect(x: -1, y: 1.25)
+                    .frame(width: geometry.size.width, height: geometry.size.height / 2.5)
+                    .allowsHitTesting(false)
+                    .foregroundStyle(contactCardTheme.navBarBackground)
 
-            ScrollView {
                 VStack {
-                    Color.clear
-                        .frame(height: 75)
-
                     OnBoardingHeaderView()
+                        .padding(IKPadding.medium)
+                        .frame(maxWidth: 300)
                         .environment(\.contactCardTheme, contactCardTheme)
                         .padding(.top, IKPadding.giant)
 
@@ -67,13 +65,13 @@ struct ContactCardOnBoardingView: View {
                             FeatureItemCell(
                                 text: itemString
                             )
-                            .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, IKPadding.large)
                         }
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(IKPadding.medium)
+                .frame(maxWidth: 600)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .frame(minHeight: UIScreen.main.bounds.height - 150, alignment: .center)
             }
         }
         .ignoresSafeArea(.all)
