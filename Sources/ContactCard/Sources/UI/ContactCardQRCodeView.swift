@@ -47,10 +47,12 @@ private struct VCardTransferable: Transferable {
 struct ContactCardQRCodeView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.scenePhase) private var scenePhase
 
     @Binding var myState: StateCardView
 
     @State private var showDeleteConfirmation = false
+    @State private var savedBrightness: CGFloat = UIScreen.main.brightness
 
     let userProfile: UserProfile
     let contactCard: ContactCard
@@ -61,6 +63,20 @@ struct ContactCardQRCodeView: View {
     var body: some View {
         ScrollView {
             cardContent
+        }
+        .onAppear {
+            savedBrightness = UIScreen.main.brightness
+            UIScreen.main.brightness = 1.0
+        }
+        .onDisappear {
+            UIScreen.main.brightness = savedBrightness
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .background {
+                UIScreen.main.brightness = savedBrightness
+            } else if newPhase == .active {
+                UIScreen.main.brightness = 1.0
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .safeAreaInset(edge: .bottom) { shareButton }
