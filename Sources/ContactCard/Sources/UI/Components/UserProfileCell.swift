@@ -126,19 +126,6 @@ private struct SocialLinksRow: View {
     }
 }
 
-extension ContactCardType {
-    var systemImageName: Image {
-        switch self {
-        case .linkedIn: return Image(.linkedin)
-        case .instagram: return Image(.instagram)
-        case .facebook: return Image(.facebook)
-        case .x: return Image(.link)
-        case .website: return Image(.link)
-        case .other: return Image(.link)
-        }
-    }
-}
-
 #Preview {
     UserProfileCell(contactCard: ProfileFake.fakeContactCard)
         .padding()

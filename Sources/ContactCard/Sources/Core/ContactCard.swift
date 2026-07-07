@@ -19,6 +19,7 @@
 import Foundation
 import Nuke
 import NukeUI
+import SwiftUI
 
 @frozen public struct ContactCard: Codable, Hashable {
     public let id: Int
@@ -71,16 +72,16 @@ import NukeUI
 }
 
 public struct ContactCardLink: Codable, Hashable {
-    public let type: ContactCardType
+    public let type: URLType
     public let url: String
 
-    public init(type: ContactCardType, url: String) {
+    public init(type: URLType, url: String) {
         self.type = type
         self.url = url
     }
 }
 
-public enum ContactCardType: String, Codable {
+public enum URLType: String, Codable {
     case linkedIn
     case x
     case instagram
@@ -96,6 +97,17 @@ public enum ContactCardType: String, Codable {
         case .facebook: return "Facebook"
         case .website: return "Website"
         case .other: return "URL"
+        }
+    }
+
+    var systemImageName: Image {
+        switch self {
+        case .linkedIn: return Image(.linkedin)
+        case .instagram: return Image(.instagram)
+        case .facebook: return Image(.facebook)
+        case .x: return Image(.link)
+        case .website: return Image(.link)
+        case .other: return Image(.link)
         }
     }
 }
