@@ -16,6 +16,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#if canImport(UIKit)
 import DesignSystem
 import InfomaniakCore
 import InfomaniakCoreSwiftUI
@@ -232,3 +233,4 @@ struct ContactCardFormView: View {
         }
     }
 }
+#endif

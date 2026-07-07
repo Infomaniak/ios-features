@@ -16,6 +16,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#if canImport(UIKit)
 import SwiftUI
 
 extension Font {
@@ -39,3 +40,4 @@ extension Font {
         static let callout = Font.dynamicTypeSizeFont(size: 14, weight: .regular, relativeTo: .callout)
     }
 }
+#endif

@@ -16,6 +16,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#if canImport(UIKit)
 import DesignSystem
 import InfomaniakCoreSwiftUI
 import SwiftUI
@@ -43,3 +44,4 @@ struct FeatureItemCell: View {
 #Preview {
     FeatureItemCell(text: Localizable.contactCardOnBoardingFirstItem)
 }
+#endif
