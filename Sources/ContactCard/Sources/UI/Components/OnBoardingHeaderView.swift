@@ -26,7 +26,7 @@ struct OnBoardingHeaderView: View {
 
     var body: some View {
         VStack(spacing: IKPadding.huge) {
-            Image(.illuOnboarding)
+            contactCardTheme.onBoardingImage
                 .resizable()
                 .scaledToFit()
                 .foregroundColor(contactCardTheme.primary)
