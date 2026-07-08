@@ -47,13 +47,10 @@ struct ContactCardQRCodeGeneratorView: View {
                 .foregroundStyle(Color.red)
             } else {
                 ProgressView()
+                    .task(id: contactCardTheme.primary) {
+                        await computeQRCode(foregroundColor: UIColor(contactCardTheme.primary).cgColor)
+                    }
             }
-        }
-        .task {
-            await computeQRCode()
-        }
-        .onChange(of: contactCardTheme.primary) { newPrimary in
-            Task { await computeQRCode(foregroundColor: UIColor(newPrimary).cgColor) }
         }
     }
 
