@@ -49,11 +49,11 @@ public struct ContactCardView: View {
                         rootViewState = .form(userProfile, rootPath, nil)
                     }
                     .environment(\.contactCardTheme, contactCardTheme)
-                case .form(let profile, let root, let existingCard):
+                case .form(let profile, let rootPath, let existingCard):
                     ContactCardFormView(
                         rootViewState: $rootViewState,
                         userProfile: profile,
-                        rootPath: root,
+                        rootPath: rootPath,
                         existingCard: existingCard
                     )
                     .navigationTitle(Localizable.contactCardTitle)
@@ -94,7 +94,7 @@ public struct ContactCardView: View {
     }
 
     private func fetchContactCard() async {
-        contactCardProfile = try? await ContactCardManager(rootPath: rootPath).load(userId: userProfile.id)
+        contactCardProfile = try? await ContactCardManager(rootPath: rootPath).cardFor(userId: userProfile.id)
         guard let contactCardProfile else { return }
         rootViewState = .qrCode(userProfile, contactCardProfile)
     }

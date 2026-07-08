@@ -63,7 +63,7 @@ struct ContactCardQRCodeView: View {
         .alert(Localizable.deleteAlertTitle, isPresented: $isShowingDeleteConfirmation) {
             Button(Localizable.deleteButton, role: .destructive) {
                 Task {
-                    try? await ContactCardManager(rootPath: rootPath).delete(userId: userProfile.id)
+                    try? await ContactCardManager(rootPath: rootPath).deleteCardFor(userId: userProfile.id)
                     dismiss()
                     onDelete?()
                 }

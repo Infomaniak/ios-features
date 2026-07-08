@@ -43,12 +43,12 @@ public struct ContactCardManager {
         try jsonData.write(to: folderURL.appending(path: "\(userId).json"))
     }
 
-    public func delete(userId: Int) async throws {
+    public func deleteCardFor(userId: Int) async throws {
         let filePath = rootPath.appending(path: folderName).appending(path: "\(userId).json")
         try FileManager.default.removeItem(at: filePath)
     }
 
-    public func load(userId: Int) async throws -> ContactCard? {
+    public func cardFor(userId: Int) async throws -> ContactCard? {
         let filePath = rootPath.appending(path: folderName).appending(path: "\(userId).json")
         let decoder = JSONDecoder()
 
