@@ -48,8 +48,8 @@ private extension ContactCard {
 final class ContactCardTest: XCTestCase {
     // MARK: makeVCardString
 
-    func testVCardContainsRequiredFields() {
-        let vcf = ContactCard.sample.makeVCardString()
+    func testVCardContainsRequiredFields() async {
+        let vcf = await ContactCard.sample.makeVCardString()
 
         XCTAssertTrue(vcf.contains("BEGIN:VCARD"))
         XCTAssertTrue(vcf.contains("VERSION:3.0"))
@@ -61,26 +61,26 @@ final class ContactCardTest: XCTestCase {
         XCTAssertTrue(vcf.contains("END:VCARD"))
     }
 
-    func testVCardContainsLinks() {
-        let vcf = ContactCard.sample.makeVCardString()
+    func testVCardContainsLinks() async {
+        let vcf = await ContactCard.sample.makeVCardString()
 
         XCTAssertTrue(vcf.contains("URL:https://www.john.doe.com/"))
         XCTAssertTrue(vcf.contains("URL:https://www.linkedin.com/john.doe"))
     }
 
-    func testVCardNoPhotoWhenQRCodeMode() {
-        let vcf = ContactCard.sample.makeVCardString(forQRCode: true)
+    func testVCardNoPhotoWhenQRCodeMode() async {
+        let vcf = await ContactCard.sample.makeVCardString(forQRCode: true)
 
         XCTAssertFalse(vcf.contains("PHOTO"), "The QR Code mode must not include a photo")
     }
 
-    func testVCardNoLinksWhenNone() {
-        let vcf = ContactCard.minimal.makeVCardString()
+    func testVCardNoLinksWhenNone() async {
+        let vcf = await ContactCard.minimal.makeVCardString()
 
         XCTAssertFalse(vcf.contains("item1.URL"), "No links should appear if links is nil")
     }
 
-    func testVCardEmptyLinksAreSkipped() {
+    func testVCardEmptyLinksAreSkipped() async {
         let card = ContactCard(
             id: 2,
             firstName: "A",
@@ -92,13 +92,13 @@ final class ContactCardTest: XCTestCase {
                 ContactCardLink(type: .linkedIn, url: "https://linkedin.com/ab")
             ]
         )
-        let vcf = card.makeVCardString()
+        let vcf = await card.makeVCardString()
 
         XCTAssertTrue(vcf.contains("URL:https://linkedin.com/ab"))
     }
 
-    func testVCardOptionalCompanyIsEmpty() {
-        let vcf = ContactCard.minimal.makeVCardString()
+    func testVCardOptionalCompanyIsEmpty() async {
+        let vcf = await ContactCard.minimal.makeVCardString()
 
         XCTAssertTrue(vcf.contains("ORG:"), "ORG must be included even without company")
         XCTAssertFalse(vcf.contains("ORG:Infomaniak"))
