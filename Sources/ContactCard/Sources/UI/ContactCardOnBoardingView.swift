@@ -98,9 +98,7 @@ struct ContactCardOnBoardingView: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
+                Button(action: dismiss.callAsFunction) {
                     Label(CoreUILocalizable.buttonClose, systemImage: "xmark")
                 }
             }
