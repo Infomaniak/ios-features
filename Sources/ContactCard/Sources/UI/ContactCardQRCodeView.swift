@@ -17,32 +17,10 @@
  */
 
 #if canImport(UIKit)
-import DesignSystem
 import Foundation
 import InfomaniakCore
-import InfomaniakCoreSwiftUI
 import InfomaniakCoreUIResources
-import Nuke
-import NukeUI
 import SwiftUI
-import UniformTypeIdentifiers
-
-private struct VCardTransferable: Transferable {
-    let contactCard: ContactCard
-
-    static var transferRepresentation: some TransferRepresentation {
-        DataRepresentation(exportedContentType: .vCard) { item in
-            let photoData = await item.getCacheAvatarData()
-            return await Data(item.contactCard.makeVCardString(photoData: photoData).utf8)
-        }
-    }
-
-    private func getCacheAvatarData() async -> PlatformImage? {
-        guard let urlString = contactCard.avatarURL,
-              let url = URL(string: urlString) else { return nil }
-        return try? await ImagePipeline.shared.image(for: url)
-    }
-}
 
 @available(iOS 16.4, *)
 struct ContactCardQRCodeView: View {
@@ -52,7 +30,7 @@ struct ContactCardQRCodeView: View {
 
     @Binding var rootViewState: ContactCardView.RootViewState
 
-    @State private var showDeleteConfirmation = false
+    @State private var isShowingDeleteConfirmation = false
     @State private var savedBrightness: CGFloat = UIScreen.main.brightness
 
     let userProfile: UserProfile
@@ -63,7 +41,7 @@ struct ContactCardQRCodeView: View {
 
     var body: some View {
         ScrollView {
-            cardContent
+            CardContentView(userProfile: userProfile, contactCard: contactCard)
         }
         .onAppear {
             savedBrightness = UIScreen.main.brightness
@@ -80,9 +58,9 @@ struct ContactCardQRCodeView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .safeAreaInset(edge: .bottom) { shareButton }
+        .safeAreaInset(edge: .bottom) { ShareButton(contactCard: contactCard) }
         .navigationBarBackButtonHidden(true)
-        .alert(Localizable.deleteAlertTitle, isPresented: $showDeleteConfirmation) {
+        .alert(Localizable.deleteAlertTitle, isPresented: $isShowingDeleteConfirmation) {
             Button(Localizable.deleteButton, role: .destructive) {
                 Task {
                     try? await ContactCardManager(rootPath: rootPath).delete(userId: userProfile.id)
@@ -95,106 +73,34 @@ struct ContactCardQRCodeView: View {
             Text(Localizable.deleteAlertDescription)
         }
         .toolbar {
-            trailingToolbarItem
-            leadingToolbarItem
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Menu {
+                    Button {
+                        rootViewState = .form(userProfile, rootPath, contactCard)
+                    } label: {
+                        Label(Localizable.menuEdit, systemImage: "pencil")
+                    }
+
+                    Button(role: .destructive) {
+                        isShowingDeleteConfirmation = true
+                    } label: {
+                        Label(Localizable.deleteButton, systemImage: "trash")
+                    }
+                } label: {
+                    Label(Localizable.buttonMore, systemImage: "ellipsis")
+                }
+            }
+
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Label(CoreUILocalizable.buttonClose, systemImage: "xmark")
+                }
+            }
         }
         .toolbarBackground(.hidden, for: .navigationBar)
         .background(contactCardTheme.navBarBackground)
-    }
-
-    var cardContent: some View {
-        VStack(spacing: 0) {
-            qrCodeSection
-            userProfileSection
-        }
-        .background(contactCardTheme.background)
-        .clipShape(RoundedRectangle(cornerRadius: IKRadius.large))
-        .padding(IKPadding.medium)
-        .padding(.bottom, IKPadding.large)
-        .frame(maxWidth: 400)
-    }
-
-    private var qrCodeSection: some View {
-        ZStack(alignment: .top) {
-            Rectangle()
-                .foregroundStyle(contactCardTheme.primary)
-                .frame(width: .infinity, height: 80)
-
-            ContactCardQRCodeGeneratorView(userProfile: userProfile, contactCard: contactCard)
-                .environment(\.contactCardTheme, contactCardTheme)
-                .frame(width: 200, height: 200)
-                .padding(IKPadding.large)
-                .background(contactCardTheme.background, in: RoundedRectangle(cornerRadius: IKRadius.large))
-                .shadow(radius: 4, x: 0, y: 2)
-                .padding(.top, IKPadding.huge)
-                .padding(.bottom, IKPadding.small)
-        }
-        .frame(maxWidth: .infinity)
-    }
-
-    private var userProfileSection: some View {
-        UserProfileCell(contactCard: contactCard)
-            .padding(.horizontal, IKPadding.large)
-            .padding(.bottom, IKPadding.large)
-            .frame(maxWidth: .infinity)
-            .background(contactCardTheme.background)
-    }
-
-    private var shareButton: some View {
-        let theme = IKButtonTheme(
-            primary: contactCardTheme.primary,
-            secondary: contactCardTheme.secondary,
-            tertiary: Color.gray,
-            disabledPrimary: Color.gray,
-            disabledSecondary: Color.white,
-            error: Color.red,
-            smallFont: .body,
-            mediumFont: .headline
-        )
-        return ShareLink(
-            item: VCardTransferable(contactCard: contactCard),
-            preview: SharePreview(
-                "\(contactCard.firstName) \(contactCard.lastName)"
-            )
-        ) {
-            Text(Localizable.sharedButton)
-        }
-        .buttonStyle(.ikBorderedProminent)
-        .ikButtonFullWidth(true)
-        .controlSize(.large)
-        .ikButtonTheme(theme)
-        .padding(.horizontal, IKPadding.large)
-        .padding(.bottom, IKPadding.mini)
-    }
-
-    private var trailingToolbarItem: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarTrailing) {
-            Menu {
-                Button {
-                    rootViewState = .form(userProfile, rootPath, contactCard)
-                } label: {
-                    Label(Localizable.menuEdit, systemImage: "pencil")
-                }
-
-                Button(role: .destructive) {
-                    showDeleteConfirmation = true
-                } label: {
-                    Label(Localizable.deleteButton, systemImage: "trash")
-                }
-            } label: {
-                Label(Localizable.buttonMore, systemImage: "ellipsis")
-            }
-        }
-    }
-
-    private var leadingToolbarItem: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
-            Button {
-                dismiss()
-            } label: {
-                Label(CoreUILocalizable.buttonClose, systemImage: "xmark")
-            }
-        }
     }
 }
 #endif

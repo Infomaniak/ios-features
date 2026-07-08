@@ -17,14 +17,12 @@
  */
 
 #if canImport(UIKit)
-import DesignSystem
 import InfomaniakCore
-import InfomaniakCoreSwiftUI
 import InfomaniakCoreUIResources
 import OSLog
 import SwiftUI
 
-private struct IdentifiableURL: Identifiable {
+struct IdentifiableURL: Identifiable {
     let id = UUID()
     var value: String
 }
@@ -84,129 +82,38 @@ struct ContactCardFormView: View {
     }
 
     var body: some View {
-        formContent
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    trailingToolbarContent
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(CoreUILocalizable.buttonCancel) {
-                        dismiss()
+        FormContentView(
+            firstname: $firstname,
+            lastname: $lastname,
+            email: $email,
+            phone: $phone,
+            company: $company,
+            linkedin: $linkedin,
+            facebook: $facebook,
+            instagram: $instagram,
+            x: $x,
+            website: $website,
+            additionalURLs: $additionalURLs,
+            showValidationAlert: $showValidationAlert
+        )
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button((existingCard == nil) ? Localizable.buttonCreate : CoreUILocalizable.buttonSave) {
+                    if isFormValid {
+                        create()
+                    } else {
+                        showValidationAlert = true
                     }
                 }
             }
-            .background(contactCardTheme.navBarBackground)
-            .toolbarBackground(.hidden, for: .navigationBar)
-    }
-
-    private var formContent: some View {
-        Form {
-            generalInformationSection
-            linksSection
-        }
-        .alert(Localizable.alertTitle, isPresented: $showValidationAlert) {
-            Button(Localizable.continueButton, role: .cancel) {}
-        } message: {
-            Text(Localizable.alertDescription)
-        }
-        .padding(.top, IKPadding.large)
-        .formStyle(.grouped)
-        .scrollContentBackground(.hidden)
-        .foregroundColor(contactCardTheme.primaryText)
-    }
-
-    private var generalInformationSection: some View {
-        Section {
-            TextField("\(Localizable.firstName)*", text: $firstname)
-                .multilineTextAlignment(.leading)
-            TextField("\(Localizable.lastName)*", text: $lastname)
-                .multilineTextAlignment(.leading)
-            TextField("\(Localizable.email)*", text: $email)
-                .multilineTextAlignment(.leading)
-                .keyboardType(.emailAddress)
-            TextField("\(Localizable.phone)*", text: $phone)
-                .multilineTextAlignment(.leading)
-                .keyboardType(.phonePad)
-            TextField(Localizable.company, text: $company)
-                .multilineTextAlignment(.leading)
-        } header: {
-            Text(Localizable.generalInformation)
-                .foregroundStyle(contactCardTheme.secondaryText)
-                .font(.Custom.callout)
-                .padding(.bottom, IKPadding.mini)
-        }
-    }
-
-    private var linksSection: some View {
-        Section {
-            TextField(Localizable.linkedIn, text: $linkedin)
-                .multilineTextAlignment(.leading)
-                .keyboardType(.URL)
-            TextField(Localizable.facebook, text: $facebook)
-                .multilineTextAlignment(.leading)
-                .keyboardType(.URL)
-            TextField(Localizable.instagram, text: $instagram)
-                .multilineTextAlignment(.leading)
-                .keyboardType(.URL)
-            TextField(Localizable.x, text: $x)
-                .multilineTextAlignment(.leading)
-                .keyboardType(.URL)
-            TextField(Localizable.webSite, text: $website)
-                .multilineTextAlignment(.leading)
-                .keyboardType(.URL)
-            additionalURLsRows
-            addURLButton
-        } header: {
-            Text(Localizable.linksAndSocialNetwork)
-                .foregroundStyle(contactCardTheme.secondaryText)
-                .font(.Custom.callout)
-                .padding(.bottom, IKPadding.mini)
-        }
-    }
-
-    private var additionalURLsRows: some View {
-        ForEach($additionalURLs) { entry in
-            HStack {
-                TextField(Localizable.otherUrl, text: entry.value)
-                    .multilineTextAlignment(.leading)
-                    .keyboardType(.URL)
-                Button {
-                    withAnimation {
-                        additionalURLs.removeAll { $0.id == entry.id }
-                    }
-                } label: {
-                    Image(.bin)
-                        .foregroundStyle(contactCardTheme.primary)
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(CoreUILocalizable.buttonCancel) {
+                    dismiss()
                 }
-                .buttonStyle(.borderless)
             }
         }
-    }
-
-    private var addURLButton: some View {
-        Button {
-            withAnimation {
-                additionalURLs.append(IdentifiableURL(value: ""))
-            }
-        } label: {
-            HStack {
-                Image(.add)
-                    .foregroundStyle(contactCardTheme.primary)
-                Text(Localizable.addUrl)
-                    .font(.Custom.headline)
-                    .foregroundStyle(contactCardTheme.primary)
-            }
-        }
-    }
-
-    private var trailingToolbarContent: some View {
-        Button((existingCard == nil) ? Localizable.buttonCreate : CoreUILocalizable.buttonSave) {
-            if isFormValid {
-                create()
-            } else {
-                showValidationAlert = true
-            }
-        }
+        .background(contactCardTheme.navBarBackground)
+        .toolbarBackground(.hidden, for: .navigationBar)
     }
 
     private func create() {
@@ -219,7 +126,7 @@ struct ContactCardFormView: View {
         for entry in additionalURLs where !entry.value.isEmpty {
             links.append(ContactCardLink(type: .other, url: entry.value))
         }
-        let myCard = ContactCard(
+        let newCard = ContactCard(
             id: existingCard?.id ?? userProfile.id,
             firstName: firstname,
             lastName: lastname,
@@ -231,8 +138,8 @@ struct ContactCardFormView: View {
         )
         Task {
             do {
-                try await ContactCardManager(rootPath: rootPath).save(contactCard: myCard, userId: userProfile.id)
-                rootViewState = .qrCode(userProfile, myCard)
+                try await ContactCardManager(rootPath: rootPath).save(contactCard: newCard, userId: userProfile.id)
+                rootViewState = .qrCode(userProfile, newCard)
             } catch {
                 Logger.general.error("Error save contact card :\(error)")
             }

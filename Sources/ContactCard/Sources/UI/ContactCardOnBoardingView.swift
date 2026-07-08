@@ -18,7 +18,6 @@
 
 #if canImport(UIKit)
 import DesignSystem
-import Foundation
 import InfomaniakCoreSwiftUI
 import InfomaniakCoreUIResources
 import SwiftUI
@@ -30,13 +29,18 @@ struct ContactCardOnBoardingView: View {
 
     let onCreateButtonTapped: () -> Void
 
+    let itemsStrings: [String] = [
+        Localizable.contactCardOnBoardingFirstItem,
+        Localizable.contactCardOnBoardingSecondItem,
+        Localizable.contactCardOnBoardingThirdItem
+    ]
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .top) {
                 Image(.backgroundOnboarding)
                     .resizable()
-                    .scaleEffect(x: -1, y: 1.25)
-                    .frame(width: geometry.size.width, height: geometry.size.height / 2.5)
+                    .frame(width: geometry.size.width, height: geometry.size.height / 2)
                     .allowsHitTesting(false)
                     .foregroundStyle(contactCardTheme.navBarBackground)
 
@@ -55,13 +59,7 @@ struct ContactCardOnBoardingView: View {
                         .padding(.horizontal, IKPadding.large)
 
                     VStack(spacing: IKPadding.mini) {
-                        let myStrings = [
-                            Localizable.contactCardOnBoardingFirstItem,
-                            Localizable.contactCardOnBoardingSecondItem,
-                            Localizable.contactCardOnBoardingThirdItem
-                        ]
-
-                        ForEach(myStrings, id: \.self) { itemString in
+                        ForEach(itemsStrings, id: \.self) { itemString in
                             FeatureItemCell(
                                 text: itemString
                             )
@@ -100,9 +98,7 @@ struct ContactCardOnBoardingView: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
+                Button(action: { dismiss() }) {
                     Label(CoreUILocalizable.buttonClose, systemImage: "xmark")
                 }
             }
