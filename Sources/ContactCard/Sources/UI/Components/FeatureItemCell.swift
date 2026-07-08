@@ -38,6 +38,7 @@ struct FeatureItemCell: View {
                 .font(.Custom.callout)
                 .fontWeight(.medium)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
