@@ -62,7 +62,7 @@ struct ContactCardQRCodeGeneratorView: View {
         let bg = UIColor(.white).cgColor
 
         do {
-            var documentBuilder = try QRCode.build
+            var documentBuilder = try await QRCode.build
                 .text(contactCard.makeVCardString(forQRCode: true))
                 .errorCorrection(.high)
                 .foregroundColor(fg)

@@ -22,7 +22,7 @@ import Nuke
 import NukeUI
 import SwiftUI
 
-@frozen public struct ContactCard: Codable, Hashable {
+public struct ContactCard: Sendable, Codable, Hashable {
     public let id: Int
     public let firstName: String
     public let lastName: String
@@ -52,7 +52,8 @@ import SwiftUI
         self.links = links
     }
 
-    public func makeVCardString(forQRCode qrCodeParentScreen: Bool = false, photoData: PlatformImage? = nil) -> String {
+    @concurrent
+    public func makeVCardString(forQRCode qrCodeParentScreen: Bool = false, photoData: PlatformImage? = nil) async -> String {
         var base64String: String?
         if let photoData,
            !qrCodeParentScreen,
@@ -71,7 +72,7 @@ import SwiftUI
     }
 }
 
-public struct ContactCardLink: Codable, Hashable {
+public struct ContactCardLink: Codable, Hashable, Sendable {
     public let type: URLType
     public let url: String
 
@@ -81,7 +82,7 @@ public struct ContactCardLink: Codable, Hashable {
     }
 }
 
-public enum URLType: String, Codable {
+public enum URLType: String, Codable, Sendable {
     case linkedIn
     case x
     case instagram
@@ -92,7 +93,7 @@ public enum URLType: String, Codable {
     public var vCardLabel: String {
         switch self {
         case .linkedIn: return "LinkedIn"
-        case .x: return "Twitter"
+        case .x: return "X"
         case .instagram: return "Instagram"
         case .facebook: return "Facebook"
         case .website: return "Website"

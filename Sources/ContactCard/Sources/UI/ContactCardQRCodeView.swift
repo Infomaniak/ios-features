@@ -33,7 +33,7 @@ private struct VCardTransferable: Transferable {
     static var transferRepresentation: some TransferRepresentation {
         DataRepresentation(exportedContentType: .vCard) { item in
             let photoData = await item.getCacheAvatarData()
-            return Data(item.contactCard.makeVCardString(photoData: photoData).utf8)
+            return await Data(item.contactCard.makeVCardString(photoData: photoData).utf8)
         }
     }
 
