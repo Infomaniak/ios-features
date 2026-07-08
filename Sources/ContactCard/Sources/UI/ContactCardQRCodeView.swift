@@ -49,7 +49,7 @@ struct ContactCardQRCodeView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
 
-    @Binding var myState: StateCardView
+    @Binding var rootViewState: StateCardView
 
     @State private var showDeleteConfirmation = false
     @State private var savedBrightness: CGFloat = UIScreen.main.brightness
@@ -170,7 +170,7 @@ struct ContactCardQRCodeView: View {
         ToolbarItem(placement: .navigationBarTrailing) {
             Menu {
                 Button {
-                    myState = .form(userProfile, rootPath, contactCard)
+                    rootViewState = .form(userProfile, rootPath, contactCard)
                 } label: {
                     Label(Localizable.menuEdit, systemImage: "pencil")
                 }

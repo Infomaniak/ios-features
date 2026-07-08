@@ -29,7 +29,7 @@ public struct ContactCardTheme {
     let backgroundTint: Color
     let navBarBackground: Color
     let snackbarActionColor: Color
-    let onBoardingImage: Image
+    let onboardingImage: Image
 
     public init(
         primary: Color,
@@ -41,7 +41,7 @@ public struct ContactCardTheme {
         backgroundTint: Color,
         navBarBackground: Color,
         snackbarActionColor: Color,
-        onBoardingImage: Image
+        onboardingImage: Image
     ) {
         self.primary = primary
         self.secondary = secondary
@@ -52,7 +52,7 @@ public struct ContactCardTheme {
         self.backgroundTint = backgroundTint
         self.navBarBackground = navBarBackground
         self.snackbarActionColor = snackbarActionColor
-        self.onBoardingImage = onBoardingImage
+        self.onboardingImage = onboardingImage
     }
 
     static let pink = ContactCardTheme(
@@ -65,7 +65,7 @@ public struct ContactCardTheme {
         backgroundTint: Color(.systemGray6),
         navBarBackground: Color(red: 0.20, green: 0.04, blue: 0.11),
         snackbarActionColor: Color(red: 0.96, green: 0.73, blue: 0.85),
-        onBoardingImage: Image(systemName: "cube.fill")
+        onboardingImage: Image(systemName: "cube.fill")
     )
 }
 

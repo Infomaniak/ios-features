@@ -21,12 +21,12 @@ import DesignSystem
 import InfomaniakCoreSwiftUI
 import SwiftUI
 
-struct OnBoardingHeaderView: View {
+struct OnboardingHeaderView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
     var body: some View {
         VStack(spacing: IKPadding.huge) {
-            contactCardTheme.onBoardingImage
+            contactCardTheme.onboardingImage
                 .resizable()
                 .scaledToFit()
                 .foregroundColor(contactCardTheme.primary)
@@ -40,6 +40,6 @@ struct OnBoardingHeaderView: View {
 }
 
 #Preview {
-    OnBoardingHeaderView()
+    OnboardingHeaderView()
 }
 #endif

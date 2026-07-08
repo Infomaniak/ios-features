@@ -41,7 +41,7 @@ struct ContactCardOnBoardingView: View {
                     .foregroundStyle(contactCardTheme.navBarBackground)
 
                 VStack {
-                    OnBoardingHeaderView()
+                    OnboardingHeaderView()
                         .padding(IKPadding.medium)
                         .frame(maxWidth: 300)
                         .environment(\.contactCardTheme, contactCardTheme)

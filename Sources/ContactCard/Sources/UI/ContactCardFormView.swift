@@ -33,7 +33,7 @@ struct ContactCardFormView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
     @Environment(\.dismiss) private var dismiss
 
-    @Binding var myState: StateCardView
+    @Binding var rootViewState: StateCardView
 
     @State private var firstname = ""
     @State private var lastname = ""
@@ -58,8 +58,8 @@ struct ContactCardFormView: View {
         !firstname.isEmpty && !lastname.isEmpty && !email.isEmpty && !phone.isEmpty
     }
 
-    init(myState: Binding<StateCardView>, userProfile: UserProfile, rootPath: URL, existingCard: ContactCard? = nil) {
-        _myState = myState
+    init(rootViewState: Binding<StateCardView>, userProfile: UserProfile, rootPath: URL, existingCard: ContactCard? = nil) {
+        _rootViewState = rootViewState
         self.userProfile = userProfile
         self.rootPath = rootPath
         self.existingCard = existingCard
@@ -226,7 +226,7 @@ struct ContactCardFormView: View {
         Task {
             do {
                 try await ContactCardManager(rootPath: rootPath).save(contactCard: myCard, userId: userProfile.id)
-                myState = .qrCode(userProfile, myCard)
+                rootViewState = .qrCode(userProfile, myCard)
             } catch {
                 Logger.general.error("Error save contact card :\(error)")
             }

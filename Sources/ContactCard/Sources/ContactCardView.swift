@@ -25,12 +25,12 @@ import SwiftUI
 
 @available(iOS 16.4, *)
 public struct ContactCardView: View {
-    @Environment(\.contactCardTheme) private var contactCardTheme
-
     @LazyInjectService private var orientationManager: OrientationManageable
 
+    @Environment(\.contactCardTheme) private var contactCardTheme
+
     @State private var contactCardProfile: ContactCard?
-    @State private var myState: StateCardView = .onBoarding
+    @State private var rootViewState: StateCardView = .onboarding
 
     public let userProfile: UserProfile
     public let rootPath: URL
@@ -43,28 +43,31 @@ public struct ContactCardView: View {
     public var body: some View {
         NavigationStack {
             ZStack {
-                switch myState {
-                case .onBoarding:
+                switch rootViewState {
+                case .onboarding:
                     ContactCardOnBoardingView {
-                        myState = .form(userProfile, rootPath, nil)
+                        rootViewState = .form(userProfile, rootPath, nil)
                     }
                     .environment(\.contactCardTheme, contactCardTheme)
                 case .form(let profile, let root, let existingCard):
-                    ContactCardFormView(myState: $myState, userProfile: profile, rootPath: root, existingCard: existingCard)
-                        .environment(\.contactCardTheme, contactCardTheme)
-                        .navigationTitle(Localizable.contactCardTitle)
-                        .navigationBarTitleDisplayMode(.inline)
-                        .navigationBarBackButtonHidden()
+                    ContactCardFormView(
+                        rootViewState: $rootViewState,
+                        userProfile: profile,
+                        rootPath: root,
+                        existingCard: existingCard
+                    )
+                    .navigationTitle(Localizable.contactCardTitle)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarBackButtonHidden()
                 case .qrCode(let profile, let card):
                     ContactCardQRCodeView(
-                        myState: $myState,
+                        rootViewState: $rootViewState,
                         userProfile: profile,
                         contactCard: card,
                         rootPath: rootPath,
                         onDelete: { contactCardProfile = nil },
                         onUpdate: { contactCardProfile = $0 }
                     )
-                    .environment(\.contactCardTheme, contactCardTheme)
                     .navigationTitle(Localizable.contactCardTitle)
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarBackButtonHidden()
@@ -93,7 +96,7 @@ public struct ContactCardView: View {
     private func fetchContactCard() async {
         contactCardProfile = try? await ContactCardManager(rootPath: rootPath).load(userId: userProfile.id)
         guard let contactCardProfile else { return }
-        myState = .qrCode(userProfile, contactCardProfile)
+        rootViewState = .qrCode(userProfile, contactCardProfile)
     }
 }
 
@@ -104,41 +107,8 @@ public struct ContactCardView: View {
 }
 
 enum StateCardView {
-    case onBoarding
+    case onboarding
     case form(UserProfile, URL, ContactCard?)
     case qrCode(UserProfile, ContactCard)
-}
-
-// MARK: - Fake Profile
-
-enum ProfileFake {
-    static let fakeUserProfile = UserProfile(
-        id: 42,
-        displayName: "Camille Mercier",
-        firstName: "Camille",
-        lastName: "Mercier",
-        email: "camille.mercier@example.com",
-        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=512&h=512&fit=crop"
-    )
-
-    static let fakeContactCardsLinks: [ContactCardLink] = [
-        .init(type: .website, url: "https://joe.doe.fr"),
-        .init(type: .linkedIn, url: "https://linkedin.com/in/joe.doe"),
-        .init(type: .facebook, url: "https://facebook.com/in/joe.doe"),
-        .init(type: .instagram, url: "https://instagram.com/in/joe.doe"),
-        .init(type: .x, url: "https://x.com/in/joe.doe"),
-        .init(type: .other, url: "https://other1.com/in/joe.doe"),
-        .init(type: .other, url: "https://other2.com/in/joe.doe")
-    ]
-
-    static let fakeContactCard = ContactCard(
-        id: 43,
-        firstName: "Joe",
-        lastName: "Doe",
-        email: "joe.doe@example.com",
-        phone: "+44 777 123 456",
-        company: "Infomaniak",
-        links: fakeContactCardsLinks
-    )
 }
 #endif
