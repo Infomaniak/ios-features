@@ -48,14 +48,14 @@ struct ContactCardQRCodeGeneratorView: View {
             } else {
                 ProgressView()
                     .task(id: contactCardTheme.primary) {
-                        await computeQRCode(foregroundColor: UIColor(contactCardTheme.primary).cgColor)
+                        await computeQRCode()
                     }
             }
         }
     }
 
-    @MainActor private func computeQRCode(foregroundColor: CGColor? = nil) async {
-        let fg = foregroundColor ?? UIColor(.black).cgColor
+    @MainActor private func computeQRCode() async {
+        let fg = UIColor(.black).cgColor
         let bg = UIColor(.white).cgColor
 
         do {
