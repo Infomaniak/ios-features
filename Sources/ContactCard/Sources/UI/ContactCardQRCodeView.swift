@@ -44,12 +44,13 @@ private struct VCardTransferable: Transferable {
     }
 }
 
+@available(iOS 16.4, *)
 struct ContactCardQRCodeView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
 
-    @Binding var rootViewState: StateCardView
+    @Binding var rootViewState: ContactCardView.RootViewState
 
     @State private var showDeleteConfirmation = false
     @State private var savedBrightness: CGFloat = UIScreen.main.brightness

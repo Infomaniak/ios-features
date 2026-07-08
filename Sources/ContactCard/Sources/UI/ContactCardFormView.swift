@@ -29,11 +29,12 @@ private struct IdentifiableURL: Identifiable {
     var value: String
 }
 
+@available(iOS 16.4, *)
 struct ContactCardFormView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
     @Environment(\.dismiss) private var dismiss
 
-    @Binding var rootViewState: StateCardView
+    @Binding var rootViewState: ContactCardView.RootViewState
 
     @State private var firstname = ""
     @State private var lastname = ""
@@ -58,7 +59,12 @@ struct ContactCardFormView: View {
         !firstname.isEmpty && !lastname.isEmpty && !email.isEmpty && !phone.isEmpty
     }
 
-    init(rootViewState: Binding<StateCardView>, userProfile: UserProfile, rootPath: URL, existingCard: ContactCard? = nil) {
+    init(
+        rootViewState: Binding<ContactCardView.RootViewState>,
+        userProfile: UserProfile,
+        rootPath: URL,
+        existingCard: ContactCard? = nil
+    ) {
         _rootViewState = rootViewState
         self.userProfile = userProfile
         self.rootPath = rootPath

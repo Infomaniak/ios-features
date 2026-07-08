@@ -30,7 +30,7 @@ public struct ContactCardView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
     @State private var contactCardProfile: ContactCard?
-    @State private var rootViewState: StateCardView = .onboarding
+    @State private var rootViewState: RootViewState = .onboarding
 
     public let userProfile: UserProfile
     public let rootPath: URL
@@ -106,9 +106,13 @@ public struct ContactCardView: View {
         .environment(\.contactCardTheme, .pink)
 }
 
-enum StateCardView {
-    case onboarding
-    case form(UserProfile, URL, ContactCard?)
-    case qrCode(UserProfile, ContactCard)
+@available(iOS 16.4, *)
+extension ContactCardView: View {
+    enum RootViewState {
+        case onboarding
+        case form(UserProfile, URL, ContactCard?)
+        case qrCode(UserProfile, ContactCard)
+    }
 }
+
 #endif
