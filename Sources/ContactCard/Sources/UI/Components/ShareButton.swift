@@ -57,18 +57,6 @@ struct ShareButton: View {
         .buttonStyle(.ikBorderedProminent)
         .ikButtonFullWidth(true)
         .controlSize(.large)
-        .ikButtonTheme(
-            IKButtonTheme(
-                primary: contactCardTheme.primary,
-                secondary: contactCardTheme.secondary,
-                tertiary: Color.gray,
-                disabledPrimary: Color.gray,
-                disabledSecondary: Color.white,
-                error: Color.red,
-                smallFont: .body,
-                mediumFont: .headline
-            )
-        )
         .padding(.horizontal, IKPadding.large)
         .padding(.bottom, IKPadding.mini)
     }
