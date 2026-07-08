@@ -78,7 +78,8 @@ struct ContactCardFormView: View {
         _x = State(initialValue: existingCard?.links?.first { $0.type == .x }?.url ?? "")
         let websiteLinks = existingCard?.links?.filter { $0.type == .website } ?? []
         _website = State(initialValue: websiteLinks.first?.url ?? "")
-        _additionalURLs = State(initialValue: websiteLinks.dropFirst().map { IdentifiableURL(value: $0.url) })
+        let otherLinks = existingCard?.links?.filter { $0.type == .other } ?? []
+        _additionalURLs = State(initialValue: otherLinks.map { IdentifiableURL(value: $0.url) })
     }
 
     var body: some View {
