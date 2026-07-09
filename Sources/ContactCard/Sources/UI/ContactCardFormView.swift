@@ -113,8 +113,8 @@ struct ContactCardFormView: View {
                 }
             }
         }
-        .background(contactCardTheme.navBarBackground)
-        .toolbarBackground(.hidden, for: .navigationBar)
+        .toolbarBackground(contactCardTheme.navBarBackground, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
     }
 
     private func create() {
