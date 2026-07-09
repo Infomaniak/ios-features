@@ -140,7 +140,9 @@ struct ContactCardFormView: View {
         Task {
             do {
                 try await ContactCardManager(rootPath: rootPath).save(contactCard: newCard, userId: userProfile.id)
-                rootViewState = .qrCode(userProfile, newCard)
+                withAnimation {
+                    rootViewState = .qrCode(userProfile, newCard)
+                }
             } catch {
                 Logger.general.error("Error save contact card :\(error)")
             }

@@ -46,7 +46,9 @@ public struct ContactCardView: View {
                 switch rootViewState {
                 case .onboarding:
                     ContactCardOnBoardingView {
-                        rootViewState = .form(userProfile, rootPath, nil)
+                        withAnimation {
+                            rootViewState = .form(userProfile, rootPath, nil)
+                        }
                     }
                     .environment(\.contactCardTheme, contactCardTheme)
                 case .form(let profile, let rootPath, let existingCard):
@@ -96,7 +98,9 @@ public struct ContactCardView: View {
     private func fetchContactCard() async {
         contactCardProfile = try? await ContactCardManager(rootPath: rootPath).cardFor(userId: userProfile.id)
         guard let contactCardProfile else { return }
-        rootViewState = .qrCode(userProfile, contactCardProfile)
+        withAnimation {
+            rootViewState = .qrCode(userProfile, contactCardProfile)
+        }
     }
 }
 

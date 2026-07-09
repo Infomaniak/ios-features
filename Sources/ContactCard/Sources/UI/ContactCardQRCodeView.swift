@@ -76,7 +76,9 @@ struct ContactCardQRCodeView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
                     Button {
-                        rootViewState = .form(userProfile, rootPath, contactCard)
+                        withAnimation {
+                            rootViewState = .form(userProfile, rootPath, contactCard)
+                        }
                     } label: {
                         Label(Localizable.menuEdit, systemImage: "pencil")
                     }
