@@ -62,9 +62,7 @@ struct FormContentView: View {
         } message: {
             Text(Localizable.alertDescription)
         }
-        .padding(.top, IKPadding.large)
         .formStyle(.grouped)
-        .scrollContentBackground(.hidden)
         .foregroundColor(contactCardTheme.primaryText)
     }
 }
