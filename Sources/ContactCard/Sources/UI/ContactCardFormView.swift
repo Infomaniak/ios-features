@@ -109,7 +109,13 @@ struct ContactCardFormView: View {
             }
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(CoreUILocalizable.buttonCancel) {
-                    dismiss()
+                    if let existingCard {
+                        withAnimation {
+                            rootViewState = .qrCode(userProfile, existingCard)
+                        }
+                    } else {
+                        dismiss()
+                    }
                 }
             }
         }
