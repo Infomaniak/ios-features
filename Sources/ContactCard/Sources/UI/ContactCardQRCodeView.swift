@@ -28,14 +28,15 @@ struct ContactCardQRCodeView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
 
-    @Binding var rootViewState: ContactCardView.RootViewState
-
     @State private var isShowingDeleteConfirmation = false
     @State private var savedBrightness: CGFloat = UIScreen.main.brightness
+
+    @Binding var path: [ContactCardRoute]
 
     let userProfile: UserProfile
     let contactCard: ContactCard
     let rootPath: URL
+    let onCancel: (() -> Void)?
     let onDelete: (() -> Void)?
     let onUpdate: ((ContactCard) -> Void)?
 
@@ -64,7 +65,6 @@ struct ContactCardQRCodeView: View {
             Button(Localizable.deleteButton, role: .destructive) {
                 Task {
                     try? await ContactCardManager(rootPath: rootPath).deleteCardFor(userId: userProfile.id)
-                    dismiss()
                     onDelete?()
                 }
             }
@@ -77,7 +77,7 @@ struct ContactCardQRCodeView: View {
                 Menu {
                     Button {
                         withAnimation {
-                            rootViewState = .form(userProfile, rootPath, contactCard)
+                            path.append(ContactCardRoute.form(userProfile, contactCard))
                         }
                     } label: {
                         Label(Localizable.menuEdit, systemImage: "pencil")
@@ -95,7 +95,7 @@ struct ContactCardQRCodeView: View {
 
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    dismiss()
+                    onCancel?()
                 } label: {
                     Label(CoreUILocalizable.buttonClose, systemImage: "xmark")
                 }

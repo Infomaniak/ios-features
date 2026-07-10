@@ -28,9 +28,10 @@ public struct ContactCardView: View {
     @LazyInjectService private var orientationManager: OrientationManageable
 
     @Environment(\.contactCardTheme) private var contactCardTheme
+    @Environment(\.dismiss) private var dismiss
 
+    @State private var path: [ContactCardRoute] = []
     @State private var contactCardProfile: ContactCard?
-    @State private var rootViewState: RootViewState = .onboarding
 
     public let userProfile: UserProfile
     public let rootPath: URL
@@ -41,34 +42,55 @@ public struct ContactCardView: View {
     }
 
     public var body: some View {
-        NavigationStack {
-            ZStack {
-                switch rootViewState {
-                case .onboarding:
-                    ContactCardOnBoardingView {
-                        withAnimation {
-                            rootViewState = .form(userProfile, rootPath, nil)
-                        }
-                    }
-                    .environment(\.contactCardTheme, contactCardTheme)
-                case .form(let profile, let rootPath, let existingCard):
+        NavigationStack(path: $path) {
+            ContactCardOnBoardingView {
+                withAnimation {
+                    path.append(ContactCardRoute.form(userProfile, nil))
+                }
+            }
+            .environment(\.contactCardTheme, contactCardTheme)
+            .navigationTitle(Localizable.contactCardTitle)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(for: ContactCardRoute.self) { route in
+                switch route {
+                case .form(let profile, let existingCard):
                     ContactCardFormView(
-                        rootViewState: $rootViewState,
+                        path: $path,
                         userProfile: profile,
                         rootPath: rootPath,
                         existingCard: existingCard
-                    )
+                    ) {
+                        contactCardProfile = nil
+                        path.removeAll()
+                        dismiss()
+                    }
                     .navigationTitle(Localizable.contactCardTitle)
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarBackButtonHidden()
+
                 case .qrCode(let profile, let card):
                     ContactCardQRCodeView(
-                        rootViewState: $rootViewState,
+                        path: $path,
                         userProfile: profile,
                         contactCard: card,
                         rootPath: rootPath,
-                        onDelete: { contactCardProfile = nil },
-                        onUpdate: { contactCardProfile = $0 }
+                        onCancel: {
+                            contactCardProfile = nil
+                            path.removeAll()
+                            dismiss()
+                        },
+                        onDelete: {
+                            contactCardProfile = nil
+                            path.removeAll()
+                            dismiss()
+                        },
+                        onUpdate: { updated in
+                            contactCardProfile = updated
+                            if let index = path.lastIndex { if case .qrCode = $0 { return true } else { return false } } {
+                                path.removeLast(path.count - index - 1)
+                                path.append(ContactCardRoute.qrCode(profile, updated))
+                            }
+                        }
                     )
                     .navigationTitle(Localizable.contactCardTitle)
                     .navigationBarTitleDisplayMode(.inline)
@@ -77,7 +99,7 @@ public struct ContactCardView: View {
             }
         }
         .task {
-            await fetchContactCard()
+            await fetchAndNavigateIfCardExists()
         }
         .onAppear {
             if UIDevice.current.userInterfaceIdiom == .phone {
@@ -95,11 +117,13 @@ public struct ContactCardView: View {
         }
     }
 
-    private func fetchContactCard() async {
+    private func fetchAndNavigateIfCardExists() async {
         contactCardProfile = try? await ContactCardManager(rootPath: rootPath).cardFor(userId: userProfile.id)
         guard let contactCardProfile else { return }
-        withAnimation {
-            rootViewState = .qrCode(userProfile, contactCardProfile)
+        await MainActor.run {
+            withAnimation {
+                path.append(ContactCardRoute.qrCode(userProfile, contactCardProfile))
+            }
         }
     }
 }
@@ -110,13 +134,9 @@ public struct ContactCardView: View {
         .environment(\.contactCardTheme, .pink)
 }
 
-@available(iOS 16.4, *)
-extension ContactCardView: View {
-    enum RootViewState {
-        case onboarding
-        case form(UserProfile, URL, ContactCard?)
-        case qrCode(UserProfile, ContactCard)
-    }
+enum ContactCardRoute: Hashable {
+    case form(UserProfile, ContactCard?)
+    case qrCode(UserProfile, ContactCard)
 }
 
 #endif

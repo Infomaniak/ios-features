@@ -32,8 +32,6 @@ struct ContactCardFormView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
     @Environment(\.dismiss) private var dismiss
 
-    @Binding var rootViewState: ContactCardView.RootViewState
-
     @State private var firstname = ""
     @State private var lastname = ""
     @State private var email = ""
@@ -49,24 +47,30 @@ struct ContactCardFormView: View {
 
     @State private var showValidationAlert = false
 
+    @Binding private var path: [ContactCardRoute]
+
     var userProfile: UserProfile
     var rootPath: URL
     var existingCard: ContactCard?
+
+    let onCancel: (() -> Void)?
 
     private var isFormValid: Bool {
         !firstname.isEmpty && !lastname.isEmpty && !email.isEmpty && !phone.isEmpty
     }
 
     init(
-        rootViewState: Binding<ContactCardView.RootViewState>,
+        path: Binding<[ContactCardRoute]>,
         userProfile: UserProfile,
         rootPath: URL,
-        existingCard: ContactCard? = nil
+        existingCard: ContactCard? = nil,
+        onCancel: (() -> Void)? = nil
     ) {
-        _rootViewState = rootViewState
+        _path = path
         self.userProfile = userProfile
         self.rootPath = rootPath
         self.existingCard = existingCard
+        self.onCancel = onCancel
         _firstname = State(initialValue: existingCard?.firstName ?? userProfile.firstName)
         _lastname = State(initialValue: existingCard?.lastName ?? userProfile.lastName)
         _email = State(initialValue: existingCard?.email ?? userProfile.email)
@@ -111,10 +115,10 @@ struct ContactCardFormView: View {
                 Button(CoreUILocalizable.buttonCancel) {
                     if let existingCard {
                         withAnimation {
-                            rootViewState = .qrCode(userProfile, existingCard)
+                            dismiss()
                         }
                     } else {
-                        dismiss()
+                        onCancel?()
                     }
                 }
             }
@@ -147,7 +151,11 @@ struct ContactCardFormView: View {
             do {
                 try await ContactCardManager(rootPath: rootPath).save(contactCard: newCard, userId: userProfile.id)
                 withAnimation {
-                    rootViewState = .qrCode(userProfile, newCard)
+                    if let existingCard {
+                        dismiss()
+                    } else {
+                        path.append(ContactCardRoute.qrCode(userProfile, newCard))
+                    }
                 }
             } catch {
                 Logger.general.error("Error save contact card :\(error)")
