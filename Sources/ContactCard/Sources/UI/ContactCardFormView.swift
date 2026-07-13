@@ -29,20 +29,20 @@ struct ContactCardFormView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
     @Environment(\.dismiss) private var dismiss
 
-    @State private var firstname = ""
-    @State private var lastname = ""
+    @State private var firstName = ""
+    @State private var lastName = ""
     @State private var email = ""
     @State private var phone = ""
     @State private var company = ""
 
-    @State private var linkedin = ""
+    @State private var linkedIn = ""
     @State private var facebook = ""
     @State private var instagram = ""
     @State private var x = ""
     @State private var website = ""
     @State private var additionalURLs: [String] = []
 
-    @State private var showValidationAlert = false
+    @State private var isShowingValidationAlert = false
 
     @Binding private var path: [ContactCardRoute]
 
@@ -53,7 +53,7 @@ struct ContactCardFormView: View {
     let onCancel: (() -> Void)?
 
     private var isFormValid: Bool {
-        !firstname.isEmpty && !lastname.isEmpty && !email.isEmpty && !phone.isEmpty
+        !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && !phone.isEmpty
     }
 
     init(
@@ -68,12 +68,12 @@ struct ContactCardFormView: View {
         self.rootPath = rootPath
         self.existingCard = existingCard
         self.onCancel = onCancel
-        _firstname = State(initialValue: existingCard?.firstName ?? userProfile.firstName)
-        _lastname = State(initialValue: existingCard?.lastName ?? userProfile.lastName)
+        _firstName = State(initialValue: existingCard?.firstName ?? userProfile.firstName)
+        _lastName = State(initialValue: existingCard?.lastName ?? userProfile.lastName)
         _email = State(initialValue: existingCard?.email ?? userProfile.email)
         _phone = State(initialValue: existingCard?.phone ?? "")
         _company = State(initialValue: existingCard?.company ?? "")
-        _linkedin = State(initialValue: existingCard?.links?.first { $0.type == .linkedIn }?.url ?? "")
+        _linkedIn = State(initialValue: existingCard?.links?.first { $0.type == .linkedIn }?.url ?? "")
         _facebook = State(initialValue: existingCard?.links?.first { $0.type == .facebook }?.url ?? "")
         _instagram = State(initialValue: existingCard?.links?.first { $0.type == .instagram }?.url ?? "")
         _x = State(initialValue: existingCard?.links?.first { $0.type == .x }?.url ?? "")
@@ -85,30 +85,30 @@ struct ContactCardFormView: View {
 
     var body: some View {
         FormContentView(
-            firstname: $firstname,
-            lastname: $lastname,
+            firstName: $firstName,
+            lastName: $lastName,
             email: $email,
             phone: $phone,
             company: $company,
-            linkedin: $linkedin,
+            linkedIn: $linkedIn,
             facebook: $facebook,
             instagram: $instagram,
             x: $x,
             website: $website,
             additionalURLs: $additionalURLs,
-            showValidationAlert: $showValidationAlert
+            isShowingValidationAlert: $isShowingValidationAlert
         )
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button((existingCard == nil) ? Localizable.buttonCreate : CoreUILocalizable.buttonSave) {
                     if isFormValid {
-                        create()
                         if existingCard == nil {
                             @InjectService var matomo: MatomoUtils
                             matomo.track(eventWithCategory: .contactCard, name: "create")
                         }
+                        createCard()
                     } else {
-                        showValidationAlert = true
+                        isShowingValidationAlert = true
                     }
                 }
             }
@@ -129,26 +129,29 @@ struct ContactCardFormView: View {
         .matomoView(view: ["ContactCardFromView"])
     }
 
-    private func create() {
+    private func createCard() {
         var links: [ContactCardLink] = []
+
         if !website.isEmpty { links.append(ContactCardLink(type: .website, url: website)) }
-        if !linkedin.isEmpty { links.append(ContactCardLink(type: .linkedIn, url: linkedin)) }
+        if !linkedIn.isEmpty { links.append(ContactCardLink(type: .linkedIn, url: linkedIn)) }
         if !facebook.isEmpty { links.append(ContactCardLink(type: .facebook, url: facebook)) }
         if !instagram.isEmpty { links.append(ContactCardLink(type: .instagram, url: instagram)) }
         if !x.isEmpty { links.append(ContactCardLink(type: .x, url: x)) }
-        for entry in additionalURLs where entry != "" {
+        for entry in additionalURLs where !entry.isEmpty {
             links.append(ContactCardLink(type: .other, url: entry))
         }
+
         let newCard = ContactCard(
             id: existingCard?.id ?? userProfile.id,
-            firstName: firstname,
-            lastName: lastname,
+            firstName: firstName,
+            lastName: lastName,
             email: email,
             phone: phone,
             company: company,
             avatarURL: userProfile.avatar,
             links: links
         )
+
         Task {
             do {
                 try await ContactCardManager(rootPath: rootPath).save(contactCard: newCard, userId: userProfile.id)

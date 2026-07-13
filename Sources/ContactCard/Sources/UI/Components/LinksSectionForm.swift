@@ -23,7 +23,7 @@ import SwiftUI
 struct LinksSectionForm: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
-    @Binding var linkedin: String
+    @Binding var linkedIn: String
     @Binding var facebook: String
     @Binding var instagram: String
     @Binding var x: String
@@ -32,7 +32,7 @@ struct LinksSectionForm: View {
 
     var body: some View {
         Section {
-            TextField(Localizable.linkedIn, text: $linkedin)
+            TextField(Localizable.linkedIn, text: $linkedIn)
                 .multilineTextAlignment(.leading)
                 .keyboardType(.URL)
             TextField(Localizable.facebook, text: $facebook)

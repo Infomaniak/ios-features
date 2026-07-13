@@ -23,33 +23,33 @@ import SwiftUI
 struct FormContentView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
-    @Binding var firstname: String
-    @Binding var lastname: String
+    @Binding var firstName: String
+    @Binding var lastName: String
     @Binding var email: String
     @Binding var phone: String
     @Binding var company: String
 
-    @Binding var linkedin: String
+    @Binding var linkedIn: String
     @Binding var facebook: String
     @Binding var instagram: String
     @Binding var x: String
     @Binding var website: String
     @Binding var additionalURLs: [String]
 
-    @Binding var showValidationAlert: Bool
+    @Binding var isShowingValidationAlert: Bool
 
     var body: some View {
         Form {
             GeneralInformationSectionForm(
-                firstname: $firstname,
-                lastname: $lastname,
+                firstName: $firstName,
+                lastName: $lastName,
                 email: $email,
                 phone: $phone,
                 company: $company
             )
 
             LinksSectionForm(
-                linkedin: $linkedin,
+                linkedIn: $linkedIn,
                 facebook: $facebook,
                 instagram: $instagram,
                 x: $x,
@@ -57,7 +57,7 @@ struct FormContentView: View {
                 additionalURLs: $additionalURLs
             )
         }
-        .alert(Localizable.alertTitle, isPresented: $showValidationAlert) {
+        .alert(Localizable.alertTitle, isPresented: $isShowingValidationAlert) {
             Button(Localizable.continueButton, role: .cancel) {}
         } message: {
             Text(Localizable.alertDescription)
