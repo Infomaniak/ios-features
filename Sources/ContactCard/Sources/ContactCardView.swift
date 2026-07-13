@@ -42,41 +42,44 @@ public struct ContactCardView: View {
 
     public var body: some View {
         NavigationStack(path: $path) {
-            ContactCardOnBoardingView {
-                withAnimation {
-                    path.append(ContactCardRoute.form(userProfile, nil))
-                }
-            }
-            .environment(\.contactCardTheme, contactCardTheme)
-            .navigationTitle(Localizable.contactCardTitle)
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(for: ContactCardRoute.self) { route in
-                switch route {
-                case .form(let profile, let existingCard):
-                    ContactCardFormView(
-                        path: $path,
-                        userProfile: profile,
-                        rootPath: rootPath,
-                        existingCard: existingCard,
-                        dimissModal: dismiss.callAsFunction
-                    )
-                    .navigationTitle(Localizable.contactCardTitle)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .navigationBarBackButtonHidden()
+            ProgressView()
+                .environment(\.contactCardTheme, contactCardTheme)
+                .navigationDestination(for: ContactCardRoute.self) { route in
+                    switch route {
+                    case .onBoarding:
+                        ContactCardOnBoardingView {
+                            withAnimation {
+                                path.append(ContactCardRoute.form(userProfile, nil))
+                            }
+                        }
+                        .navigationTitle(Localizable.contactCardTitle)
+                        .navigationBarTitleDisplayMode(.inline)
 
-                case .qrCode(let profile, let card):
-                    ContactCardQRCodeView(
-                        path: $path,
-                        userProfile: profile,
-                        contactCard: card,
-                        rootPath: rootPath,
-                        dimissModal: dismiss.callAsFunction
-                    )
-                    .navigationTitle(Localizable.contactCardTitle)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .navigationBarBackButtonHidden()
+                    case .form(let profile, let existingCard):
+                        ContactCardFormView(
+                            path: $path,
+                            userProfile: profile,
+                            rootPath: rootPath,
+                            existingCard: existingCard,
+                            dimissModal: dismiss.callAsFunction
+                        )
+                        .navigationTitle(Localizable.contactCardTitle)
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarBackButtonHidden()
+
+                    case .qrCode(let profile, let card):
+                        ContactCardQRCodeView(
+                            path: $path,
+                            userProfile: profile,
+                            contactCard: card,
+                            rootPath: rootPath,
+                            dimissModal: dismiss.callAsFunction
+                        )
+                        .navigationTitle(Localizable.contactCardTitle)
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarBackButtonHidden()
+                    }
                 }
-            }
         }
         .task {
             await fetchAndNavigateIfCardExists()
@@ -99,9 +102,13 @@ public struct ContactCardView: View {
 
     private func fetchAndNavigateIfCardExists() async {
         let contactCardProfile = try? await ContactCardManager(rootPath: rootPath).cardFor(userId: userProfile.id)
-        guard let contactCardProfile else { return }
+
         withAnimation {
-            path.append(ContactCardRoute.qrCode(userProfile, contactCardProfile))
+            if let contactCardProfile {
+                path.append(ContactCardRoute.qrCode(userProfile, contactCardProfile))
+            } else {
+                path.append(ContactCardRoute.onBoarding)
+            }
         }
     }
 }
@@ -113,6 +120,7 @@ public struct ContactCardView: View {
 }
 
 enum ContactCardRoute: Hashable {
+    case onBoarding
     case form(UserProfile, ContactCard?)
     case qrCode(UserProfile, ContactCard)
 }
