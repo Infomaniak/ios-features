@@ -27,18 +27,12 @@ struct AdditionalURLsRows: View {
     var body: some View {
         ForEach(additionalURLs.indices, id: \.self) { index in
             HStack {
-                // Create a binding to the specific element in the array
-                let binding = Binding<String>(
-                    get: { additionalURLs[index] },
-                    set: { additionalURLs[index] = $0 }
-                )
-
-                TextField(Localizable.otherUrl, text: binding)
+                TextField(Localizable.otherUrl, text: $additionalURLs[index])
                     .multilineTextAlignment(.leading)
                     .keyboardType(.URL)
                 Button {
                     withAnimation {
-                        additionalURLs.remove(at: index)
+                        _ = additionalURLs.remove(at: index)
                     }
                 } label: {
                     Image(.bin)
