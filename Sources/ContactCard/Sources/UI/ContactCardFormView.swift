@@ -50,7 +50,7 @@ struct ContactCardFormView: View {
     var rootPath: URL
     var existingCard: ContactCard?
 
-    let onCancel: (() -> Void)?
+    let dimissModal: (() -> Void)?
 
     private var isFormValid: Bool {
         !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && !phone.isEmpty
@@ -61,13 +61,13 @@ struct ContactCardFormView: View {
         userProfile: UserProfile,
         rootPath: URL,
         existingCard: ContactCard? = nil,
-        onCancel: (() -> Void)? = nil
+        dimissModal: (() -> Void)? = nil
     ) {
         _path = path
         self.userProfile = userProfile
         self.rootPath = rootPath
         self.existingCard = existingCard
-        self.onCancel = onCancel
+        self.dimissModal = dimissModal
         _firstName = State(initialValue: existingCard?.firstName ?? userProfile.firstName)
         _lastName = State(initialValue: existingCard?.lastName ?? userProfile.lastName)
         _email = State(initialValue: existingCard?.email ?? userProfile.email)
@@ -119,7 +119,8 @@ struct ContactCardFormView: View {
                             dismiss()
                         }
                     } else {
-                        onCancel?()
+                        path.removeAll()
+                        dimissModal?()
                     }
                 }
             }
@@ -157,7 +158,8 @@ struct ContactCardFormView: View {
                 try await ContactCardManager(rootPath: rootPath).save(contactCard: newCard, userId: userProfile.id)
                 withAnimation {
                     if existingCard != nil {
-                        dismiss()
+                        path.removeLast()
+                        path.append(ContactCardRoute.qrCode(userProfile, newCard))
                     } else {
                         path.append(ContactCardRoute.qrCode(userProfile, newCard))
                     }

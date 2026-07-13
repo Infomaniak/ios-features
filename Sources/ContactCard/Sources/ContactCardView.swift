@@ -31,7 +31,6 @@ public struct ContactCardView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var path: [ContactCardRoute] = []
-    @State private var contactCardProfile: ContactCard?
 
     public let userProfile: UserProfile
     public let rootPath: URL
@@ -58,12 +57,9 @@ public struct ContactCardView: View {
                         path: $path,
                         userProfile: profile,
                         rootPath: rootPath,
-                        existingCard: existingCard
-                    ) {
-                        contactCardProfile = nil
-                        path.removeAll()
-                        dismiss()
-                    }
+                        existingCard: existingCard,
+                        dimissModal: dismiss.callAsFunction
+                    )
                     .navigationTitle(Localizable.contactCardTitle)
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarBackButtonHidden()
@@ -74,23 +70,7 @@ public struct ContactCardView: View {
                         userProfile: profile,
                         contactCard: card,
                         rootPath: rootPath,
-                        onCancel: {
-                            contactCardProfile = nil
-                            path.removeAll()
-                            dismiss()
-                        },
-                        onDelete: {
-                            contactCardProfile = nil
-                            path.removeAll()
-                            dismiss()
-                        },
-                        onUpdate: { updated in
-                            contactCardProfile = updated
-                            if let index = path.lastIndex { if case .qrCode = $0 { return true } else { return false } } {
-                                path.removeLast(path.count - index - 1)
-                                path.append(ContactCardRoute.qrCode(profile, updated))
-                            }
-                        }
+                        dimissModal: dismiss.callAsFunction
                     )
                     .navigationTitle(Localizable.contactCardTitle)
                     .navigationBarTitleDisplayMode(.inline)
@@ -118,12 +98,10 @@ public struct ContactCardView: View {
     }
 
     private func fetchAndNavigateIfCardExists() async {
-        contactCardProfile = try? await ContactCardManager(rootPath: rootPath).cardFor(userId: userProfile.id)
+        let contactCardProfile = try? await ContactCardManager(rootPath: rootPath).cardFor(userId: userProfile.id)
         guard let contactCardProfile else { return }
-        await MainActor.run {
-            withAnimation {
-                path.append(ContactCardRoute.qrCode(userProfile, contactCardProfile))
-            }
+        withAnimation {
+            path.append(ContactCardRoute.qrCode(userProfile, contactCardProfile))
         }
     }
 }
