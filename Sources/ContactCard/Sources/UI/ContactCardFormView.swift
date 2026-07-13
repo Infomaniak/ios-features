@@ -24,11 +24,6 @@ import InfomaniakDI
 import OSLog
 import SwiftUI
 
-struct IdentifiableURL: Identifiable {
-    let id = UUID()
-    var value: String
-}
-
 @available(iOS 16.4, *)
 struct ContactCardFormView: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
@@ -45,7 +40,7 @@ struct ContactCardFormView: View {
     @State private var instagram = ""
     @State private var x = ""
     @State private var website = ""
-    @State private var additionalURLs: [IdentifiableURL] = []
+    @State private var additionalURLs: [String] = []
 
     @State private var showValidationAlert = false
 
@@ -85,7 +80,7 @@ struct ContactCardFormView: View {
         let websiteLinks = existingCard?.links?.filter { $0.type == .website } ?? []
         _website = State(initialValue: websiteLinks.first?.url ?? "")
         let otherLinks = existingCard?.links?.filter { $0.type == .other } ?? []
-        _additionalURLs = State(initialValue: otherLinks.map { IdentifiableURL(value: $0.url) })
+        _additionalURLs = State(initialValue: otherLinks.map { $0.url })
     }
 
     var body: some View {
@@ -141,8 +136,8 @@ struct ContactCardFormView: View {
         if !facebook.isEmpty { links.append(ContactCardLink(type: .facebook, url: facebook)) }
         if !instagram.isEmpty { links.append(ContactCardLink(type: .instagram, url: instagram)) }
         if !x.isEmpty { links.append(ContactCardLink(type: .x, url: x)) }
-        for entry in additionalURLs where !entry.value.isEmpty {
-            links.append(ContactCardLink(type: .other, url: entry.value))
+        for entry in additionalURLs where entry != "" {
+            links.append(ContactCardLink(type: .other, url: entry))
         }
         let newCard = ContactCard(
             id: existingCard?.id ?? userProfile.id,
@@ -158,7 +153,7 @@ struct ContactCardFormView: View {
             do {
                 try await ContactCardManager(rootPath: rootPath).save(contactCard: newCard, userId: userProfile.id)
                 withAnimation {
-                    if let existingCard {
+                    if existingCard != nil {
                         dismiss()
                     } else {
                         path.append(ContactCardRoute.qrCode(userProfile, newCard))

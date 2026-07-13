@@ -28,7 +28,7 @@ struct LinksSectionForm: View {
     @Binding var instagram: String
     @Binding var x: String
     @Binding var website: String
-    @Binding var additionalURLs: [IdentifiableURL]
+    @Binding var additionalURLs: [String]
 
     var body: some View {
         Section {

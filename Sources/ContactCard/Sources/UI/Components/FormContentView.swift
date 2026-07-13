@@ -34,7 +34,7 @@ struct FormContentView: View {
     @Binding var instagram: String
     @Binding var x: String
     @Binding var website: String
-    @Binding var additionalURLs: [IdentifiableURL]
+    @Binding var additionalURLs: [String]
 
     @Binding var showValidationAlert: Bool
 

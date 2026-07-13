@@ -22,13 +22,13 @@ import SwiftUI
 struct AddURLButton: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
-    @Binding var additionalURLs: [IdentifiableURL]
+    @Binding var additionalURLs: [String]
 
     var body: some View {
         Button {
             withAnimation {
                 additionalURLs
-                    .append(IdentifiableURL(value: ""))
+                    .append("")
             }
         } label: {
             HStack {

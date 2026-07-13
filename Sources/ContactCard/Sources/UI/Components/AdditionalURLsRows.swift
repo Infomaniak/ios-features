@@ -22,17 +22,23 @@ import SwiftUI
 struct AdditionalURLsRows: View {
     @Environment(\.contactCardTheme) private var contactCardTheme
 
-    @Binding var additionalURLs: [IdentifiableURL]
+    @Binding var additionalURLs: [String]
 
     var body: some View {
-        ForEach($additionalURLs) { entry in
+        ForEach(additionalURLs.indices, id: \.self) { index in
             HStack {
-                TextField(Localizable.otherUrl, text: entry.value)
+                // Create a binding to the specific element in the array
+                let binding = Binding<String>(
+                    get: { additionalURLs[index] },
+                    set: { additionalURLs[index] = $0 }
+                )
+
+                TextField(Localizable.otherUrl, text: binding)
                     .multilineTextAlignment(.leading)
                     .keyboardType(.URL)
                 Button {
                     withAnimation {
-                        additionalURLs.removeAll { $0.id == entry.id }
+                        additionalURLs.remove(at: index)
                     }
                 } label: {
                     Image(.bin)
