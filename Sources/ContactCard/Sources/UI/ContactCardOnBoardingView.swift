@@ -104,6 +104,7 @@ struct ContactCardOnBoardingView: View {
             }
         }
         .background(contactCardTheme.background)
+        .matomoView(view: ["ContactCardOnboardingView"])
     }
 }
 

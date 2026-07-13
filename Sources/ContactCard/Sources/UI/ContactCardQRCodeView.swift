@@ -19,7 +19,9 @@
 #if canImport(UIKit)
 import Foundation
 import InfomaniakCore
+import InfomaniakCoreCommonUI
 import InfomaniakCoreUIResources
+import InfomaniakDI
 import SwiftUI
 
 @available(iOS 16.4, *)
@@ -67,6 +69,9 @@ struct ContactCardQRCodeView: View {
                     try? await ContactCardManager(rootPath: rootPath).deleteCardFor(userId: userProfile.id)
                     onDelete?()
                 }
+
+                @InjectService var matomo: MatomoUtils
+                matomo.track(eventWithCategory: .contactCard, name: "delete")
             }
             Button(CoreUILocalizable.buttonCancel, role: .cancel) {}
         } message: {
@@ -103,6 +108,7 @@ struct ContactCardQRCodeView: View {
         }
         .toolbarBackground(.hidden, for: .navigationBar)
         .background(contactCardTheme.navBarBackground)
+        .matomoView(view: ["ContactCardQRCodeView"])
     }
 }
 #endif

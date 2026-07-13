@@ -18,7 +18,9 @@
 
 #if canImport(UIKit)
 import InfomaniakCore
+import InfomaniakCoreCommonUI
 import InfomaniakCoreUIResources
+import InfomaniakDI
 import OSLog
 import SwiftUI
 
@@ -106,6 +108,10 @@ struct ContactCardFormView: View {
                 Button((existingCard == nil) ? Localizable.buttonCreate : CoreUILocalizable.buttonSave) {
                     if isFormValid {
                         create()
+                        if existingCard == nil {
+                            @InjectService var matomo: MatomoUtils
+                            matomo.track(eventWithCategory: .contactCard, name: "create")
+                        }
                     } else {
                         showValidationAlert = true
                     }
@@ -113,7 +119,7 @@ struct ContactCardFormView: View {
             }
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(CoreUILocalizable.buttonCancel) {
-                    if let existingCard {
+                    if existingCard != nil {
                         withAnimation {
                             dismiss()
                         }
@@ -125,6 +131,7 @@ struct ContactCardFormView: View {
         }
         .toolbarBackground(contactCardTheme.navBarBackground, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
+        .matomoView(view: ["ContactCardFromView"])
     }
 
     private func create() {
