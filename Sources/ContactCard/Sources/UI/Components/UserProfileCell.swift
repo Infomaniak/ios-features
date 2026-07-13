@@ -36,7 +36,7 @@ struct UserProfileCell: View {
         if !contactCard.phone.isEmpty {
             rows.append((Localizable.phone, contactCard.phone))
         }
-        if let website = contactCard.links?.first { $0.type == .website } {
+        if let website = contactCard.links?.first(where: { $0.type == .website }) {
             rows.append((Localizable.webSite, website.url))
         }
         return rows

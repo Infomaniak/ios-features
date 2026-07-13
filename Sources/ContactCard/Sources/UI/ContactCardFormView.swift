@@ -100,34 +100,38 @@ struct ContactCardFormView: View {
         )
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button((existingCard == nil) ? Localizable.buttonCreate : CoreUILocalizable.buttonSave) {
-                    if isFormValid {
-                        if existingCard == nil {
-                            @InjectService var matomo: MatomoUtils
-                            matomo.track(eventWithCategory: .contactCard, name: "create")
-                        }
-                        createCard()
-                    } else {
-                        isShowingValidationAlert = true
-                    }
-                }
+                Button((existingCard == nil) ? Localizable.buttonCreate : CoreUILocalizable.buttonSave, action: onSavePressed)
             }
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(CoreUILocalizable.buttonCancel) {
-                    if existingCard != nil {
-                        withAnimation {
-                            dismiss()
-                        }
-                    } else {
-                        path.removeAll()
-                        dimissModal?()
-                    }
-                }
+                Button(CoreUILocalizable.buttonCancel, action: onCancelPressed)
             }
         }
         .toolbarBackground(contactCardTheme.navBarBackground, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .matomoView(view: ["ContactCardFromView"])
+    }
+
+    private func onCancelPressed() {
+        if existingCard != nil {
+            withAnimation {
+                dismiss()
+            }
+        } else {
+            path.removeAll()
+            dimissModal?()
+        }
+    }
+
+    private func onSavePressed() {
+        if isFormValid {
+            if existingCard == nil {
+                @InjectService var matomo: MatomoUtils
+                matomo.track(eventWithCategory: .contactCard, name: "create")
+            }
+            createCard()
+        } else {
+            isShowingValidationAlert = true
+        }
     }
 
     private func createCard() {
