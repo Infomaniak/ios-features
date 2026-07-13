@@ -47,13 +47,15 @@ public struct ContactCardView: View {
                 .navigationDestination(for: ContactCardRoute.self) { route in
                     switch route {
                     case .onBoarding:
-                        ContactCardOnBoardingView {
-                            withAnimation {
-                                path.append(ContactCardRoute.form(userProfile, nil))
-                            }
-                        }
-                        .navigationTitle(Localizable.contactCardTitle)
-                        .navigationBarTitleDisplayMode(.inline)
+                        ContactCardOnBoardingView(onCreateButtonTapped: {
+                                                      withAnimation {
+                                                          path.append(ContactCardRoute.form(userProfile, nil))
+                                                      }
+                                                  },
+                                                  dismissModal: dismiss.callAsFunction)
+                            .navigationTitle(Localizable.contactCardTitle)
+                            .navigationBarTitleDisplayMode(.inline)
+                            .navigationBarBackButtonHidden()
 
                     case .form(let profile, let existingCard):
                         ContactCardFormView(
@@ -61,7 +63,7 @@ public struct ContactCardView: View {
                             userProfile: profile,
                             rootPath: rootPath,
                             existingCard: existingCard,
-                            dimissModal: dismiss.callAsFunction
+                            dismissModal: dismiss.callAsFunction
                         )
                         .navigationTitle(Localizable.contactCardTitle)
                         .navigationBarTitleDisplayMode(.inline)
@@ -73,7 +75,7 @@ public struct ContactCardView: View {
                             userProfile: profile,
                             contactCard: card,
                             rootPath: rootPath,
-                            dimissModal: dismiss.callAsFunction
+                            dismissModal: dismiss.callAsFunction
                         )
                         .navigationTitle(Localizable.contactCardTitle)
                         .navigationBarTitleDisplayMode(.inline)

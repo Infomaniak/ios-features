@@ -24,10 +24,10 @@ import SwiftUI
 
 @available(iOS 16.4, *)
 struct ContactCardOnBoardingView: View {
-    @Environment(\.dismiss) private var dismiss
     @Environment(\.contactCardTheme) private var contactCardTheme
 
     let onCreateButtonTapped: () -> Void
+    let dismissModal: (() -> Void)?
 
     let itemsStrings: [String] = [
         Localizable.contactCardOnBoardingFirstItem,
@@ -98,7 +98,9 @@ struct ContactCardOnBoardingView: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: dismiss.callAsFunction) {
+                Button {
+                    dismissModal?()
+                } label: {
                     Label(CoreUILocalizable.buttonClose, systemImage: "xmark")
                 }
             }
@@ -110,6 +112,6 @@ struct ContactCardOnBoardingView: View {
 
 @available(iOS 16.4, *)
 #Preview {
-    ContactCardOnBoardingView {}
+    ContactCardOnBoardingView(onCreateButtonTapped: {}, dismissModal: {})
 }
 #endif

@@ -38,7 +38,7 @@ struct ContactCardQRCodeView: View {
     let userProfile: UserProfile
     let contactCard: ContactCard
     let rootPath: URL
-    let dimissModal: (() -> Void)?
+    let dismissModal: (() -> Void)?
 
     var body: some View {
         ScrollView {
@@ -65,8 +65,7 @@ struct ContactCardQRCodeView: View {
             Button(Localizable.deleteButton, role: .destructive) {
                 Task {
                     try? await ContactCardManager(rootPath: rootPath).deleteCardFor(userId: userProfile.id)
-                    path.removeAll()
-                    dimissModal?()
+                    dismissModal?()
                 }
 
                 @InjectService var matomo: MatomoUtils
@@ -99,8 +98,7 @@ struct ContactCardQRCodeView: View {
 
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    path.removeAll()
-                    dimissModal?()
+                    dismissModal?()
                 } label: {
                     Label(CoreUILocalizable.buttonClose, systemImage: "xmark")
                 }

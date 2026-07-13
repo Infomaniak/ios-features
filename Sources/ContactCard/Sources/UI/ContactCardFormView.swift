@@ -50,7 +50,7 @@ struct ContactCardFormView: View {
     var rootPath: URL
     var existingCard: ContactCard?
 
-    let dimissModal: (() -> Void)?
+    let dismissModal: (() -> Void)?
 
     private var isFormValid: Bool {
         !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && !phone.isEmpty
@@ -61,13 +61,13 @@ struct ContactCardFormView: View {
         userProfile: UserProfile,
         rootPath: URL,
         existingCard: ContactCard? = nil,
-        dimissModal: (() -> Void)? = nil
+        dismissModal: (() -> Void)? = nil
     ) {
         _path = path
         self.userProfile = userProfile
         self.rootPath = rootPath
         self.existingCard = existingCard
-        self.dimissModal = dimissModal
+        self.dismissModal = dismissModal
         _firstName = State(initialValue: existingCard?.firstName ?? userProfile.firstName)
         _lastName = State(initialValue: existingCard?.lastName ?? userProfile.lastName)
         _email = State(initialValue: existingCard?.email ?? userProfile.email)
@@ -117,8 +117,7 @@ struct ContactCardFormView: View {
                 dismiss()
             }
         } else {
-            path.removeAll()
-            dimissModal?()
+            dismissModal?()
         }
     }
 
