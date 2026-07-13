@@ -48,7 +48,6 @@ struct ContactCardOnBoardingView: View {
                     OnboardingHeaderView()
                         .padding(IKPadding.medium)
                         .frame(maxWidth: 300)
-                        .environment(\.contactCardTheme, contactCardTheme)
                         .padding(.top, IKPadding.giant)
 
                     Text(Localizable.contactCardOnBoardingDescription)

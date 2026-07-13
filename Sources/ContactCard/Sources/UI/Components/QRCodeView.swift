@@ -31,10 +31,9 @@ struct QRCodeView: View {
         ZStack(alignment: .top) {
             Rectangle()
                 .foregroundStyle(contactCardTheme.primary)
-                .frame(width: .infinity, height: 80)
+                .frame(height: 80)
 
             ContactCardQRCodeGeneratorView(userProfile: userProfile, contactCard: contactCard)
-                .environment(\.contactCardTheme, contactCardTheme)
                 .frame(width: 200, height: 200)
                 .padding(IKPadding.large)
                 .background(contactCardTheme.background, in: RoundedRectangle(cornerRadius: IKRadius.large))

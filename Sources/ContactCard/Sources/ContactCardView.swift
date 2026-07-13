@@ -27,7 +27,6 @@ import SwiftUI
 public struct ContactCardView: View {
     @LazyInjectService private var orientationManager: OrientationManageable
 
-    @Environment(\.contactCardTheme) private var contactCardTheme
     @Environment(\.dismiss) private var dismiss
 
     @State private var path: [ContactCardRoute] = []
@@ -43,7 +42,6 @@ public struct ContactCardView: View {
     public var body: some View {
         NavigationStack(path: $path) {
             ProgressView()
-                .environment(\.contactCardTheme, contactCardTheme)
                 .navigationDestination(for: ContactCardRoute.self) { route in
                     switch route {
                     case .onBoarding:
