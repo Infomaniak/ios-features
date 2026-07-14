@@ -37,8 +37,8 @@ struct FeatureItemCell: View {
             Text(text)
                 .font(.Custom.callout)
                 .fontWeight(.medium)
+                .foregroundStyle(contactCardTheme.primaryText)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
