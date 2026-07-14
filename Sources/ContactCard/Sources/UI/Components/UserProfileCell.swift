@@ -65,7 +65,12 @@ struct UserProfileCell: View {
             if !infoRows.isEmpty {
                 VStack(spacing: IKPadding.mini) {
                     ForEach(Array(infoRows.enumerated()), id: \.offset) { index, row in
-                        ContactInfoRow(label: row.label, value: row.value, valueColor: contactCardTheme.primary)
+                        ContactInfoRow(
+                            label: row.label,
+                            value: row.value,
+                            labelColor: contactCardTheme.secondaryText,
+                            valueColor: contactCardTheme.primary
+                        )
                         if index < infoRows.count - 1 || !socialLinks.isEmpty {
                             Divider()
                         }
@@ -83,12 +88,13 @@ struct UserProfileCell: View {
 private struct ContactInfoRow: View {
     let label: String
     let value: String
+    let labelColor: Color
     let valueColor: Color
 
     var body: some View {
         HStack(alignment: .firstTextBaseline) {
             Text(label)
-                .foregroundStyle(valueColor)
+                .foregroundStyle(labelColor)
             Spacer()
             Text(value)
                 .foregroundStyle(valueColor)
