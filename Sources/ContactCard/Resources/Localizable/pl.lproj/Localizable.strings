@@ -1,0 +1,104 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: pl, Polish
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
+ * Exported by: Kylian Grandy
+ * Exported at: Tue, 14 Jul 2026 08:48:03 +0200
+ */
+
+/* loco:6a4b9b67bd16f080d90102e2 */
+"addUrl" = "Dodaj adres URL";
+
+/* loco:6a4b9d07bc130aadd700d437 */
+"alertDescription" = "Proszę wypełnić wszystkie obowiązkowe pola (imię, nazwisko, adres e-mail, numer telefonu).";
+
+/* loco:6a4b9ce6d4245bfa0406af22 */
+"alertTitle" = "Pola obowiązkowe";
+
+/* loco:6a4b9c54d3716a1c8e0782f3 */
+"buttonCreate" = "Utwórz";
+
+/* loco:6a4bc7948b43c4c4c30df3d9 */
+"buttonMore" = "Więcej";
+
+/* loco:6a4b9a9c774c94b68f0ee222 */
+"company" = "Firma";
+
+/* loco:6a4b98882db06191c30a2d62 */
+"contactCardOnBoardingDescription" = "Wystarczy jeden gest, by zeskanować Twój kod QR. Twoi znajomi mogą dodać Cię do kontaktów w mgnieniu oka – zarówno przy połączeniu z internetem, jak i bez niego.";
+
+/* loco:6a4b98dc61385ce8da05ce02 */
+"contactCardOnBoardingFirstItem" = "Wszystkie Twoje dane w kodzie QR";
+
+/* loco:6a4b9913dcfe91b97c0b6b82 */
+"contactCardOnBoardingSecondItem" = "Odbiorca nie musi posiadać konta";
+
+/* loco:6a4b999aa82d0a517109ceb3 */
+"contactCardOnBoardingStart" = "Zacznij";
+
+/* loco:6a4b993d0bd42849960af6f2 */
+"contactCardOnBoardingThirdItem" = "Zawsze dostępne, nawet w trybie offline";
+
+/* loco:6a4b981712adf2df780e5ea5 */
+"contactCardOnBoardingTitle" = "Stwórz swoją wizytówkę";
+
+/* loco:6a4b9cb1bc130aadd700d435 */
+"contactCardTitle" = "Wizytówka";
+
+/* loco:6a4bc870019edb131005f5c2 */
+"continueButton" = "Kontynuuj";
+
+/* loco:6a4b9e3f01d1baf89d0c4213 */
+"deleteAlertDescription" = "Czy na pewno chcesz usunąć wizytówkę powiązaną z tym kontem?";
+
+/* loco:6a4b9e19ac8f970c1e0773d2 */
+"deleteAlertTitle" = "Usuń wizytówkę";
+
+/* loco:6a4b9e65ac8f970c1e0773d4 */
+"deleteButton" = "Usuń";
+
+/* loco:6a4b9a1af5a40c56ce0fdec2 */
+"email" = "E-mail";
+
+/* loco:6a4b9ae5962ed69f9e0406e2 */
+"facebook" = "Facebook";
+
+/* loco:6a4b99c21a71443d2e075653 */
+"firstName" = "Imię";
+
+/* loco:6a4b9bc63bfc66f09e0b1945 */
+"generalInformation" = "Informacje ogólne";
+
+/* loco:6a4b9af5c4532701980bca1b */
+"instagram" = "Instagram";
+
+/* loco:6a4b99f1da8d075ab10d92f9 */
+"lastName" = "Nazwisko";
+
+/* loco:6a4b9ad13c1285ac5806e422 */
+"linkedIn" = "LinkedIn";
+
+/* loco:6a4b9bfb27a74b691f04e233 */
+"linksAndSocialNetwork" = "Linki i serwisy społecznościowe";
+
+/* loco:6a4b9ddc111a71c69f0998f2 */
+"menuEdit" = "Edytuj";
+
+/* loco:6a4b9b4a774c94b68f0ee224 */
+"otherUrl" = "Inny adres URL";
+
+/* loco:6a4b9a84c4532701980bca19 */
+"phone" = "Telefon";
+
+/* loco:6a4b9dbd983cc71bfb0a1c92 */
+"qrCodeGenerationError" = "Nie można wygenerować kodu QR";
+
+/* loco:6a4b9d878cdc0d546a04a343 */
+"sharedButton" = "Udostępnij";
+
+/* loco:6a4b9b263bfc66f09e0b1942 */
+"webSite" = "Strona internetowa";
+
+/* loco:6a4b9b112d7064a7f1021fe2 */
+"x" = "X";

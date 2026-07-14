@@ -1,0 +1,104 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: es, Spanish
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
+ * Exported by: Kylian Grandy
+ * Exported at: Tue, 14 Jul 2026 08:48:03 +0200
+ */
+
+/* loco:6a4b9b67bd16f080d90102e2 */
+"addUrl" = "Añadir URL";
+
+/* loco:6a4b9d07bc130aadd700d437 */
+"alertDescription" = "Rellena todos los campos obligatorios (nombre, apellidos, correo electrónico, número de teléfono).";
+
+/* loco:6a4b9ce6d4245bfa0406af22 */
+"alertTitle" = "Campos obligatorios";
+
+/* loco:6a4b9c54d3716a1c8e0782f3 */
+"buttonCreate" = "Crear";
+
+/* loco:6a4bc7948b43c4c4c30df3d9 */
+"buttonMore" = "Más";
+
+/* loco:6a4b9a9c774c94b68f0ee222 */
+"company" = "Empresa";
+
+/* loco:6a4b98882db06191c30a2d62 */
+"contactCardOnBoardingDescription" = "Deja que escaneen tu código QR con un solo gesto. Tus contactos podrán añadirte en un abrir y cerrar de ojos, tanto si hay conexión a Internet como si no.";
+
+/* loco:6a4b98dc61385ce8da05ce02 */
+"contactCardOnBoardingFirstItem" = "Toda tu información en un código QR";
+
+/* loco:6a4b9913dcfe91b97c0b6b82 */
+"contactCardOnBoardingSecondItem" = "No es necesario que el destinatario tenga una cuenta";
+
+/* loco:6a4b999aa82d0a517109ceb3 */
+"contactCardOnBoardingStart" = "Empezar";
+
+/* loco:6a4b993d0bd42849960af6f2 */
+"contactCardOnBoardingThirdItem" = "Siempre accesible, incluso sin conexión";
+
+/* loco:6a4b981712adf2df780e5ea5 */
+"contactCardOnBoardingTitle" = "Crea tu tarjeta de visita";
+
+/* loco:6a4b9cb1bc130aadd700d435 */
+"contactCardTitle" = "Tarjeta de contacto";
+
+/* loco:6a4bc870019edb131005f5c2 */
+"continueButton" = "Continuar";
+
+/* loco:6a4b9e3f01d1baf89d0c4213 */
+"deleteAlertDescription" = "¿Estás seguro de que quieres eliminar la ficha de contacto asociada a esta cuenta?";
+
+/* loco:6a4b9e19ac8f970c1e0773d2 */
+"deleteAlertTitle" = "Eliminar la ficha de contacto";
+
+/* loco:6a4b9e65ac8f970c1e0773d4 */
+"deleteButton" = "Eliminar";
+
+/* loco:6a4b9a1af5a40c56ce0fdec2 */
+"email" = "Correo electrónico";
+
+/* loco:6a4b9ae5962ed69f9e0406e2 */
+"facebook" = "Facebook";
+
+/* loco:6a4b99c21a71443d2e075653 */
+"firstName" = "Nombre";
+
+/* loco:6a4b9bc63bfc66f09e0b1945 */
+"generalInformation" = "Información general";
+
+/* loco:6a4b9af5c4532701980bca1b */
+"instagram" = "Instagram";
+
+/* loco:6a4b99f1da8d075ab10d92f9 */
+"lastName" = "Apellido";
+
+/* loco:6a4b9ad13c1285ac5806e422 */
+"linkedIn" = "LinkedIn";
+
+/* loco:6a4b9bfb27a74b691f04e233 */
+"linksAndSocialNetwork" = "Enlaces y redes sociales";
+
+/* loco:6a4b9ddc111a71c69f0998f2 */
+"menuEdit" = "Editar";
+
+/* loco:6a4b9b4a774c94b68f0ee224 */
+"otherUrl" = "Otra URL";
+
+/* loco:6a4b9a84c4532701980bca19 */
+"phone" = "Teléfono";
+
+/* loco:6a4b9dbd983cc71bfb0a1c92 */
+"qrCodeGenerationError" = "No se ha podido generar el código QR";
+
+/* loco:6a4b9d878cdc0d546a04a343 */
+"sharedButton" = "Compartir";
+
+/* loco:6a4b9b263bfc66f09e0b1942 */
+"webSite" = "Página web";
+
+/* loco:6a4b9b112d7064a7f1021fe2 */
+"x" = "X";

@@ -1,0 +1,104 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: de, German
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
+ * Exported by: Kylian Grandy
+ * Exported at: Tue, 14 Jul 2026 08:48:03 +0200
+ */
+
+/* loco:6a4b9b67bd16f080d90102e2 */
+"addUrl" = "URL hinzufügen";
+
+/* loco:6a4b9d07bc130aadd700d437 */
+"alertDescription" = "Bitte füllen Sie alle Pflichtfelder aus (Vorname, Nachname, E-Mail-Adresse, Telefonnummer).";
+
+/* loco:6a4b9ce6d4245bfa0406af22 */
+"alertTitle" = "Pflichtfelder";
+
+/* loco:6a4b9c54d3716a1c8e0782f3 */
+"buttonCreate" = "Erstellen";
+
+/* loco:6a4bc7948b43c4c4c30df3d9 */
+"buttonMore" = "Mehr";
+
+/* loco:6a4b9a9c774c94b68f0ee222 */
+"company" = "Unternehmen";
+
+/* loco:6a4b98882db06191c30a2d62 */
+"contactCardOnBoardingDescription" = "Lassen Sie Ihren QR-Code mit einer einzigen Geste scannen. Ihre Kontakte können Sie im Handumdrehen hinzufügen – mit oder ohne Internetverbindung.";
+
+/* loco:6a4b98dc61385ce8da05ce02 */
+"contactCardOnBoardingFirstItem" = "Alle Ihre Informationen in einem QR-Code";
+
+/* loco:6a4b9913dcfe91b97c0b6b82 */
+"contactCardOnBoardingSecondItem" = "Auf Seiten des Empfängers ist kein Konto erforderlich";
+
+/* loco:6a4b999aa82d0a517109ceb3 */
+"contactCardOnBoardingStart" = "Erste Schritte";
+
+/* loco:6a4b993d0bd42849960af6f2 */
+"contactCardOnBoardingThirdItem" = "Jederzeit verfügbar, auch offline";
+
+/* loco:6a4b981712adf2df780e5ea5 */
+"contactCardOnBoardingTitle" = "Erstellen Sie Ihre Visitenkarte";
+
+/* loco:6a4b9cb1bc130aadd700d435 */
+"contactCardTitle" = "Kontaktkarte";
+
+/* loco:6a4bc870019edb131005f5c2 */
+"continueButton" = "Weiter";
+
+/* loco:6a4b9e3f01d1baf89d0c4213 */
+"deleteAlertDescription" = "Möchten Sie die mit diesem Konto verknüpfte Kontaktkarte wirklich löschen?";
+
+/* loco:6a4b9e19ac8f970c1e0773d2 */
+"deleteAlertTitle" = "Die Kontaktkarte löschen";
+
+/* loco:6a4b9e65ac8f970c1e0773d4 */
+"deleteButton" = "Löschen";
+
+/* loco:6a4b9a1af5a40c56ce0fdec2 */
+"email" = "E-Mail";
+
+/* loco:6a4b9ae5962ed69f9e0406e2 */
+"facebook" = "Facebook";
+
+/* loco:6a4b99c21a71443d2e075653 */
+"firstName" = "Vorname";
+
+/* loco:6a4b9bc63bfc66f09e0b1945 */
+"generalInformation" = "Allgemeine Informationen";
+
+/* loco:6a4b9af5c4532701980bca1b */
+"instagram" = "Instagram";
+
+/* loco:6a4b99f1da8d075ab10d92f9 */
+"lastName" = "Nachname";
+
+/* loco:6a4b9ad13c1285ac5806e422 */
+"linkedIn" = "LinkedIn";
+
+/* loco:6a4b9bfb27a74b691f04e233 */
+"linksAndSocialNetwork" = "Links und soziale Netzwerke";
+
+/* loco:6a4b9ddc111a71c69f0998f2 */
+"menuEdit" = "Bearbeiten";
+
+/* loco:6a4b9b4a774c94b68f0ee224 */
+"otherUrl" = "Andere URL";
+
+/* loco:6a4b9a84c4532701980bca19 */
+"phone" = "Telefon";
+
+/* loco:6a4b9dbd983cc71bfb0a1c92 */
+"qrCodeGenerationError" = "Der QR-Code kann nicht generiert werden";
+
+/* loco:6a4b9d878cdc0d546a04a343 */
+"sharedButton" = "Teilen";
+
+/* loco:6a4b9b263bfc66f09e0b1942 */
+"webSite" = "Website";
+
+/* loco:6a4b9b112d7064a7f1021fe2 */
+"x" = "X";

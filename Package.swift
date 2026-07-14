@@ -12,8 +12,16 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "MyKSuite",
-            targets: ["MyKSuite"]
+            name: "AppLock",
+            targets: ["AppLock"]
+        ),
+        .library(
+            name: "ContactCard",
+            targets: ["ContactCard"]
+        ),
+        .library(
+            name: "InAppTwoFactorAuthentication",
+            targets: ["InAppTwoFactorAuthentication"]
         ),
         .library(
             name: "InterAppLogin",
@@ -28,31 +36,66 @@ let package = Package(
             targets: ["KSuiteUtils"]
         ),
         .library(
-            name: "InAppTwoFactorAuthentication",
-            targets: ["InAppTwoFactorAuthentication"]
-        ),
-        .library(
-            name: "AppLock",
-            targets: ["AppLock"]
+            name: "MyKSuite",
+            targets: ["MyKSuite"]
         )
     ],
     dependencies: [
         .package(url: "https://github.com/Infomaniak/ios-core", .upToNextMajor(from: "19.0.0")),
         .package(url: "https://github.com/Infomaniak/ios-core-ui", .upToNextMajor(from: "26.0.0")),
+        .package(url: "https://github.com/Infomaniak/ios-core-uikit", .upToNextMajor(from: "2.0.0")),
         .package(url: "https://github.com/Infomaniak/ios-dependency-injection", .upToNextMajor(from: "2.0.3")),
         .package(url: "https://github.com/Infomaniak/ios-device-check", .upToNextMajor(from: "1.1.1")),
         .package(url: "https://github.com/Infomaniak/ios-login", .upToNextMajor(from: "7.8.0")),
-        .package(url: "https://github.com/kean/Nuke", .upToNextMajor(from: "12.1.3"))
+        .package(url: "https://github.com/kean/Nuke", .upToNextMajor(from: "12.1.3")),
+        .package(url: "https://github.com/dagronf/QRCode", .upToNextMajor(from: "28.0.0"))
     ],
     targets: [
         .target(
-            name: "MyKSuite",
+            name: "AppLock",
             dependencies: [
-                "KSuiteUtils",
                 .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
                 .product(name: "InfomaniakCore", package: "ios-core"),
+                .product(name: "InfomaniakCoreCommonUI", package: "ios-core-ui"),
                 .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
                 .product(name: "DesignSystem", package: "ios-core-ui")
+            ]
+        ),
+        .target(
+            name: "ContactCard",
+            dependencies: [
+                .product(name: "InfomaniakCore", package: "ios-core"),
+                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
+                .product(name: "DesignSystem", package: "ios-core-ui"),
+                .product(name: "QRCode", package: "QRCode"),
+                .product(name: "Nuke", package: "Nuke"),
+                .product(name: "NukeUI", package: "Nuke")
+            ]
+        ),
+        .target(
+            name: "InAppTwoFactorAuthentication",
+            dependencies: [
+                .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
+                .product(name: "InfomaniakCore", package: "ios-core"),
+                .product(name: "DeviceAssociation", package: "ios-core"),
+                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
+                .product(name: "DesignSystem", package: "ios-core-ui"),
+                .product(name: "Nuke", package: "Nuke"),
+                .product(name: "NukeUI", package: "Nuke")
+            ]
+        ),
+        .target(
+            name: "InterAppLogin",
+            dependencies: [
+                .product(name: "DesignSystem", package: "ios-core-ui"),
+                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
+                .product(name: "InfomaniakCoreUIResources", package: "ios-core-ui"),
+                .product(name: "InfomaniakCore", package: "ios-core"),
+                .product(name: "InfomaniakDeviceCheck", package: "ios-device-check"),
+                .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
+                .product(name: "InfomaniakLogin", package: "ios-login"),
+                .product(name: "NukeUI", package: "Nuke"),
+                .product(name: "Nuke", package: "Nuke")
             ]
         ),
         .target(
@@ -72,41 +115,16 @@ let package = Package(
             ]
         ),
         .target(
-            name: "InterAppLogin",
+            name: "MyKSuite",
             dependencies: [
-                .product(name: "DesignSystem", package: "ios-core-ui"),
-                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
-                .product(name: "InfomaniakCoreUIResources", package: "ios-core-ui"),
-                .product(name: "InfomaniakCore", package: "ios-core"),
-                .product(name: "InfomaniakDeviceCheck", package: "ios-device-check"),
-                .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
-                .product(name: "InfomaniakLogin", package: "ios-login"),
-                .product(name: "NukeUI", package: "Nuke"),
-                .product(name: "Nuke", package: "Nuke")
-            ]
-        ),
-        .target(
-            name: "InAppTwoFactorAuthentication",
-            dependencies: [
+                "KSuiteUtils",
                 .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
                 .product(name: "InfomaniakCore", package: "ios-core"),
-                .product(name: "DeviceAssociation", package: "ios-core"),
-                .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
-                .product(name: "DesignSystem", package: "ios-core-ui"),
-                .product(name: "Nuke", package: "Nuke"),
-                .product(name: "NukeUI", package: "Nuke")
-            ]
-        ),
-        .target(
-            name: "AppLock",
-            dependencies: [
-                .product(name: "InfomaniakDI", package: "ios-dependency-injection"),
-                .product(name: "InfomaniakCore", package: "ios-core"),
-                .product(name: "InfomaniakCoreCommonUI", package: "ios-core-ui"),
                 .product(name: "InfomaniakCoreSwiftUI", package: "ios-core-ui"),
                 .product(name: "DesignSystem", package: "ios-core-ui")
             ]
         ),
-        .testTarget(name: "MyKSuiteTests", dependencies: ["MyKSuite"])
+        .testTarget(name: "MyKSuiteTests", dependencies: ["MyKSuite"]),
+        .testTarget(name: "ContactCardTests", dependencies: ["ContactCard"])
     ]
 )

@@ -1,0 +1,104 @@
+/*
+ * Loco ios export: Xcode Strings (legacy)
+ * Project: CoreUI
+ * Locale: nb, Norwegian Bokmål
+ * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
+ * Exported by: Kylian Grandy
+ * Exported at: Tue, 14 Jul 2026 08:48:03 +0200
+ */
+
+/* loco:6a4b9b67bd16f080d90102e2 */
+"addUrl" = "Legg til nettadresse";
+
+/* loco:6a4b9d07bc130aadd700d437 */
+"alertDescription" = "Vennligst fyll ut alle obligatoriske felter (fornavn, etternavn, e-postadresse, telefonnummer).";
+
+/* loco:6a4b9ce6d4245bfa0406af22 */
+"alertTitle" = "Obligatoriske felt";
+
+/* loco:6a4b9c54d3716a1c8e0782f3 */
+"buttonCreate" = "Opprett";
+
+/* loco:6a4bc7948b43c4c4c30df3d9 */
+"buttonMore" = "Mer";
+
+/* loco:6a4b9a9c774c94b68f0ee222 */
+"company" = "Selskap";
+
+/* loco:6a4b98882db06191c30a2d62 */
+"contactCardOnBoardingDescription" = "Få QR-koden din skannet med en enkel bevegelse. Kontaktene dine kan legge deg til på et øyeblikk, både med og uten internettforbindelse.";
+
+/* loco:6a4b98dc61385ce8da05ce02 */
+"contactCardOnBoardingFirstItem" = "All informasjonen din i en QR-kode";
+
+/* loco:6a4b9913dcfe91b97c0b6b82 */
+"contactCardOnBoardingSecondItem" = "Det kreves ingen konto hos mottakeren";
+
+/* loco:6a4b999aa82d0a517109ceb3 */
+"contactCardOnBoardingStart" = "Kom i gang";
+
+/* loco:6a4b993d0bd42849960af6f2 */
+"contactCardOnBoardingThirdItem" = "Alltid tilgjengelig, selv uten nettilgang";
+
+/* loco:6a4b981712adf2df780e5ea5 */
+"contactCardOnBoardingTitle" = "Lag ditt eget visittkort";
+
+/* loco:6a4b9cb1bc130aadd700d435 */
+"contactCardTitle" = "Kontaktkort";
+
+/* loco:6a4bc870019edb131005f5c2 */
+"continueButton" = "Fortsett";
+
+/* loco:6a4b9e3f01d1baf89d0c4213 */
+"deleteAlertDescription" = "Er du sikker på at du vil slette kontaktkortet som er knyttet til denne kontoen?";
+
+/* loco:6a4b9e19ac8f970c1e0773d2 */
+"deleteAlertTitle" = "Slett kontaktkortet";
+
+/* loco:6a4b9e65ac8f970c1e0773d4 */
+"deleteButton" = "Slett";
+
+/* loco:6a4b9a1af5a40c56ce0fdec2 */
+"email" = "E-post";
+
+/* loco:6a4b9ae5962ed69f9e0406e2 */
+"facebook" = "Facebook";
+
+/* loco:6a4b99c21a71443d2e075653 */
+"firstName" = "Fornavn";
+
+/* loco:6a4b9bc63bfc66f09e0b1945 */
+"generalInformation" = "Generell informasjon";
+
+/* loco:6a4b9af5c4532701980bca1b */
+"instagram" = "Instagram";
+
+/* loco:6a4b99f1da8d075ab10d92f9 */
+"lastName" = "Etternavn";
+
+/* loco:6a4b9ad13c1285ac5806e422 */
+"linkedIn" = "LinkedIn";
+
+/* loco:6a4b9bfb27a74b691f04e233 */
+"linksAndSocialNetwork" = "Lenker og sosiale nettverk";
+
+/* loco:6a4b9ddc111a71c69f0998f2 */
+"menuEdit" = "Rediger";
+
+/* loco:6a4b9b4a774c94b68f0ee224 */
+"otherUrl" = "Annen URL";
+
+/* loco:6a4b9a84c4532701980bca19 */
+"phone" = "Telefon";
+
+/* loco:6a4b9dbd983cc71bfb0a1c92 */
+"qrCodeGenerationError" = "Det er ikke mulig å generere QR-koden";
+
+/* loco:6a4b9d878cdc0d546a04a343 */
+"sharedButton" = "Del";
+
+/* loco:6a4b9b263bfc66f09e0b1942 */
+"webSite" = "Nettsted";
+
+/* loco:6a4b9b112d7064a7f1021fe2 */
+"x" = "X";
