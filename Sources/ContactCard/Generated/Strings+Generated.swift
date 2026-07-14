@@ -39,7 +39,7 @@ internal enum Localizable {
   /// loco:6a4bc870019edb131005f5c2
   internal static let continueButton = Localizable.tr("Localizable", "continueButton", fallback: "Continue")
   /// loco:6a4b9e3f01d1baf89d0c4213
-  internal static let deleteAlertDescription = Localizable.tr("Localizable", "deleteAlertDescription", fallback: "Deleting your card deactivates it and its QR code. People who have already saved your card will not be affected. You can recreate it at any time.")
+  internal static let deleteAlertDescription = Localizable.tr("Localizable", "deleteAlertDescription", fallback: "Are you sure you want to delete the contact card associated with this account?")
   /// loco:6a4b9e19ac8f970c1e0773d2
   internal static let deleteAlertTitle = Localizable.tr("Localizable", "deleteAlertTitle", fallback: "Delete the contact card")
   /// loco:6a4b9e65ac8f970c1e0773d4

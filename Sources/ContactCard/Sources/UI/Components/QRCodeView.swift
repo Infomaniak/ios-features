@@ -36,8 +36,11 @@ struct QRCodeView: View {
             ContactCardQRCodeGeneratorView(userProfile: userProfile, contactCard: contactCard)
                 .frame(width: 200, height: 200)
                 .padding(IKPadding.large)
-                .background(contactCardTheme.background, in: RoundedRectangle(cornerRadius: IKRadius.large))
-                .shadow(radius: 4, x: 0, y: 2)
+                .background {
+                    RoundedRectangle(cornerRadius: IKRadius.large)
+                        .fill(contactCardTheme.background)
+                        .shadow(radius: 4, x: 0, y: 2)
+                }
                 .padding(.top, IKPadding.huge)
                 .padding(.bottom, IKPadding.small)
         }

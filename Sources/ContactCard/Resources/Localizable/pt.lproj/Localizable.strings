@@ -4,7 +4,7 @@
  * Locale: pt, Portuguese
  * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
  * Exported by: Kylian Grandy
- * Exported at: Mon, 06 Jul 2026 17:25:57 +0200
+ * Exported at: Tue, 14 Jul 2026 08:48:03 +0200
  */
 
 /* loco:6a4b9b67bd16f080d90102e2 */
@@ -47,10 +47,10 @@
 "contactCardTitle" = "Cartão de contacto";
 
 /* loco:6a4bc870019edb131005f5c2 */
-"continueButton" = "Continue";
+"continueButton" = "Continuar";
 
 /* loco:6a4b9e3f01d1baf89d0c4213 */
-"deleteAlertDescription" = "Ao eliminar o seu cartão, este fica desativado, assim como o seu código QR. As pessoas que já tenham guardado o seu cartão não serão afetadas. Pode recriá-lo a qualquer momento.";
+"deleteAlertDescription" = "Tem a certeza de que quer eliminar o cartão de contacto associado a esta conta?";
 
 /* loco:6a4b9e19ac8f970c1e0773d2 */
 "deleteAlertTitle" = "Apagar o cartão de contacto";

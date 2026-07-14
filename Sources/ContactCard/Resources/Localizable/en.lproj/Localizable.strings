@@ -4,7 +4,7 @@
  * Locale: en, English
  * Tagged: ios, !accountsBottomSheet, !appIntegrity, !applock, !bugtracker, !common, !emoji-reaction, !inapp2fa, !interapplogin, !ios-stringsdict, !kSuite, !login, !my kSuite, !network, !privacy
  * Exported by: Kylian Grandy
- * Exported at: Mon, 06 Jul 2026 17:25:57 +0200
+ * Exported at: Tue, 14 Jul 2026 08:48:03 +0200
  */
 
 /* loco:6a4b9b67bd16f080d90102e2 */
@@ -50,7 +50,7 @@
 "continueButton" = "Continue";
 
 /* loco:6a4b9e3f01d1baf89d0c4213 */
-"deleteAlertDescription" = "Deleting your card deactivates it and its QR code. People who have already saved your card will not be affected. You can recreate it at any time.";
+"deleteAlertDescription" = "Are you sure you want to delete the contact card associated with this account?";
 
 /* loco:6a4b9e19ac8f970c1e0773d2 */
 "deleteAlertTitle" = "Delete the contact card";
