@@ -44,6 +44,7 @@ struct ContactCardQRCodeView: View {
     var body: some View {
         ScrollView {
             CardContentView(userProfile: userProfile, contactCard: contactCard)
+                .card3DEffect()
                 .padding(IKPadding.medium)
                 .padding(.bottom, IKPadding.large)
         }
@@ -111,5 +112,16 @@ struct ContactCardQRCodeView: View {
         .background(contactCardTheme.navBarBackground)
         .matomoView(view: ["ContactCardQRCodeView"])
     }
+}
+
+@available(iOS 16.4, *)
+#Preview {
+    ContactCardQRCodeView(
+        path: .constant([.qrCode(ProfileFake.fakeUserProfile, ProfileFake.fakeContactCard)]),
+        userProfile: ProfileFake.fakeUserProfile,
+        contactCard: ProfileFake.fakeContactCard,
+        rootPath: URL(string: "https://example.com")!
+    ) {}
+        .environment(\.contactCardTheme, .pink)
 }
 #endif

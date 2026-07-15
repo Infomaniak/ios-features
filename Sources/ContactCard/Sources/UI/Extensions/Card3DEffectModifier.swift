@@ -37,7 +37,7 @@ private struct Card3DEffectModifier: ViewModifier {
     private let rotationMultiplier: Double = 12
 
     private var specularShader: Shader {
-        ShaderLibrary.default.specularHighlight(
+        ShaderLibrary.bundle(.module).specularHighlight(
             .boundingRect,
             .float2(Float(motionManager.tiltX), Float(motionManager.tiltY))
         )
