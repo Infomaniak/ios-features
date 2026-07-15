@@ -17,6 +17,7 @@
  */
 
 #if canImport(UIKit)
+import DesignSystem
 import Foundation
 import InfomaniakCore
 import InfomaniakCoreCommonUI
@@ -43,6 +44,8 @@ struct ContactCardQRCodeView: View {
     var body: some View {
         ScrollView {
             CardContentView(userProfile: userProfile, contactCard: contactCard)
+                .padding(IKPadding.medium)
+                .padding(.bottom, IKPadding.large)
         }
         .onAppear {
             savedBrightness = UIScreen.main.brightness

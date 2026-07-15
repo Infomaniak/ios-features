@@ -68,7 +68,6 @@ public struct ContactCardView: View {
                         .navigationTitle(Localizable.contactCardTitle)
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarBackButtonHidden()
-
                     case .qrCode(let profile, let card):
                         ContactCardQRCodeView(
                             path: $path,

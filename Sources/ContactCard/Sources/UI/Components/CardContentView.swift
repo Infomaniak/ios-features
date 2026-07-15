@@ -38,9 +38,15 @@ struct CardContentView: View {
                 .background(contactCardTheme.background)
         }
         .background(contactCardTheme.background)
-        .clipShape(RoundedRectangle(cornerRadius: IKRadius.large))
-        .padding(IKPadding.medium)
-        .padding(.bottom, IKPadding.large)
+        .clipShape(.rect(cornerRadius: IKRadius.large))
         .frame(maxWidth: 400)
     }
+}
+
+#Preview {
+    CardContentView(userProfile: ProfileFake.fakeUserProfile, contactCard: ProfileFake.fakeContactCard)
+        .environment(\.contactCardTheme, .pink)
+        .padding()
+        .frame(maxHeight: .infinity)
+        .background(Color.gray.opacity(0.1))
 }
