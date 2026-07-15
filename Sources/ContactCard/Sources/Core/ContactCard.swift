@@ -72,7 +72,8 @@ public struct ContactCard: Sendable, Codable, Hashable {
     }
 }
 
-public struct ContactCardLink: Codable, Hashable, Sendable {
+public struct ContactCardLink: Identifiable, Codable, Hashable, Sendable {
+    public var id = UUID()
     public let type: URLType
     public let url: String
 
