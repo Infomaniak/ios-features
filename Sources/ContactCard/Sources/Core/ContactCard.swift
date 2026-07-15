@@ -103,10 +103,10 @@ public enum URLType: String, Codable, Sendable {
 
     var systemImageName: Image {
         switch self {
-        case .linkedIn: return Image(.linkedin)
+        case .linkedIn: return Image(.linkedIn)
         case .instagram: return Image(.instagram)
         case .facebook: return Image(.facebook)
-        case .x: return Image(.link)
+        case .x: return Image(.x)
         case .website: return Image(.link)
         case .other: return Image(.link)
         }
