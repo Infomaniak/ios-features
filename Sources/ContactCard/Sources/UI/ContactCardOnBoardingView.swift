@@ -41,37 +41,37 @@ struct ContactCardOnBoardingView: View {
                 Image(.backgroundOnboarding)
                     .resizable()
                     .frame(width: geometry.size.width, height: geometry.size.height / 2)
-                    .allowsHitTesting(false)
                     .foregroundStyle(contactCardTheme.navBarBackground)
 
-                VStack {
-                    OnboardingHeaderView()
-                        .padding(IKPadding.medium)
-                        .frame(maxWidth: 300)
-                        .padding(.top, IKPadding.giant)
+                ScrollView {
+                    VStack {
+                        OnboardingHeaderView()
+                            .padding(IKPadding.medium)
+                            .frame(maxWidth: 300)
 
-                    Text(Localizable.contactCardOnBoardingDescription)
-                        .multilineTextAlignment(.center)
-                        .font(.Custom.body)
-                        .foregroundStyle(contactCardTheme.secondaryText)
-                        .padding(.vertical, IKPadding.medium)
-                        .padding(.horizontal, IKPadding.large)
-
-                    VStack(spacing: IKPadding.mini) {
-                        ForEach(itemsStrings, id: \.self) { itemString in
-                            FeatureItemCell(
-                                text: itemString
-                            )
+                        Text(Localizable.contactCardOnBoardingDescription)
+                            .multilineTextAlignment(.center)
+                            .font(.Custom.body)
+                            .foregroundStyle(contactCardTheme.secondaryText)
+                            .padding(.vertical, IKPadding.medium)
                             .padding(.horizontal, IKPadding.large)
+
+                        VStack(alignment: .leading, spacing: IKPadding.mini) {
+                            ForEach(itemsStrings, id: \.self) { itemString in
+                                FeatureItemCell(
+                                    text: itemString
+                                )
+                                .padding(.horizontal, IKPadding.large)
+                            }
                         }
+                        .frame(maxWidth: .infinity, alignment: .center)
                     }
+                    .padding(.top, 96)
+                    .padding(.bottom, IKPadding.small)
                 }
-                .frame(maxWidth: 600)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .frame(minHeight: UIScreen.main.bounds.height - 150, alignment: .center)
             }
         }
-        .ignoresSafeArea(.all)
+        .ignoresSafeArea(edges: .top)
         .scrollBounceBehavior(.basedOnSize)
         .safeAreaInset(edge: .bottom) {
             Button(Localizable.buttonCreate) {

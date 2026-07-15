@@ -45,15 +45,17 @@ public struct ContactCardView: View {
                 .navigationDestination(for: ContactCardRoute.self) { route in
                     switch route {
                     case .onBoarding:
-                        ContactCardOnBoardingView(onCreateButtonTapped: {
-                                                      withAnimation {
-                                                          path.append(ContactCardRoute.form(userProfile, nil))
-                                                      }
-                                                  },
-                                                  dismissModal: dismiss.callAsFunction)
-                            .navigationTitle(Localizable.contactCardTitle)
-                            .navigationBarTitleDisplayMode(.inline)
-                            .navigationBarBackButtonHidden()
+                        ContactCardOnBoardingView(
+                            onCreateButtonTapped: {
+                                withAnimation {
+                                    path.append(ContactCardRoute.form(userProfile, nil))
+                                }
+                            },
+                            dismissModal: dismiss.callAsFunction
+                        )
+                        .navigationTitle(Localizable.contactCardTitle)
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarBackButtonHidden()
 
                     case .form(let profile, let existingCard):
                         ContactCardFormView(
