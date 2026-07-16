@@ -43,6 +43,7 @@ struct ContactCardQRCodeView: View {
     var body: some View {
         ScrollView {
             CardContentView(userProfile: userProfile, contactCard: contactCard)
+                .cardPhysicalEffect()
         }
         .onAppear {
             savedBrightness = UIScreen.main.brightness
