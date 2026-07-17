@@ -71,7 +71,7 @@ struct ContactCardFormView: View {
         _firstName = State(initialValue: existingCard?.firstName ?? userProfile.firstName)
         _lastName = State(initialValue: existingCard?.lastName ?? userProfile.lastName)
         _email = State(initialValue: existingCard?.email ?? userProfile.email)
-        _phone = State(initialValue: existingCard?.phone ?? "")
+        _phone = State(initialValue: existingCard?.phone ?? (userProfile.phones?.first?.phone ?? ""))
         _company = State(initialValue: existingCard?.company ?? "")
         _linkedIn = State(initialValue: existingCard?.links?.first { $0.type == .linkedIn }?.url ?? "")
         _facebook = State(initialValue: existingCard?.links?.first { $0.type == .facebook }?.url ?? "")
