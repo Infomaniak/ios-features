@@ -24,33 +24,60 @@ import SwiftUI
 @available(iOS 17.0, *)
 @Observable
 final class CardMotionManager {
-    private(set) var roll: Double = 0
-    private(set) var pitch: Double = 0
+    private(set) var roll = 0.0
+    private(set) var pitch = 0.0
+
+    private var initialRoll: Double?
+    private var initialPitch: Double?
 
     private let motionManager = CMMotionManager()
 
+    deinit {
+        stop()
+    }
+
     func start() {
-        guard motionManager.isDeviceMotionAvailable else { return }
+        guard motionManager.isDeviceMotionAvailable else {
+            return
+        }
+
+        initialRoll = nil
+        initialPitch = nil
+
         motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
         motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { [weak self] motion, _ in
-            guard let motion else { return }
-            self?.roll = motion.attitude.roll
-            self?.pitch = motion.attitude.pitch
+            guard let self, let motion else { return }
+
+            let attitude = motion.attitude
+            if initialRoll == nil || initialPitch == nil {
+                initialRoll = attitude.roll
+                initialPitch = attitude.pitch
+            }
+
+            roll = Self.normalizedAngleDelta(from: initialRoll ?? attitude.roll, to: attitude.roll)
+            pitch = Self.normalizedAngleDelta(from: initialPitch ?? attitude.pitch, to: attitude.pitch)
         }
     }
 
     func stop() {
         motionManager.stopDeviceMotionUpdates()
     }
+
+    private static func normalizedAngleDelta(from initialAngle: Double, to currentAngle: Double) -> Double {
+        let delta = currentAngle - initialAngle
+        return atan2(sin(delta), cos(delta))
+    }
 }
 
 @available(iOS 17.0, *)
 struct CardPhysicalEffectModifier: ViewModifier {
-    @Environment(\.scenePhase) private var scenePhase
-
     @State private var motion = CardMotionManager()
 
-    static private let maxRotationAngle: Double = .pi / 6
+    private nonisolated static let lightIntensity = 0.25
+    private nonisolated static let lightSpecPower = 6.0
+
+    private nonisolated static let maxRotationAngle = Double.pi / 12
+    private nonisolated static let rotationPerspective = 0.2
 
     private var roll: Double {
         return clamp(motion.roll, min: -Self.maxRotationAngle, max: Self.maxRotationAngle)
@@ -61,43 +88,51 @@ struct CardPhysicalEffectModifier: ViewModifier {
     }
 
     func body(content: Content) -> some View {
-        content
-            .visualEffect { view, proxy in
-                view.layerEffect(
-                    ShaderLibrary.bundle(.module).cardSpecular(
-                        .float2(proxy.size),
-                        .float2(CGFloat(roll), CGFloat(pitch)),
-                        .float(0.8),
-                        .float(18.0)
-                    ),
-                    maxSampleOffset: .zero
-                )
-            }
-            .rotation3DEffect(
-                .radians(pitch),
-                axis: (x: 1, y: 0, z: 0),
-                anchor: .center,
-                perspective: 0.5
-            )
-            .rotation3DEffect(
-                .radians(roll),
-                axis: (x: 0, y: 1, z: 0),
-                anchor: .center,
-                perspective: 0.5
-            )
-            .onAppear { motion.start() }
-            .onDisappear { motion.stop() }
-            .onChange(of: scenePhase) { newPhase in
-                if newPhase == .active {
-                    motion.start()
-                } else {
-                    motion.stop()
+        let roll = roll
+        let pitch = pitch
+
+        ZStack {
+            content
+
+            Rectangle()
+                .fill(.background)
+                .opacity(0.1)
+                .visualEffect { view, proxy in
+                    view
+                        .layerEffect(
+                            ShaderLibrary.bundle(.module).cardSpecular(
+                                .float2(proxy.size),
+                                .float2(CGFloat(roll), CGFloat(pitch)),
+                                .float(Self.lightIntensity),
+                                .float(Self.lightSpecPower)
+                            ),
+                            maxSampleOffset: .zero
+                        )
                 }
-            }
+        }
+        .visualEffect { view, proxy in
+            view
+                .rotation3DEffect(
+                    .radians(pitch),
+                    axis: (x: 1, y: 0, z: 0),
+                    anchor: .center,
+                    perspective: Self.rotationPerspective
+                )
+                .rotation3DEffect(
+                    .radians(roll),
+                    axis: (x: 0, y: 1, z: 0),
+                    anchor: .center,
+                    perspective: Self.rotationPerspective
+                )
+        }
+
+        .onAppear {
+            motion.start()
+        }
     }
 
     private func clamp(_ value: Double, min minValue: Double, max maxValue: Double) -> Double {
-        return min(max(value, -minValue), maxValue)
+        return min(max(value, minValue), maxValue)
     }
 }
 
