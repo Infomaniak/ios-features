@@ -120,8 +120,8 @@ private struct SocialLinksRow: View {
 
     var body: some View {
         HStack(spacing: IKPadding.small) {
-            ForEach(visibleLinks) { link in
-                link.type.systemImageName
+            ForEach(visibleLinks.indices, id: \.self) { index in
+                visibleLinks[index].type.systemImageName
                     .foregroundStyle(color)
                     .font(.Custom.headline)
             }
