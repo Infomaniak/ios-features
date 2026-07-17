@@ -41,7 +41,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/Infomaniak/ios-core", branch: "feat/Get-phones-and-emails-in-UserProfile"),
+        .package(url: "https://github.com/Infomaniak/ios-core", .upToNextMajor(from: "19.1.0")),
         .package(url: "https://github.com/Infomaniak/ios-core-ui", .upToNextMajor(from: "26.0.0")),
         .package(url: "https://github.com/Infomaniak/ios-core-uikit", .upToNextMajor(from: "2.0.0")),
         .package(url: "https://github.com/Infomaniak/ios-dependency-injection", .upToNextMajor(from: "2.0.3")),

@@ -1,5 +1,5 @@
 {
-  "originHash" : "dd42aa950ab15db87a199baef479ee523bdddcfeedc472376c163c24faefa2b2",
+  "originHash" : "bfe6ead1b099f9197a8f65bb1394d145a741b705343d054f57d9ecc5e3c0c09c",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Infomaniak/ios-core",
       "state" : {
-        "branch" : "feat/Get-phones-and-emails-in-UserProfile",
-        "revision" : "6455482d81d048d9b24ed6de7cd3edb20df9efc2"
+        "revision" : "2736ed737a3e588d480ae83087564d692a3a8c62",
+        "version" : "19.1.0"
       }
     },
     {
