@@ -151,6 +151,7 @@ public struct ContinueWithAccountView: View {
         .ikButtonFullWidth(true)
         .controlSize(.large)
         .task {
+            guard shouldUseWithAccounts else { return }
             @InjectService var connectedAccountManager: ConnectedAccountManagerable
             var accounts = await connectedAccountManager.listAllLocalAccounts()
             accounts = accounts.filter { connectedAccount in
