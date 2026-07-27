@@ -81,7 +81,7 @@ public struct ContinueWithAccountView: View {
     private let isLoading: Bool
     private let excludingUserIds: [Int]
     private let allowsMultipleSelection: Bool
-    private let shouldUseWithAccounts: Bool
+    private let shouldDisplayInterAppLogin: Bool
     private let onLoginPressed: () -> Void
     private let onLoginWithAccountsPressed: ([ConnectedAccount]) -> Void
     private let onCreateAccountPressed: () -> Void
@@ -99,14 +99,14 @@ public struct ContinueWithAccountView: View {
     public init(isLoading: Bool,
                 excludingUserIds: [Int] = [],
                 allowsMultipleSelection: Bool = true,
-                shouldUseWithAccounts: Bool = true,
+                shouldDisplayInterAppLogin: Bool = true,
                 onLoginPressed: @escaping () -> Void,
                 onLoginWithAccountsPressed: @escaping ([ConnectedAccount]) -> Void,
                 onCreateAccountPressed: @escaping () -> Void) {
         self.isLoading = isLoading
         self.excludingUserIds = excludingUserIds
         self.allowsMultipleSelection = allowsMultipleSelection
-        self.shouldUseWithAccounts = shouldUseWithAccounts
+        self.shouldDisplayInterAppLogin = shouldDisplayInterAppLogin
         self.onLoginPressed = onLoginPressed
         self.onLoginWithAccountsPressed = onLoginWithAccountsPressed
         self.onCreateAccountPressed = onCreateAccountPressed
@@ -114,7 +114,7 @@ public struct ContinueWithAccountView: View {
 
     public var body: some View {
         VStack(spacing: IKPadding.mini) {
-            if !shouldUseWithAccounts || (accounts?.isEmpty == true) {
+            if !shouldDisplayInterAppLogin || (accounts?.isEmpty == true) {
                 Button(InterAppLoginLocalizable.buttonLogin, action: onLoginPressed)
                     .buttonStyle(.ikBorderedProminent)
                     .ikButtonLoading(isLoading)
@@ -151,7 +151,10 @@ public struct ContinueWithAccountView: View {
         .ikButtonFullWidth(true)
         .controlSize(.large)
         .task {
-            guard shouldUseWithAccounts else { return }
+            guard shouldDisplayInterAppLogin else {
+                accounts = []
+                return
+            }
             @InjectService var connectedAccountManager: ConnectedAccountManagerable
             var accounts = await connectedAccountManager.listAllLocalAccounts()
             accounts = accounts.filter { connectedAccount in
