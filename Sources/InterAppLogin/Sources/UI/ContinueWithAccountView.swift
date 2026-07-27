@@ -114,32 +114,34 @@ public struct ContinueWithAccountView: View {
 
     public var body: some View {
         VStack(spacing: IKPadding.mini) {
-            if !shouldDisplayInterAppLogin || (accounts?.isEmpty == true) {
-                Button(InterAppLoginLocalizable.buttonLogin, action: onLoginPressed)
+            if let accounts {
+                if accounts.isEmpty {
+                    Button(InterAppLoginLocalizable.buttonLogin, action: onLoginPressed)
+                        .buttonStyle(.ikBorderedProminent)
+                        .ikButtonLoading(isLoading)
+
+                    Button(InterAppLoginLocalizable.buttonCreateAccount, action: onCreateAccountPressed)
+                        .buttonStyle(.ikBorderless)
+                        .disabled(isLoading)
+                } else {
+                    Button {
+                        isShowingAccountsSelection.toggle()
+                    } label: {
+                        if accounts.count == 1 || selectedAccountIds.count == 1, let selectedAccount = selectedAccounts.first {
+                            OneAccountView(account: selectedAccount)
+                        } else {
+                            ManyAccountView(selectedAccounts: selectedAccounts)
+                        }
+                    }
+                    .buttonStyle(.outlined)
+                    .disabled(isLoading)
+
+                    Button(InterAppLoginLocalizable.buttonContinueWithAccounts(selectedAccountIds.count)) {
+                        onLoginWithAccountsPressed(selectedAccounts)
+                    }
                     .buttonStyle(.ikBorderedProminent)
                     .ikButtonLoading(isLoading)
-
-                Button(InterAppLoginLocalizable.buttonCreateAccount, action: onCreateAccountPressed)
-                    .buttonStyle(.ikBorderless)
-                    .disabled(isLoading)
-            } else if let accounts, !accounts.isEmpty {
-                Button {
-                    isShowingAccountsSelection.toggle()
-                } label: {
-                    if accounts.count == 1 || selectedAccountIds.count == 1, let selectedAccount = selectedAccounts.first {
-                        OneAccountView(account: selectedAccount)
-                    } else {
-                        ManyAccountView(selectedAccounts: selectedAccounts)
-                    }
                 }
-                .buttonStyle(.outlined)
-                .disabled(isLoading)
-
-                Button(InterAppLoginLocalizable.buttonContinueWithAccounts(selectedAccountIds.count)) {
-                    onLoginWithAccountsPressed(selectedAccounts)
-                }
-                .buttonStyle(.ikBorderedProminent)
-                .ikButtonLoading(isLoading)
             } else {
                 HStack(spacing: IKPadding.mini) {
                     ProgressView()
