@@ -32,7 +32,7 @@ struct ConnectedAccountAvatarView: View {
                let avatarURL = URL(string: rawAvatarURL) {
                 LazyImage(request: ImageRequest(url: avatarURL)) { state in
                     if let image = state.image {
-                        AvatarImage(image: image, size: size)
+                        AvatarImage(image: image)
                     } else {
                         initialsView
                     }
@@ -41,6 +41,7 @@ struct ConnectedAccountAvatarView: View {
                 initialsView
             }
         }
+        .frame(width: size, height: size)
         .clipShape(Circle())
         .background(
             Circle()
@@ -52,8 +53,7 @@ struct ConnectedAccountAvatarView: View {
         InitialsView(
             initials: NameFormatter(fullName: connectedAccount.userProfile.displayName).initials,
             backgroundColor: Color.backgroundColor(from: connectedAccount.userProfile.email.hash),
-            foregroundColor: Color.backgroundSecondary,
-            size: size
+            foregroundColor: Color.backgroundSecondary
         )
     }
 }
