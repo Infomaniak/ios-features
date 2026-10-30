@@ -33,7 +33,7 @@ struct UserRowView: View {
                    let avatarURL = URL(string: rawAvatarURL) {
                     LazyImage(request: ImageRequest(url: avatarURL)) { state in
                         if let image = state.image {
-                            AvatarImage(image: image, size: avatarSize)
+                            AvatarImage(image: image)
                         } else {
                             initialsView
                         }
@@ -42,6 +42,7 @@ struct UserRowView: View {
                     initialsView
                 }
             }
+            .frame(width: avatarSize, height: avatarSize)
             .clipShape(Circle())
             .background(
                 Circle()
@@ -63,8 +64,7 @@ struct UserRowView: View {
         InitialsView(
             initials: NameFormatter(fullName: user.displayName).initials,
             backgroundColor: Color.backgroundColor(from: user.email.hash),
-            foregroundColor: Color.white,
-            size: avatarSize
+            foregroundColor: Color.white
         )
     }
 }

@@ -1,5 +1,5 @@
 {
-  "originHash" : "bfe6ead1b099f9197a8f65bb1394d145a741b705343d054f57d9ecc5e3c0c09c",
+  "originHash" : "39740288bfd7c16b690f3408a1d02c6fd00588eca98fae4c6e17ec42c0537a31",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Infomaniak/ios-core-ui",
       "state" : {
-        "revision" : "7309ad76dcf0427df51386cf924dfc33e77dd474",
-        "version" : "26.0.1"
+        "revision" : "c17d5f355c2b6ed80a46cdf277f9a917448ec244",
+        "version" : "27.0.0"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Infomaniak/ios-core-uikit",
       "state" : {
-        "revision" : "dd005b4e493c9f8c793d1d251eb54c8c315d602e",
-        "version" : "2.0.0"
+        "revision" : "bf5d5f2e755d9acd8926d17676284bc5793ed3da",
+        "version" : "3.0.0"
       }
     },
     {
@@ -141,8 +141,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Infomaniak/SnackBar.swift",
       "state" : {
-        "revision" : "7d8d20af50c6b744aa9791b597f7efbd0a15add2",
-        "version" : "1.2.0"
+        "revision" : "4c0d4fc65e8ef17477d6f0750ebbec066cde8cb0",
+        "version" : "1.2.1"
       }
     },
     {
