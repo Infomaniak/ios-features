@@ -1,5 +1,5 @@
 {
-  "originHash" : "9a57f7b3ecfeab03f3584a82ed7959025affec82c08fa86e36b9437cb7bb771f",
+  "originHash" : "39740288bfd7c16b690f3408a1d02c6fd00588eca98fae4c6e17ec42c0537a31",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Infomaniak/ios-core-uikit",
       "state" : {
-        "branch" : "chore/core-ui-27",
-        "revision" : "333b250aa2a3fdad3e7693d56af8c1d5835babe1"
+        "revision" : "bf5d5f2e755d9acd8926d17676284bc5793ed3da",
+        "version" : "3.0.0"
       }
     },
     {
